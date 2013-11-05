@@ -2,7 +2,8 @@ Leaping-Cliff
 =============
 Groepsregelement
 Project Leaping Cliff 
-1.	We gebruiken GitHub als een versiebeheersysteem. Het vorige systeem (Google Drive) wordt slechts gebruikt als urenregistratie. Dennis is verantwoordelijk voor de onderhoud van GitHub.
+<p>
+1.	We gebruiken GitHub als een versiebeheersysteem. Het vorige systeem (Google Drive) wordt slechts gebruikt als urenregistratie. Dennis is verantwoordelijk voor de onderhoud van GitHub.</p>
 2.	Er wordt gewerkt met een waarschuwingssysteem. Hierbij worden er 3 waarschuwingen gegeven voordat er een gele kaart wordt gegeven. Deze waarschuwingen worden gegeven bij het overtreden van groeps- en gedragsregels. Voor de tweede gele kaart geldt deze regel niet. Na de eerste gele kaart wordt er geen waarschuwing gegeven alvorens er een gele kaart wordt uitgedeeld.
 3.	Berichten die er toe doen in de groep worden verstuurd via mail, of in een PM naar de Projectleider. Gesprekken die plaats vinden in de WhatsApp-groep worden niet gezien als officiële communicatie. 
 A)	Afwezigheid op korte termijn mag worden doorgegeven via een privé-gesprek op Whatsapp, mits die persoon zelf wél aanwezig is. 
