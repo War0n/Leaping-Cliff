@@ -1,0 +1,92 @@
+@CHARSET "UTF-8";
+
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+
+.login-form {
+	font-size: 12px;
+	padding: 20px;
+}
+
+	.login-form .btn-lgn {
+		margin-right: 20px;
+		width: 100px;
+	}
+	
+	
+.table-members img {
+	width: 50px;
+}
+	
+	
+a {
+	color: #000;
+}
+
+.table-centered tbody tr td {
+	text-align:center;
+	vertical-align: middle;
+}
+
+.barometer .col-lg-9 {
+	padding-left: 0px;
+}
+
+.barometer .col-lg-3 {
+	padding-right: 0px;
+}
+
+.modal .modal-body {
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+.barometer-control{
+	background-color: #fff;
+	height: 500px;
+}
+
+	.barometer .tab-pane {
+	}
+
+.baro-students {
+	margin-top: 40px;
+}
+
+.baro-students li {
+	background-color: #e7e7e7;
+	height: 70px;
+	padding: 10px;
+	cursor: pointer;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 4px;
+	border-top-left-radius: 4px;
+}
+	.baro-students li.active {
+		background-color: #fff;
+	}
+
+	.baro-students li p {
+		margin: 14px;
+		float: right;
+	}
+	
+.baro-students img {
+	width: 50px;
+}
+
+.select-week {
+	margin-bottom: 0px;
+}
+
+.select-week .form-control {
+	margin-bottom: 0px;
+}

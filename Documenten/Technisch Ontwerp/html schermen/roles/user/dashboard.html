@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Avans barometer</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		    
+		    
+		 <!-- Css -->
+		<link href="../../css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../css/default.css" rel="stylesheet">
+		
+		 <!--Js -->
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<script src="../../js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		    <script type="text/javascript">
+		      google.load("visualization", "1", {packages:["corechart"]});
+		      google.setOnLoadCallback(drawChart);
+		      function drawChart() {
+		        var data = google.visualization.arrayToDataTable([
+		          ['Projecten', 'Mijn cijfer', 'Eindcijfer'],
+		          ['Proj Reisbureau',  7, 9],
+		          ['Proj Databases',  10, 8],
+		          ['Proj Wordfeud',  8, 6],
+		          ['Proj Barometer',  7, 10]
+		        ]);
+		
+		        var options = {
+		          title: 'Laatste 5 projecten',
+		          min : 1,
+		          max : 10
+		        };
+		
+		        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+		        chart.draw(data, options);
+		      }
+		    </script>
+	
+	</head>
+	<body>
+	    <div class="container">
+	      <div class="navbar navbar-default" role="navigation">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">Avans</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	         	<ul class="nav navbar-nav">
+			      <li class="active"><a href="#">Dashboard</a></li>
+			      <li><a href="projecten.html">Mijn projecten</a></li>
+			    </ul>
+	         
+	         	
+	         	<form class="navbar-form navbar-right">
+	         	<a href="../../index.html" type="button" class="btn btn-default">Log uit</a>
+	         	</form>
+	         	
+	         	<p class="navbar-text navbar-right">
+	         	Ingelogd als <a href="#" class="navbar-link">Jens Hoevenaars</a>
+	         	</p>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	      
+	      <div class="row">
+	      	
+	      	<div class="col-lg-4">
+	      		<div class="well">
+	      		<h2>Huidig project</h2>
+	      		
+	      		<h4><i>Info</i></h4>
+	      		<table class="table table-bordered">
+	      			<tbody>
+	      				<tr>
+	      					<td>Naam</td>
+	      					<td>Project Barometer</td>
+	      				</tr>
+	      				<tr>
+	      					<td>Omschrijving</td>
+	      					<td>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et</td>
+	      				</tr>
+	      				<tr>
+	      					<td>Docenten</td>
+	      					<td>
+	      						<a href="mailto:#" title="Mail docent">Erik van Apeldoor</a><br />
+	      						<a href="mailto:#" title="Mail docent">Mareike NogWat</a>
+	      					</td>
+	      				</tr>
+	      				<tr>
+	      					<td>Duur</td>
+	      					<td>10 weken</td>
+	      				</tr>
+	      			</tbody>
+	      		</table>
+	      		
+	      		<hr />
+	      		
+	      		<h4><i>Beoordeling</i> 
+	      		 <!-- 
+	      		<span class="label label-danger"><span class="glyphicon glyphicon-bell"></span> tijd voor beoordeling</span>
+	      		 -->
+	      		</h4>
+	      		<table class="table table-bordered table-centered">
+	      			<tr>
+	      				<td>Huidige project week</td>
+	      				<td>Volgende beoordelings ronde</td>
+	      			</tr>
+	      			<tr>
+	      				<td><h1>4</h1></td>
+	      				<td><h1>6</h1></td>
+	      			</tr>
+	      		</table>
+	      		<a class="btn btn-default form-control" href="barometer.html">Barometer invullen</a>
+	      		
+	      		
+	      		<hr />
+	      		
+	      		<h4><i>Groepsleden</i></h4>
+	      		<table class="table table-bordered table-members table-centered">
+	      			<tbody>
+	      				<tr>
+	      					<td colspan="2"><b>Tutor</b></td>
+	      				</tr>
+	      				<tr>
+	      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+	      					<td colspan="2">A. van de Boogaard</td>
+	      				</tr>
+	      				<tr>
+	      					<td colspan="2"><b>Leden</b></td>
+	      				</tr>
+	      				<tr>
+	      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+	      					<td>Rik Coenen</td>
+	      				</tr>
+	      				<tr>
+	      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+	      					<td>Ronald Duren</td>
+	      				</tr>
+	      				<tr>
+	      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+	      					<td>Joost Dolman</td>
+	      				</tr>
+	      				<tr>
+	      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+	      					<td>John Huijbergt</td>
+	      				</tr>
+	      			</tbody>
+	      		</table>
+	      	</div>
+	      	</div>
+	      	
+	      		      	
+	      	
+	      	<div class="col-lg-8">
+	      		<h3>Overal voortgang</h3>
+	      		<div id="chart_div" style="width: 100%; position: relative;"></div>
+	      	</div>
+	      </div>
+	      
+	    	  
+	 	
+	 	
+	 	
+	 	</div>
+  
+
+	</body>
+</html>
