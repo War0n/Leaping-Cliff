@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="ab1db083-3303-4937-8d94-41c67690eb19" name="UMLClassDiagram1" linkedPackageId="988258e8-a65b-4f34-9825-d51ea51cb715" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="62ab9e04-96d9-4e6a-b4fb-d64ec0ce9ee6">
-      <profileInstance Id="e63fcd84-d99c-4f92-b834-49f667f15f8e" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="5de04f52-10ba-48e5-a285-58ad42723dd1">
-      <profileInstance Id="259c0d6c-321e-4e4b-adfc-3df5de980f7f" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="5e81f58b-1e4f-4751-9ae9-90f3cac7f8c7" name="MainController" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -106,22 +92,6 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="da5abc57-5d5a-4da9-add7-1d8a9c47c912" />
           </association>
-          <association Id="1661f5d3-167b-44dc-891a-e162aed27b78" isDerived="false" sourceEndRoleName="ProjectController" targetEndRoleName="Grader" isLeaf="false" isAbstract="false">
-            <classMoniker Id="8dd81056-ba11-4f1b-9875-27ffe3539a3d" LastKnownName="Grader" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="d4cc2b08-6a8d-41e6-96c6-f2f9ac497cf7" name="ProjectController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="d93ce6dc-b745-45cc-8841-34444e54e239" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="f7492beb-7466-493c-b9a9-f19c1c14c73a" name="Grader" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="80ae7c8e-2e04-4141-a251-61dff8d90d39" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="79128d31-6671-455a-aba7-2c1ad55f8137" />
-          </association>
           <association Id="1deb828d-665a-4f34-999e-e418deed8b42" isDerived="false" sourceEndRoleName="ProjectController" targetEndRoleName="Project" isLeaf="false" isAbstract="false">
             <classMoniker Id="2f4ac62e-9e03-4250-a844-e83359ebffb1" LastKnownName="Project" />
             <relationshipOwnedElementsInternal>
@@ -138,12 +108,54 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="315f6c27-65b4-444a-acb6-c9ae5fafaad4" />
           </association>
+          <association Id="267b9ca1-1e7a-4c4d-99b8-6cd535a97064" isDerived="false" sourceEndRoleName="ProjectController" targetEndRoleName="TemplateBuilder" isLeaf="false" isAbstract="false">
+            <classMoniker Id="f5b6a02c-8301-47d0-9389-7f35a85058c2" LastKnownName="TemplateBuilder" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="24faf562-e83c-47ec-a1d3-1f38985aca0b" name="ProjectController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="3edb43bc-40d4-4797-b323-b547d8bb9ba1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ae20240b-1d09-4d5c-b1bc-d2d1733b2c12" name="TemplateBuilder" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="3f417b3a-8106-4d19-bb26-1f22ed4d7a0e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="daee342b-5649-43f4-8ccf-69a63d04f8ff" />
+          </association>
         </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="36c7587f-4e24-4054-b33b-ebeb4cad593c" name="SaveProject" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="836176ed-0abe-4f95-8301-d6e137032252" />
+          </operation>
+          <operation Id="7344fe93-1850-4d00-8334-7edb5e9aa8b6" name="GetProjects" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="29d60ed2-2767-4bff-8600-1a9fb2fb6ae3" />
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
       <class Id="5894b02b-639c-4769-8d03-bf9a7bc128ff" name="GradeController" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="604820f5-7dae-4204-8cc6-7ccfcf2e21a7" />
+        <targetEnds>
+          <association Id="cceaf7d9-4448-44c0-a90b-d67fa01e621c" isDerived="false" sourceEndRoleName="GradeController" targetEndRoleName="Grader" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8dd81056-ba11-4f1b-9875-27ffe3539a3d" LastKnownName="Grader" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="653018fd-da24-45ff-9918-16b01067a1c5" name="GradeController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="86dd27b8-c0d4-497c-b847-ce1f30033536" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bb7bd434-1947-4fea-94a9-fb2afb27bd8f" name="Grader" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e7b49c82-a353-467c-a39c-15decae1e480" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="5ab294cd-9f98-45c8-a406-b6d1a9910918" />
+          </association>
+        </targetEnds>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -154,11 +166,64 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="56eacb25-a57a-457c-8fac-0121c5b7f15a" name="ProjectFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="612bd3bf-1999-4cae-8878-b297cc1c4e1e" />
+        <ownedOperationsInternal>
+          <operation Id="93c6f897-fe88-4cc9-b503-5b9d81de573e" name="createProjec" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b1272ebd-0829-46ea-bbbb-af184feb4a52" />
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
       <class Id="b54930b2-b308-49d5-a4b1-6e99fe44d3b2" name="ProjectEditor" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="448018f5-921f-4409-991c-cf3a66c5c85c" />
+        <targetEnds>
+          <association Id="08f2795a-bcf0-454c-96d6-f5e8508ef98c" isDerived="false" sourceEndRoleName="ProjectEditor" targetEndRoleName="StudentImporter" isLeaf="false" isAbstract="false">
+            <classMoniker Id="94119d43-d77f-4f7d-8914-00db23c8acec" LastKnownName="StudentImporter" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7be08229-b9a3-4e7a-a711-5dfa1e27d7e8" name="ProjectEditor" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b998e1a0-d6ab-48b9-b6d6-73206b733588" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="216755e7-3be0-4e9b-b6b5-0f58b585f7ae" name="StudentImporter" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c1286d1f-6111-4a7b-9cbc-e3c39277517e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="9bec2cd1-8cc6-4000-a5cf-b535b613969d" />
+          </association>
+          <association Id="a12d6260-77ad-4796-a896-92902d348ea5" isDerived="false" sourceEndRoleName="ProjectEditor" targetEndRoleName="ReviewTemplateImporter" isLeaf="false" isAbstract="false">
+            <classMoniker Id="bc2ab709-9fc2-4582-9e91-189e3874b22f" LastKnownName="ReviewTemplateImporter" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6e294c32-95ee-4832-bf29-f87cddb5a4d5" name="ProjectEditor" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4bdb445b-1eb8-4d0b-8244-e0812db032c8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="90bb0c6f-3d38-4ef4-9ebc-0f3cd5ee8e51" name="ReviewTemplateImporter" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="6d4495a6-8d7a-41c3-9b0e-c7618677355d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="424b2d03-7425-4ea1-a974-b37ce3cd02a9" />
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="002d0573-1774-4cce-bcc2-dc8f8cc3b45c" name="changeDate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="172bbb41-e253-4d20-8f34-39c2b3ffea45" />
+          </operation>
+          <operation Id="592cb42d-87de-4754-8e53-49a153d4e238" name="addReviewDate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c470f018-6c59-4ec6-af7b-5a996c4229d1" />
+          </operation>
+          <operation Id="446619d6-51b3-4f6e-8191-260d08a5aaac" name="addStudents" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="00dd12b5-e1cb-4fb9-b606-205954f42ae5" />
+          </operation>
+          <operation Id="cd4e13e1-9417-4e05-b936-44a926698847" name="addReviewTemplate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="54f14f42-72c7-4d12-a30a-55404475d81a" />
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -197,6 +262,17 @@
             <elementDefinition Id="40a7d568-49ee-4d14-8677-6fe91b0aca84" />
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="c855990c-1c39-41a0-ba52-1210ae970ebc" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e5ba62d2-c67e-4c84-9d47-afb4c84b1252" />
+          </property>
+          <property Id="420a8b85-fc4c-497b-98ed-3073540cf072" name="Number" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="43553a0c-4330-4d93-b60c-6968a2ea526d" />
+          </property>
+          <property Id="32186384-e2e7-4d34-9d77-fb4bc37d8c19" name="Class" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="f1e94afb-c0ad-45cc-84f5-3bc599f7a827" />
+          </property>
+        </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -240,11 +316,24 @@
             <elementDefinition Id="8f91ef2d-1acc-4f10-a7fe-5c5ce2f01893" />
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="54a8846c-5c20-4608-9c29-2e74dc46fd06" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d5ae9795-c675-453c-b2c4-1aae5070aca9" />
+          </property>
+        </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
       <class Id="e152fd88-8c9e-490d-915a-203e34aa6334" name="Grade" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="d054b742-9167-4a8d-b882-8bcbd99cd371" />
+        <ownedAttributesInternal>
+          <property Id="70515ec3-1b3e-43d8-9be0-5ef570122c80" name="Criterium" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e4a54745-fcde-410b-b8a6-e54135dbc32e" />
+          </property>
+          <property Id="d66d87a7-927a-431f-a137-ac219078e4e3" name="Grade" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e3651b4a-52b7-4cd0-a671-a163762cabfe" />
+          </property>
+        </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -269,8 +358,86 @@
         </generalsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="94119d43-d77f-4f7d-8914-00db23c8acec" name="StudentImporter" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="f10d838a-d815-4fe7-81c9-3732ee491ba5" />
+        <suppliersInternal>
+          <dependency Id="65b890ad-319e-4585-99c2-2feb7f47d124">
+            <interfaceMoniker Id="1d7d84cb-4f1c-45b2-99a4-04032215f078" LastKnownName="IImport" />
+            <elementDefinition Id="f8c17869-9612-4ebd-be84-2633538c4792" />
+          </dependency>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="6d189b1e-620d-4334-b273-ca140c6d0e60" name="Import" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="eb337c31-e7ce-4004-ae39-812bc9cb5273" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="bc2ab709-9fc2-4582-9e91-189e3874b22f" name="ReviewTemplateImporter" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="59261879-470e-4faa-ac3a-8037d7657f8a" />
+        <suppliersInternal>
+          <dependency Id="d4502728-7ecb-4c7a-87bd-1d209995aedd">
+            <interfaceMoniker Id="1d7d84cb-4f1c-45b2-99a4-04032215f078" LastKnownName="IImport" />
+            <elementDefinition Id="d509d492-d911-433d-9060-d4c9339adfe7" />
+          </dependency>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="0d85c3f6-77bd-4598-abda-05eb61692f3c" name="Import" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="7b3ab762-9969-459d-ba0d-437dc0f5288c" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="1d7d84cb-4f1c-45b2-99a4-04032215f078" name="IImport" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="734e952e-fe30-44c4-b1c1-accaba2114f6" />
+        <ownedOperations>
+          <operation Id="8a8efc12-19d9-4de0-b50a-5b8f2900c88e" name="Import" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1396115a-9527-4702-abbf-9c6fc9c861b0" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="f5b6a02c-8301-47d0-9389-7f35a85058c2" name="TemplateBuilder" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c41c4578-4560-4cd3-86e6-002cff5e759e" />
+        <ownedOperationsInternal>
+          <operation Id="33aa1522-2619-48e4-865e-a2c12402fdc8" name="CreateTemplate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="099ed91f-69ba-4b94-be3d-35a37beb5f2d" />
+          </operation>
+          <operation Id="28de4819-3244-4133-9fe2-ecd8f02ee666" name="AddCriterium" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f5d50e40-7d89-44cd-9e8e-15fa65889c96" />
+          </operation>
+          <operation Id="d426f1ea-6a62-467d-b9c4-f79572936480" name="SaveTemplate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f186e2f8-3d74-41a8-b2bd-c5f2e4d3c25f" />
+          </operation>
+          <operation Id="7592f9f7-f09c-4c9b-8260-848fd61272e5" name="RemoveCriterium" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1dec123c-65f0-4611-a1f5-fdbffa72b3e1" />
+          </operation>
+          <operation Id="ef90468b-3c51-44fb-a0f1-482d8043cba4" name="ChangeCriteriumType" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="91e62737-2d92-4f25-bed1-9f7c2e88938e" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="988258e8-a65b-4f34-9825-d51ea51cb715" name="ModelingProject1">
     <elementDefinition Id="489c013c-7fb3-42d0-b3a6-b83fbbf4a51d" />
+    <profileInstances>
+      <packageHasProfileInstances Id="62ab9e04-96d9-4e6a-b4fb-d64ec0ce9ee6">
+        <profileInstance Id="e63fcd84-d99c-4f92-b834-49f667f15f8e" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="5de04f52-10ba-48e5-a285-58ad42723dd1">
+        <profileInstance Id="259c0d6c-321e-4e4b-adfc-3df5de980f7f" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>
