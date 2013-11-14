@@ -155,7 +155,47 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="5ab294cd-9f98-45c8-a406-b6d1a9910918" />
           </association>
+          <association Id="d2ac979b-168d-4aad-b1b1-594cc2b5d1da" isDerived="false" sourceEndRoleName="GradeController" targetEndRoleName="Project" isLeaf="false" isAbstract="false">
+            <classMoniker Id="2f4ac62e-9e03-4250-a844-e83359ebffb1" LastKnownName="Project" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e9ff76bd-1a56-4a98-932c-3d6f347f8d99" name="GradeController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="34228356-c749-444f-8e01-07f63cc171f8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="09d3494c-77ce-41f6-a5da-cd36acaed548" name="Project" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="57507c5e-12ef-40ca-ad26-1e90d860566d" name="Lower" value="0">
+                      <elementDefinition Id="4fe507e3-ac82-450f-b984-6228274c19ab" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="bd7aeda6-e326-423f-90c0-46595801c5bf" name="Upper" value="*">
+                      <elementDefinition Id="cc283c15-374b-4259-a935-878140babd28" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="92479563-0ca2-49b3-9388-10acf2986543" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="f26f99be-d5b2-43d1-9f40-2dc01c6778a0" />
+          </association>
         </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="ee8d5e11-9f21-4f5f-85d5-d098b057c90d" name="GetGradesToDo" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="18a08328-323e-4cf9-8a91-28aec3cff7f8" />
+          </operation>
+          <operation Id="25aa4a71-df90-41d2-af72-0701cea53145" name="CheckStudentFiledInGrades" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c0823e0c-632a-4a11-ae0d-d1944d06a154" />
+          </operation>
+          <operation Id="331da2d9-3a66-463f-bc55-598d325df783" name="GetStudent" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9febc20f-2a4d-4012-9e4d-a6eba2a9a8d2" />
+          </operation>
+          <operation Id="75553d40-3b75-49c7-b2c6-3dcf4bbb1529" name="CreateExcelSheet" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="df1b31a3-2b2c-4484-9719-835baa97367c" />
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -229,6 +269,20 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="8dd81056-ba11-4f1b-9875-27ffe3539a3d" name="Grader" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="400364f8-9449-42b1-98d9-cd34deecd06c" />
+        <ownedOperationsInternal>
+          <operation Id="64ae7162-cc31-4769-80b9-201e5b9a34f1" name="SaveGrades" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="870a741d-ca4a-4899-a2f9-2a3ef7941093" />
+          </operation>
+          <operation Id="24c732fb-92ac-4b05-b86d-05b1a116a1a3" name="RemoveGrade" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c4ca8eaf-de1d-4625-ba73-1a35dadace98" />
+          </operation>
+          <operation Id="ae8d0a01-00a2-4a05-90c2-bf0d0944dd1f" name="UpdateGrade" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="96d72666-c2ca-48eb-9a7b-5e2afbfd0bf8" />
+          </operation>
+          <operation Id="675a85ca-5c62-4d4f-9f14-b8eb2f6ba980" name="DeleteGrade" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="dbd07af6-8e6b-4a47-96dd-e4f4e4fb4739" />
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -397,6 +451,9 @@
           <operation Id="8a8efc12-19d9-4de0-b50a-5b8f2900c88e" name="Import" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="1396115a-9527-4702-abbf-9c6fc9c861b0" />
           </operation>
+          <operation Id="b39700d0-7c63-46b7-bd72-ad5e605ff917" name="CheckSheetForSyntaxErrors" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="58dd4ba4-01d2-46ec-b3b9-49b4b14bca21" />
+          </operation>
         </ownedOperations>
       </Interface>
     </logicalClassDesignerModelHasTypes>
@@ -418,6 +475,25 @@
           </operation>
           <operation Id="ef90468b-3c51-44fb-a0f1-482d8043cba4" name="ChangeCriteriumType" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="91e62737-2d92-4f25-bed1-9f7c2e88938e" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8a32d20c-8ac9-44ff-8871-48478cb19052" name="GradeViewer" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="51cbf424-8495-4a92-9910-ef1b125c00df" />
+        <ownedOperationsInternal>
+          <operation Id="21b297d6-ee0e-4102-b031-433afb6d0e0f" name="ViewGrades" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a1699e6f-7b96-4336-8a17-4d33c1c5246c" />
+          </operation>
+          <operation Id="8c07a874-7221-4ce2-a33d-3814b995e7dd" name="ViewAvarageGrades" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="94904491-6f8d-48e6-b09f-77915c108a8f" />
+          </operation>
+          <operation Id="94222d91-5730-4b18-a9f5-568c09bd9971" name="ViewGradeHistory" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="341676e7-484a-4fca-977b-e1b784bb48b1" />
+          </operation>
+          <operation Id="980b7b2d-94cf-4e00-a42e-7f0a97c5501d" name="ViewGraph" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="067556ab-b753-4d7a-8929-7e6f719de4fd" />
           </operation>
         </ownedOperationsInternal>
       </class>
