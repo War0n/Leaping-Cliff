@@ -24,6 +24,7 @@ namespace Barometer_ASP_NET.Controllers
 		public ActionResult Login(string returnUrl)
 		{
 			ViewBag.ReturnUrl = returnUrl;
+            //commit check
 			return View();
 		}
 
