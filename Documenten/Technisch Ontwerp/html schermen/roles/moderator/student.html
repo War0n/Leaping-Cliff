@@ -13,6 +13,65 @@
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="../../js/bootstrap.min.js"></script>
 		
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Onderdeel', 'BDS', 'System use cases', 'Prototypes', 'Requirement Analyse', 'Functioneel Ontwerp'],
+          ['Week 3',  6, 7, 7, 6, 6],
+          ['Week 6',  5, 6, 7, 7, 7],
+          ['Week 9',  7, 8, 9, 10, 10]
+        ]);
+
+        var options = {
+          title: 'Voortgang Inhoudelijke kennis',
+          min : 1,
+          max : 10,
+          vAxis : {
+        		gridlines : {
+        			count: 10
+        		}
+        	},
+        	seriesType : "bars",
+        	series : {5 : {type : "line"}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div_inhoudelijk'));
+        chart.draw(data, options);
+
+
+        data = google.visualization.arrayToDataTable([
+        	['Onderdeel', 'Inzet/motivatie', 'Inzicht eigen functioneren', 'Samenwerken', 'Schriftelijk communiceren', 'Mondeling communiceren', 'Projectmatig werken'],
+        	['Week 3', 5, 6, 4, 7, 4, 6],
+        	['Week 6', 6, 7, 7, 6, 7, 7],
+        	['Week 9', 8, 9, 10, 10, 9, 10]
+        ]);
+        options = {
+        	title : 'Voortgang werken als professional',
+        	min : 1,
+        	max : 10,
+        	vAxis : {
+        		gridlines : {
+        			count: 10
+        		}
+        	}
+        };
+
+        chart = new google.visualization.ColumnChart(document.getElementById('chart_div_prof'));
+        chart.draw(data,options);
+
+
+      }
+
+
+
+
+
+
+      chart_div_prof
+    </script>
 
 	
 	</head>
@@ -52,10 +111,200 @@
 		      <hr />
 		      </div>
 	      </div>
+
 	      <div class="row">
-	      		<h1>HISTORISCH OVERZICHT STUDENT komt hier</h1>
+		      <div class="col-lg-4">
+
+		      		<h4><i>Info</i></h4>
+		      		<table class="table table-bordered">
+		      			<tbody>
+		      				<tr>
+		      					<td>Omschrijving</td>
+		      					<td>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et</td>
+		      				</tr>
+		      				<tr>
+		      					<td>Docenten</td>
+		      					<td>
+		      						<a href="mailto:#" title="Mail docent">Erik van Apeldoor</a><br />
+		      						<a href="mailto:#" title="Mail docent">Mareike NogWat</a>
+		      					</td>
+		      				</tr>
+		      				<tr>
+		      					<td>Eindcijfer</td>
+		      					<td><span class="label label-success">6</span></td>
+		      				</tr>
+		      				<tr>
+		      					<td>Eindcijfer individueel</td>
+		      					<td><span class="label label-danger">4</span></td>
+		      				</tr>
+		      			</tbody>
+		      		</table>
+		      		
+
+		      		<h4><i>Groepsleden</i></h4>
+		      		<table class="table table-bordered table-members table-centered">
+		      			<tbody>
+		      				<tr>
+		      					<td colspan="3"><b>Leden</b></td>
+		      				</tr>
+		      				<tr>
+		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+		      					<td>Rik Coenen</td>
+		      					<td><a data-toggle="modal" data-target="#modal-baro" title="Bekijk beoordeling van Rik Coenen"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+		      				</tr>
+		      				<tr>
+		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+		      					<td>Ronald Duren</td>
+		      					<td><a href="" title="Bekijk beoordeling van Rik Coenen"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+		      				</tr>
+		      				<tr>
+		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+		      					<td>Joost Dolman</td>
+		      					<td><a href="" title="Bekijk beoordeling van Rik Coenen"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+		      				</tr>
+		      				<tr>
+		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+		      					<td>John Huijbergt</td>
+		      					<td><a href="" title="Bekijk beoordeling van Rik Coenen"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+		      				</tr>
+		      			</tbody>
+		      		</table>
+		      	
+		      	</div>
+
+
+		      	<div class="col-lg-8">
+		      		<h4><i>Voortgang</i></h4>
+		      		<div class="col-lg-3 pull-right">
+			      		<select class="form-control">
+			      			<option>Project barometer</option>
+			      			<option>Project wordfeud</option>
+			      			<option>Project databases</option>
+			      		</select>
+		      		</div>
+		      		<div class="clearfix"></div>
+		      		<div id="chart_div_inhoudelijk" style="position:relative; width: 100%;"></div>
+		      		<div id="chart_div_prof" style="position: relative; width: 100%"></div>	
+		      	</div>
 
 	      </div>
+	      </div>
+
+
+		<div class="modal fade" id="modal-baro" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="model-baroLabel">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Beoordeling van Rik Coenen</h4>
+						<select class="form-control">
+							<option>Week 3</option>
+							<option>Week 6</option>
+							<option>Week 9</option>
+						</select>
+					</div>
+					<div class="modal-body">
+							<div class="barometer-control">
+								<ul class="nav nav-tabs" id="myTab">
+								  <li class="active"><a href="#tab1" data-toggle="tab">Inhoudelijke kennis</a></li>
+								  <li><a href="#tab2" data-toggle="tab">Werken als professional</a></li>
+								</ul>
+								
+								<div class="tab-content">
+								  <div class="tab-pane active" id="tab1">
+									  	<table class="table">
+									  		<tr>
+									  			<td colspan="2"><h4><i>Kennis van/over en vaardigheden</i></h4></td>
+									  		</tr>
+									  		<tr>
+									  			<td>Bussines definition study</td>
+									  			<td>7</td>
+									  		</tr>
+									  		<tr>
+									  			<td>System use cases</td>
+									  			<td>8</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Prototype(s)</td>
+									  			<td>7</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Requirement analyse</td>
+									  			<td>7</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Functioneel ontwerp</td>
+									  			<td>8</td>
+									  		</tr>
+									  	</table>
+								  </div>
+								  <div class="tab-pane" id="tab2">
+									  	<table class="table">
+									  		<tr>
+									  			<td colspan="2"><h4><i>Inzet motivatie</i></h4></td>
+									  		</tr>
+									  		<tr>
+									  			<td>Meedoen</td>
+									  			<td>7</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Afspraken nakomen</td>
+									  			<td>7</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Op tijd zijn</td>
+									  			<td>8</td>
+									  		</tr>
+									  		
+									  		
+									  		<tr>
+									  			<td colspan="2"><h4><i>Inzicht eigen functioneren</i></h4></td>
+									  		</tr>
+									  		<tr>
+									  			<td>Kritisch </td>
+									  			<td>6</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Eigen sterktes en zwaktes kennen</td>
+									  			<td>7</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Besluiten nemen</td>
+									  			<td>8</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Omgaan met stress</td>
+									  			<td>8</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Assertief zijn</td>
+									  			<td>7</td>
+									  		</tr>
+									  		
+									  		<tr>
+									  			<td colspan="2"><h4><i>Samenwerken</i></h4></td>
+									  		</tr>
+									  		<tr>
+									  			<td>Anderen helpen </td>
+									  			<td>8</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Feedback geven </td>
+									  			<td>6</td>
+									  		</tr>
+									  		<tr>
+									  			<td>Feedback ontvangen </td>
+									  			<td>6</td>
+									  		</tr>
+									  	</table>
+								  </div>
+							</div>
+				</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
+					</div>
+				</div>
+			</div>
 
 	 	
 	 	</div>
