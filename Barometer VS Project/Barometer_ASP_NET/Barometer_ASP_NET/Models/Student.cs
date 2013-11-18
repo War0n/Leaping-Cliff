@@ -20,9 +20,9 @@ namespace Barometer_ASP_NET.Models
 			Grades = new List<Grade>();
 		}
 
-		public void AddGrade(string crit, double grade, Project projectClass)
+		public void AddGrade(string crit, double grade, ProjectGroup projectGroup)
 		{
-			Grades.Add(new Grade(crit, grade, projectClass));
+			Grades.Add(new Grade(crit, grade, projectGroup));
 		}
 	}
 }
