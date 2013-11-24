@@ -163,7 +163,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Database\DAOProject.cs" />
     <Compile Include="Database\DatabaseFactory.cs" />
+    <Compile Include="Database\LDAPConnector.cs" />
+    <Compile Include="FileFactory\FileHandlerFactory.cs" />
+    <Compile Include="FileFactory\GradeExcel.cs" />
+    <Compile Include="FileFactory\IExcelDataTransfer.cs" />
+    <Compile Include="FileFactory\StudentExcel.cs" />
+    <Compile Include="FileFactory\TemplateExcel.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
