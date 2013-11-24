@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="1368520a-5077-4df2-9b0f-53ac89023901"
+  name="Factory" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="51c8e69d-e36e-414e-909e-8a640f1aefe3"
+        name="DatabaseFactory"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="47e22f6b-da84-4471-8f22-4f1ed939faf1"
+        name="LDAPConnector"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="60109851-ac25-4b45-b297-cd5c2419cfc8"
+        name="IExcelDataTransfer"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="c05d9e94-3b6f-4a32-a351-0991cf4eb384"
+            name="Import"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+          <operation
+            Id="ac3b3ba3-1c5d-4e72-b362-d2502b799540"
+            name="Export"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="d4eec23d-7199-45d9-b851-6174ba0834ee"
+        name="IExcelExport"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="2da6e527-a02a-44ba-8533-d05f38a0b9f6"
+        name="StudentExcel"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="c8e9ab2b-a6be-44cd-a10f-6512acef2f95">
+            <interfaceMoniker
+              Id="60109851-ac25-4b45-b297-cd5c2419cfc8"
+              LastKnownName="IExcelDataTransfer"
+              LastKnownLocation="Package_1059.uml" />
+          </dependency>
+          <dependency
+            Id="a81be66e-459b-4d34-82df-0ce86dc69f8a">
+            <interfaceMoniker
+              Id="d4eec23d-7199-45d9-b851-6174ba0834ee"
+              LastKnownName="IExcelExport"
+              LastKnownLocation="Package_1059.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="c7c9533f-2050-4617-b0d5-c9d214db0997"
+        name="GradeExcel"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="1bbda5da-9fd6-4d87-8015-805b0a7eb581">
+            <interfaceMoniker
+              Id="60109851-ac25-4b45-b297-cd5c2419cfc8"
+              LastKnownName="IExcelDataTransfer"
+              LastKnownLocation="Package_1059.uml" />
+          </dependency>
+          <dependency
+            Id="f879e67c-f8ec-4644-b808-b115bb18432e">
+            <interfaceMoniker
+              Id="d4eec23d-7199-45d9-b851-6174ba0834ee"
+              LastKnownName="IExcelExport"
+              LastKnownLocation="Package_1059.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="53467675-b8f9-49bd-aab1-ba5c46435ca5"
+        name="TemplateExcel"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="29802bb1-aaa8-4c3f-b210-ea5750b8d1f1">
+            <interfaceMoniker
+              Id="60109851-ac25-4b45-b297-cd5c2419cfc8"
+              LastKnownName="IExcelDataTransfer"
+              LastKnownLocation="Package_1059.uml" />
+          </dependency>
+          <dependency
+            Id="4b8f9ad4-0da4-42dc-bd99-596fce9d4652">
+            <interfaceMoniker
+              Id="d4eec23d-7199-45d9-b851-6174ba0834ee"
+              LastKnownName="IExcelExport"
+              LastKnownLocation="Package_1059.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="4497eecb-42b9-40a8-afed-a9bd2cc80669"
+        name="FileHandlerFactory &lt;Product&gt;"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="fd961441-6785-4fa8-ba73-61dec64d4898">
+            <interfaceMoniker
+              Id="d4eec23d-7199-45d9-b851-6174ba0834ee"
+              LastKnownName="IExcelExport"
+              LastKnownLocation="Package_1059.uml" />
+          </dependency>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="00ab506b-969a-40c3-bbbd-416136b1e047"
+            name="create"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2e6a2f9d-ac2e-4355-b95e-ddc0c4ef4203"
+                  name="string productName"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0b0b5d93-8f71-4c89-83e8-f173072baab0"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="98163627-1baf-4a2e-b807-7ab41a37baf8"
+                      LastKnownName="product"
+                      LastKnownLocation="Package_1059.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="98163627-1baf-4a2e-b807-7ab41a37baf8"
+        name="product" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

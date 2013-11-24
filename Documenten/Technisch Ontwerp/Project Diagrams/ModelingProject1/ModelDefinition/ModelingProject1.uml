@@ -3,26 +3,6 @@
   dslVersion="1.0.0.0"
   Id="489c013c-7fb3-42d0-b3a6-b83fbbf4a51d"
   name="ModelingProject1" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
-  <ownedCommentsInternal>
-    <comment
-      Id="d6af9af3-3aec-49dc-bcd6-01de8e38f321">
-      <body>Projectgerelateerd</body>
-    </comment>
-    <comment
-      Id="ac7af3c3-02a5-4f55-9c70-4a67aa18a089">
-      <body>Grade-Gerelateerd
-</body>
-    </comment>
-    <comment
-      Id="8c4c5686-6d63-4af8-8f3c-43a726af4111">
-      <body>Models</body>
-    </comment>
-    <comment
-      Id="8668d701-bab4-43bf-b346-871d5206e208">
-      <body>Static class
-</body>
-    </comment>
-  </ownedCommentsInternal>
   <profileInstances>
     <packageHasProfileInstances
       Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
@@ -223,7 +203,7 @@
             <classMoniker
               Id="ea3aa3ca-86e8-467f-838c-ad550be6b275"
               LastKnownName="Project"
-              LastKnownLocation="ModelingProject1.uml" />
+              LastKnownLocation="Package_1050.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
@@ -301,7 +281,7 @@
             <classMoniker
               Id="f7184b32-cd8c-49f0-bc3c-f4c752ed2a90"
               LastKnownName="Template"
-              LastKnownLocation="ModelingProject1.uml" />
+              LastKnownLocation="Package_1050.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
@@ -421,7 +401,7 @@
             <classMoniker
               Id="ea3aa3ca-86e8-467f-838c-ad550be6b275"
               LastKnownName="Project"
-              LastKnownLocation="ModelingProject1.uml" />
+              LastKnownLocation="Package_1050.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
@@ -580,14 +560,6 @@
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
-        Id="51c8e69d-e36e-414e-909e-8a640f1aefe3"
-        name="DatabaseFactory"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <class
         Id="612bd3bf-1999-4cae-8878-b297cc1c4e1e"
         name="ProjectFactory"
         isAbstract="false"
@@ -740,226 +712,6 @@
             concurrency="Sequential"
             isQuery="false" />
         </ownedOperationsInternal>
-      </class>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <class
-        Id="4244bfe1-dc4a-4d36-a538-1f88f72ac05a"
-        name="Student"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false">
-        <targetEnds>
-          <association
-            Id="40a7d568-49ee-4d14-8677-6fe91b0aca84"
-            isDerived="false"
-            sourceEndRoleName="Student"
-            targetEndRoleName="Grade"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="d054b742-9167-4a8d-b882-8bcbd99cd371"
-              LastKnownName="Grade"
-              LastKnownLocation="ModelingProject1.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="edcf9ce9-9604-4712-acc6-15f20a6e91e9"
-                  name="Student"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="2930ca89-c38d-4ecd-94f2-825ce0918daa"
-                  name="Grade"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="1cb34210-2942-4a8e-901d-5dc6d2c38bc2"
-                      name="Lower"
-                      value="0" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="9304b621-3d78-40c2-8baf-ff25d2a9a75b"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-        </targetEnds>
-        <ownedAttributesInternal>
-          <property
-            Id="e5ba62d2-c67e-4c84-9d47-afb4c84b1252"
-            name="Name"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false" />
-          <property
-            Id="43553a0c-4330-4d93-b60c-6968a2ea526d"
-            name="Number"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false" />
-          <property
-            Id="f1e94afb-c0ad-45cc-84f5-3bc599f7a827"
-            name="Class"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false" />
-        </ownedAttributesInternal>
-      </class>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <class
-        Id="ea3aa3ca-86e8-467f-838c-ad550be6b275"
-        name="Project"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false">
-        <targetEnds>
-          <association
-            Id="8f91ef2d-1acc-4f10-a7fe-5c5ce2f01893"
-            isDerived="false"
-            sourceEndRoleName="Project"
-            targetEndRoleName="Student"
-            isLeaf="false"
-            isAbstract="false">
-            <classMoniker
-              Id="4244bfe1-dc4a-4d36-a538-1f88f72ac05a"
-              LastKnownName="Student"
-              LastKnownLocation="ModelingProject1.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="678c2e3b-41bb-49c9-b7ea-b254916219ed"
-                  name="Project"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false"
-                  isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="792f0600-af50-40b2-9a0d-460641160096"
-                      name="Lower"
-                      value="1" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="fcd3595a-83b9-4b53-9f76-a7d9494a3d3b"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="5d995df9-9276-4ce7-9bcc-d5151badc449"
-                  name="Student"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false">
-                  <lowerValueInternal>
-                    <literalString
-                      Id="242f603e-df49-442a-8184-b2985c0e74ff"
-                      name="Lower"
-                      value="0" />
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString
-                      Id="36eff3cf-0e20-4ae1-8730-d81bacf15ab5"
-                      name="Upper"
-                      value="*" />
-                  </upperValueInternal>
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
-        </targetEnds>
-        <ownedAttributesInternal>
-          <property
-            Id="d5ae9795-c675-453c-b2c4-1aae5070aca9"
-            name="Name"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false" />
-        </ownedAttributesInternal>
-      </class>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <class
-        Id="d054b742-9167-4a8d-b882-8bcbd99cd371"
-        name="Grade"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false">
-        <ownedAttributesInternal>
-          <property
-            Id="e4a54745-fcde-410b-b8a6-e54135dbc32e"
-            name="Criterium"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false" />
-          <property
-            Id="e3651b4a-52b7-4cd0-a671-a163762cabfe"
-            name="Grade"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false" />
-        </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -1298,20 +1050,16 @@
       </Interface>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <class
-        Id="f7184b32-cd8c-49f0-bc3c-f4c752ed2a90"
-        name="Template"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false" />
+      <packageMoniker
+        Id="191b2490-b641-442d-95c0-3fe7c6441fb1"
+        LastKnownName="Model"
+        LastKnownLocation="Package_1050.uml" />
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <class
-        Id="47e22f6b-da84-4471-8f22-4f1ed939faf1"
-        name="LDAPConnector"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false" />
+      <packageMoniker
+        Id="1368520a-5077-4df2-9b0f-53ac89023901"
+        LastKnownName="Factory"
+        LastKnownLocation="Package_1059.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
