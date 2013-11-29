@@ -25,7 +25,7 @@ namespace Barometer_ASP_NET.Filters
 		{
 			public SimpleMembershipInitializer()
 			{
-				Database.SetInitializer<UsersContext>(null);
+				//Database.SetInitializer<UsersContext>(null);
 
 				try
 				{

@@ -27,10 +27,10 @@ namespace Barometer_ASP_NET.Database
 		/// Method to make the connection with the database
 		/// </summary>
 		/// <returns></returns>
-		public Connection makeConnection()
-		{
+		//public Connection makeConnection()
+		//{
 			//hier komt de connectie met het db
-		}
+		//}
 
 		/// <summary>
 		/// Method to get the object of the Database-Model class back

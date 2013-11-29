@@ -15,20 +15,20 @@ namespace Barometer_ASP_NET.Database
         public string getChallenges(int id) {
             string ProjectName = null;
             try {
-                Connection connection = DatabaseFactory.getInstance().makeConnection();
+               // Connection connection = DatabaseFactory.getInstance().makeConnection();
 
-                String sql = "SELECT * FROM project WHERE projectid = " + id + ";";
+              //  String sql = "SELECT * FROM project WHERE projectid = " + id + ";";
 
-                Statement selectStatement = connection.createStatement();
-                ResultSet results = selectStatement.executeQuery(sql);
+               // Statement selectStatement = connection.createStatement();
+               // ResultSet results = selectStatement.executeQuery(sql);
 
-				ProjectName = results.getString();
+				//ProjectName = results.getString();
 
-                connection.close();
-                results.close();
-                selectStatement.close();
+               // connection.close();
+               // results.close();
+               // selectStatement.close();
 
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 Console.WriteLine("Error in getChallenges: " + e);
             }
             return ProjectName;
