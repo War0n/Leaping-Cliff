@@ -66,7 +66,7 @@
         <classShapeMoniker Id="12c72978-b962-4a76-8e87-38e5424703a9" />
       </nodes>
     </associationConnector>
-    <packageShape Id="f8896bbd-03e4-4fcc-9eb9-e0b83b1f9899" absoluteBounds="0.5, 0.875, 6.25, 6.125" customColor="255, 249, 230" hideQualifiedName="false">
+    <packageShape Id="f8896bbd-03e4-4fcc-9eb9-e0b83b1f9899" absoluteBounds="0.5, 0.875, 6.25, 5.5" customColor="255, 249, 230" hideQualifiedName="false">
       <packageMoniker Id="5915e096-4bd4-4b77-a4e4-dc48b8752abf" LastKnownName="Factory" />
       <nestedChildShapes>
         <classShape Id="532a0a19-8f7f-4ba4-b336-8528acfe578c" absoluteBounds="0.75, 1.375, 1.5, 0.90234373509883881" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
@@ -120,7 +120,7 @@
         </classShape>
       </nestedChildShapes>
     </packageShape>
-    <dependencyConnector edgePoints="[(1.375 : 4.875); (1.375 : 3.86132811258237); (2.375 : 3.86132811258237)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <dependencyConnector edgePoints="[(0.65625 : 4.875); (0.65625 : 3.90624998013178); (2.375 : 3.90624998013178)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
       <dependencyMoniker Id="ac445ad5-5bde-46e2-af39-90932f0580af" />
       <relativeChildShapes />
       <nodes>
