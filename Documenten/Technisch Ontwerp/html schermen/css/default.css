@@ -5,6 +5,11 @@ body {
   padding-bottom: 20px;
 }
 
+
+#field {
+    margin-bottom:20px;
+}
+
 .navbar {
   margin-bottom: 20px;
 }
@@ -25,6 +30,21 @@ body {
 	width: 50px;
 }
 	
+.navbar-default .navbar-brand {
+	color: #ff0039;
+}
+
+td.currentday {
+	background-color: #007fff;
+	color: #fff;
+	opacity: 0.50;
+}
+
+tr.baroweek td {
+	background-color: #ff0039;
+	opacity: 0.50;
+	color: #fff;
+}
 	
 a {
 	color: #000;
@@ -97,4 +117,8 @@ form {
 
 .aspects {
 	margin-top: 9px;
+}
+
+.subaspects {
+	margin-left: 30px;
 }
