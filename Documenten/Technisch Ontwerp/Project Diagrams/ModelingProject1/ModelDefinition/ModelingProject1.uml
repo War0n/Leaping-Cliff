@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="489c013c-7fb3-42d0-b3a6-b83fbbf4a51d"
   name="ModelingProject1" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -1808,22 +1808,22 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="0c0ea266-4c6b-4f2f-ac0f-cd4fae6ee67b"
-            name="MessageOccurrenceSpecification11">
-            <covered>
-              <lifelineMoniker
-                Id="455bf0b7-d5b1-4ddb-aa37-886d7dbe5fac"
-                LastKnownName="BarometerController"
-                LastKnownLocation="ModelingProject1.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="ebe0b41b-d971-440e-b300-82c351c12c16"
             name="MessageOccurrenceSpecification12">
             <covered>
               <lifelineMoniker
                 Id="50c50ce8-ebec-4b76-9311-7b5154b242f0"
                 LastKnownName="DatabaseFactory"
+                LastKnownLocation="ModelingProject1.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="0c0ea266-4c6b-4f2f-ac0f-cd4fae6ee67b"
+            name="MessageOccurrenceSpecification11">
+            <covered>
+              <lifelineMoniker
+                Id="455bf0b7-d5b1-4ddb-aa37-886d7dbe5fac"
+                LastKnownName="BarometerController"
                 LastKnownLocation="ModelingProject1.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -2200,22 +2200,22 @@
             </covered>
           </messageOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="4dedcec1-8b10-4ba1-97e3-25f9870e18e5"
-            name="MessageOccurrenceSpecification29">
-            <covered>
-              <lifelineMoniker
-                Id="25b31d2a-dc24-4c4a-b220-af6d15c5232a"
-                LastKnownName="Grades"
-                LastKnownLocation="ModelingProject1.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="0b8f3ccf-7207-44a5-8d70-fb2a0a3c448c"
             name="MessageOccurrenceSpecification30">
             <covered>
               <lifelineMoniker
                 Id="986b64e0-7711-4df8-b6c1-47ea1db11cd7"
                 LastKnownName="Student"
+                LastKnownLocation="ModelingProject1.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="4dedcec1-8b10-4ba1-97e3-25f9870e18e5"
+            name="MessageOccurrenceSpecification29">
+            <covered>
+              <lifelineMoniker
+                Id="25b31d2a-dc24-4c4a-b220-af6d15c5232a"
+                LastKnownName="Grades"
                 LastKnownLocation="ModelingProject1.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -3128,22 +3128,22 @@
             </covered>
           </messageOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="e21cd6be-2e7f-4e06-9c63-be9dc47c02ce"
-            name="MessageOccurrenceSpecification21">
-            <covered>
-              <lifelineMoniker
-                Id="6e9d6782-2149-4211-ae42-52c54cb6e212"
-                LastKnownName="GradeExportDatabase"
-                LastKnownLocation="ModelingProject1.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="c81b6881-e996-4917-95c9-6d2780d41f14"
             name="MessageOccurrenceSpecification22">
             <covered>
               <lifelineMoniker
                 Id="b54816b7-39d2-4fde-9d19-664886ad8f6b"
                 LastKnownName="DatabaseFactory"
+                LastKnownLocation="ModelingProject1.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e21cd6be-2e7f-4e06-9c63-be9dc47c02ce"
+            name="MessageOccurrenceSpecification21">
+            <covered>
+              <lifelineMoniker
+                Id="6e9d6782-2149-4211-ae42-52c54cb6e212"
+                LastKnownName="GradeExportDatabase"
                 LastKnownLocation="ModelingProject1.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -3678,6 +3678,24 @@
       <executionEvent
         Id="3e9225c8-ab8a-4377-a940-896f7cd1b9d0"
         name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="91900205-a0cb-463c-95a1-6975000cfb71"
+        LastKnownName="Admin"
+        LastKnownLocation="Package_2011.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="02661217-5e98-4b0b-b0b2-063558144c09"
+        LastKnownName="Controller"
+        LastKnownLocation="Package_2026.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="c5d264e7-bcef-4957-8405-5d671731deeb"
+        LastKnownName="View"
+        LastKnownLocation="Package_2027.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

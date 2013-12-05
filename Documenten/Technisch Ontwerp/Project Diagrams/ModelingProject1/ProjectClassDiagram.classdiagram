@@ -234,6 +234,80 @@
         <elementDefinition Id="98163627-1baf-4a2e-b807-7ab41a37baf8" />
       </referencedType>
     </packageHasNamedElement>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="f2a6355e-a536-45f5-895e-dfa82ddadf06" name="Controller">
+        <elementDefinition Id="02661217-5e98-4b0b-b0b2-063558144c09" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="dffcd0c2-172f-4f8c-a362-0808eda00383" name="AdminController" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="f9700339-48ec-46d2-b468-1d5f0829c5e0" />
+              <ownedOperationsInternal>
+                <operation Id="581e54bc-da65-4127-93c2-7ec3f014d8ed" name="CreateBarometer" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="ed03782d-2680-4ca8-a43f-3639b2c0ce0e" />
+                </operation>
+                <operation Id="cdfa6756-5258-4f3d-b884-8077fede243d" name="BarometerTemplateList" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="c73e529c-0784-4254-9da1-6ecaa0c6d83a" />
+                </operation>
+                <operation Id="bed5dd81-87b3-484c-9cb8-b26b67cca8a9" name="ProjectList" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="b20eedb4-fd55-4542-8475-b7a17909fc8c" />
+                </operation>
+                <operation Id="ef9fa0e8-7cea-413c-bf7c-02d5966f4249" name="ProjectGroup" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="c48653c7-c64c-402c-98f3-200ccf2e6f50" />
+                </operation>
+                <operation Id="a03791fc-dd12-45bd-9047-a7778545d071" name="ProjectGroupOverview" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="8e169a4c-19ee-4e22-b69f-fe6e350f904c" />
+                </operation>
+                <operation Id="9d7e14fe-f23a-4c9a-813e-8d97b8896cc1" name="CreateEditProject" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="4773529d-4a9c-46f6-ac3c-9cb038a7e32c" />
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="23c45338-e9a1-4800-be4b-b16ff83b9deb" name="StudentController" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="1f358b60-0e84-49c5-984c-e50b810b9a71" />
+              <ownedOperationsInternal>
+                <operation Id="422abde0-756e-465f-9c40-afe1ad722a52" name="Dashboard" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="5a2aed0c-561a-465c-b0a2-20d21938d102" />
+                </operation>
+                <operation Id="15eb183e-68a1-41cc-b50a-ec62e2b96ac2" name="BarometerFill" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="5bbfb59b-42d7-4f68-a763-d7baa2ea5262" />
+                </operation>
+                <operation Id="19cef006-f77e-48d5-9362-e8011698c117" name="ProjectList" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="d7d67716-9f2c-4be4-a538-a434364c25ce" />
+                </operation>
+                <operation Id="2fd35370-f2e7-4923-a9a0-0b028d615839" name="ProjectView" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="f2da8756-199a-4632-8829-38c1533ac8c2" />
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="7673c64e-2476-4e4b-b45b-c06a85e19b4e" name="LoginController" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="eb8ff56c-1ff3-4577-96d4-8c8fdc458f6c" />
+              <ownedOperationsInternal>
+                <operation Id="f1aa6f2f-295b-47d1-9166-65b535558692" name="Login" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="b5838735-cd08-449b-937d-66b340c77aab" />
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="c138fa86-1fd3-48b5-8e78-b2368c412f20" name="ModeratorController" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="aef32479-ee28-47d5-b23b-95e59be461e5" />
+              <ownedOperationsInternal>
+                <operation Id="9ef1749d-1203-47b1-a150-5eab241a27bb" name="Dashboard" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="4ee50b2d-8806-4064-b79f-bbb86e071a82" />
+                </operation>
+                <operation Id="9c969c30-0a98-47ef-9f40-34c5c8ee486b" name="StudentView" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="d201eea5-46db-496d-b379-ce89b09f1ab2" />
+                </operation>
+              </ownedOperationsInternal>
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
   </packagedElements>
   <package Id="988258e8-a65b-4f34-9825-d51ea51cb715" name="ModelingProject1">
     <elementDefinition Id="489c013c-7fb3-42d0-b3a6-b83fbbf4a51d" />
