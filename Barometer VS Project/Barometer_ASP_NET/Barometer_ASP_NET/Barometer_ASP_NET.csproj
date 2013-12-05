@@ -161,13 +161,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\AdminProject\AdminProjectAreaRegistration.cs" />
-    <Compile Include="Areas\AdminProject\Controllers\ProjectController.cs" />
-    <Compile Include="Areas\admin\adminAreaRegistration.cs" />
-    <Compile Include="Areas\admin\Controllers\DashboardController.cs" />
-    <Compile Include="Areas\moderator\moderatorAreaRegistration.cs" />
-    <Compile Include="Areas\user\userAreaRegistration.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModeratorController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Database\DAOProject.cs" />
     <Compile Include="Database\DatabaseFactory.cs" />
     <Compile Include="Database\LDAPConnector.cs" />
@@ -195,26 +192,19 @@
     <Content Include="Content\css\default.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\pf.jpg" />
-    <Content Include="Areas\user\Views\Web.config" />
-    <Content Include="Areas\admin\Views\Web.config" />
-    <Content Include="Areas\moderator\Views\Web.config" />
-    <Content Include="Areas\AdminProject\Views\Web.config" />
-    <Content Include="Areas\AdminProject\Views\Shared\_Layout.cshtml" />
-    <None Include="Areas\admin\Views\Barotemplate.cshtml" />
-    <None Include="Areas\admin\Views\Dashboard\Dashboard.cshtml" />
-    <None Include="Areas\AdminProject\Views\Create.cshtml" />
-    <None Include="Areas\AdminProject\Views\Detail.cshtml" />
-    <None Include="Areas\AdminProject\Views\List.cshtml" />
-    <None Include="Areas\AdminProject\Views\Project-groups-view.cshtml" />
-    <None Include="Areas\AdminProject\Views\Project-groups.cshtml" />
-    <Content Include="Areas\admin\Views\Shared\_Layout.cshtml" />
-    <None Include="Areas\moderator\Views\dashboard.cshtml" />
-    <Content Include="Areas\moderator\Views\Shared\_Layout.cshtml" />
-    <None Include="Areas\moderator\Views\student.cshtml" />
-    <None Include="Areas\user\Views\barometer.cshtml" />
-    <None Include="Areas\user\Views\dashboard.cshtml" />
-    <None Include="Areas\user\Views\project.cshtml" />
-    <None Include="Areas\user\Views\projecten.cshtml" />
+    <None Include="Views\Admin\Barotemplate.cshtml" />
+    <None Include="Views\Admin\Dashboard.cshtml" />
+    <None Include="Views\Admin\Create.cshtml" />
+    <None Include="Views\Admin\Detail.cshtml" />
+    <None Include="Views\Admin\List.cshtml" />
+    <None Include="Views\Admin\ProjectGroupsView.cshtml" />
+    <None Include="Views\Admin\ProjectGroups.cshtml" />
+    <None Include="Views\Moderator\Dashboard.cshtml" />
+    <None Include="Views\Moderator\Student.cshtml" />
+    <None Include="Views\User\Barometer.cshtml" />
+    <None Include="Views\User\Dashboard.cshtml" />
+    <None Include="Views\User\Project.cshtml" />
+    <None Include="Views\User\Projecten.cshtml" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -274,7 +264,6 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Areas\user\Views\Shared\_Layout.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -290,7 +279,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
-    <None Include="Views\roles\Index.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -321,12 +310,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AdminProject\Models\" />
-    <Folder Include="Areas\admin\Models\" />
-    <Folder Include="Areas\moderator\Controllers\" />
-    <Folder Include="Areas\moderator\Models\" />
-    <Folder Include="Areas\user\Controllers\" />
-    <Folder Include="Areas\user\Models\" />
     <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>

@@ -6,15 +6,20 @@ using System.Web.Mvc;
 
 namespace Barometer_ASP_NET.Controllers
 {
-    public class RolesController : Controller
+    public class ModeratorController : Controller
     {
         //
-        // GET: /Roles/
+        // GET: /Moderator/
 
-        public ActionResult Index()
+        public ActionResult Dashboard()
         {
             return View();
         }
+
+		public ActionResult Student()
+		{
+			return View();
+		}
 
     }
 }

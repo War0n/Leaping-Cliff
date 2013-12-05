@@ -4,14 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Barometer_ASP_NET.Areas.admin.Controllers
+namespace Barometer_ASP_NET.Controllers
 {
-    public class DashboardController : Controller
+    public class HomeController : Controller
     {
         //
-        // GET: /admin/Dashboard/
+        // GET: /Roles/
 
-        public ActionResult Dashboard()
+        public ActionResult Index()
         {
             return View();
         }
