@@ -1,8 +1,7 @@
 @{
     ViewBag.Title = "Barometer";
 }
-<html>
-	<head>
+
 		<script type="text/javascript">
 			$(function() {
 				$('.baro-students li').click(function(e){
@@ -14,9 +13,7 @@
 				
 			});
 		</script>
-	</head>
-	<body>
-	    <div class="container">
+	
 	      <div class="navbar navbar-default" role="navigation">
 	        <div class="navbar-header">
 	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -29,13 +26,13 @@
 	        </div>
 	        <div class="navbar-collapse collapse">
 	         	<ul class="nav navbar-nav">
-			      <li><a href="dashboard.html">Dashboard</a></li>
-			      <li><a href="projecten.html">Mijn projecten</a></li>
+			      <li>@Html.ActionLink("Dashboard", "Dashboard", "User", null)</li>
+			      <li>@Html.ActionLink("Projecten", "Projecten", "User", null)</li>
 			    </ul>
 	         
 	         	
-	         	<form class="navbar-form navbar-right">
-	         	<a href="../../index.html" type="button" class="btn btn-default">Log uit</a>
+	         	<form class="navbar-form navbar-right">                    
+                     @Html.ActionLink("Log Uit", "Index", "Home", null, new { @class = "btn btn-default" })
 	         	</form>
 	         	
 	         	<p class="navbar-text navbar-right">
@@ -196,6 +193,3 @@
 					</div>
 				</div>
 			</div>
-		</div>
-</body>
-</html>
