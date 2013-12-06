@@ -169,6 +169,11 @@
     <Compile Include="Database\DAOProject.cs" />
     <Compile Include="Database\DatabaseFactory.cs" />
     <Compile Include="Database\LDAPConnector.cs" />
+    <Compile Include="Database\LinqToSql.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LinqToSql.dbml</DependentUpon>
+    </Compile>
     <Compile Include="FileFactory\FileHandlerFactory.cs" />
     <Compile Include="FileFactory\GradeExcel.cs" />
     <Compile Include="FileFactory\IExcelDataTransfer.cs" />
@@ -253,6 +258,11 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Database\LinqToSql.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>LinqToSql.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -317,6 +327,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Database\LinqToSql.dbml.layout">
+      <DependentUpon>LinqToSql.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
