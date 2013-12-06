@@ -14,4 +14,3 @@ A)	Wanneer de Projectleider en de Notulist beiden aanwezig zijn, zijn zij ook de
 B)	Uitzonderingen zullen worden goedgekeurd door de projectleider, of (in het geval van een afwezige projectleider) zijn vervanger.</p>
 <p>6.	Elk groepslid doet actief mee in vergaderingen en overige bijeenkomsten. </p>
 <p>7.	Elk groepslid is verantwoordelijk voor zijn eigen taak. Wanneer de taak onvoldoende wordt bevonden door een van de reiviewers, is het verantwoordelijke groepslid verplicht het zelf op tijd te verbeteren.</p>
-
