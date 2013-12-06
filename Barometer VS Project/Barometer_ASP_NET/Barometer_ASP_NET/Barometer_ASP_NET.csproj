@@ -186,25 +186,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\pf.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\css\bootstrap-theme-min.css" />
     <Content Include="Content\css\bootstrap-min.css" />
     <Content Include="Content\css\default.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\pf.jpg" />
-    <None Include="Views\Admin\Barotemplate.cshtml" />
-    <None Include="Views\Admin\Dashboard.cshtml" />
-    <None Include="Views\Admin\Create.cshtml" />
-    <None Include="Views\Admin\Detail.cshtml" />
-    <None Include="Views\Admin\List.cshtml" />
-    <None Include="Views\Admin\ProjectGroupsView.cshtml" />
-    <None Include="Views\Admin\ProjectGroups.cshtml" />
-    <None Include="Views\Moderator\Dashboard.cshtml" />
-    <None Include="Views\Moderator\Student.cshtml" />
-    <None Include="Views\User\Barometer.cshtml" />
-    <None Include="Views\User\Dashboard.cshtml" />
-    <None Include="Views\User\Project.cshtml" />
-    <None Include="Views\User\Projecten.cshtml" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -279,7 +267,22 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <None Include="Views\Admin\Barolist.cshtml" />
+    <None Include="Views\Admin\Barotemplate.cshtml" />
+    <None Include="Views\Admin\Create.cshtml" />
+    <None Include="Views\Admin\Dashboard.cshtml" />
+    <None Include="Views\Admin\Detail.cshtml" />
+    <None Include="Views\Admin\List.cshtml" />
+    <None Include="Views\Admin\ProjectGroupsView.cshtml" />
+    <None Include="Views\Admin\ProjectGroups.cshtml" />
+    <None Include="Views\Admin\Student.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Moderator\Dashboard.cshtml" />
+    <None Include="Views\Moderator\Student.cshtml" />
+    <None Include="Views\User\Barometer.cshtml" />
+    <None Include="Views\User\Dashboard.cshtml" />
+    <None Include="Views\User\Project.cshtml" />
+    <None Include="Views\User\Projecten.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -310,7 +313,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

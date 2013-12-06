@@ -1,0 +1,41 @@
+@{
+    ViewBag.Title = "Avans Barometer";
+}
+<html>
+  <body>
+
+    <div class="container">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+      	<div class="row">
+      		<div class="col-lg-6">
+      			<h1>Avans barometer</h1>
+		        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu iaculis leo, quis lobortis orci. Nulla malesuada pulvinar lorem. Morbi ullamcorper est metus, sit amet venenatis libero adipiscing id. Ut suscipit mattis lobortis. Vestibulum bibendum lorem id sodales fermentum.</p>
+      		</div>
+      		<div class="col-lg-5 col-lg-offset-1 well">
+				<form class="form-horizontal login-form" role="form">
+				  <div class="form-group">
+				    <label for="inputEmail3" class="control-label">Naam</label>
+				      <input type="email" class="form-control" id="inputEmail3" placeholder="Avans gebruikersnaam">
+				  </div>
+				  <div class="form-group">
+				    <label for="inputPassword3" class="control-label">Wachtwoord</label>
+				      <input type="password" class="form-control" id="inputPassword3" placeholder="Wachtwoord">
+				  </div>
+				  
+				  <hr />
+				  
+				  <div class="form-group">
+                      @Html.ActionLink("Log in", "Dashboard", "User", null, new {@class = "btn btn-default btn-lgn"})
+				      <a href="#">Wachtwoord vergeten</a>
+				  </div>
+				</form>
+      		</div>
+      	</div>
+
+      </div>
+
+    </div> <!-- /container -->
+  </body>
+</html>
