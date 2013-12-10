@@ -192,8 +192,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\bootstrap-theme-min.css" />
-    <Content Include="Content\css\bootstrap-min.css" />
+    <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\default.css" />
     <Content Include="Content\images\pf.jpg" />
     <Content Include="Content\js\bootstrap-min.js" />

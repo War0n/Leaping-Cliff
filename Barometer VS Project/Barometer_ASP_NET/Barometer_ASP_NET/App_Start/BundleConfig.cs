@@ -23,7 +23,7 @@ namespace Barometer_ASP_NET
 			bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
 						"~/Scripts/modernizr-*"));
 
-			bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/css/bootstrap-theme-min.css", "~/Content/css/bootstrap-min.css", "~/Content/css/default.css"));
+			bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/css/bootstrap.css", "~/Content/css/default.css"));
 
 			bundles.Add(new ScriptBundle("~/Content/js").Include(
 						"~/Content/js/bootstrap-min.js"));
