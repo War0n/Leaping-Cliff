@@ -25,8 +25,8 @@ namespace Barometer_ASP_NET
 
 			bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/css/bootstrap-theme-min.css", "~/Content/css/bootstrap-min.css", "~/Content/css/default.css"));
 
-			bundles.Add(new StyleBundle("~/Content/js").Include(
-						"~/Content/js/bootstrap.min.js"));
+			bundles.Add(new ScriptBundle("~/Content/js").Include(
+						"~/Content/js/bootstrap-min.js"));
 		}
 	}
 }
