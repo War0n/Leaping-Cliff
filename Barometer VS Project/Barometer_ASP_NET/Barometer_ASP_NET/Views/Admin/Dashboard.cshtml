@@ -1,192 +1,148 @@
 @{
     ViewBag.Title = "Dashboard";
 }
-<html>
-	<body>
-	    <div class="container">
-	      <div class="navbar navbar-default" role="navigation">
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	            <span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </button>
-	          <a class="navbar-brand" href="#">Avans</a>
-	        </div>
-	        <div class="navbar-collapse collapse">
-	         	<ul class="nav navbar-nav">
-			      <li class="active"><a href="dashboard.html">Dashboard</a></li>
-			      <li class="dropdown">
-			      	<a class="dropdown-toggle" data-toggle="dropdown" href="project/list.html">Projecten <b class="caret"></b></a>
-			      	<ul class="dropdown-menu">
-			      		<li><a href="project/create.html">Aanmaken</a></li>
-			      		<li><a href="project/list.html">Overzicht</a></li>
-			      	</ul>
-			      	</li>
-			      <li><a href="barotemplate.html">Barometer templates</a></li>
-			    </ul>
-	         
-	         	
-	         	<form class="navbar-form navbar-right">
-	         	<a href="../../index.html" type="button" class="btn btn-default">Log uit</a>
-	         	</form>
-	         	
-	         	<p class="navbar-text navbar-right">
-	         	Ingelogd als <a href="#" class="navbar-link">Jos van Weert</a>
-	         	</p>
-	        </div><!--/.nav-collapse -->
-	      </div>
-	      
 <div class="row">
-		      <div class="col-lg-6">
-		      		<h2>Groepen</h2>
-		      		<p>Klik op een student om deze te bekijken</p>
-		      		<hr />
-		      		<select class="form-control">
-			      		<option>Selecteer project</option>
-			      		<option>Project Barometer</option>
-			      		<option>Project Wordfeud</option>
-		      		</select>
-		      		<br /><br />
-					<div class="panel-group" id="accordion">
-					  <div class="panel panel-default">
-					    <div class="panel-heading">
-					      <h4 class="panel-title">
-					        <a data-toggle="collapse" data-parent="#accordion" href="#group1">
-					          42IN06SOa
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="group1" class="panel-collapse collapse in">
-					      <div class="panel-body">
-					        <table class="table table-bordered table-members table-centered">
-		      			<tbody>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>Rik Coenen</td>
-		      					<td><a href="student.html" title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-		      				</tr>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>Ronald Duren</td>
-		      					<td><a  title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+    <div class="col-lg-6">
+        <h2>Groepen</h2>
+        <p>Klik op een student om deze te bekijken</p>
+        <hr />
+        <select class="form-control">
+            <option>Selecteer project</option>
+            <option>Project Barometer</option>
+            <option>Project Wordfeud</option>
+        </select>
+        <br />
+        <br />
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        @Html.ActionLink("42IN06SOa", "Student", "Admin", new { @data_toggle = "collapse", @data_parent = "#accordion", @Href = "#group1" })
+                    </h4>
+                </div>
+                <div id="group1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-members table-centered">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>Rik Coenen</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>Ronald Duren</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
 
-		      				</tr>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>Joost Dolman</td>
-		      					<td><a title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-		      				</tr>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>John Huijbergt</td>
-		      					<td><a  title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-		      				</tr>
-		      			</tbody>
-		      		</table>
-					      </div>
-					    </div>
-					  </div>
-					   <div class="panel panel-default">
-					    <div class="panel-heading">
-					      <h4 class="panel-title">
-					        <a data-toggle="collapse" data-parent="#accordion" href="#group2">
-					          42IN06SOb
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="group2" class="panel-collapse collapse">
-					      <div class="panel-body">
-					        <table class="table table-bordered table-members table-centered">
-		      			<tbody>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>Rik Coenen</td>
-		      					<td><a title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-		      				</tr>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>Ronald Duren</td>
-		      					<td><a title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>Joost Dolman</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>John Huijbergt</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        @Html.ActionLink("42IN06SOb", "Student", "Admin", new { @data_toggle = "collapse", @data_parent = "#accordion", @Href = "#group2" })
+                    </h4>
+                </div>
+                <div id="group2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-members table-centered">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>Rik Coenen</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>Ronald Duren</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
 
-		      				</tr>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>Joost Dolman</td>
-		      					<td><a title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-		      				</tr>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>John Huijbergt</td>
-		      					<td><a title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-		      				</tr>
-		      			</tbody>
-		      		</table>
-					      </div>
-					    </div>
-					  </div>
-					   <div class="panel panel-default">
-					    <div class="panel-heading">
-					      <h4 class="panel-title">
-					        <a data-toggle="collapse" data-parent="#accordion" href="#group3">
-					          42IN06SOc
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="group3" class="panel-collapse collapse">
-					      <div class="panel-body">
-					        <table class="table table-bordered table-members table-centered">
-		      			<tbody>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>Rik Coenen</td>
-		      					<td><a title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-		      				</tr>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>Ronald Duren</td>
-		      					<td><a  title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>Joost Dolman</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>John Huijbergt</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        @Html.ActionLink("42IN06SOc", "Student", "Admin", new { @data_toggle = "collapse", @data_parent = "#accordion", @Href = "#group3" })
 
-		      				</tr>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>Joost Dolman</td>
-		      					<td><a  title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-		      				</tr>
-		      				<tr>
-		      					<td><img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-		      					<td>John Huijbergt</td>
-		      					<td><a title="Bekijk historich overzicht"><span class="glyphicon glyphicon-eye-open"></span></a></td>
-		      				</tr>
-		      			</tbody>
-		      		</table>
-					      </div>
-					    </div>
-					  </div>
+                    </h4>
+                </div>
+                <div id="group3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-members table-centered">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>Rik Coenen</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>Joost Dolman</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                                    <td>John Huijbergt</td>
+                                    <td>@Html.ActionLink(" ", "Student", "Admin", new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-					</div>
-		      </div>
-		      <div class="col-lg-6">
-		      		<h2>Zoek een student</h2>
-		      		<p>Typ de naam van een student in om het overzicht te bekijken</p>
-		      		<hr />
-		      		<form class="form-vertical">
-		      			<div class="form-group">
-		      				<label class="control-label">Zoek student</label>
-		      				<input type="text" class="form-control" name="student" />
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <h2>Zoek een student</h2>
+        <p>Typ de naam van een student in om het overzicht te bekijken</p>
+        <hr />
+        <form class="form-vertical">
+            <div class="form-group">
+                <label class="control-label">Zoek student</label>
+                <input type="text" class="form-control" name="student" />
 
-		      			</div>
-		      		</form>
-
-
-		      </div>
-	      </div>
+            </div>
+        </form>
 
 
-	 	
-	 	</div>
-  
-
-	</body>
-</html>
+    </div>
+</div>

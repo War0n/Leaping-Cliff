@@ -287,9 +287,14 @@
     <None Include="Views\Admin\ProjectGroupsView.cshtml" />
     <None Include="Views\Admin\ProjectGroups.cshtml" />
     <None Include="Views\Admin\Student.cshtml" />
+    <Content Include="Views\Admin\_ViewStart.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Moderator\Dashboard.cshtml" />
     <None Include="Views\Moderator\Student.cshtml" />
+    <Content Include="Views\Moderator\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_UserLayout.cshtml" />
+    <Content Include="Views\Shared\_ModeratorLayout.cshtml" />
     <None Include="Views\User\Barometer.cshtml" />
     <None Include="Views\User\Dashboard.cshtml" />
     <None Include="Views\User\Project.cshtml" />
@@ -321,6 +326,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\User\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

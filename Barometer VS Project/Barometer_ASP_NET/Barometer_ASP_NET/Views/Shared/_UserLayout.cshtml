@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Content/js")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div class="container">
+        <div class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Avans</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Dashboard", "Dashboard", "User", null)</li>
+                    <li>@Html.ActionLink("Projecten", "Projecten", "User", null)</li>
+                </ul>
+
+
+                <form class="navbar-form navbar-right">
+                    @Html.ActionLink("Log Uit", "Index", "Home", null, new { @class = "btn btn-default" })
+                </form>
+
+                <p class="navbar-text navbar-right">
+                    Ingelogd als <a href="#" class="navbar-link">Jens Hoevenaars</a>
+                </p>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+
+        <!-- Main component for a primary marketing message or call to action -->
+        @RenderBody()
+
+    </div>
+
+
+    @*        @RenderSection("scripts", required: false)*@
+</body>
+</html>

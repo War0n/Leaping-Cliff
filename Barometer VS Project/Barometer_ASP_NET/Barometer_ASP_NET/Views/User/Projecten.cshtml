@@ -1,71 +1,44 @@
 @{
     ViewBag.Title = "Projecten";
 }
-	      <div class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Avans</a>
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Projecten van Jens Hoevenaars</h2>
+        <hr />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Titel</td>
+                    <td>Blok</td>
+                    <td>Eindcijfer groep</td>
+                    <td>Eindcijfer individueel</td>
+                    <td>Bekijk</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Wordfeud</td>
+                    <td>Blok 3</td>
+                    <td><span class="label label-success">6</span></td>
+                    <td><span class="label label-danger">4</span></td>
+                    <td>@Html.ActionLink(" ", "Project", "User", null, new { @class = "glyphicon glyphicon-tasks" })</td>
+                </tr>
+                <tr>
+                    <td>Reisbureau</td>
+                    <td>Blok 4</td>
+                    <td><span class="label label-success">7</span></td>
+                    <td><span class="label label-danger">5</span></td>
+                    <td>@Html.ActionLink(" ", "Project", "User", null, new { @class = "glyphicon glyphicon-tasks" })</td>
+                </tr>
+                <tr>
+                    <td>Barometer</td>
+                    <td>Blok 5-6</td>
+                    <td><span class="label label-success">6.5</span></td>
+                    <td><span class="label label-success">8</span></td>
+                    <td>@Html.ActionLink(" ", "Project", "User", null, new { @class = "glyphicon glyphicon-tasks" })</td>
+                </tr>
+
+            </tbody>
+        </table>
     </div>
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li>@Html.ActionLink("Dashboard", "Dashboard", "User", null)</li>
-            <li>@Html.ActionLink("Projecten", "Projecten", "User", null)</li>
-        </ul>
-
-
-        <form class="navbar-form navbar-right">
-            @Html.ActionLink("Log Uit", "Index", "Home", null, new { @class = "btn btn-default" })
-        </form>
-
-        <p class="navbar-text navbar-right">
-            Ingelogd als @Html.ActionLink("Jens Hoevenaars", "Dashboard", "User", null)
-        </p>
-    </div><!--/.nav-collapse -->
-	      </div>
-
-		  <div class="row">
-		  	<div class="col-lg-12">
-		  		<h2>Projecten van Jens Hoevenaars</h2>
-		  		<hr />
-		  		<table class="table table-striped">
-		  		<thead>
-		  			<tr>
-		  				<td>Titel</td>
-		  				<td>Blok</td>
-		  				<td>Eindcijfer groep</td>
-		  				<td>Eindcijfer individueel</td>
-		  				<td>Bekijk</td>
-		  			</tr>
-		  		</thead>
-		  		<tbody>
-		  			<tr>
-		  				<td>Wordfeud</td>
-		  				<td>Blok 3</td>
-		  				<td><span class="label label-success">6</span></td>
-		  				<td><span class="label label-danger">4</span></td>
-		  				<td>@Html.ActionLink(" ","Project","User", null, new { @class = "glyphicon glyphicon-tasks" })</td>
-		  			</tr>
-		  			<tr>
-		  				<td>Reisbureau</td>
-		  				<td>Blok 4</td>
-		  				<td><span class="label label-success">7</span></td>
-		  				<td><span class="label label-danger">5</span></td>
-		  				<td>@Html.ActionLink(" ","Project","User", null, new { @class = "glyphicon glyphicon-tasks" })</td>
-		  			</tr>
-		  			<tr>
-		  				<td>Barometer</td>
-		  				<td>Blok 5-6</td>
-		  				<td><span class="label label-success">6.5</span></td>
-		  				<td><span class="label label-success">8</span></td>
-		  				<td>@Html.ActionLink(" ","Project","User", null, new { @class = "glyphicon glyphicon-tasks" })</td>
-		  			</tr>
-		  			
-		  			</tbody>
-		  		</table>
-		  	</div>
-		  </div>
+</div>

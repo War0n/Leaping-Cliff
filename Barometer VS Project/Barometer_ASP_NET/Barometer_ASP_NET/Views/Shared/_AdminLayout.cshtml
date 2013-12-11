@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/Content/js")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <div class="container">
+        <div class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Avans</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Dashboard","Dashboard","Admin")</li>
+                    <li class="dropdown">
+                        @Html.ActionLink(HttpUtility.HtmlDecode("Projecten &#x25be;"), "List", "Admin", new {@Class = "dropdown-toggle" ,@Data_toggle = "dropdown"})
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Aanmaken","Create","Admin")</li>
+                            <li>@Html.ActionLink("Overzicht","List","Admin")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        @Html.ActionLink(HttpUtility.HtmlDecode("Barometer templates &#x25be;"), "Barotemplate", "Admin", new {@Class = "dropdown-toggle" ,@Data_toggle = "dropdown"})
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Aanmaken","Barotemplate","Admin")</li>
+                            <li>@Html.ActionLink("Overzicht","List","Admin")</li>
+                        </ul>
+
+                    </li>
+                </ul>
+
+
+                <form class="navbar-form navbar-right">
+                    <a href="../../index.html" type="button" class="btn btn-default">Log uit</a>
+                </form>
+
+                <p class="navbar-text navbar-right">
+                    Ingelogd als @Html.ActionLink("Jos van Weert", null, null, new { @class = "navbar-link", @Href = "#" })
+                </p>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+        <!-- Main component for a primary marketing message or call to action -->
+        @RenderBody()
+
+    </div>
+
+
+    @*        @RenderSection("scripts", required: false)*@
+</body>
+</html>
