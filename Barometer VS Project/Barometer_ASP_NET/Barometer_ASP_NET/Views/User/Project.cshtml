@@ -115,25 +115,35 @@
                     <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
                     <td>Rik Coenen</td>
-                    <td><a data-toggle="modal" data-target="#modal-baro" title="Bekijk beoordeling van Rik Coenen"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                    <td>
+                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Rik Coenen", @class = "glyphicon glyphicon-eye-open" })
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                    <td>Ronald Duren</td>
-                    <td><a href="" title="Bekijk beoordeling van Rik Coenen"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                    <td>Ronald van Duren</td>
+                    <td>
+                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Ronald van Duren", @class = "glyphicon glyphicon-eye-open" })
+                    </td>
+
                 </tr>
                 <tr>
                     <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
                     <td>Joost Dolman</td>
-                    <td><a href="" title="Bekijk beoordeling van Rik Coenen"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                    <td>
+                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Joost Dolman", @class = "glyphicon glyphicon-eye-open" })
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
                     <td>John Huijbergt</td>
-                    <td><a href="" title="Bekijk beoordeling van Rik Coenen"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                    <td>
+                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van John Huijbergt", @class = "glyphicon glyphicon-eye-open" })
+
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -164,8 +174,8 @@
             <div class="modal-body">
                 <div class="barometer-control">
                     <ul class="nav nav-tabs" id="myTab">
-                        <li class="active"><a href="#tab1" data-toggle="tab">Inhoudelijke kennis</a></li>
-                        <li><a href="#tab2" data-toggle="tab">Werken als professional</a></li>
+                        <li class="active">@Html.ActionLink("Inhoudelijke Kennis", null, null, new { @data_toggle = "tab", @Href = "#tab1" })</li>
+                        <li>@Html.ActionLink("Werken als professional", null, null, new { @data_toggle = "tab", @Href = "#tab2" })</li>
                     </ul>
 
                     <div class="tab-content">
@@ -268,7 +278,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
+                <input type="button" value="Sluit" class="btn btn-default" data-dismiss="modal" />
             </div>
         </div>
     </div>

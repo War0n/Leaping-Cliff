@@ -2,165 +2,208 @@
     ViewBag.Title = "Barometer";
 }
 
-		<script type="text/javascript">
-			$(function() {
-				$('.baro-students li').click(function(e){
-					$('.baro-students li').each(function(){
-						$(this).removeClass('active');
-					});
-					$(this).addClass('active');
-				});
-				
-			});
-		</script>
-			<div class="row barometer">
-				<div class="col-lg-3">
-					<ul class="nav nav-pills nav-stacked baro-students" style="">
-						<li>
-							<img src="../../images/pf.jpg" class="img-circle pull-left">
-							<p>Rik Coenen <span class="glyphicon glyphicon-ok"></span></p>
-						</li>
-						<li class="active">
-							<img src="../../images/pf.jpg" class="img-circle pull-left">
-							<p>Dennis Dolleman </p>
-						</li>
-						<li>
-							<img src="../../images/pf.jpg" class="img-circle pull-left">
-							<p>Alhric Lacile</p>
-						</li>
-						<li>
-							<img src="../../images/pf.jpg" class="img-circle pull-left">
-							<p>Ronald Makelaar <span class="glyphicon glyphicon-ok"></span></p>
-						</li>
-						<li>
-							<img src="../../images/pf.jpg" class="img-circle pull-left">
-							<p>Nick Hulodake <span class="glyphicon glyphicon-ok"></span></p>
-						</li>
-						<li>
-							<img src="../../images/pf.jpg" class="img-circle pull-left">
-							<p>John Pakema <span class="glyphicon glyphicon-ok"></span></p>
-						</li>
-					</ul>
-					
-				</div>
-				<div class="col-lg-9">
-					<div class="barometer-control">
-						<ul class="nav nav-tabs" id="myTab">
-						  <li class="active"><a href="#tab1" data-toggle="tab">Inhoudelijke kennis</a></li>
-						  <li><a href="#tab2" data-toggle="tab">Werken als professional</a></li>
-						  <li class="pull-right">
-						  	<select class="form-control">
-						  		<option>Week 3</option>
-						  		<option>Week 6</option>
-						  		<option>Week 9</option>
-						  	</select>
-						  	</li>
-						</ul>
-						
-						<div class="tab-content">
-						  <div class="tab-pane active" id="tab1">
-						  	<form class="baro-form">
-							  	<table class="table">
-							  		<tr>
-							  			<td colspan="2"><h4><i>Kennis van/over en vaardigheden</i></h4></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Bussines definition study</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>System use cases</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Prototype(s)</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Requirement analyse</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Functioneel ontwerp</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  	</table>
-							  	
-							  	<hr />
-							  	
-							  
-							  	<button class="btn btn-primary pull-right btn-lg">Verstuur</button>
-						  	
-						  	</form>
-						  </div>
-						  <div class="tab-pane" id="tab2">
-						  	<form class="baro-form">
-							  	<table class="table">
-							  		<tr>
-							  			<td colspan="2"><h4><i>Inzet motivatie</i></h4></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Meedoen</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Afspraken nakomen</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Op tijd zijn</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		
-							  		
-							  		<tr>
-							  			<td colspan="2"><h4><i>Inzicht eigen functioneren</i></h4></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Kritisch </td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Eigen sterktes en zwaktes kennen</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Besluiten nemen</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Omgaan met stress</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Assertief zijn</td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		
-							  		<tr>
-							  			<td colspan="2"><h4><i>Samenwerken</i></h4></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Anderen helpen </td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Feedback geven </td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  		<tr>
-							  			<td>Feedback ontvangen </td>
-							  			<td><input type="text" class="col-xs-2 pull-right" /></td>
-							  		</tr>
-							  	</table>
-							  	
-							  	<hr />
-							  	
-							  	<button class="btn btn-primary pull-right btn-lg">Verstuur</button>
-						  	
-						  	</form>
-						  </div>
-						</div>
-					</div>
-				</div>
-			</div>
+<script type="text/javascript">
+    $(function () {
+        $('.baro-students li').click(function (e) {
+            $('.baro-students li').each(function () {
+                $(this).removeClass('active');
+            });
+            $(this).addClass('active');
+        });
+
+    });
+</script>
+<div class="row barometer">
+    <div class="col-lg-3">
+        <ul class="nav nav-pills nav-stacked baro-students" style="">
+            <li>
+                <img src="../../images/pf.jpg" class="img-circle pull-left">
+                <p>Rik Coenen <span class="glyphicon glyphicon-ok"></span></p>
+            </li>
+            <li class="active">
+                <img src="../../images/pf.jpg" class="img-circle pull-left">
+                <p>Dennis Dolleman </p>
+            </li>
+            <li>
+                <img src="../../images/pf.jpg" class="img-circle pull-left">
+                <p>Alhric Lacile</p>
+            </li>
+            <li>
+                <img src="../../images/pf.jpg" class="img-circle pull-left">
+                <p>Ronald Makelaar <span class="glyphicon glyphicon-ok"></span></p>
+            </li>
+            <li>
+                <img src="../../images/pf.jpg" class="img-circle pull-left">
+                <p>Nick Hulodake <span class="glyphicon glyphicon-ok"></span></p>
+            </li>
+            <li>
+                <img src="../../images/pf.jpg" class="img-circle pull-left">
+                <p>John Pakema <span class="glyphicon glyphicon-ok"></span></p>
+            </li>
+        </ul>
+
+    </div>
+    <div class="col-lg-9">
+        <div class="barometer-control">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active">@Html.ActionLink("Inhoudelijke Kennis", null, null, new { @data_toggle = "tab", @Href = "#tab1" })</li>
+                <li>@Html.ActionLink("Werken als professional", null, null, new { @data_toggle = "tab", @Href = "#tab2" })</li>
+
+                <li class="pull-right">
+                    <select class="form-control">
+                        <option>Week 3</option>
+                        <option>Week 6</option>
+                        <option>Week 9</option>
+                    </select>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                    @using (Html.BeginForm("Barometer", "Save", FormMethod.Post, new { @class = "baro-form", @role = "form" }))
+                    {
+                        <table class="table">
+                            <tr>
+                                <td colspan="2">
+                                    <h4><i>Kennis van/over en vaardigheden</i></h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Bussines definition study</td>
+                                <td>
+                                    @Html.TextBox("Buisiness_definition_study", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>System use cases</td>
+                                <td>
+                                    @Html.TextBox("System_use_cases", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Prototype(s)</td>
+                                <td>
+                                    @Html.TextBox("Prototypes", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Requirement analyse</td>
+                                <td>
+                                    @Html.TextBox("Requirement_analyse", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Functioneel ontwerp</td>
+                                <td>
+                                    @Html.TextBox("Funcioneel_ontwerp", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr />
+
+
+                        <input type="submit" value="Verstuur" class="btn btn-primary pull-right btn-lg" />
+
+                    }
+                </div>
+                <div class="tab-pane" id="tab2">
+                    @using (Html.BeginForm("Barometer", "Save", FormMethod.Post, new { @class = "baro-form", @role = "form" }))
+                    {
+                        <table class="table">
+                            <tr>
+                                <td colspan="2">
+                                    <h4><i>Inzet motivatie</i></h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Meedoen</td>
+                                <td>
+                                    @Html.TextBox("Meedoen", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Afspraken nakomen</td>
+                                <td>
+                                    @Html.TextBox("Afspraken_nakomen", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Op tijd zijn</td>
+                                <td>
+                                    @Html.TextBox("Op_tijd_zijn", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2">
+                                    <h4><i>Inzicht eigen functioneren</i></h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Kritisch </td>
+                                <td>
+                                    @Html.TextBox("Kritisch", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Eigen sterktes en zwaktes kennen</td>
+                                <td>
+                                    @Html.TextBox("Eigen_sterktes_en_zwaktes_kennen", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Besluiten nemen</td>
+                                <td>
+                                    @Html.TextBox("Besluiten_nemen", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Omgaan met stress</td>
+                                <td>
+                                    @Html.TextBox("Omgaan_met_stress", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Assertief zijn</td>
+                                <td>
+                                    @Html.TextBox("Assertief_zijn", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <h4><i>Samenwerken</i></h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Anderen helpen </td>
+                                <td>
+                                    @Html.TextBox("Anderen_helpen", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Feedback geven </td>
+                                <td>
+                                    @Html.TextBox("Feedback_geven", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Feedback ontvangen </td>
+                                <td>
+                                    @Html.TextBox("Feedback_ontvangen", " ", new { @class = "col-xs-2 pull-right" })
+                                </td>
+                            </tr>
+                        </table>
+
+                        <hr />
+
+                        <input type="submit" value="Verstuur" class="btn btn-primary pull-right btn-lg" />
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
