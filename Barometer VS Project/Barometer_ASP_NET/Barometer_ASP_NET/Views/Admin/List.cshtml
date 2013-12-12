@@ -27,9 +27,9 @@
                     <td>Jos van Weert</td>
                     <td><span class="label label-success">Bezig</span></td>
                     <td>2</td>
-                    <td><a href="project-groups.html"><span class="glyphicon glyphicon-align-justify"></span></a></td>
-                    <td><a href="detail.html"><span class="glyphicon glyphicon-edit"></span></a></td>
-                    <td><a href="#"><span class="glyphicon glyphicon-remove"></span></a></td>
+                    <td>@Html.ActionLink(" ", "ProjectGroups", "Admin", new { @class = "glyphicon glyphicon-align-justify"})</td>
+                    <td>@Html.ActionLink(" ", "Detail", "Admin", new { @class = "glyphicon glyphicon-edit"})</td>
+                    <td>@Html.ActionLink(" ", "Remove", "Project", new { @class = "glyphicon glyphicon-remove", @Href = "#" })</td>
                 </tr>
             </tbody>
         </table>

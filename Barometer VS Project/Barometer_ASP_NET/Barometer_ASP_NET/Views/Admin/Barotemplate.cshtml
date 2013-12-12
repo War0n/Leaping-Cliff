@@ -39,7 +39,7 @@
         <form name="barometer">
             <div class="form-group">
                 <label>Naam</label>
-                <input type="text" class="form-control">
+                @Html.TextBox("naam"," ",new { @class = "form-control",@placeholder = "Naam" })
             </div>
             <hr />
             <div class="form-group">
@@ -47,18 +47,18 @@
                 <table class="table table-bordered table-mainaspects">
                     <tr>
                         <td>
-                            <input type="text" value="Inzet / motivatie" class="form-control"></td>
+                            @Html.TextBox("aspect[]"," ",new { @class = "form-control",@value = "Inzet/Motivatie" })</td>
                         <td>
                             <input type="checkbox" class="checkbox" />
-                            <a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            @Html.ActionLink(" ", null, null, new { @class = "glyphicon glyphicon-eye-open", @Href = "#" })
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" value="Vak inhoudelijk" class="form-control"></td>
+                            @Html.TextBox("aspect[]"," ",new { @class = "form-control",@value = "Vak-Inhoudelijk" })</td>
                         <td>
                             <input type="checkbox" class="checkbox" />
-                            <a href="#"><span class="glyphicon glyphicon-eye-open"></span></a>
+                            @Html.ActionLink(" ", null, null, new { @class = "glyphicon glyphicon-eye-open", @Href = "#" })
                         </td>
                     </tr>
 
@@ -70,35 +70,35 @@
                 <table class="table table-bordered">
                     <tr>
                         <td>
-                            <input type="text" value="Feedback geven" class="form-control"></td>
+                            @Html.TextBox("subaspect[]"," ",new { @class = "form-control",@value = "Feedback ontvangen" })</td>
                         <td>
                             <input type="checkbox" class="checkbox" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" value="Feedback ontvangen" class="form-control"></td>
+                            @Html.TextBox("subaspect[]"," ",new { @class = "form-control",@value = "Feedback geven" })</td>
                         <td>
                             <input type="checkbox" class="checkbox" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" value="Meedoen" class="form-control"></td>
+                            @Html.TextBox("subaspect[]"," ",new { @class = "form-control",@value = "Meedoen" })</td>
                         <td>
                             <input type="checkbox" class="checkbox" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" value="Kritik geven" class="form-control"></td>
+                            @Html.TextBox("subaspect[]"," ",new { @class = "form-control",@value = "Kritiek geven" })</td>
                         <td>
                             <input type="checkbox" class="checkbox" />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <a href="#" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span></a>
+                            @Html.ActionLink(" ", null, null, new { @class = "btn btn-default glyphicon glyphicon-plus", @Href = "#" })
                         </td>
                     </tr>
 
@@ -129,7 +129,7 @@
 
             <div class="form-group">
 
-                <button type="submit" class="btn btn-primary">Opslaan</button>
+                <input type="submit" value="Opslaan" class="btn btn-primary" />
 
             </div>
 
