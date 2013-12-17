@@ -367,6 +367,12 @@
       <DependentUpon>LinqToSql.dbml</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BarometerDataAccesLayer\BarometerDataAccesLayer.csproj">
+      <Project>{16b61be8-c5e1-44e6-95a9-bd25320d3232}</Project>
+      <Name>BarometerDataAccesLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
