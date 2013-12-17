@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
@@ -14,21 +15,16 @@ namespace Barometer_ASP_NET.Database
 		/// <returns></returns>
         public string getChallenges(int id) {
             string ProjectName = null;
-            try {
-               // Connection connection = DatabaseFactory.getInstance().makeConnection();
+            try
+            {
+                LinqToSqlDataContext db = new LinqToSqlDataContext();
 
-              //  String sql = "SELECT * FROM project WHERE projectid = " + id + ";";
-
-               // Statement selectStatement = connection.createStatement();
-               // ResultSet results = selectStatement.executeQuery(sql);
-
-				//ProjectName = results.getString();
-
-               // connection.close();
-               // results.close();
-               // selectStatement.close();
-
-            } catch (Exception e) {
+                var projects = from p in db.projects
+                               where p.name.Contains("SO")
+                               select p;
+            }
+            catch (Exception e) 
+            {
                 Console.WriteLine("Error in getChallenges: " + e);
             }
             return ProjectName;
