@@ -30,17 +30,14 @@ namespace Barometer_ASP_NET.Database
         public IQueryable<ProjectGroup> getStudentGroup(int studentNumber)
         {
             DatabaseFactory factory = DatabaseFactory.getInstance();
-            using (SqlConnection connection = factory.makeConnection())
-            {
-                DatabaseClassesDataContext context = factory.getDataContext();
-                var projectGroup =
-                    from pg in context.ProjectGroups
-                    join pm in context.ProjectMembers on pg equals pm.ProjectGroup
-                    join u in context.Users on pm.student_user_id equals u.id
-                    where u.student_number == studentNumber
-                    select pg;
-                return projectGroup;
-            }
+            DatabaseClassesDataContext context = factory.getDataContext();
+            var projectGroup =
+                from pg in context.ProjectGroups
+                join pm in context.ProjectMembers on pg equals pm.ProjectGroup
+                join u in context.Users on pm.student_user_id equals u.id
+                where u.student_number == studentNumber
+                select pg;
+            return projectGroup;
         }
     }
 }
