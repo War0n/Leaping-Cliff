@@ -158,14 +158,14 @@
                         <td colspan="3"><b>Leden</b></td>
                     </tr>
                     @{int counter = 1;}
-                    @foreach (BarometerDataAccesLayer.ProjectMember usr in Model.ProjectMembers)
+                    @foreach (BarometerDataAccesLayer.ProjectMember pm in Model.ProjectMembers)
                     {
                         <tr>
                             <td>
                                 <img src="~/Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                            <td>@usr.User.firstname @usr.User.lastname</td>
+                            <td>@pm.User.firstname @pm.User.lastname</td>
                             <td>
-                                @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab"+@counter, @Title = "Bekijk beoordeling van "+@usr.User.firstname+" "+@usr.User.lastname, @class = "glyphicon glyphicon-eye-open" })
+                                @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab"+@counter, @Title = "Bekijk beoordeling van "+@pm.User.firstname+" "+@pm.User.lastname, @class = "glyphicon glyphicon-eye-open" })
                             </td>
                         </tr>
                         {counter++;}
