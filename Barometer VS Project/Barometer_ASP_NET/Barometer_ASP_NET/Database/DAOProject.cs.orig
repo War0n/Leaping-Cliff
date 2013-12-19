@@ -14,6 +14,21 @@ namespace Barometer_ASP_NET.Database
 		/// </summary>
 		/// <param name="projectID">The project you want to query</param>
 		/// <returns></returns>
+<<<<<<< Updated upstream
+        public string getChallenges(int id) {
+            string ProjectName = null;
+            try
+            {
+                LinqToSqlDataContext db = new LinqToSqlDataContext();
+
+                var projects = from p in db.projects
+                               where p.name.Contains("SO")
+                               select p;
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine("Error in getChallenges: " + e);
+=======
         public IQueryable<User> getStudents(int projectID)
         {
             DatabaseFactory factory = DatabaseFactory.getInstance();
@@ -45,6 +60,7 @@ namespace Barometer_ASP_NET.Database
                     join pg in context.ProjectGroups on pm.ProjectGroup equals pg
                     select pm;
                 return projectMembers;
+>>>>>>> Stashed changes
             }
         }
     }

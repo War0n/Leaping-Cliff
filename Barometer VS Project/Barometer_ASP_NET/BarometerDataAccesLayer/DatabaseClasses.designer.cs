@@ -30,36 +30,36 @@ namespace BarometerDataAccesLayer
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertbaro_aspect(baro_aspect instance);
-    partial void Updatebaro_aspect(baro_aspect instance);
-    partial void Deletebaro_aspect(baro_aspect instance);
-    partial void Insertbaro_template(baro_template instance);
-    partial void Updatebaro_template(baro_template instance);
-    partial void Deletebaro_template(baro_template instance);
-    partial void Insertuser(user instance);
-    partial void Updateuser(user instance);
-    partial void Deleteuser(user instance);
-    partial void Insertproject(project instance);
-    partial void Updateproject(project instance);
-    partial void Deleteproject(project instance);
-    partial void Insertproject_group(project_group instance);
-    partial void Updateproject_group(project_group instance);
-    partial void Deleteproject_group(project_group instance);
-    partial void Insertproject_member(project_member instance);
-    partial void Updateproject_member(project_member instance);
-    partial void Deleteproject_member(project_member instance);
-    partial void Insertproject_owner(project_owner instance);
-    partial void Updateproject_owner(project_owner instance);
-    partial void Deleteproject_owner(project_owner instance);
-    partial void Insertproject_report_date(project_report_date instance);
-    partial void Updateproject_report_date(project_report_date instance);
-    partial void Deleteproject_report_date(project_report_date instance);
-    partial void Insertreport(report instance);
-    partial void Updatereport(report instance);
-    partial void Deletereport(report instance);
-    partial void Insertrol(rol instance);
-    partial void Updaterol(rol instance);
-    partial void Deleterol(rol instance);
+    partial void InsertBaroAspect(BaroAspect instance);
+    partial void UpdateBaroAspect(BaroAspect instance);
+    partial void DeleteBaroAspect(BaroAspect instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
+    partial void InsertBaroTemplate(BaroTemplate instance);
+    partial void UpdateBaroTemplate(BaroTemplate instance);
+    partial void DeleteBaroTemplate(BaroTemplate instance);
+    partial void InsertProject(Project instance);
+    partial void UpdateProject(Project instance);
+    partial void DeleteProject(Project instance);
+    partial void InsertProjectGroup(ProjectGroup instance);
+    partial void UpdateProjectGroup(ProjectGroup instance);
+    partial void DeleteProjectGroup(ProjectGroup instance);
+    partial void InsertProjectMember(ProjectMember instance);
+    partial void UpdateProjectMember(ProjectMember instance);
+    partial void DeleteProjectMember(ProjectMember instance);
+    partial void InsertProjectOwner(ProjectOwner instance);
+    partial void UpdateProjectOwner(ProjectOwner instance);
+    partial void DeleteProjectOwner(ProjectOwner instance);
+    partial void InsertProjectReportDate(ProjectReportDate instance);
+    partial void UpdateProjectReportDate(ProjectReportDate instance);
+    partial void DeleteProjectReportDate(ProjectReportDate instance);
+    partial void InsertReport(Report instance);
+    partial void UpdateReport(Report instance);
+    partial void DeleteReport(Report instance);
+    partial void InsertRol(Rol instance);
+    partial void UpdateRol(Rol instance);
+    partial void DeleteRol(Rol instance);
     #endregion
 		
 		public DatabaseClassesDataContext() : 
@@ -92,89 +92,126 @@ namespace BarometerDataAccesLayer
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<baro_aspect> baro_aspects
+		public System.Data.Linq.Table<BaroAspect> BaroAspects
 		{
 			get
 			{
-				return this.GetTable<baro_aspect>();
+				return this.GetTable<BaroAspect>();
 			}
 		}
 		
-		public System.Data.Linq.Table<baro_template> baro_templates
+		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
-				return this.GetTable<baro_template>();
+				return this.GetTable<User>();
 			}
 		}
 		
-		public System.Data.Linq.Table<user> users
+		public System.Data.Linq.Table<BaroTemplate> BaroTemplates
 		{
 			get
 			{
-				return this.GetTable<user>();
+				return this.GetTable<BaroTemplate>();
 			}
 		}
 		
-		public System.Data.Linq.Table<project> projects
+		public System.Data.Linq.Table<Project> Projects
 		{
 			get
 			{
-				return this.GetTable<project>();
+				return this.GetTable<Project>();
 			}
 		}
 		
-		public System.Data.Linq.Table<project_group> project_groups
+		public System.Data.Linq.Table<ProjectGroup> ProjectGroups
 		{
 			get
 			{
-				return this.GetTable<project_group>();
+				return this.GetTable<ProjectGroup>();
 			}
 		}
 		
-		public System.Data.Linq.Table<project_member> project_members
+		public System.Data.Linq.Table<ProjectMember> ProjectMembers
 		{
 			get
 			{
-				return this.GetTable<project_member>();
+				return this.GetTable<ProjectMember>();
 			}
 		}
 		
-		public System.Data.Linq.Table<project_owner> project_owners
+		public System.Data.Linq.Table<ProjectOwner> ProjectOwners
 		{
 			get
 			{
-				return this.GetTable<project_owner>();
+				return this.GetTable<ProjectOwner>();
 			}
 		}
 		
-		public System.Data.Linq.Table<project_report_date> project_report_dates
+		public System.Data.Linq.Table<ProjectReportDate> ProjectReportDates
 		{
 			get
 			{
-				return this.GetTable<project_report_date>();
+				return this.GetTable<ProjectReportDate>();
 			}
 		}
 		
-		public System.Data.Linq.Table<report> reports
+		public System.Data.Linq.Table<Report> Reports
 		{
 			get
 			{
-				return this.GetTable<report>();
+				return this.GetTable<Report>();
 			}
 		}
 		
-		public System.Data.Linq.Table<rol> rols
+		public System.Data.Linq.Table<Rol> Rols
 		{
 			get
 			{
-				return this.GetTable<rol>();
+				return this.GetTable<Rol>();
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.add_student_to_group")]
+		public void add_student_to_group([global::System.Data.Linq.Mapping.ParameterAttribute(Name="StudentNumber", DbType="Int")] System.Nullable<int> studentNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupID", DbType="Int")] System.Nullable<int> groupID)
+		{
+			this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), studentNumber, groupID);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.get_student_procedure")]
+		public ISingleResult<get_student_procedureResult> get_student_procedure([global::System.Data.Linq.Mapping.ParameterAttribute(Name="StudentNr", DbType="Int")] System.Nullable<int> studentNr)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), studentNr);
+			return ((ISingleResult<get_student_procedureResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Check_Student_Is_In_Group", IsComposable=true)]
+		public System.Nullable<int> Check_Student_Is_In_Group([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> studentID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ProjectID", DbType="Int")] System.Nullable<int> projectID)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), studentID, projectID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetProjectID", IsComposable=true)]
+		public IQueryable<GetProjectIDResult> GetProjectID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> groupID)
+		{
+			return this.CreateMethodCallQuery<GetProjectIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupID);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Get_Student", IsComposable=true)]
+		public System.Nullable<int> Get_Student([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> studentnumber)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), studentnumber).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetProject", IsComposable=true)]
+		public IQueryable<GetProjectResult> GetProject([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> groupID)
+		{
+			return this.CreateMethodCallQuery<GetProjectResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupID);
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.baro_aspect")]
-	public partial class baro_aspect : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class BaroAspect : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -193,13 +230,13 @@ namespace BarometerDataAccesLayer
 		
 		private string _desription;
 		
-		private EntitySet<baro_aspect> _baro_aspects;
+		private EntitySet<BaroAspect> _BaroAspects;
 		
-		private EntitySet<report> _reports;
+		private EntitySet<Report> _Reports;
 		
-		private EntityRef<baro_aspect> _baro_aspect1;
+		private EntityRef<BaroAspect> _baro_aspect1;
 		
-		private EntityRef<baro_template> _baro_template;
+		private EntityRef<BaroTemplate> _BaroTemplate;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -221,12 +258,12 @@ namespace BarometerDataAccesLayer
     partial void OndesriptionChanged();
     #endregion
 		
-		public baro_aspect()
+		public BaroAspect()
 		{
-			this._baro_aspects = new EntitySet<baro_aspect>(new Action<baro_aspect>(this.attach_baro_aspects), new Action<baro_aspect>(this.detach_baro_aspects));
-			this._reports = new EntitySet<report>(new Action<report>(this.attach_reports), new Action<report>(this.detach_reports));
-			this._baro_aspect1 = default(EntityRef<baro_aspect>);
-			this._baro_template = default(EntityRef<baro_template>);
+			this._BaroAspects = new EntitySet<BaroAspect>(new Action<BaroAspect>(this.attach_BaroAspects), new Action<BaroAspect>(this.detach_BaroAspects));
+			this._Reports = new EntitySet<Report>(new Action<Report>(this.attach_Reports), new Action<Report>(this.detach_Reports));
+			this._baro_aspect1 = default(EntityRef<BaroAspect>);
+			this._BaroTemplate = default(EntityRef<BaroTemplate>);
 			OnCreated();
 		}
 		
@@ -285,7 +322,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._baro_template_id != value))
 				{
-					if (this._baro_template.HasLoadedOrAssignedValue)
+					if (this._BaroTemplate.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -378,34 +415,34 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_aspect_baro_aspect", Storage="_baro_aspects", ThisKey="id", OtherKey="parent_id")]
-		public EntitySet<baro_aspect> baro_aspects
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_aspect_baro_aspect", Storage="_BaroAspects", ThisKey="id", OtherKey="parent_id")]
+		public EntitySet<BaroAspect> BaroAspects
 		{
 			get
 			{
-				return this._baro_aspects;
+				return this._BaroAspects;
 			}
 			set
 			{
-				this._baro_aspects.Assign(value);
+				this._BaroAspects.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_aspect_report", Storage="_reports", ThisKey="id", OtherKey="baro_aspect_id")]
-		public EntitySet<report> reports
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_aspect_report", Storage="_Reports", ThisKey="id", OtherKey="baro_aspect_id")]
+		public EntitySet<Report> Reports
 		{
 			get
 			{
-				return this._reports;
+				return this._Reports;
 			}
 			set
 			{
-				this._reports.Assign(value);
+				this._Reports.Assign(value);
 			}
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_aspect_baro_aspect", Storage="_baro_aspect1", ThisKey="parent_id", OtherKey="id", IsForeignKey=true)]
-		public baro_aspect baro_aspect1
+		public BaroAspect baro_aspect1
 		{
 			get
 			{
@@ -413,7 +450,7 @@ namespace BarometerDataAccesLayer
 			}
 			set
 			{
-				baro_aspect previousValue = this._baro_aspect1.Entity;
+				BaroAspect previousValue = this._baro_aspect1.Entity;
 				if (((previousValue != value) 
 							|| (this._baro_aspect1.HasLoadedOrAssignedValue == false)))
 				{
@@ -421,12 +458,12 @@ namespace BarometerDataAccesLayer
 					if ((previousValue != null))
 					{
 						this._baro_aspect1.Entity = null;
-						previousValue.baro_aspects.Remove(this);
+						previousValue.BaroAspects.Remove(this);
 					}
 					this._baro_aspect1.Entity = value;
 					if ((value != null))
 					{
-						value.baro_aspects.Add(this);
+						value.BaroAspects.Add(this);
 						this._parent_id = value.id;
 					}
 					else
@@ -438,36 +475,36 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_template_baro_aspect", Storage="_baro_template", ThisKey="baro_template_id", OtherKey="id", IsForeignKey=true)]
-		public baro_template baro_template
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_template_baro_aspect", Storage="_BaroTemplate", ThisKey="baro_template_id", OtherKey="id", IsForeignKey=true)]
+		public BaroTemplate BaroTemplate
 		{
 			get
 			{
-				return this._baro_template.Entity;
+				return this._BaroTemplate.Entity;
 			}
 			set
 			{
-				baro_template previousValue = this._baro_template.Entity;
+				BaroTemplate previousValue = this._BaroTemplate.Entity;
 				if (((previousValue != value) 
-							|| (this._baro_template.HasLoadedOrAssignedValue == false)))
+							|| (this._BaroTemplate.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._baro_template.Entity = null;
-						previousValue.baro_aspects.Remove(this);
+						this._BaroTemplate.Entity = null;
+						previousValue.BaroAspects.Remove(this);
 					}
-					this._baro_template.Entity = value;
+					this._BaroTemplate.Entity = value;
 					if ((value != null))
 					{
-						value.baro_aspects.Add(this);
+						value.BaroAspects.Add(this);
 						this._baro_template_id = value.id;
 					}
 					else
 					{
 						this._baro_template_id = default(int);
 					}
-					this.SendPropertyChanged("baro_template");
+					this.SendPropertyChanged("BaroTemplate");
 				}
 			}
 		}
@@ -492,223 +529,33 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		private void attach_baro_aspects(baro_aspect entity)
+		private void attach_BaroAspects(BaroAspect entity)
 		{
 			this.SendPropertyChanging();
 			entity.baro_aspect1 = this;
 		}
 		
-		private void detach_baro_aspects(baro_aspect entity)
+		private void detach_BaroAspects(BaroAspect entity)
 		{
 			this.SendPropertyChanging();
 			entity.baro_aspect1 = null;
 		}
 		
-		private void attach_reports(report entity)
+		private void attach_Reports(Report entity)
 		{
 			this.SendPropertyChanging();
-			entity.baro_aspect = this;
+			entity.BaroAspect = this;
 		}
 		
-		private void detach_reports(report entity)
+		private void detach_Reports(Report entity)
 		{
 			this.SendPropertyChanging();
-			entity.baro_aspect = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.baro_template")]
-	public partial class baro_template : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _template_name;
-		
-		private System.Nullable<byte> _rating_type;
-		
-		private System.Nullable<byte> _anonymous;
-		
-		private EntitySet<baro_aspect> _baro_aspects;
-		
-		private EntitySet<project> _projects;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void Ontemplate_nameChanging(string value);
-    partial void Ontemplate_nameChanged();
-    partial void Onrating_typeChanging(System.Nullable<byte> value);
-    partial void Onrating_typeChanged();
-    partial void OnanonymousChanging(System.Nullable<byte> value);
-    partial void OnanonymousChanged();
-    #endregion
-		
-		public baro_template()
-		{
-			this._baro_aspects = new EntitySet<baro_aspect>(new Action<baro_aspect>(this.attach_baro_aspects), new Action<baro_aspect>(this.detach_baro_aspects));
-			this._projects = new EntitySet<project>(new Action<project>(this.attach_projects), new Action<project>(this.detach_projects));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_name", DbType="VarChar(50)")]
-		public string template_name
-		{
-			get
-			{
-				return this._template_name;
-			}
-			set
-			{
-				if ((this._template_name != value))
-				{
-					this.Ontemplate_nameChanging(value);
-					this.SendPropertyChanging();
-					this._template_name = value;
-					this.SendPropertyChanged("template_name");
-					this.Ontemplate_nameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rating_type", DbType="TinyInt")]
-		public System.Nullable<byte> rating_type
-		{
-			get
-			{
-				return this._rating_type;
-			}
-			set
-			{
-				if ((this._rating_type != value))
-				{
-					this.Onrating_typeChanging(value);
-					this.SendPropertyChanging();
-					this._rating_type = value;
-					this.SendPropertyChanged("rating_type");
-					this.Onrating_typeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_anonymous", DbType="TinyInt")]
-		public System.Nullable<byte> anonymous
-		{
-			get
-			{
-				return this._anonymous;
-			}
-			set
-			{
-				if ((this._anonymous != value))
-				{
-					this.OnanonymousChanging(value);
-					this.SendPropertyChanging();
-					this._anonymous = value;
-					this.SendPropertyChanged("anonymous");
-					this.OnanonymousChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_template_baro_aspect", Storage="_baro_aspects", ThisKey="id", OtherKey="baro_template_id")]
-		public EntitySet<baro_aspect> baro_aspects
-		{
-			get
-			{
-				return this._baro_aspects;
-			}
-			set
-			{
-				this._baro_aspects.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_template_project", Storage="_projects", ThisKey="id", OtherKey="baro_template_id")]
-		public EntitySet<project> projects
-		{
-			get
-			{
-				return this._projects;
-			}
-			set
-			{
-				this._projects.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_baro_aspects(baro_aspect entity)
-		{
-			this.SendPropertyChanging();
-			entity.baro_template = this;
-		}
-		
-		private void detach_baro_aspects(baro_aspect entity)
-		{
-			this.SendPropertyChanging();
-			entity.baro_template = null;
-		}
-		
-		private void attach_projects(project entity)
-		{
-			this.SendPropertyChanging();
-			entity.baro_template = this;
-		}
-		
-		private void detach_projects(project entity)
-		{
-			this.SendPropertyChanging();
-			entity.baro_template = null;
+			entity.BaroAspect = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[user]")]
-	public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -727,17 +574,17 @@ namespace BarometerDataAccesLayer
 		
 		private string _rol_name;
 		
-		private EntitySet<project_group> _project_groups;
+		private EntitySet<ProjectGroup> _ProjectGroups;
 		
-		private EntitySet<project_member> _project_members;
+		private EntitySet<ProjectMember> _ProjectMembers;
 		
-		private EntitySet<project_owner> _project_owners;
+		private EntitySet<ProjectOwner> _ProjectOwners;
 		
-		private EntitySet<report> _reports;
+		private EntitySet<Report> _reports;
 		
-		private EntitySet<report> _reports1;
+		private EntitySet<Report> _Reports1;
 		
-		private EntityRef<rol> _rol;
+		private EntityRef<Rol> _Rol;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -759,14 +606,14 @@ namespace BarometerDataAccesLayer
     partial void Onrol_nameChanged();
     #endregion
 		
-		public user()
+		public User()
 		{
-			this._project_groups = new EntitySet<project_group>(new Action<project_group>(this.attach_project_groups), new Action<project_group>(this.detach_project_groups));
-			this._project_members = new EntitySet<project_member>(new Action<project_member>(this.attach_project_members), new Action<project_member>(this.detach_project_members));
-			this._project_owners = new EntitySet<project_owner>(new Action<project_owner>(this.attach_project_owners), new Action<project_owner>(this.detach_project_owners));
-			this._reports = new EntitySet<report>(new Action<report>(this.attach_reports), new Action<report>(this.detach_reports));
-			this._reports1 = new EntitySet<report>(new Action<report>(this.attach_reports1), new Action<report>(this.detach_reports1));
-			this._rol = default(EntityRef<rol>);
+			this._ProjectGroups = new EntitySet<ProjectGroup>(new Action<ProjectGroup>(this.attach_ProjectGroups), new Action<ProjectGroup>(this.detach_ProjectGroups));
+			this._ProjectMembers = new EntitySet<ProjectMember>(new Action<ProjectMember>(this.attach_ProjectMembers), new Action<ProjectMember>(this.detach_ProjectMembers));
+			this._ProjectOwners = new EntitySet<ProjectOwner>(new Action<ProjectOwner>(this.attach_ProjectOwners), new Action<ProjectOwner>(this.detach_ProjectOwners));
+			this._reports = new EntitySet<Report>(new Action<Report>(this.attach_reports), new Action<Report>(this.detach_reports));
+			this._Reports1 = new EntitySet<Report>(new Action<Report>(this.attach_Reports1), new Action<Report>(this.detach_Reports1));
+			this._Rol = default(EntityRef<Rol>);
 			OnCreated();
 		}
 		
@@ -901,7 +748,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._rol_name != value))
 				{
-					if (this._rol.HasLoadedOrAssignedValue)
+					if (this._Rol.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -914,47 +761,47 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_group", Storage="_project_groups", ThisKey="id", OtherKey="tutor_user_id")]
-		public EntitySet<project_group> project_groups
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_group", Storage="_ProjectGroups", ThisKey="id", OtherKey="tutor_user_id")]
+		public EntitySet<ProjectGroup> ProjectGroups
 		{
 			get
 			{
-				return this._project_groups;
+				return this._ProjectGroups;
 			}
 			set
 			{
-				this._project_groups.Assign(value);
+				this._ProjectGroups.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_member", Storage="_project_members", ThisKey="id", OtherKey="student_user_id")]
-		public EntitySet<project_member> project_members
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_member", Storage="_ProjectMembers", ThisKey="id", OtherKey="student_user_id")]
+		public EntitySet<ProjectMember> ProjectMembers
 		{
 			get
 			{
-				return this._project_members;
+				return this._ProjectMembers;
 			}
 			set
 			{
-				this._project_members.Assign(value);
+				this._ProjectMembers.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_owner", Storage="_project_owners", ThisKey="id", OtherKey="user_id")]
-		public EntitySet<project_owner> project_owners
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_owner", Storage="_ProjectOwners", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<ProjectOwner> ProjectOwners
 		{
 			get
 			{
-				return this._project_owners;
+				return this._ProjectOwners;
 			}
 			set
 			{
-				this._project_owners.Assign(value);
+				this._ProjectOwners.Assign(value);
 			}
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_report", Storage="_reports", ThisKey="id", OtherKey="reporter_id")]
-		public EntitySet<report> reports
+		public EntitySet<Report> reports
 		{
 			get
 			{
@@ -966,49 +813,49 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_report1", Storage="_reports1", ThisKey="id", OtherKey="subject_id")]
-		public EntitySet<report> reports1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_report1", Storage="_Reports1", ThisKey="id", OtherKey="subject_id")]
+		public EntitySet<Report> Reports1
 		{
 			get
 			{
-				return this._reports1;
+				return this._Reports1;
 			}
 			set
 			{
-				this._reports1.Assign(value);
+				this._Reports1.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="rol_user", Storage="_rol", ThisKey="rol_name", OtherKey="name", IsForeignKey=true)]
-		public rol rol
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="rol_user", Storage="_Rol", ThisKey="rol_name", OtherKey="name", IsForeignKey=true)]
+		public Rol Rol
 		{
 			get
 			{
-				return this._rol.Entity;
+				return this._Rol.Entity;
 			}
 			set
 			{
-				rol previousValue = this._rol.Entity;
+				Rol previousValue = this._Rol.Entity;
 				if (((previousValue != value) 
-							|| (this._rol.HasLoadedOrAssignedValue == false)))
+							|| (this._Rol.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._rol.Entity = null;
-						previousValue.users.Remove(this);
+						this._Rol.Entity = null;
+						previousValue.Users.Remove(this);
 					}
-					this._rol.Entity = value;
+					this._Rol.Entity = value;
 					if ((value != null))
 					{
-						value.users.Add(this);
+						value.Users.Add(this);
 						this._rol_name = value.name;
 					}
 					else
 					{
 						this._rol_name = default(string);
 					}
-					this.SendPropertyChanged("rol");
+					this.SendPropertyChanged("Rol");
 				}
 			}
 		}
@@ -1033,69 +880,259 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		private void attach_project_groups(project_group entity)
+		private void attach_ProjectGroups(ProjectGroup entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_ProjectGroups(ProjectGroup entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_ProjectMembers(ProjectMember entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_ProjectMembers(ProjectMember entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_ProjectOwners(ProjectOwner entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_ProjectOwners(ProjectOwner entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_reports(Report entity)
 		{
 			this.SendPropertyChanging();
 			entity.user = this;
 		}
 		
-		private void detach_project_groups(project_group entity)
+		private void detach_reports(Report entity)
 		{
 			this.SendPropertyChanging();
 			entity.user = null;
 		}
 		
-		private void attach_project_members(project_member entity)
+		private void attach_Reports1(Report entity)
 		{
 			this.SendPropertyChanging();
-			entity.user = this;
+			entity.User1 = this;
 		}
 		
-		private void detach_project_members(project_member entity)
+		private void detach_Reports1(Report entity)
 		{
 			this.SendPropertyChanging();
-			entity.user = null;
+			entity.User1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.baro_template")]
+	public partial class BaroTemplate : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _template_name;
+		
+		private System.Nullable<byte> _rating_type;
+		
+		private System.Nullable<byte> _anonymous;
+		
+		private EntitySet<BaroAspect> _BaroAspects;
+		
+		private EntitySet<Project> _Projects;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Ontemplate_nameChanging(string value);
+    partial void Ontemplate_nameChanged();
+    partial void Onrating_typeChanging(System.Nullable<byte> value);
+    partial void Onrating_typeChanged();
+    partial void OnanonymousChanging(System.Nullable<byte> value);
+    partial void OnanonymousChanged();
+    #endregion
+		
+		public BaroTemplate()
+		{
+			this._BaroAspects = new EntitySet<BaroAspect>(new Action<BaroAspect>(this.attach_BaroAspects), new Action<BaroAspect>(this.detach_BaroAspects));
+			this._Projects = new EntitySet<Project>(new Action<Project>(this.attach_Projects), new Action<Project>(this.detach_Projects));
+			OnCreated();
 		}
 		
-		private void attach_project_owners(project_owner entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
 		{
-			this.SendPropertyChanging();
-			entity.user = this;
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
 		}
 		
-		private void detach_project_owners(project_owner entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_name", DbType="VarChar(50)")]
+		public string template_name
 		{
-			this.SendPropertyChanging();
-			entity.user = null;
+			get
+			{
+				return this._template_name;
+			}
+			set
+			{
+				if ((this._template_name != value))
+				{
+					this.Ontemplate_nameChanging(value);
+					this.SendPropertyChanging();
+					this._template_name = value;
+					this.SendPropertyChanged("template_name");
+					this.Ontemplate_nameChanged();
+				}
+			}
 		}
 		
-		private void attach_reports(report entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rating_type", DbType="TinyInt")]
+		public System.Nullable<byte> rating_type
 		{
-			this.SendPropertyChanging();
-			entity.user = this;
+			get
+			{
+				return this._rating_type;
+			}
+			set
+			{
+				if ((this._rating_type != value))
+				{
+					this.Onrating_typeChanging(value);
+					this.SendPropertyChanging();
+					this._rating_type = value;
+					this.SendPropertyChanged("rating_type");
+					this.Onrating_typeChanged();
+				}
+			}
 		}
 		
-		private void detach_reports(report entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_anonymous", DbType="TinyInt")]
+		public System.Nullable<byte> anonymous
 		{
-			this.SendPropertyChanging();
-			entity.user = null;
+			get
+			{
+				return this._anonymous;
+			}
+			set
+			{
+				if ((this._anonymous != value))
+				{
+					this.OnanonymousChanging(value);
+					this.SendPropertyChanging();
+					this._anonymous = value;
+					this.SendPropertyChanged("anonymous");
+					this.OnanonymousChanged();
+				}
+			}
 		}
 		
-		private void attach_reports1(report entity)
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_template_baro_aspect", Storage="_BaroAspects", ThisKey="id", OtherKey="baro_template_id")]
+		public EntitySet<BaroAspect> BaroAspects
 		{
-			this.SendPropertyChanging();
-			entity.user1 = this;
+			get
+			{
+				return this._BaroAspects;
+			}
+			set
+			{
+				this._BaroAspects.Assign(value);
+			}
 		}
 		
-		private void detach_reports1(report entity)
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_template_project", Storage="_Projects", ThisKey="id", OtherKey="baro_template_id")]
+		public EntitySet<Project> Projects
+		{
+			get
+			{
+				return this._Projects;
+			}
+			set
+			{
+				this._Projects.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_BaroAspects(BaroAspect entity)
 		{
 			this.SendPropertyChanging();
-			entity.user1 = null;
+			entity.BaroTemplate = this;
+		}
+		
+		private void detach_BaroAspects(BaroAspect entity)
+		{
+			this.SendPropertyChanging();
+			entity.BaroTemplate = null;
+		}
+		
+		private void attach_Projects(Project entity)
+		{
+			this.SendPropertyChanging();
+			entity.BaroTemplate = this;
+		}
+		
+		private void detach_Projects(Project entity)
+		{
+			this.SendPropertyChanging();
+			entity.BaroTemplate = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.project")]
-	public partial class project : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Project : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1114,13 +1151,13 @@ namespace BarometerDataAccesLayer
 		
 		private System.Nullable<int> _baro_template_id;
 		
-		private EntitySet<project_group> _project_groups;
+		private EntitySet<ProjectGroup> _ProjectGroups;
 		
-		private EntitySet<project_owner> _project_owners;
+		private EntitySet<ProjectOwner> _ProjectOwners;
 		
-		private EntitySet<project_report_date> _project_report_dates;
+		private EntitySet<ProjectReportDate> _ProjectReportDates;
 		
-		private EntityRef<baro_template> _baro_template;
+		private EntityRef<BaroTemplate> _BaroTemplate;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1142,12 +1179,12 @@ namespace BarometerDataAccesLayer
     partial void Onbaro_template_idChanged();
     #endregion
 		
-		public project()
+		public Project()
 		{
-			this._project_groups = new EntitySet<project_group>(new Action<project_group>(this.attach_project_groups), new Action<project_group>(this.detach_project_groups));
-			this._project_owners = new EntitySet<project_owner>(new Action<project_owner>(this.attach_project_owners), new Action<project_owner>(this.detach_project_owners));
-			this._project_report_dates = new EntitySet<project_report_date>(new Action<project_report_date>(this.attach_project_report_dates), new Action<project_report_date>(this.detach_project_report_dates));
-			this._baro_template = default(EntityRef<baro_template>);
+			this._ProjectGroups = new EntitySet<ProjectGroup>(new Action<ProjectGroup>(this.attach_ProjectGroups), new Action<ProjectGroup>(this.detach_ProjectGroups));
+			this._ProjectOwners = new EntitySet<ProjectOwner>(new Action<ProjectOwner>(this.attach_ProjectOwners), new Action<ProjectOwner>(this.detach_ProjectOwners));
+			this._ProjectReportDates = new EntitySet<ProjectReportDate>(new Action<ProjectReportDate>(this.attach_ProjectReportDates), new Action<ProjectReportDate>(this.detach_ProjectReportDates));
+			this._BaroTemplate = default(EntityRef<BaroTemplate>);
 			OnCreated();
 		}
 		
@@ -1282,7 +1319,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._baro_template_id != value))
 				{
-					if (this._baro_template.HasLoadedOrAssignedValue)
+					if (this._BaroTemplate.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1295,75 +1332,75 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_group", Storage="_project_groups", ThisKey="id", OtherKey="project_id")]
-		public EntitySet<project_group> project_groups
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_group", Storage="_ProjectGroups", ThisKey="id", OtherKey="project_id")]
+		public EntitySet<ProjectGroup> ProjectGroups
 		{
 			get
 			{
-				return this._project_groups;
+				return this._ProjectGroups;
 			}
 			set
 			{
-				this._project_groups.Assign(value);
+				this._ProjectGroups.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_owner", Storage="_project_owners", ThisKey="id", OtherKey="project_id")]
-		public EntitySet<project_owner> project_owners
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_owner", Storage="_ProjectOwners", ThisKey="id", OtherKey="project_id")]
+		public EntitySet<ProjectOwner> ProjectOwners
 		{
 			get
 			{
-				return this._project_owners;
+				return this._ProjectOwners;
 			}
 			set
 			{
-				this._project_owners.Assign(value);
+				this._ProjectOwners.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_report_date", Storage="_project_report_dates", ThisKey="id", OtherKey="project_id_int")]
-		public EntitySet<project_report_date> project_report_dates
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_report_date", Storage="_ProjectReportDates", ThisKey="id", OtherKey="project_id_int")]
+		public EntitySet<ProjectReportDate> ProjectReportDates
 		{
 			get
 			{
-				return this._project_report_dates;
+				return this._ProjectReportDates;
 			}
 			set
 			{
-				this._project_report_dates.Assign(value);
+				this._ProjectReportDates.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_template_project", Storage="_baro_template", ThisKey="baro_template_id", OtherKey="id", IsForeignKey=true)]
-		public baro_template baro_template
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_template_project", Storage="_BaroTemplate", ThisKey="baro_template_id", OtherKey="id", IsForeignKey=true)]
+		public BaroTemplate BaroTemplate
 		{
 			get
 			{
-				return this._baro_template.Entity;
+				return this._BaroTemplate.Entity;
 			}
 			set
 			{
-				baro_template previousValue = this._baro_template.Entity;
+				BaroTemplate previousValue = this._BaroTemplate.Entity;
 				if (((previousValue != value) 
-							|| (this._baro_template.HasLoadedOrAssignedValue == false)))
+							|| (this._BaroTemplate.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._baro_template.Entity = null;
-						previousValue.projects.Remove(this);
+						this._BaroTemplate.Entity = null;
+						previousValue.Projects.Remove(this);
 					}
-					this._baro_template.Entity = value;
+					this._BaroTemplate.Entity = value;
 					if ((value != null))
 					{
-						value.projects.Add(this);
+						value.Projects.Add(this);
 						this._baro_template_id = value.id;
 					}
 					else
 					{
 						this._baro_template_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("baro_template");
+					this.SendPropertyChanged("BaroTemplate");
 				}
 			}
 		}
@@ -1388,45 +1425,45 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		private void attach_project_groups(project_group entity)
+		private void attach_ProjectGroups(ProjectGroup entity)
 		{
 			this.SendPropertyChanging();
-			entity.project = this;
+			entity.Project = this;
 		}
 		
-		private void detach_project_groups(project_group entity)
+		private void detach_ProjectGroups(ProjectGroup entity)
 		{
 			this.SendPropertyChanging();
-			entity.project = null;
+			entity.Project = null;
 		}
 		
-		private void attach_project_owners(project_owner entity)
+		private void attach_ProjectOwners(ProjectOwner entity)
 		{
 			this.SendPropertyChanging();
-			entity.project = this;
+			entity.Project = this;
 		}
 		
-		private void detach_project_owners(project_owner entity)
+		private void detach_ProjectOwners(ProjectOwner entity)
 		{
 			this.SendPropertyChanging();
-			entity.project = null;
+			entity.Project = null;
 		}
 		
-		private void attach_project_report_dates(project_report_date entity)
+		private void attach_ProjectReportDates(ProjectReportDate entity)
 		{
 			this.SendPropertyChanging();
-			entity.project = this;
+			entity.Project = this;
 		}
 		
-		private void detach_project_report_dates(project_report_date entity)
+		private void detach_ProjectReportDates(ProjectReportDate entity)
 		{
 			this.SendPropertyChanging();
-			entity.project = null;
+			entity.Project = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.project_group")]
-	public partial class project_group : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class ProjectGroup : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1441,11 +1478,11 @@ namespace BarometerDataAccesLayer
 		
 		private int _project_id;
 		
-		private EntitySet<project_member> _project_members;
+		private EntitySet<ProjectMember> _ProjectMembers;
 		
-		private EntityRef<project> _project;
+		private EntityRef<Project> _Project;
 		
-		private EntityRef<user> _user;
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1463,11 +1500,11 @@ namespace BarometerDataAccesLayer
     partial void Onproject_idChanged();
     #endregion
 		
-		public project_group()
+		public ProjectGroup()
 		{
-			this._project_members = new EntitySet<project_member>(new Action<project_member>(this.attach_project_members), new Action<project_member>(this.detach_project_members));
-			this._project = default(EntityRef<project>);
-			this._user = default(EntityRef<user>);
+			this._ProjectMembers = new EntitySet<ProjectMember>(new Action<ProjectMember>(this.attach_ProjectMembers), new Action<ProjectMember>(this.detach_ProjectMembers));
+			this._Project = default(EntityRef<Project>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -1542,7 +1579,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._tutor_user_id != value))
 				{
-					if (this._user.HasLoadedOrAssignedValue)
+					if (this._User.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1566,7 +1603,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._project_id != value))
 				{
-					if (this._project.HasLoadedOrAssignedValue)
+					if (this._Project.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1579,83 +1616,83 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_group_project_member", Storage="_project_members", ThisKey="id", OtherKey="project_group_id")]
-		public EntitySet<project_member> project_members
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_group_project_member", Storage="_ProjectMembers", ThisKey="id", OtherKey="project_group_id")]
+		public EntitySet<ProjectMember> ProjectMembers
 		{
 			get
 			{
-				return this._project_members;
+				return this._ProjectMembers;
 			}
 			set
 			{
-				this._project_members.Assign(value);
+				this._ProjectMembers.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_group", Storage="_project", ThisKey="project_id", OtherKey="id", IsForeignKey=true)]
-		public project project
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_group", Storage="_Project", ThisKey="project_id", OtherKey="id", IsForeignKey=true)]
+		public Project Project
 		{
 			get
 			{
-				return this._project.Entity;
+				return this._Project.Entity;
 			}
 			set
 			{
-				project previousValue = this._project.Entity;
+				Project previousValue = this._Project.Entity;
 				if (((previousValue != value) 
-							|| (this._project.HasLoadedOrAssignedValue == false)))
+							|| (this._Project.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._project.Entity = null;
-						previousValue.project_groups.Remove(this);
+						this._Project.Entity = null;
+						previousValue.ProjectGroups.Remove(this);
 					}
-					this._project.Entity = value;
+					this._Project.Entity = value;
 					if ((value != null))
 					{
-						value.project_groups.Add(this);
+						value.ProjectGroups.Add(this);
 						this._project_id = value.id;
 					}
 					else
 					{
 						this._project_id = default(int);
 					}
-					this.SendPropertyChanged("project");
+					this.SendPropertyChanged("Project");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_group", Storage="_user", ThisKey="tutor_user_id", OtherKey="id", IsForeignKey=true)]
-		public user user
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_group", Storage="_User", ThisKey="tutor_user_id", OtherKey="id", IsForeignKey=true)]
+		public User User
 		{
 			get
 			{
-				return this._user.Entity;
+				return this._User.Entity;
 			}
 			set
 			{
-				user previousValue = this._user.Entity;
+				User previousValue = this._User.Entity;
 				if (((previousValue != value) 
-							|| (this._user.HasLoadedOrAssignedValue == false)))
+							|| (this._User.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._user.Entity = null;
-						previousValue.project_groups.Remove(this);
+						this._User.Entity = null;
+						previousValue.ProjectGroups.Remove(this);
 					}
-					this._user.Entity = value;
+					this._User.Entity = value;
 					if ((value != null))
 					{
-						value.project_groups.Add(this);
+						value.ProjectGroups.Add(this);
 						this._tutor_user_id = value.id;
 					}
 					else
 					{
 						this._tutor_user_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("user");
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -1680,21 +1717,21 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		private void attach_project_members(project_member entity)
+		private void attach_ProjectMembers(ProjectMember entity)
 		{
 			this.SendPropertyChanging();
-			entity.project_group = this;
+			entity.ProjectGroup = this;
 		}
 		
-		private void detach_project_members(project_member entity)
+		private void detach_ProjectMembers(ProjectMember entity)
 		{
 			this.SendPropertyChanging();
-			entity.project_group = null;
+			entity.ProjectGroup = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.project_member")]
-	public partial class project_member : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class ProjectMember : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1707,9 +1744,9 @@ namespace BarometerDataAccesLayer
 		
 		private System.Nullable<int> _end_grade;
 		
-		private EntityRef<project_group> _project_group;
+		private EntityRef<ProjectGroup> _ProjectGroup;
 		
-		private EntityRef<user> _user;
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1725,10 +1762,10 @@ namespace BarometerDataAccesLayer
     partial void Onend_gradeChanged();
     #endregion
 		
-		public project_member()
+		public ProjectMember()
 		{
-			this._project_group = default(EntityRef<project_group>);
-			this._user = default(EntityRef<user>);
+			this._ProjectGroup = default(EntityRef<ProjectGroup>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -1763,7 +1800,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._project_group_id != value))
 				{
-					if (this._project_group.HasLoadedOrAssignedValue)
+					if (this._ProjectGroup.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1787,7 +1824,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._student_user_id != value))
 				{
-					if (this._user.HasLoadedOrAssignedValue)
+					if (this._User.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1820,70 +1857,70 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_group_project_member", Storage="_project_group", ThisKey="project_group_id", OtherKey="id", IsForeignKey=true)]
-		public project_group project_group
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_group_project_member", Storage="_ProjectGroup", ThisKey="project_group_id", OtherKey="id", IsForeignKey=true)]
+		public ProjectGroup ProjectGroup
 		{
 			get
 			{
-				return this._project_group.Entity;
+				return this._ProjectGroup.Entity;
 			}
 			set
 			{
-				project_group previousValue = this._project_group.Entity;
+				ProjectGroup previousValue = this._ProjectGroup.Entity;
 				if (((previousValue != value) 
-							|| (this._project_group.HasLoadedOrAssignedValue == false)))
+							|| (this._ProjectGroup.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._project_group.Entity = null;
-						previousValue.project_members.Remove(this);
+						this._ProjectGroup.Entity = null;
+						previousValue.ProjectMembers.Remove(this);
 					}
-					this._project_group.Entity = value;
+					this._ProjectGroup.Entity = value;
 					if ((value != null))
 					{
-						value.project_members.Add(this);
+						value.ProjectMembers.Add(this);
 						this._project_group_id = value.id;
 					}
 					else
 					{
 						this._project_group_id = default(int);
 					}
-					this.SendPropertyChanged("project_group");
+					this.SendPropertyChanged("ProjectGroup");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_member", Storage="_user", ThisKey="student_user_id", OtherKey="id", IsForeignKey=true)]
-		public user user
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_member", Storage="_User", ThisKey="student_user_id", OtherKey="id", IsForeignKey=true)]
+		public User User
 		{
 			get
 			{
-				return this._user.Entity;
+				return this._User.Entity;
 			}
 			set
 			{
-				user previousValue = this._user.Entity;
+				User previousValue = this._User.Entity;
 				if (((previousValue != value) 
-							|| (this._user.HasLoadedOrAssignedValue == false)))
+							|| (this._User.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._user.Entity = null;
-						previousValue.project_members.Remove(this);
+						this._User.Entity = null;
+						previousValue.ProjectMembers.Remove(this);
 					}
-					this._user.Entity = value;
+					this._User.Entity = value;
 					if ((value != null))
 					{
-						value.project_members.Add(this);
+						value.ProjectMembers.Add(this);
 						this._student_user_id = value.id;
 					}
 					else
 					{
 						this._student_user_id = default(int);
 					}
-					this.SendPropertyChanged("user");
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -1910,7 +1947,7 @@ namespace BarometerDataAccesLayer
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.project_owner")]
-	public partial class project_owner : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class ProjectOwner : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1921,9 +1958,9 @@ namespace BarometerDataAccesLayer
 		
 		private int _project_id;
 		
-		private EntityRef<project> _project;
+		private EntityRef<Project> _Project;
 		
-		private EntityRef<user> _user;
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1937,10 +1974,10 @@ namespace BarometerDataAccesLayer
     partial void Onproject_idChanged();
     #endregion
 		
-		public project_owner()
+		public ProjectOwner()
 		{
-			this._project = default(EntityRef<project>);
-			this._user = default(EntityRef<user>);
+			this._Project = default(EntityRef<Project>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -1975,7 +2012,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._user_id != value))
 				{
-					if (this._user.HasLoadedOrAssignedValue)
+					if (this._User.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1999,7 +2036,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._project_id != value))
 				{
-					if (this._project.HasLoadedOrAssignedValue)
+					if (this._Project.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2012,70 +2049,70 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_owner", Storage="_project", ThisKey="project_id", OtherKey="id", IsForeignKey=true)]
-		public project project
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_owner", Storage="_Project", ThisKey="project_id", OtherKey="id", IsForeignKey=true)]
+		public Project Project
 		{
 			get
 			{
-				return this._project.Entity;
+				return this._Project.Entity;
 			}
 			set
 			{
-				project previousValue = this._project.Entity;
+				Project previousValue = this._Project.Entity;
 				if (((previousValue != value) 
-							|| (this._project.HasLoadedOrAssignedValue == false)))
+							|| (this._Project.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._project.Entity = null;
-						previousValue.project_owners.Remove(this);
+						this._Project.Entity = null;
+						previousValue.ProjectOwners.Remove(this);
 					}
-					this._project.Entity = value;
+					this._Project.Entity = value;
 					if ((value != null))
 					{
-						value.project_owners.Add(this);
+						value.ProjectOwners.Add(this);
 						this._project_id = value.id;
 					}
 					else
 					{
 						this._project_id = default(int);
 					}
-					this.SendPropertyChanged("project");
+					this.SendPropertyChanged("Project");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_owner", Storage="_user", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
-		public user user
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_project_owner", Storage="_User", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		public User User
 		{
 			get
 			{
-				return this._user.Entity;
+				return this._User.Entity;
 			}
 			set
 			{
-				user previousValue = this._user.Entity;
+				User previousValue = this._User.Entity;
 				if (((previousValue != value) 
-							|| (this._user.HasLoadedOrAssignedValue == false)))
+							|| (this._User.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._user.Entity = null;
-						previousValue.project_owners.Remove(this);
+						this._User.Entity = null;
+						previousValue.ProjectOwners.Remove(this);
 					}
-					this._user.Entity = value;
+					this._User.Entity = value;
 					if ((value != null))
 					{
-						value.project_owners.Add(this);
+						value.ProjectOwners.Add(this);
 						this._user_id = value.id;
 					}
 					else
 					{
 						this._user_id = default(int);
 					}
-					this.SendPropertyChanged("user");
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -2102,7 +2139,7 @@ namespace BarometerDataAccesLayer
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.project_report_date")]
-	public partial class project_report_date : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class ProjectReportDate : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -2119,9 +2156,9 @@ namespace BarometerDataAccesLayer
 		
 		private System.Nullable<System.DateTime> _end_date;
 		
-		private EntitySet<report> _reports;
+		private EntitySet<Report> _Reports;
 		
-		private EntityRef<project> _project;
+		private EntityRef<Project> _Project;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2141,10 +2178,10 @@ namespace BarometerDataAccesLayer
     partial void Onend_dateChanged();
     #endregion
 		
-		public project_report_date()
+		public ProjectReportDate()
 		{
-			this._reports = new EntitySet<report>(new Action<report>(this.attach_reports), new Action<report>(this.detach_reports));
-			this._project = default(EntityRef<project>);
+			this._Reports = new EntitySet<Report>(new Action<Report>(this.attach_Reports), new Action<Report>(this.detach_Reports));
+			this._Project = default(EntityRef<Project>);
 			OnCreated();
 		}
 		
@@ -2179,7 +2216,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._project_id_int != value))
 				{
-					if (this._project.HasLoadedOrAssignedValue)
+					if (this._Project.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2272,49 +2309,49 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_report_date_report", Storage="_reports", ThisKey="id", OtherKey="project_report_date_id")]
-		public EntitySet<report> reports
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_report_date_report", Storage="_Reports", ThisKey="id", OtherKey="project_report_date_id")]
+		public EntitySet<Report> Reports
 		{
 			get
 			{
-				return this._reports;
+				return this._Reports;
 			}
 			set
 			{
-				this._reports.Assign(value);
+				this._Reports.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_report_date", Storage="_project", ThisKey="project_id_int", OtherKey="id", IsForeignKey=true)]
-		public project project
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_project_report_date", Storage="_Project", ThisKey="project_id_int", OtherKey="id", IsForeignKey=true)]
+		public Project Project
 		{
 			get
 			{
-				return this._project.Entity;
+				return this._Project.Entity;
 			}
 			set
 			{
-				project previousValue = this._project.Entity;
+				Project previousValue = this._Project.Entity;
 				if (((previousValue != value) 
-							|| (this._project.HasLoadedOrAssignedValue == false)))
+							|| (this._Project.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._project.Entity = null;
-						previousValue.project_report_dates.Remove(this);
+						this._Project.Entity = null;
+						previousValue.ProjectReportDates.Remove(this);
 					}
-					this._project.Entity = value;
+					this._Project.Entity = value;
 					if ((value != null))
 					{
-						value.project_report_dates.Add(this);
+						value.ProjectReportDates.Add(this);
 						this._project_id_int = value.id;
 					}
 					else
 					{
 						this._project_id_int = default(int);
 					}
-					this.SendPropertyChanged("project");
+					this.SendPropertyChanged("Project");
 				}
 			}
 		}
@@ -2339,21 +2376,21 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		private void attach_reports(report entity)
+		private void attach_Reports(Report entity)
 		{
 			this.SendPropertyChanging();
-			entity.project_report_date = this;
+			entity.ProjectReportDate = this;
 		}
 		
-		private void detach_reports(report entity)
+		private void detach_Reports(Report entity)
 		{
 			this.SendPropertyChanging();
-			entity.project_report_date = null;
+			entity.ProjectReportDate = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.report")]
-	public partial class report : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Report : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -2372,13 +2409,13 @@ namespace BarometerDataAccesLayer
 		
 		private string _comment;
 		
-		private EntityRef<baro_aspect> _baro_aspect;
+		private EntityRef<BaroAspect> _BaroAspect;
 		
-		private EntityRef<project_report_date> _project_report_date;
+		private EntityRef<ProjectReportDate> _ProjectReportDate;
 		
-		private EntityRef<user> _user;
+		private EntityRef<User> _user;
 		
-		private EntityRef<user> _user1;
+		private EntityRef<User> _User1;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2400,12 +2437,12 @@ namespace BarometerDataAccesLayer
     partial void OncommentChanged();
     #endregion
 		
-		public report()
+		public Report()
 		{
-			this._baro_aspect = default(EntityRef<baro_aspect>);
-			this._project_report_date = default(EntityRef<project_report_date>);
-			this._user = default(EntityRef<user>);
-			this._user1 = default(EntityRef<user>);
+			this._BaroAspect = default(EntityRef<BaroAspect>);
+			this._ProjectReportDate = default(EntityRef<ProjectReportDate>);
+			this._user = default(EntityRef<User>);
+			this._User1 = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -2464,7 +2501,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._subject_id != value))
 				{
-					if (this._user1.HasLoadedOrAssignedValue)
+					if (this._User1.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2488,7 +2525,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._project_report_date_id != value))
 				{
-					if (this._project_report_date.HasLoadedOrAssignedValue)
+					if (this._ProjectReportDate.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2512,7 +2549,7 @@ namespace BarometerDataAccesLayer
 			{
 				if ((this._baro_aspect_id != value))
 				{
-					if (this._baro_aspect.HasLoadedOrAssignedValue)
+					if (this._BaroAspect.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -2565,76 +2602,76 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_aspect_report", Storage="_baro_aspect", ThisKey="baro_aspect_id", OtherKey="id", IsForeignKey=true)]
-		public baro_aspect baro_aspect
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="baro_aspect_report", Storage="_BaroAspect", ThisKey="baro_aspect_id", OtherKey="id", IsForeignKey=true)]
+		public BaroAspect BaroAspect
 		{
 			get
 			{
-				return this._baro_aspect.Entity;
+				return this._BaroAspect.Entity;
 			}
 			set
 			{
-				baro_aspect previousValue = this._baro_aspect.Entity;
+				BaroAspect previousValue = this._BaroAspect.Entity;
 				if (((previousValue != value) 
-							|| (this._baro_aspect.HasLoadedOrAssignedValue == false)))
+							|| (this._BaroAspect.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._baro_aspect.Entity = null;
-						previousValue.reports.Remove(this);
+						this._BaroAspect.Entity = null;
+						previousValue.Reports.Remove(this);
 					}
-					this._baro_aspect.Entity = value;
+					this._BaroAspect.Entity = value;
 					if ((value != null))
 					{
-						value.reports.Add(this);
+						value.Reports.Add(this);
 						this._baro_aspect_id = value.id;
 					}
 					else
 					{
 						this._baro_aspect_id = default(int);
 					}
-					this.SendPropertyChanged("baro_aspect");
+					this.SendPropertyChanged("BaroAspect");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_report_date_report", Storage="_project_report_date", ThisKey="project_report_date_id", OtherKey="id", IsForeignKey=true)]
-		public project_report_date project_report_date
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="project_report_date_report", Storage="_ProjectReportDate", ThisKey="project_report_date_id", OtherKey="id", IsForeignKey=true)]
+		public ProjectReportDate ProjectReportDate
 		{
 			get
 			{
-				return this._project_report_date.Entity;
+				return this._ProjectReportDate.Entity;
 			}
 			set
 			{
-				project_report_date previousValue = this._project_report_date.Entity;
+				ProjectReportDate previousValue = this._ProjectReportDate.Entity;
 				if (((previousValue != value) 
-							|| (this._project_report_date.HasLoadedOrAssignedValue == false)))
+							|| (this._ProjectReportDate.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._project_report_date.Entity = null;
-						previousValue.reports.Remove(this);
+						this._ProjectReportDate.Entity = null;
+						previousValue.Reports.Remove(this);
 					}
-					this._project_report_date.Entity = value;
+					this._ProjectReportDate.Entity = value;
 					if ((value != null))
 					{
-						value.reports.Add(this);
+						value.Reports.Add(this);
 						this._project_report_date_id = value.id;
 					}
 					else
 					{
 						this._project_report_date_id = default(int);
 					}
-					this.SendPropertyChanged("project_report_date");
+					this.SendPropertyChanged("ProjectReportDate");
 				}
 			}
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_report", Storage="_user", ThisKey="reporter_id", OtherKey="id", IsForeignKey=true)]
-		public user user
+		public User user
 		{
 			get
 			{
@@ -2642,7 +2679,7 @@ namespace BarometerDataAccesLayer
 			}
 			set
 			{
-				user previousValue = this._user.Entity;
+				User previousValue = this._user.Entity;
 				if (((previousValue != value) 
 							|| (this._user.HasLoadedOrAssignedValue == false)))
 				{
@@ -2667,36 +2704,36 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_report1", Storage="_user1", ThisKey="subject_id", OtherKey="id", IsForeignKey=true)]
-		public user user1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="user_report1", Storage="_User1", ThisKey="subject_id", OtherKey="id", IsForeignKey=true)]
+		public User User1
 		{
 			get
 			{
-				return this._user1.Entity;
+				return this._User1.Entity;
 			}
 			set
 			{
-				user previousValue = this._user1.Entity;
+				User previousValue = this._User1.Entity;
 				if (((previousValue != value) 
-							|| (this._user1.HasLoadedOrAssignedValue == false)))
+							|| (this._User1.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._user1.Entity = null;
-						previousValue.reports1.Remove(this);
+						this._User1.Entity = null;
+						previousValue.Reports1.Remove(this);
 					}
-					this._user1.Entity = value;
+					this._User1.Entity = value;
 					if ((value != null))
 					{
-						value.reports1.Add(this);
+						value.Reports1.Add(this);
 						this._subject_id = value.id;
 					}
 					else
 					{
 						this._subject_id = default(int);
 					}
-					this.SendPropertyChanged("user1");
+					this.SendPropertyChanged("User1");
 				}
 			}
 		}
@@ -2723,14 +2760,14 @@ namespace BarometerDataAccesLayer
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.rol")]
-	public partial class rol : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Rol : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private string _name;
 		
-		private EntitySet<user> _users;
+		private EntitySet<User> _Users;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2740,9 +2777,9 @@ namespace BarometerDataAccesLayer
     partial void OnnameChanged();
     #endregion
 		
-		public rol()
+		public Rol()
 		{
-			this._users = new EntitySet<user>(new Action<user>(this.attach_users), new Action<user>(this.detach_users));
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			OnCreated();
 		}
 		
@@ -2766,16 +2803,16 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="rol_user", Storage="_users", ThisKey="name", OtherKey="rol_name")]
-		public EntitySet<user> users
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="rol_user", Storage="_Users", ThisKey="name", OtherKey="rol_name")]
+		public EntitySet<User> Users
 		{
 			get
 			{
-				return this._users;
+				return this._Users;
 			}
 			set
 			{
-				this._users.Assign(value);
+				this._Users.Assign(value);
 			}
 		}
 		
@@ -2799,16 +2836,112 @@ namespace BarometerDataAccesLayer
 			}
 		}
 		
-		private void attach_users(user entity)
+		private void attach_Users(User entity)
 		{
 			this.SendPropertyChanging();
-			entity.rol = this;
+			entity.Rol = this;
 		}
 		
-		private void detach_users(user entity)
+		private void detach_Users(User entity)
 		{
 			this.SendPropertyChanging();
-			entity.rol = null;
+			entity.Rol = null;
+		}
+	}
+	
+	public partial class get_student_procedureResult
+	{
+		
+		private string _Naam;
+		
+		private System.Nullable<int> _Eindcijfer;
+		
+		public get_student_procedureResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Naam", DbType="VarChar(50)")]
+		public string Naam
+		{
+			get
+			{
+				return this._Naam;
+			}
+			set
+			{
+				if ((this._Naam != value))
+				{
+					this._Naam = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Eindcijfer", DbType="Int")]
+		public System.Nullable<int> Eindcijfer
+		{
+			get
+			{
+				return this._Eindcijfer;
+			}
+			set
+			{
+				if ((this._Eindcijfer != value))
+				{
+					this._Eindcijfer = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetProjectIDResult
+	{
+		
+		private int _project_id;
+		
+		public GetProjectIDResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_project_id", DbType="Int NOT NULL")]
+		public int project_id
+		{
+			get
+			{
+				return this._project_id;
+			}
+			set
+			{
+				if ((this._project_id != value))
+				{
+					this._project_id = value;
+				}
+			}
+		}
+	}
+	
+	public partial class GetProjectResult
+	{
+		
+		private int _project_id;
+		
+		public GetProjectResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_project_id", DbType="Int NOT NULL")]
+		public int project_id
+		{
+			get
+			{
+				return this._project_id;
+			}
+			set
+			{
+				if ((this._project_id != value))
+				{
+					this._project_id = value;
+				}
+			}
 		}
 	}
 }

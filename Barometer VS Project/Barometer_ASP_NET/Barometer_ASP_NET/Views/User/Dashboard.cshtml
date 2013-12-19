@@ -1,6 +1,8 @@
 @{
     ViewBag.Title = "Dashboard";
 }
+@model Barometer_ASP_NET.Wrappers.UserDashboardWrapper
+
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
@@ -66,17 +68,17 @@
             <table class="table-condensed table-bordered table-striped" style="width: 100%;">
                 <thead>
                     <tr>
-                        <th colspan="7" style="text-align: center;">November 2013
+                        <th colspan="7" style="text-align: center;">@DateTime.Today.ToString("MMMM") @DateTime.Today.Year
                         </th>
                     </tr>
                     <tr>
-                        <th>Su</th>
-                        <th>Mo</th>
-                        <th>Tu</th>
-                        <th>We</th>
-                        <th>Th</th>
-                        <th>Fr</th>
-                        <th>Sa</th>
+                        <th>@DateTimeOffset.MaxValue.Date.AddDays(-12).ToString("ddd").ToUpper()</th>
+                        <th>@DateTimeOffset.MaxValue.Date.AddDays(-11).ToString("ddd").ToUpper()</th>
+                        <th>@DateTimeOffset.MaxValue.Date.AddDays(-10).ToString("ddd").ToUpper()</th>
+                        <th>@DateTimeOffset.MaxValue.Date.AddDays(-9).ToString("ddd").ToUpper()</th>
+                        <th>@DateTimeOffset.MaxValue.Date.AddDays(-8).ToString("ddd").ToUpper()</th>
+                        <th>@DateTimeOffset.MaxValue.Date.AddDays(-7).ToString("ddd").ToUpper()</th>
+                        <th>@DateTimeOffset.MaxValue.Date.AddDays(-6).ToString("ddd").ToUpper()</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -149,13 +151,26 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                            <img src="~/Content/images/pf.jpg" alt="..." class="img-circle"></td>
                         <td colspan="2">A. van de Boogaard</td>
                     </tr>
                     <tr>
                         <td colspan="3"><b>Leden</b></td>
                     </tr>
-                    <tr>
+                    @{int counter = 1;}
+                    @foreach (BarometerDataAccesLayer.ProjectMember usr in Model.ProjectMembers)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/Content/images/pf.jpg" alt="..." class="img-circle"></td>
+                            <td>@usr.User.firstname @usr.User.lastname</td>
+                            <td>
+                                @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab"+@counter, @Title = "Bekijk beoordeling van "+@usr.User.firstname+" "+@usr.User.lastname, @class = "glyphicon glyphicon-eye-open" })
+                            </td>
+                        </tr>
+                        {counter++;}
+                    }
+                    @*                    <tr>
                         <td>
                             <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
                         <td>Rik Coenen</td>
@@ -188,7 +203,7 @@
                             @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van John Huijbergt", @class = "glyphicon glyphicon-eye-open" })
 
                         </td>
-                    </tr>
+                    </tr>*@
                 </tbody>
             </table>
         </div>
@@ -205,135 +220,128 @@
 
 </div>
 
+<div class="modal fade" id="modal-baro" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="model-baroLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Beoordeling van Rik Coenen</h4>
+                <select class="form-control">
+                    <option>Week 3</option>
+                    <option>Week 6</option>
+                    <option>Week 9</option>
+                </select>
+            </div>
+            <div class="modal-body">
+                <div class="barometer-control">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active"><a href="#tab1" data-toggle="tab">Inhoudelijke kennis</a></li>
+                        <li><a href="#tab2" data-toggle="tab">Werken als professional</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <table class="table">
+                                <tr>
+                                    <td colspan="2">
+                                        <h4><i>Kennis van/over en vaardigheden</i></h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Bussines definition study</td>
+                                    <td>7</td>
+                                </tr>
+                                <tr>
+                                    <td>System use cases</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>Prototype(s)</td>
+                                    <td>7</td>
+                                </tr>
+                                <tr>
+                                    <td>Requirement analyse</td>
+                                    <td>7</td>
+                                </tr>
+                                <tr>
+                                    <td>Functioneel ontwerp</td>
+                                    <td>8</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <table class="table">
+                                <tr>
+                                    <td colspan="2">
+                                        <h4><i>Inzet motivatie</i></h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Meedoen</td>
+                                    <td>7</td>
+                                </tr>
+                                <tr>
+                                    <td>Afspraken nakomen</td>
+                                    <td>7</td>
+                                </tr>
+                                <tr>
+                                    <td>Op tijd zijn</td>
+                                    <td>8</td>
+                                </tr>
 
 
+                                <tr>
+                                    <td colspan="2">
+                                        <h4><i>Inzicht eigen functioneren</i></h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Kritisch </td>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <td>Eigen sterktes en zwaktes kennen</td>
+                                    <td>7</td>
+                                </tr>
+                                <tr>
+                                    <td>Besluiten nemen</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>Omgaan met stress</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>Assertief zijn</td>
+                                    <td>7</td>
+                                </tr>
 
+                                <tr>
+                                    <td colspan="2">
+                                        <h4><i>Samenwerken</i></h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Anderen helpen </td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>Feedback geven </td>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <td>Feedback ontvangen </td>
+                                    <td>6</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
+            </div>
+        </div>
+    </div>
 
 </div>
-  
 
-
-  		<div class="modal fade" id="modal-baro" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="model-baroLabel">
-              <div class="modal-dialog">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h4 class="modal-title">Beoordeling van Rik Coenen</h4>
-                          <select class="form-control">
-                              <option>Week 3</option>
-                              <option>Week 6</option>
-                              <option>Week 9</option>
-                          </select>
-                      </div>
-                      <div class="modal-body">
-                          <div class="barometer-control">
-                              <ul class="nav nav-tabs" id="myTab">
-                                  <li class="active"><a href="#tab1" data-toggle="tab">Inhoudelijke kennis</a></li>
-                                  <li><a href="#tab2" data-toggle="tab">Werken als professional</a></li>
-                              </ul>
-
-                              <div class="tab-content">
-                                  <div class="tab-pane active" id="tab1">
-                                      <table class="table">
-                                          <tr>
-                                              <td colspan="2">
-                                                  <h4><i>Kennis van/over en vaardigheden</i></h4>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <td>Bussines definition study</td>
-                                              <td>7</td>
-                                          </tr>
-                                          <tr>
-                                              <td>System use cases</td>
-                                              <td>8</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Prototype(s)</td>
-                                              <td>7</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Requirement analyse</td>
-                                              <td>7</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Functioneel ontwerp</td>
-                                              <td>8</td>
-                                          </tr>
-                                      </table>
-                                  </div>
-                                  <div class="tab-pane" id="tab2">
-                                      <table class="table">
-                                          <tr>
-                                              <td colspan="2">
-                                                  <h4><i>Inzet motivatie</i></h4>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <td>Meedoen</td>
-                                              <td>7</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Afspraken nakomen</td>
-                                              <td>7</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Op tijd zijn</td>
-                                              <td>8</td>
-                                          </tr>
-
-
-                                          <tr>
-                                              <td colspan="2">
-                                                  <h4><i>Inzicht eigen functioneren</i></h4>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <td>Kritisch </td>
-                                              <td>6</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Eigen sterktes en zwaktes kennen</td>
-                                              <td>7</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Besluiten nemen</td>
-                                              <td>8</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Omgaan met stress</td>
-                                              <td>8</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Assertief zijn</td>
-                                              <td>7</td>
-                                          </tr>
-
-                                          <tr>
-                                              <td colspan="2">
-                                                  <h4><i>Samenwerken</i></h4>
-                                              </td>
-                                          </tr>
-                                          <tr>
-                                              <td>Anderen helpen </td>
-                                              <td>8</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Feedback geven </td>
-                                              <td>6</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Feedback ontvangen </td>
-                                              <td>6</td>
-                                          </tr>
-                                      </table>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Sluit</button>
-                      </div>
-                  </div>
-              </div>
-
-          </div>

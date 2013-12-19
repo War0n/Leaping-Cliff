@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Barometer_ASP_NET.Wrappers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,10 +11,11 @@ namespace Barometer_ASP_NET.Controllers
     {
         //
         // GET: /User/
-
+        
         public ActionResult Dashboard()
         {
-            return View();
+            UserDashboardWrapper wrapper = new UserDashboardWrapper(2000000);
+            return View(wrapper);
         }
 
 		public ActionResult Barometer()
@@ -23,6 +25,7 @@ namespace Barometer_ASP_NET.Controllers
 
 		public ActionResult Project()
 		{
+            
 			return View();
 		}
 

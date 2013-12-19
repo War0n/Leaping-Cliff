@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BarometerDataAccesLayer;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,11 +12,13 @@ namespace Barometer_ASP_NET.Database
 	{
 		private DAOProject DAOPROJECT = new DAOProject();
 		private static DatabaseFactory instance = null;
+        private DAOStudent DAOSTUDENT = new DAOStudent();
+        private static DatabaseClassesDataContext DataContext { get; set; }
 
 		/// <summary>
 		/// Singleton pattern to get the DatabaseFactory Object
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>An instance of the DatabaseFactory</returns>
 		public static DatabaseFactory getInstance()
 		{
 			if (instance == null)
@@ -25,13 +28,31 @@ namespace Barometer_ASP_NET.Database
 			return instance;
 		}
 
+        /// <summary>
+        /// Singleton pattern to get the DataContext Object
+        /// </summary>
+        /// <returns>DatabaseClassesDataContext</returns>
+        public DatabaseClassesDataContext getDataContext()
+        {
+            if (DataContext == null)
+            {
+                DataContext = new DatabaseClassesDataContext();
+            }
+            return DataContext;
+        }
+
 		/// <summary>
 		/// Method to get the object of the Database-Model class back
 		/// </summary>
 		/// <returns></returns>
-		public DAOProject getDAOPerson()
+		public DAOProject getDAOProject()
 		{
 			return DAOPROJECT;
 		}
-	}
+
+        internal DAOStudent getDAOStudent()
+        {
+            return DAOSTUDENT;
+        }
+    }
 }
