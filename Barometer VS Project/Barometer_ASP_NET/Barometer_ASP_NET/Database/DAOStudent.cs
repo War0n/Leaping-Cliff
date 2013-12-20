@@ -45,23 +45,30 @@ namespace Barometer_ASP_NET.Database
         /// </summary>
         /// <param name="studentNumber">The student and the project you want to querry</param>
         /// <returns></returns>
-        //public IQueryable<Project> getProgress(int studentNumber, int projectID)
+       public Dictionary<int, int> getReportResults(int studentNumber, int projectID)
         //{
             
         //    DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            Dictionary<int, int> grades = new Dictionary<int, int>();
 
-        //    var progress =
+           var progress =
         //        from u in context.Users
         //        join pm in context.ProjectMembers on u.id equals pm.student_user_id
         //        join pg in context.ProjectGroups on pm.project_group_id equals pg.id
         //        join p in context.Projects on pg.project_id equals p.id
-        //        where u.student_number == studentNumber
+                join r in context.Reports on u.id equals r.subject_id
         //        && p.id == projectID
         //        && p.status_name.Equals("Done")
         //        select pm.end_grade;
+                select new
+                {
+                   r.project_report_date_id, r.grade
+                };
 
-
-        //    return progress;
-        //}
+           foreach(var s in progress)
+           {
+               grades.Add((int)s.project_report_date_id, (int)s.grade);
+           }
+            return grades;
     }
 }
