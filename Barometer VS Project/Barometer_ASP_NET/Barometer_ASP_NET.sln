@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barometer_ASP_NET.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarometerDataAccesLayer", "BarometerDataAccesLayer\BarometerDataAccesLayer.csproj", "{16B61BE8-C5E1-44E6-95A9-BD25320D3232}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oAuthDemo", "..\..\..\..\Desktop\OAuthDemo\OAuthDemo\oAuthDemo\oAuthDemo.csproj", "{AA311CA7-737E-447D-8D66-6ECBE22B8E4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarometerAvansApi", "..\..\..\..\Desktop\OAuthDemo\OAuthDemo\oAuthDemo\BarometerAvansApi.csproj", "{AA311CA7-737E-447D-8D66-6ECBE22B8E4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
