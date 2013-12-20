@@ -24,7 +24,7 @@ namespace Barometer_ASP_NET.Database
 
         public static LDAPConnector GetInstance()
         {
-           
+           //test
             if (instance == null)
                 instance = new LDAPConnector("73d120c3cebc89b2a344ca8b7e434d8f30349c70", "0179ed703f5f15277cefef2ec0259646dc4e2d36");
             return instance;
