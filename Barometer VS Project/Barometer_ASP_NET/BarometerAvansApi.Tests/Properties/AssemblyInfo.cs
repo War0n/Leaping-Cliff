@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BarometerAvansApi")]
+[assembly: AssemblyTitle("BarometerAvansApi.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BarometerAvansApi")]
+[assembly: AssemblyProduct("BarometerAvansApi.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b5d19243-2e92-4a3b-bb11-f8ee20f2c07e")]
+[assembly: Guid("62cdee60-b0fc-4b19-aef7-5a4f62a89e38")]
 
 // Version information for an assembly consists of the following four values:
 //
