@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
 
-namespace Barometer_ASP_NET.Models
+namespace MvcApplication1.Models
 {
 	public class UsersContext : DbContext
 	{
