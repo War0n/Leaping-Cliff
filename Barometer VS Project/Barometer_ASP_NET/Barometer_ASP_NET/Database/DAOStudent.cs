@@ -39,5 +39,29 @@ namespace Barometer_ASP_NET.Database
                 select pg;
             return projectGroup;
         }
+
+        /// <summary>
+        /// Get the results of the student of a single project
+        /// </summary>
+        /// <param name="studentNumber">The student and the project you want to querry</param>
+        /// <returns></returns>
+        public IQueryable<Project> getProgress(int studentNumber, int projectID)
+        {
+            
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var progress =
+                from u in context.Users
+                join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                join pg in context.ProjectGroups on pm.project_group_id equals pg.id
+                join p in context.Projects on pg.project_id equals p.id
+                where u.student_number == studentNumber
+                && p.id == projectID
+                && p.status_name.Equals("Done")
+                select pm.end_grade;
+
+
+            return progress;
+        }
     }
 }

@@ -41,5 +41,24 @@ namespace Barometer_ASP_NET.Database
                 select pm;
             return projectMembers;
         }
+
+        public IQueryable<string> getTutors(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            string fullName;
+
+            var tutors =
+                from pg in context.ProjectGroups
+                join u in context.Users on pg.tutor_user_id equals u.id
+                where projectId == pg.project_id
+                select new
+                {
+                   fullName = u.firstname + " " +
+                    u.lastname
+                };
+
+            return tutors;
+
+        }
     }
 }
