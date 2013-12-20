@@ -185,7 +185,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModeratorController.cs" />
@@ -194,7 +193,6 @@
     <Compile Include="Database\DAOStudent.cs" />
     <Compile Include="Database\DAOProject.cs" />
     <Compile Include="Database\DatabaseFactory.cs" />
-    <Compile Include="Database\LDAPConnector.cs" />
     <Compile Include="FileFactory\FileHandlerFactory.cs" />
     <Compile Include="FileFactory\GradeExcel.cs" />
     <Compile Include="FileFactory\IExcelDataTransfer.cs" />

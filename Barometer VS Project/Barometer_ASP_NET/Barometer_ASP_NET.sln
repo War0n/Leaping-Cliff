@@ -7,12 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barometer_ASP_NET.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarometerDataAccesLayer", "BarometerDataAccesLayer\BarometerDataAccesLayer.csproj", "{16B61BE8-C5E1-44E6-95A9-BD25320D3232}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{22CE51D8-7448-411C-B1BE-0D9CE09D1B47}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oAuthDemo", "..\..\..\..\Desktop\OAuthDemo\OAuthDemo\oAuthDemo\oAuthDemo.csproj", "{AA311CA7-737E-447D-8D66-6ECBE22B8E4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +27,10 @@ Global
 		{16B61BE8-C5E1-44E6-95A9-BD25320D3232}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16B61BE8-C5E1-44E6-95A9-BD25320D3232}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16B61BE8-C5E1-44E6-95A9-BD25320D3232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA311CA7-737E-447D-8D66-6ECBE22B8E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA311CA7-737E-447D-8D66-6ECBE22B8E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA311CA7-737E-447D-8D66-6ECBE22B8E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA311CA7-737E-447D-8D66-6ECBE22B8E4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
