@@ -53,6 +53,9 @@
         chart.draw(data, options);
 
 
+        $(window).smartresize(function () {
+            chart.draw(data, options);
+        });
     }
 
 
