@@ -63,7 +63,34 @@ namespace Barometer_ASP_NET.Database
              }
 
             return nameDictionary;
+        }
 
+
+        /// <summary>
+        /// Get all the student names from a single group
+        /// </summary>
+        /// <param name="groupId">The group you want to query</param>
+        /// <returns>All the names of the students in a dictionary </returns>
+        public Dictionary<string, string> getNamesOfGroupMembers(int groupId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            Dictionary<string, string> nameDictionary = new Dictionary<string, string>();
+
+            var users =
+                from pm in context.ProjectMembers
+                join u in context.Users on pm.student_user_id equals u.id
+                where pm.project_group_id == groupId
+                select new
+                {
+                    u.firstname, u.lastname
+                };
+
+            foreach (var f in users)
+            {
+                nameDictionary.Add(f.firstname, f.lastname);
+            }
+
+            return nameDictionary;
         }
     }
 }
