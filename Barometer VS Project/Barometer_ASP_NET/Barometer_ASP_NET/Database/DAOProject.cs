@@ -41,20 +41,22 @@ namespace Barometer_ASP_NET.Database
                 select pm;
             return projectMembers;
         }
-
+        /// <summary>
+        /// Get all tutors belonging to the projectgroup
+        /// </summary>
         public Dictionary<string, string> getTutors(int projectId)
-        //{
-        //    DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             Dictionary<string, string> nameDictionary = new Dictionary<string, string>();
              var fullName =
-        //        from pg in context.ProjectGroups
-        //        join u in context.Users on pg.tutor_user_id equals u.id
-        //        where projectId == pg.project_id
-        //        select new
-        //        {
+                from pg in context.ProjectGroups
+                join u in context.Users on pg.tutor_user_id equals u.id
+                where projectId == pg.project_id
+                select new
+                {
                     u.firstname,
-        //            u.lastname
-        //        };
+                    u.lastname
+                };
              foreach (var f in fullName)
              {
                  nameDictionary.Add(f.firstname, f.lastname);
@@ -62,6 +64,6 @@ namespace Barometer_ASP_NET.Database
 
             return nameDictionary;
 
-        //}
+        }
     }
 }
