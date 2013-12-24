@@ -11,8 +11,9 @@ namespace Barometer_ASP_NET.Controllers
     {
         //
         // GET: /Project/
-        DAOStudent student = new DAOStudent();
-        DAOProject project = new DAOProject();
+        public DAOStudent student = new DAOStudent();
+        public DAOProject project = new DAOProject();
+
         public ActionResult Index()
         {
             ViewData["key"] = student;
@@ -65,8 +66,9 @@ namespace Barometer_ASP_NET.Controllers
 
         public int ShowEndGradeIndividual()
         {
-            int i = student.getEndGradeIndividual(3000000, 2);//IMPORTANT, uses a test value, not yet ready for implementation(incorrect query)
+            int i = student.getEndGradeIndividual(3000000, 1);//IMPORTANT, uses a test value
             return i;
         }
+
     }
 }

@@ -85,7 +85,7 @@ namespace Barometer_ASP_NET.Database
                (from u in context.Users
                join pm in context.ProjectMembers on u.id equals pm.student_user_id
                join pg in context.ProjectGroups on pm.project_group_id equals pg.id
-               where pm.student_user_id == studentNumber && pg.project_id == projectId
+               where u.student_number == studentNumber && pg.project_id == projectId          
                select pm.end_grade).SingleOrDefault();
 
           return (int)endGrade; 
@@ -132,6 +132,5 @@ namespace Barometer_ASP_NET.Database
 
          return fullName;
        }
-
     }
 }
