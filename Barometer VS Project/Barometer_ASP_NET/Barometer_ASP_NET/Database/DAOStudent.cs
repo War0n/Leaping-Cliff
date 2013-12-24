@@ -77,14 +77,15 @@ namespace Barometer_ASP_NET.Database
        /// </summary>
        /// <param name="studentNumber">The student you want the grade from</param>
        /// <returns>Returns the final grade as an integer</returns>
-       public int getEndGradeIndividual(int studentNumber)
+       public int getEndGradeIndividual(int studentNumber, int projectId)
        {
            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
            var endGrade =
                (from u in context.Users
                join pm in context.ProjectMembers on u.id equals pm.student_user_id
-               where pm.student_user_id == studentNumber
+               join pg in context.ProjectGroups on pm.project_group_id equals pg.id
+               where pm.student_user_id == studentNumber && pg.project_id == projectId
                select pm.end_grade).SingleOrDefault();
 
           return (int)endGrade; 
@@ -109,8 +110,27 @@ namespace Barometer_ASP_NET.Database
                select pg.group_end_grade).SingleOrDefault();
 
            return (int)endGroupGrade;
+       }
 
-         
+       public Dictionary<string, string> getName(int studentNumber)
+       {
+         DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+         Dictionary<string, string> fullName = new Dictionary<string, string>();
+
+         var name =
+             from u in context.Users
+             where u.student_number == studentNumber
+             select new
+             {
+                 u.firstname, u.lastname
+             };
+
+         foreach (var v in name)
+         {
+             fullName.Add(v.firstname, v.lastname);
+         }
+
+         return fullName;
        }
 
     }
