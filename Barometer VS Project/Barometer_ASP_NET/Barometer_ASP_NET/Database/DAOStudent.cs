@@ -76,7 +76,7 @@ namespace Barometer_ASP_NET.Database
        /// Get the endgrade of a project of an indivdual student
        /// </summary>
        /// <param name="studentNumber">The student you want the grade from</param>
-       /// <returns></returns>
+       /// <returns>Returns the final grade as an integer</returns>
        public int getEndGradeIndividual(int studentNumber)
        {
            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
@@ -95,7 +95,7 @@ namespace Barometer_ASP_NET.Database
        /// Get the end grade of a group
        /// </summary>
        /// <param name="studentNumber", "GroupId">The student you want the grade from, the group he belonged to during the project</param>
-       /// <returns></returns>
+       /// <returns>Returns the final group grade as an integer</returns>
        public int getEndGradeGroup(int studentNumber, int groupId)
        {
            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();

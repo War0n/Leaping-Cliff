@@ -92,5 +92,115 @@ namespace Barometer_ASP_NET.Database
 
             return nameDictionary;
         }
+
+        /// <summary>
+        /// Get the project name
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>The name of the project </returns>
+        public string getProjectName(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var projectName =
+                (from p in context.Projects
+                 where p.id == projectId
+                 select p.name).SingleOrDefault();
+
+            return (string)projectName;
+        }
+
+        /// <summary>
+        /// Get the start and the end date of a project
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>The start and end date of a project in string format </returns>
+        public Dictionary<string, string> getStartAndEndDate(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            Dictionary<string, string> startAndEndDate = new Dictionary<string,string>();
+
+            var projectDate =
+                from p in context.Projects
+                where p.id == projectId
+                select new
+                {
+                    p.start_date, p.end_date
+                };
+
+            foreach(var p in projectDate)
+            {
+                startAndEndDate.Add(p.start_date.ToString(), p.end_date.ToString());
+            }
+            return startAndEndDate;
+        }
+
+        /// <summary>
+        /// Get the summary of a project
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>The summary of a project</returns>
+        public string getProjectSummary(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var projectSummary =
+                (from p in context.Projects
+                 where p.id == projectId
+                 select p.description).SingleOrDefault();
+
+            return (string)projectSummary;
+        }
+
+        /// <summary>
+        /// Get the names of the teachers who own a particular project
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>Returns a dictionary with the names of the teachers </returns>
+        public Dictionary<string, string> projectTeachers(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            Dictionary<string, string> teachers = new Dictionary<string, string>();
+
+            var teacher =
+                from p in context.Projects
+                join po in context.ProjectOwners on p.id equals po.project_id
+                join u in context.Users on po.user_id equals u.id
+                where p.id == projectId
+                select new
+                {
+                    u.firstname, u.lastname
+                };
+
+            foreach (var t in teacher)
+            {
+                teachers.Add(t.firstname, t.lastname);
+            }
+
+            return teachers;
+        }
+
+        public Dictionary<string, string> getGradingDetailsGrade(int reportId, int reporterId, int projectId, int week/*, int headAspect*/)
+        {
+            /*DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            Dictionary<string, string> gradingDetails = new Dictionary<string,string>();
+
+            var details =
+                from r in context.Reports
+                join prd in context.ProjectReportDates on r.project_report_date_id equals prd.id
+                join ba in context.BaroAspects on r.baro_aspect_id equals ba.id
+                where r.reporter_id == reporterId && prd.project_id_int == projectId
+                && r.project_report_date_id == week /* and equals headAspect
+                select new
+                {
+                    r.grade, ba.desription
+                };*/
+
+
+            return null;
+        }
+
+        //TODO add another method to fill the headaspects in the student grading detail view
+
     }
 }
