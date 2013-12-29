@@ -180,27 +180,29 @@ namespace Barometer_ASP_NET.Database
             return teachers;
         }
 
-        public Dictionary<string, string> getGradingDetailsGrade(int reportId, int reporterId, int projectId, int week/*, int headAspect*/)
+        /// <summary>
+        /// Get all the users of a project who belong to a particular group
+        /// </summary>
+        /// <param name="groupId">The project and group you want to query</param>
+        /// <returns>Returns user objects </returns>
+        /// 
+        //TODO this method uses distinct because otherwise the query returns a single user 4 times, this needs to be fixed
+        public IQueryable<User> getUsersInGroup(int projectId, int groupId)
         {
-            /*DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            Dictionary<string, string> gradingDetails = new Dictionary<string,string>();
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-            var details =
-                from r in context.Reports
-                join prd in context.ProjectReportDates on r.project_report_date_id equals prd.id
-                join ba in context.BaroAspects on r.baro_aspect_id equals ba.id
-                where r.reporter_id == reporterId && prd.project_id_int == projectId
-                && r.project_report_date_id == week /* and equals headAspect
-                select new
-                {
-                    r.grade, ba.desription
-                };*/
+            List<User> userList = new List<User>();
 
+            var users =
+            (from u in context.Users
+             join p in context.Projects on projectId equals p.id
+             join pg in context.ProjectGroups on p.id equals pg.project_id
+             join po in context.ProjectOwners on pg.project_id equals po.project_id
+             join pm in context.ProjectMembers on pg.id equals pm.project_group_id
+             where groupId == pg.id
+             select u).Distinct();
 
-            return null;
+            return users;
         }
-
-        //TODO add another method to fill the headaspects in the student grading detail view
-
     }
 }

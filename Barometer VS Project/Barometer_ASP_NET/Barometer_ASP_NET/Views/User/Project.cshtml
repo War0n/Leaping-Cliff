@@ -1,12 +1,6 @@
+@model IEnumerable<BarometerDataAccesLayer.User>
 @{
-    ViewBag.Title = "Projectdetails";
-    
-    string htmlStringToConvert = Html.Action("ShowEndGradeGroup", "Project").ToString();
-    int endGradeGroup = Convert.ToInt32(htmlStringToConvert);
-
-    string htmlStringToConvert2 = Html.Action("ShowEndGradeIndividual", "Project").ToString();
-    int endGradeIndividual = Convert.ToInt32(htmlStringToConvert2);
-
+    ViewBag.Title = "Project";
 
 }
 
@@ -91,20 +85,29 @@
                 </tr>
                 <tr>
                     <td>Docenten</td>
-                    <td>
-                        <a href="mailto:#" title="Mail docent">Erik van Apeldoor</a><br />
-                        <a href="mailto:#" title="Mail docent">Mareike NogWat</a>
+                    <td>                    
+                        @foreach (var u in Model)
+                        {
+                            if(u.rol_name.Equals("admin")){
+                              <a href="mailto:@u.email" title="Mail docent">@u.firstname @u.lastname</a><br />
+                        }
+                        }
+                        
                     </td>
                 </tr>
                 <tr>
                     <td>Eindcijfer</td>
-                    @if (endGradeGroup > 6) {<td><span class="label label-success">@Html.Action("ShowEndGradeGroup", "Project")</span></td>}
-                    else if(endGradeGroup < 6) {<td><span class="label label-danger">@Html.Action("ShowEndGradeGroup", "Project")</span></td>}
+                    @if ((double)ViewData["groupGrade"] > 5.5)
+                    {<td><span class="label label-success">@Html.Action("ShowEndGradeGroup", "Project")</span></td>}
+                    else if ((double)ViewData["groupGrade"] < 5.5)
+                    {<td><span class="label label-danger">@Html.Action("ShowEndGradeGroup", "Project")</span></td>}
                 </tr>
                 <tr>
                     <td>Eindcijfer individueel</td>
-                     @if (endGradeIndividual > 6) {<td><span class="label label-success">@Html.Action("ShowEndGradeIndividual", "Project")</span></td>}
-                    else if(endGradeIndividual < 6) {<td><span class="label label-danger">@Html.Action("ShowEndGradeIndividual", "Project")</span></td>}
+                     @if ((double)ViewData["individualGrade"] > 5.5)
+                     {<td><span class="label label-success">@Html.Action("ShowEndGradeIndividual", "Project")</span></td>}
+                     else if ((double)ViewData["individualGrade"] < 5.5)
+                     {<td><span class="label label-danger">@Html.Action("ShowEndGradeIndividual", "Project")</span></td>}
                 </tr>
             </tbody>
         </table>
@@ -116,48 +119,35 @@
                 <tr>
                     <td colspan="3"><b>Tutor</b></td>
                 </tr>
-                <tr>
-                    <td>
+                @foreach (var u in Model)
+                {
+                    if(u.rol_name.Equals("moderator"))
+                    {
+                    <tr>
+                      <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                    <td colspan="2">A. van de Boogaard</td>
-                </tr>
+                      <td colspan="2">@u.firstname @u.lastname</td>
+                    </tr>
+                    }
+                }
+                
                 <tr>
                     <td colspan="3"><b>Leden</b></td>
                 </tr>
-                <tr>
-                    <td>
+                @foreach (var u in Model)
+                {
+                    if (u.rol_name.Equals("user"))
+                    {
+                    <tr>
+                      <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                    <td>Rik Coenen</td>
-                    <td>
+                      <td>@u.firstname @u.lastname</td>
+                      <td>
                         @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Rik Coenen", @class = "glyphicon glyphicon-eye-open" })
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                    <td>Ronald van Duren</td>
-                    <td>
-                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Ronald van Duren", @class = "glyphicon glyphicon-eye-open" })
-                    </td>
-
-                </tr>
-                <tr>
-                    <td>
-                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                    <td>Joost Dolman</td>
-                    <td>
-                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Joost Dolman", @class = "glyphicon glyphicon-eye-open" })
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                    <td>John Huijbergt</td>
-                    <td>
-                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van John Huijbergt", @class = "glyphicon glyphicon-eye-open" })
-
-                    </td>
-                </tr>
+                      </td>
+                    </tr>
+                    }
+                }
             </tbody>
         </table>
 
@@ -177,7 +167,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Beoordeling van Rik Coenen</h4>
+                <h4 class="modal-title">Jouw beoordelingen</h4>
                 <select class="form-control">
                     <option>Week 3</option>
                     <option>Week 6</option>

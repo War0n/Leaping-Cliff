@@ -1,4 +1,6 @@
 ﻿using Barometer_ASP_NET.Database;
+using Barometer_ASP_NET.Models;
+using BarometerDataAccesLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +18,12 @@ namespace Barometer_ASP_NET.Controllers
 
         public ActionResult Index()
         {
-            ViewData["key"] = student;
             return View();
         }
 
         //Detail Function
         public string ShowNameOfStudent()
         {
-            ViewData["key"] = student;
             Dictionary<string, string> d = student.getName(3000000);//IMPORTANT, uses a test value, it needs the studentnumber when LDAP is finished.
             string s ="";
             foreach (KeyValuePair<string, string> pair in d)
@@ -58,16 +58,9 @@ namespace Barometer_ASP_NET.Controllers
             return s;
         }
 
-        public int ShowEndGradeGroup()
+        public ViewResult Project()
         {
-            int i = student.getEndGradeGroup(3000000, 1);//IMPORTANT, uses a test value
-            return i;
-        }
-
-        public int ShowEndGradeIndividual()
-        {
-            int i = student.getEndGradeIndividual(3000000, 1);//IMPORTANT, uses a test value
-            return i;
+            return View();
         }
 
     }
