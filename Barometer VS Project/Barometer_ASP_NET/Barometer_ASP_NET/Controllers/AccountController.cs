@@ -8,10 +8,9 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using Barometer_ASP_NET.Filters;
-using Barometer_ASP_NET.Models;
 
-namespace MvcApplication1.Controllers
+
+namespace Barometer_ASP_NET.Controllers
 {
 	[Authorize]
 	[InitializeSimpleMembership]
@@ -217,7 +216,9 @@ namespace MvcApplication1.Controllers
 		[AllowAnonymous]
 		public ActionResult ExternalLoginCallback(string returnUrl)
 		{
-			AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+			var client = ((AvansOAuthClient)OAuthWebSecurity.GetOAuthClientData("Avans").AuthenticationClient);
+			AuthenticationResult result = client.VerifyAuthentication(HttpContext);
+
 			if (!result.IsSuccessful)
 			{
 				return RedirectToAction("ExternalLoginFailure");

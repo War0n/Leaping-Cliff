@@ -1,3 +1,4 @@
+@model BarometerAvansApi.Models.LoginModel
 @{
     ViewBag.Title = "Avans Barometer";
 }
@@ -26,9 +27,10 @@
 				  <!-- test -->
 				  <hr />
 				  
-				  <div class="form-group">
+				  <div class="form-group" id="socialLoginForm">
                       @Html.ActionLink("Log in", "Dashboard", "User", null, new {@class = "btn btn-default btn-lgn"})
-                      @Html.ActionLink("Avans login", "Login", "Account", null, new {@class = "btn btn-danger btn-lgn"})
+                      @*Html.ActionLink("Avans login", "Login", "Account", null, new {@class = "btn btn-danger btn-lgn"})*@
+                      @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 				      <a href="#">Wachtwoord vergeten</a>
 				  </div>
 				</form>
@@ -39,4 +41,9 @@
 
     </div> <!-- /container -->
   </body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 </html>
+
+

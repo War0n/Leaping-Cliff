@@ -210,11 +210,9 @@
     <Compile Include="FileFactory\IExcelDataTransfer.cs" />
     <Compile Include="FileFactory\StudentExcel.cs" />
     <Compile Include="FileFactory\TemplateExcel.cs" />
-    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectGroup.cs" />
@@ -324,7 +322,7 @@
     <None Include="Views\Admin\ProjectGroups.cshtml" />
     <None Include="Views\Admin\Student.cshtml" />
     <Content Include="Views\Admin\_ViewStart.cshtml" />
-    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Account\Index.cshtml" />
     <None Include="Views\Moderator\Dashboard.cshtml" />
     <None Include="Views\Moderator\Student.cshtml" />
     <Content Include="Views\Moderator\_ViewStart.cshtml" />
@@ -366,6 +364,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -374,9 +373,9 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BarometerAvansApi\BarometerAvansApi.csproj">
-      <Project>{6b10513f-3123-4c4c-b98f-573508070327}</Project>
-      <Name>BarometerAvansApi</Name>
+    <ProjectReference Include="..\BaroMeterApi\BaroMeterApi.csproj">
+      <Project>{b635952f-54ea-432e-befd-ef81fe2d7c5b}</Project>
+      <Name>BaroMeterApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\BarometerDataAccesLayer\BarometerDataAccesLayer.csproj">
       <Project>{16b61be8-c5e1-44e6-95a9-bd25320d3232}</Project>

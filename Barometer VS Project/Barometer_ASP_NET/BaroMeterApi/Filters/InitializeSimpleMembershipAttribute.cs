@@ -4,7 +4,7 @@ using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
-using Barometer_ASP_NET.Models;
+using BarometerAvansApi.Models;
 
 namespace Barometer_ASP_NET.Filters
 {
@@ -18,7 +18,7 @@ namespace Barometer_ASP_NET.Filters
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
 			// Ensure ASP.NET Simple Membership is initialized only once per app start
-			LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
+			// LazyInitializer.EnsureInitialized(ref _initializer, ref _isInitialized, ref _initializerLock);
 		}
 
 		private class SimpleMembershipInitializer
