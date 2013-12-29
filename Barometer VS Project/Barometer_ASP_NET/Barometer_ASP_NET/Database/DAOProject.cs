@@ -41,5 +41,168 @@ namespace Barometer_ASP_NET.Database
                 select pm;
             return projectMembers;
         }
+        /// <summary>
+        /// Get all tutors belonging to the projectgroup
+        /// </summary>
+        public Dictionary<string, string> getTutors(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            Dictionary<string, string> nameDictionary = new Dictionary<string, string>();
+             var fullName =
+                from pg in context.ProjectGroups
+                join u in context.Users on pg.tutor_user_id equals u.id
+                where projectId == pg.project_id
+                select new
+                {
+                    u.firstname,
+                    u.lastname
+                };
+             foreach (var f in fullName)
+             {
+                 nameDictionary.Add(f.firstname, f.lastname);
+             }
+
+            return nameDictionary;
+        }
+
+
+        /// <summary>
+        /// Get all the student names from a single group
+        /// </summary>
+        /// <param name="groupId">The group you want to query</param>
+        /// <returns>All the names of the students in a dictionary </returns>
+        public Dictionary<string, string> getNamesOfGroupMembers(int groupId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            Dictionary<string, string> nameDictionary = new Dictionary<string, string>();
+
+            var users =
+                from pm in context.ProjectMembers
+                join u in context.Users on pm.student_user_id equals u.id
+                where pm.project_group_id == groupId
+                select new
+                {
+                    u.firstname, u.lastname
+                };
+
+            foreach (var f in users)
+            {
+                nameDictionary.Add(f.firstname, f.lastname);
+            }
+
+            return nameDictionary;
+        }
+
+        /// <summary>
+        /// Get the project name
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>The name of the project </returns>
+        public string getProjectName(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var projectName =
+                (from p in context.Projects
+                 where p.id == projectId
+                 select p.name).SingleOrDefault();
+
+            return (string)projectName;
+        }
+
+        /// <summary>
+        /// Get the start and the end date of a project
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>The start and end date of a project in string format </returns>
+        public Dictionary<string, string> getStartAndEndDate(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            Dictionary<string, string> startAndEndDate = new Dictionary<string,string>();
+
+            var projectDate =
+                from p in context.Projects
+                where p.id == projectId
+                select new
+                {
+                    p.start_date, p.end_date
+                };
+
+            foreach(var p in projectDate)
+            {
+                startAndEndDate.Add(p.start_date.ToString(), p.end_date.ToString());
+            }
+            return startAndEndDate;
+        }
+
+        /// <summary>
+        /// Get the summary of a project
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>The summary of a project</returns>
+        public string getProjectSummary(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var projectSummary =
+                (from p in context.Projects
+                 where p.id == projectId
+                 select p.description).SingleOrDefault();
+
+            return (string)projectSummary;
+        }
+
+        /// <summary>
+        /// Get the names of the teachers who own a particular project
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>Returns a dictionary with the names of the teachers </returns>
+        public Dictionary<string, string> projectTeachers(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            Dictionary<string, string> teachers = new Dictionary<string, string>();
+
+            var teacher =
+                from p in context.Projects
+                join po in context.ProjectOwners on p.id equals po.project_id
+                join u in context.Users on po.user_id equals u.id
+                where p.id == projectId
+                select new
+                {
+                    u.firstname, u.lastname
+                };
+
+            foreach (var t in teacher)
+            {
+                teachers.Add(t.firstname, t.lastname);
+            }
+
+            return teachers;
+        }
+
+        /// <summary>
+        /// Get all the users of a project who belong to a particular group
+        /// </summary>
+        /// <param name="groupId">The project and group you want to query</param>
+        /// <returns>Returns user objects </returns>
+        /// 
+        //TODO this method uses distinct because otherwise the query returns a single user 4 times, this needs to be fixed
+        public IQueryable<User> getUsersInGroup(int projectId, int groupId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            List<User> userList = new List<User>();
+
+            var users =
+            (from u in context.Users
+             join p in context.Projects on projectId equals p.id
+             join pg in context.ProjectGroups on p.id equals pg.project_id
+             join po in context.ProjectOwners on pg.project_id equals po.project_id
+             join pm in context.ProjectMembers on pg.id equals pm.project_group_id
+             where groupId == pg.id
+             select u).Distinct();
+
+            return users;
+        }
     }
 }

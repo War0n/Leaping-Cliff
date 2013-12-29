@@ -1,4 +1,5 @@
-﻿using Barometer_ASP_NET.Wrappers;
+﻿using Barometer_ASP_NET.Database;
+using Barometer_ASP_NET.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace Barometer_ASP_NET.Controllers
     {
         //
         // GET: /User/
-        
+        public DAOStudent student = new DAOStudent();
+        public DAOProject project = new DAOProject();
+
         public ActionResult Dashboard()
         {
             UserDashboardWrapper wrapper = new UserDashboardWrapper(2000000);
@@ -25,8 +28,10 @@ namespace Barometer_ASP_NET.Controllers
 
 		public ActionResult Project()
 		{
-            
-			return View();
+            ViewData["individualGrade"] = Convert.ToDouble(student.getEndGradeIndividual(3000000, 1)); //IMPORTANT, uses a test value
+            ViewData["groupGrade"] = Convert.ToDouble(student.getEndGradeGroup(3000000, 1)); //IMPORTANT, uses a test value
+            var model = project.getUsersInGroup(1, 1); //IMPORTANT, uses a test value
+            return View(model);
 		}
 
 		public ActionResult Projecten()
