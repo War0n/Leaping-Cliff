@@ -29,11 +29,15 @@
 
 
                 <form class="navbar-form navbar-right">
-                    @Html.ActionLink("Log Uit", "Index", "Home", null, new { @class = "btn btn-default" })
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Logout" class="btn btn-default" />
+                    }
                 </form>
 
                 <p class="navbar-text navbar-right">
-                    Ingelogd als <a href="#" class="navbar-link">Jens Hoevenaars</a>
+                    Ingelogd als <a href="#" class="navbar-link">@User.Identity.Name</a>
                 </p>
             </div>
             <!--/.nav-collapse -->

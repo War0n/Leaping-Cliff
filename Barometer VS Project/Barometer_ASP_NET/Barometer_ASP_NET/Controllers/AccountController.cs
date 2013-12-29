@@ -12,7 +12,7 @@ using oAuthDemo.Filters;
 using oAuthDemo.Models;
 using oAuthDemo.OAuth;
 
-namespace MvcApplication1.Controllers
+namespace Barometer_ASP_NET.Controllers
 {
 	[Authorize]
 	[InitializeSimpleMembership]
@@ -24,7 +24,7 @@ namespace MvcApplication1.Controllers
 		[AllowAnonymous]
 		public ActionResult Login(string returnUrl)
 		{
-			ViewBag.ReturnUrl = returnUrl;
+			ViewBag.ReturnUrl = Url.Action("DashBoard","User",null);
 			return View();
 		}
 
@@ -55,7 +55,7 @@ namespace MvcApplication1.Controllers
 		{
 			WebSecurity.Logout();
 
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Login", "Account");
 		}
 
 		//
@@ -82,7 +82,7 @@ namespace MvcApplication1.Controllers
 				{
 					WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
 					WebSecurity.Login(model.UserName, model.Password);
-					return RedirectToAction("Index", "Home");
+					return RedirectToAction("Dashboard", "User");
 				}
 				catch (MembershipCreateUserException e)
 				{
@@ -215,36 +215,37 @@ namespace MvcApplication1.Controllers
 		//
 		// GET: /Account/ExternalLoginCallback
 
-		[AllowAnonymous]
-		public ActionResult ExternalLoginCallback(string returnUrl)
-		{
-            var client = ((AvansOAuthClient)OAuthWebSecurity.GetOAuthClientData("Avans").AuthenticationClient);
-            AuthenticationResult result = client.VerifyAuthentication(HttpContext); 
+        [AllowAnonymous]
+        public ActionResult ExternalLoginCallback(string returnUrl)
+        {
+            var avansOAuth = (AvansOAuthClient)OAuthWebSecurity.GetOAuthClientData("avans").AuthenticationClient;
+            AuthenticationResult result = avansOAuth.VerifyAuthentication(HttpContext);
+
             if (!result.IsSuccessful)
-			{
-				return RedirectToAction("ExternalLoginFailure");
-			}
+            {
+                return RedirectToAction("ExternalLoginFailure");
+            }
 
-			if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
-			{
-				return RedirectToLocal(returnUrl);
-			}
+            if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+            {
+                return RedirectToLocal(returnUrl);
+            }
 
-			if (User.Identity.IsAuthenticated)
-			{
-				// If the current user is logged in add the new account
-				OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
-				return RedirectToLocal(returnUrl);
-			}
-			else
-			{
-				// User is new, ask for their desired membership name
-				string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-				ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
-				ViewBag.ReturnUrl = returnUrl;
-				return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
-			}
-		}
+            if (User.Identity.IsAuthenticated)
+            {
+                // If the current user is logged in add the new account
+                OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
+                return RedirectToLocal(returnUrl);
+            }
+            else
+            {
+                // User is new, ask for their desired membership name
+                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+                ViewBag.ReturnUrl = returnUrl;
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+            }
+        }
 
 		//
 		// POST: /Account/ExternalLoginConfirmation
@@ -339,7 +340,7 @@ namespace MvcApplication1.Controllers
 			}
 			else
 			{
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Login", "Account");
 			}
 		}
 

@@ -38,7 +38,7 @@ namespace oAuthDemo.OAuth
         {
         }
 
-        public AvansOAuthClient(string consumerKey, string consumerSecret,IOAuthTokenManager tokenManager) 
+        public AvansOAuthClient(string consumerKey, string consumerSecret, IOAuthTokenManager tokenManager)
             : base("avans", AvansServiceDescription, new SimpleConsumerTokenManager(consumerKey, consumerSecret, tokenManager))
         {
         }
@@ -47,7 +47,8 @@ namespace oAuthDemo.OAuth
         {
             var profileEndpoint = new MessageReceivingEndpoint("https://publicapi.avans.nl/oauth/api/user/?format=json", HttpDeliveryMethods.GetRequest);
             string accessToken = response.AccessToken;
-
+            consumerKey = ConfigurationManager.AppSettings["AvansOAuthConsumerKey"];
+            consumerSecret = ConfigurationManager.AppSettings["AvansOAuthConsumerSecret"];
             InMemoryOAuthTokenManager tokenManager = new InMemoryOAuthTokenManager(consumerKey, consumerSecret);
             tokenManager.ExpireRequestTokenAndStoreNewAccessToken(String.Empty, String.Empty, accessToken, (response as ITokenSecretContainingMessage).TokenSecret);
             WebConsumer webConsumer = new WebConsumer(AvansServiceDescription, tokenManager);
@@ -64,7 +65,7 @@ namespace oAuthDemo.OAuth
                         {
                             string jsonText = reader.ReadToEnd();
 
-                            var user = JsonConvert.DeserializeObject<List<OAuthUser>>(jsonText); 
+                            var user = JsonConvert.DeserializeObject<List<OAuthUser>>(jsonText);
 
                             Dictionary<string, string> extraData = new Dictionary<string, string>();
                             extraData.Add("Id", user[0].Id ?? "Onbekend");
@@ -73,7 +74,7 @@ namespace oAuthDemo.OAuth
                         }
                     }
                 }
-                
+                return new AuthenticationResult(false);
             }
             catch (WebException ex)
             {
@@ -86,7 +87,6 @@ namespace oAuthDemo.OAuth
                     }
                 }
             }
-            return new AuthenticationResult(false);
         }
     }
 }
