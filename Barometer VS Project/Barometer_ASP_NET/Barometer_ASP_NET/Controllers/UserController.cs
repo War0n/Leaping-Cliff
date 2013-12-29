@@ -29,10 +29,8 @@ namespace Barometer_ASP_NET.Controllers
 
 		public ActionResult Project()
 		{
-            ViewData["individualGrade"] = Convert.ToDouble(student.getEndGradeIndividual(3000000, 1)); //IMPORTANT, uses a test value
-            ViewData["groupGrade"] = Convert.ToDouble(student.getEndGradeGroup(3000000, 1)); //IMPORTANT, uses a test value
-            UserProjectWrapper wrapper = new UserProjectWrapper(3000000); //IMPORTANT, uses a test value
 
+            UserProjectWrapper wrapper = new UserProjectWrapper(3000000); //IMPORTANT, uses a test value
             return View(wrapper);
 		}
 

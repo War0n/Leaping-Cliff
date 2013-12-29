@@ -242,19 +242,19 @@ namespace Barometer_ASP_NET.Database
         /// </summary>
         /// <param name="groupId">The project of a student</param>
         /// <returns>Returns an ID from an active project </returns>
-        public int GetCurrentActiveProject(int studentNumber)
+        public IQueryable<Project> GetCurrentActiveProject(int studentNumber)
         {
             DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-            var activeProject =(
+            var activeProject =
                 from p in context.Projects
                 join pg in context.ProjectGroups on p.id equals pg.project_id
                 join pm in context.ProjectMembers on pg.id equals pm.project_group_id
-                join u in context.Users on studentNumber equals u.student_number
-                where p.Status.Equals("Active")
-                select p.id).SingleOrDefault();
+                join u in context.Users on pm.student_user_id equals u.id
+                where u.student_number == studentNumber && p.status_name.Equals("Active")
+                select p;
 
-            return (int)activeProject;
+            return activeProject;
         }
     }
 }

@@ -10,6 +10,11 @@ namespace Barometer_ASP_NET.Wrappers
     public class UserProjectWrapper
     {
         private int studentNumber;
+        public string  CurrentProjectSummary { get; set; }
+        public string  CurrentProjectName { get; set; }
+        public string  CurrentProjectDate { get; set; }
+        public int CurrentProjectGroupGrade { get; set; }
+        public int CurrentProjectIndividualGrade { get; set; }
         public IQueryable<User> ProjectMembers { get; set; }
         public IQueryable<User> ProjectOwners { get; set; }
         public IQueryable<User> Tutors { get; set; }
@@ -23,7 +28,8 @@ namespace Barometer_ASP_NET.Wrappers
             project = DatabaseFactory.getInstance().getDAOProject();
             FillProjectMembers(student.getStudentGroup(studentNumber).First());
             FillTutors(student.getStudentGroup(studentNumber).First());
-            FillProjectOwners();
+            FillProjectOwners(project.GetCurrentActiveProject(studentNumber).First());
+            FillProjectDetails(project.GetCurrentActiveProject(studentNumber).First(), student.getStudentGroup(studentNumber).First());
         }
 
         private void FillProjectMembers(ProjectGroup projectGroup)
@@ -31,14 +37,24 @@ namespace Barometer_ASP_NET.Wrappers
             ProjectMembers = project.getUsersInGroup(projectGroup.id);
         }
 
-        private void FillProjectOwners()
+        private void FillProjectOwners(Project p)
         {
-            ProjectOwners = project.GetProjectOwners(1);
+            ProjectOwners = project.GetProjectOwners(p.id);
         }
 
         private void FillTutors(ProjectGroup projectGroup)
         {
             Tutors = project.GetTutor(projectGroup.id);
+        }
+
+        private void FillProjectDetails(Project p, ProjectGroup pg)
+        {
+            CurrentProjectSummary = p.description;
+            CurrentProjectName = p.name;
+            CurrentProjectDate = (Convert.ToDateTime(p.start_date).Date.ToString() + " tot " + Convert.ToDateTime(p.end_date).Date.ToString());
+            CurrentProjectGroupGrade = student.getEndGradeGroup(studentNumber, pg.id);
+            CurrentProjectIndividualGrade = student.getEndGradeIndividual(studentNumber, p.id);
+
         }
     }
 }
