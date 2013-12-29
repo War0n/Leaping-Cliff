@@ -73,7 +73,7 @@ namespace oAuthDemo.OAuth
                         }
                     }
                 }
-                return new AuthenticationResult(false);
+                
             }
             catch (WebException ex)
             {
@@ -86,6 +86,7 @@ namespace oAuthDemo.OAuth
                     }
                 }
             }
+            return new AuthenticationResult(false);
         }
     }
 }
