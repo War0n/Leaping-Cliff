@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using oAuthDemo.Filters;
 using oAuthDemo.Models;
+using oAuthDemo.OAuth;
 
 namespace MvcApplication1.Controllers
 {
@@ -217,8 +218,9 @@ namespace MvcApplication1.Controllers
 		[AllowAnonymous]
 		public ActionResult ExternalLoginCallback(string returnUrl)
 		{
-			AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
-			if (!result.IsSuccessful)
+            var client = ((AvansOAuthClient)OAuthWebSecurity.GetOAuthClientData("Avans").AuthenticationClient);
+            AuthenticationResult result = client.VerifyAuthentication(HttpContext); 
+            if (!result.IsSuccessful)
 			{
 				return RedirectToAction("ExternalLoginFailure");
 			}

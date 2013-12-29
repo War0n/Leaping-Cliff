@@ -307,13 +307,14 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\old_Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ViewStart.cshtml" />
     <None Include="Views\Admin\Barolist.cshtml" />
     <None Include="Views\Admin\Barotemplate.cshtml" />
     <None Include="Views\Admin\Create.cshtml" />
@@ -324,7 +325,7 @@
     <None Include="Views\Admin\ProjectGroups.cshtml" />
     <None Include="Views\Admin\Student.cshtml" />
     <Content Include="Views\Admin\_ViewStart.cshtml" />
-    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Account\Login.cshtml" />
     <None Include="Views\Moderator\Dashboard.cshtml" />
     <None Include="Views\Moderator\Student.cshtml" />
     <Content Include="Views\Moderator\_ViewStart.cshtml" />
@@ -366,6 +367,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
