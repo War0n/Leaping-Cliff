@@ -325,6 +325,7 @@
     <None Include="Views\Admin\Student.cshtml" />
     <Content Include="Views\Admin\_ViewStart.cshtml" />
     <None Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\LoggedOut.cshtml" />
     <None Include="Views\Moderator\Dashboard.cshtml" />
     <None Include="Views\Moderator\Student.cshtml" />
     <Content Include="Views\Moderator\_ViewStart.cshtml" />
@@ -366,7 +367,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

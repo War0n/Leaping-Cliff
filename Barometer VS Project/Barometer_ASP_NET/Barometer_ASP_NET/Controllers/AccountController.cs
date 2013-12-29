@@ -55,7 +55,7 @@ namespace Barometer_ASP_NET.Controllers
 		{
 			WebSecurity.Logout();
 
-			return RedirectToAction("Login", "Account");
+			return RedirectToAction("LoggedOut", "Home");
 		}
 
 		//
