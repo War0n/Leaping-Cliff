@@ -186,23 +186,75 @@ namespace Barometer_ASP_NET.Database
         /// <param name="groupId">The project and group you want to query</param>
         /// <returns>Returns user objects </returns>
         /// 
-        //TODO this method uses distinct because otherwise the query returns a single user 4 times, this needs to be fixed
-        public IQueryable<User> getUsersInGroup(int projectId, int groupId)
+        public IQueryable<User> getUsersInGroup(int groupId)
         {
             DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-            List<User> userList = new List<User>();
-
             var users =
-            (from u in context.Users
-             join p in context.Projects on projectId equals p.id
-             join pg in context.ProjectGroups on p.id equals pg.project_id
-             join po in context.ProjectOwners on pg.project_id equals po.project_id
-             join pm in context.ProjectMembers on pg.id equals pm.project_group_id
-             where groupId == pg.id
-             select u).Distinct();
+                from u in context.Users
+                join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                where pm.project_group_id == groupId
+                select u;
 
             return users;
+        }
+
+        /// <summary>
+        /// Get all the the project owners of a project
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>Returns the owners of a project</returns>
+
+        public IQueryable<User> GetProjectOwners(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var projectOwners =
+                from u in context.Users
+                join po in context.ProjectOwners on u.id equals po.user_id
+                where po.project_id == projectId
+                select u;
+
+            return projectOwners;
+
+        }
+
+        /// <summary>
+        /// Get the tutors of a group
+        /// </summary>
+        /// <param name="groupId">The group you want to query</param>
+        /// <returns>Returns tutors of a group </returns>
+        public IQueryable<User> GetTutor(int groupId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var tutor =
+                from u in context.Users 
+                join pg in context.ProjectGroups on u.id equals pg.tutor_user_id
+                where pg.id == groupId
+                select u;
+
+            return tutor;
+        }
+
+        /// <summary>
+        /// Gets the ID of an active project 
+        /// </summary>
+        /// <param name="groupId">The project of a student</param>
+        /// <returns>Returns an ID from an active project </returns>
+        public int GetCurrentActiveProject(int studentNumber)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var activeProject =(
+                from p in context.Projects
+                join pg in context.ProjectGroups on p.id equals pg.project_id
+                join pm in context.ProjectMembers on pg.id equals pm.project_group_id
+                join u in context.Users on studentNumber equals u.student_number
+                where p.Status.Equals("Active")
+                select p.id).SingleOrDefault();
+
+            return (int)activeProject;
         }
     }
 }

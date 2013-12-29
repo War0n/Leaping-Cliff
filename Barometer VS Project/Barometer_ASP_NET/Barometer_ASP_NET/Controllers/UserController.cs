@@ -1,6 +1,7 @@
 ﻿using Barometer_ASP_NET.Database;
 using Barometer_ASP_NET.Wrappers;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,8 +31,9 @@ namespace Barometer_ASP_NET.Controllers
 		{
             ViewData["individualGrade"] = Convert.ToDouble(student.getEndGradeIndividual(3000000, 1)); //IMPORTANT, uses a test value
             ViewData["groupGrade"] = Convert.ToDouble(student.getEndGradeGroup(3000000, 1)); //IMPORTANT, uses a test value
-            var model = project.getUsersInGroup(1, 1); //IMPORTANT, uses a test value
-            return View(model);
+            UserProjectWrapper wrapper = new UserProjectWrapper(3000000); //IMPORTANT, uses a test value
+
+            return View(wrapper);
 		}
 
 		public ActionResult Projecten()

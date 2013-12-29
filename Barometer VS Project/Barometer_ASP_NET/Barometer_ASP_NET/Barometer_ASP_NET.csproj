@@ -212,6 +212,7 @@
     <Compile Include="Models\Template.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wrappers\UserDashboardWrapper.cs" />
+    <Compile Include="Wrappers\UserProjectWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\bootstrap.css" />
