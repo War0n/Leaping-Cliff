@@ -1,4 +1,4 @@
-@model IEnumerable<BarometerDataAccesLayer.User>
+@model Barometer_ASP_NET.Wrappers.UserProjectWrapper
 @{
     ViewBag.Title = "Project";
 
@@ -69,7 +69,7 @@
 </script>
 <div class="row">
     <div class="col-lg-12">
-        <h2>@Html.Action("ShowNameOfProject", "Project") <small>(@Html.Action("ShowStartAndEndDate", "Project")</small></h2>
+        <h2>@Model.CurrentProjectName <small>(@Model.CurrentProjectDate)</small></h2>
         <hr />
     </div>
 </div>
@@ -81,33 +81,30 @@
             <tbody>
                 <tr>
                     <td>Omschrijving</td>
-                    <td>@Html.Action("ShowSummaryOfProject", "Project")</td>
+                    <td>@Model.CurrentProjectSummary</td>
                 </tr>
                 <tr>
                     <td>Docenten</td>
-                    <td>                    
-                        @foreach (var u in Model)
+                    <td>            
+                        @foreach (var u in Model.ProjectOwners)
                         {
-                            if(u.rol_name.Equals("admin")){
                               <a href="mailto:@u.email" title="Mail docent">@u.firstname @u.lastname</a><br />
-                        }
-                        }
-                        
+                        } 
                     </td>
                 </tr>
                 <tr>
                     <td>Eindcijfer</td>
-                    @if ((double)ViewData["groupGrade"] > 5.5)
-                    {<td><span class="label label-success">@Html.Action("ShowEndGradeGroup", "Project")</span></td>}
-                    else if ((double)ViewData["groupGrade"] < 5.5)
-                    {<td><span class="label label-danger">@Html.Action("ShowEndGradeGroup", "Project")</span></td>}
+                    @if ((double)Model.CurrentProjectGroupGrade > 5.5)
+                    {<td><span class="label label-success">@Model.CurrentProjectGroupGrade</span></td>}
+                    else if ((double)Model.CurrentProjectGroupGrade < 5.5)
+                    {<td><span class="label label-danger">@Model.CurrentProjectGroupGrade</span></td>}
                 </tr>
                 <tr>
                     <td>Eindcijfer individueel</td>
-                     @if ((double)ViewData["individualGrade"] > 5.5)
-                     {<td><span class="label label-success">@Html.Action("ShowEndGradeIndividual", "Project")</span></td>}
-                     else if ((double)ViewData["individualGrade"] < 5.5)
-                     {<td><span class="label label-danger">@Html.Action("ShowEndGradeIndividual", "Project")</span></td>}
+                     @if ((double)Model.CurrentProjectIndividualGrade > 5.5)
+                     {<td><span class="label label-success">@Model.CurrentProjectIndividualGrade</span></td>}
+                     else if ((double)Model.CurrentProjectIndividualGrade < 5.5)
+                     {<td><span class="label label-danger">@Model.CurrentProjectIndividualGrade</span></td>}
                 </tr>
             </tbody>
         </table>
@@ -119,34 +116,27 @@
                 <tr>
                     <td colspan="3"><b>Tutor</b></td>
                 </tr>
-                @foreach (var u in Model)
+                @foreach (var u in Model.Tutors)
                 {
-                    if(u.rol_name.Equals("moderator"))
-                    {
                     <tr>
                       <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
                       <td colspan="2">@u.firstname @u.lastname</td>
                     </tr>
-                    }
                 }
-                
                 <tr>
                     <td colspan="3"><b>Leden</b></td>
                 </tr>
-                @foreach (var u in Model)
+                @foreach (var u in Model.ProjectMembers)
                 {
-                    if (u.rol_name.Equals("user"))
-                    {
                     <tr>
                       <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
                       <td>@u.firstname @u.lastname</td>
                       <td>
-                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Rik Coenen", @class = "glyphicon glyphicon-eye-open" })
+                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Beoordeling van " + @u.firstname + " " + @u.lastname, @class = "glyphicon glyphicon-eye-open" })
                       </td>
                     </tr>
-                    }
                 }
             </tbody>
         </table>
@@ -167,7 +157,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Jouw beoordelingen</h4>
+                <h4 class="modal-title">Beoordelingen</h4>
                 <select class="form-control">
                     <option>Week 3</option>
                     <option>Week 6</option>
