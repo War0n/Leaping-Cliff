@@ -8,8 +8,8 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using MvcApplication1.Filters;
-using MvcApplication1.Models;
+using oAuthDemo.Filters;
+using oAuthDemo.Models;
 
 namespace MvcApplication1.Controllers
 {
