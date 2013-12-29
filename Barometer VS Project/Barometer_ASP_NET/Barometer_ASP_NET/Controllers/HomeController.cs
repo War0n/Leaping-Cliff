@@ -16,5 +16,9 @@ namespace Barometer_ASP_NET.Controllers
             return View();
         }
 
+        public ActionResult LoggedOut()
+        {
+            return View();
+        }
     }
 }
