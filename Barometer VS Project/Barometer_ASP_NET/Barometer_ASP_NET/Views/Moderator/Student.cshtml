@@ -50,6 +50,10 @@
         chart = new google.visualization.ColumnChart(document.getElementById('chart_div_prof'));
         chart.draw(data, options);
 
+        $(window).smartresize(function () {
+            chart.draw(data, options);
+        });
+
 
     }
 

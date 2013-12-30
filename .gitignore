@@ -44,9 +44,15 @@ rcf/
 # Also consider letting NuGet automatically restore missing packages for you:
 ## http://docs.nuget.org/docs/workflows/using-nuget-without-committing-packages/
 packages/
+.nuget/
  
 # ReSharper
 _ReSharper*/
  
 # NCrunch
 *ncrunch*
+
+.mdf
+.ldf
+Barometer VS Project/Barometer_ASP_NET/Barometer_ASP_NET/App_Data/aspnet-Barometer_ASP_NET-20131115111233.mdf
+Barometer VS Project/Barometer_ASP_NET/Barometer_ASP_NET/App_Data/aspnet-Barometer_ASP_NET-20131115111233_log.ldf

@@ -1,6 +1,7 @@
+@model Barometer_ASP_NET.Wrappers.UserProjectWrapper
 @{
-    ViewBag.Title = "Projectdetails";
     ViewBag.Title = "Project";
+
 
 }
 
@@ -139,13 +140,14 @@
                 <tr>
                     <td colspan="3"><b>Leden</b></td>
                 </tr>
-                <tr>
-                    <td>
                 @foreach (var u in Model.ProjectMembers)
                 {
                     <tr>
                       <td>
-                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                @foreach (var u in Model.ProjectMembers)
+                      <td>@u.firstname @u.lastname</td>
+                    <tr>
+                      <td>
                       <td>@u.firstname @u.lastname</td>
                       <td>
                         @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Beoordeling van " + @u.firstname + " " + @u.lastname, @class = "glyphicon glyphicon-eye-open" })
@@ -171,7 +173,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Beoordeling van Rik Coenen</h4>
+                <h4 class="modal-title">Beoordelingen</h4>
                 <select class="form-control">
                     <option>Week 3</option>
                     <option>Week 6</option>
