@@ -18,7 +18,16 @@ namespace Barometer_ASP_NET.Database
         /// <returns></returns>
         public IQueryable<Report> getStudentGrades(int studentNumber, int projectId)
         {
-            return null;
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+              var report =
+                from r in context.Reports
+                join prd in context.ProjectReportDates on r.project_report_date_id equals prd.id
+                join u in context.Users on r.reporter_id equals u.id
+                where u.student_number == studentNumber && prd.project_id_int == projectId
+                select r; 
+
+            return report;
         }
 
 

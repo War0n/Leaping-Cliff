@@ -1,31 +1,17 @@
 @{
     ViewBag.Title = "Projectdetails";
-    ViewBag.Title = "Project";
-
 }
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-
     google.load("visualization", "1", { packages: ["corechart"] });
     google.setOnLoadCallback(drawChart);
     function drawChart() {
-        var d = []
         var data = google.visualization.arrayToDataTable([
-          
-            
           ['Onderdeel', 'BDS', 'System use cases', 'Prototypes', 'Requirement Analyse', 'Functioneel Ontwerp'],
-          ['Week 3',@foreach(var v in Model.MyGrades){
-                         if(v.project_report_date_id == 1){
-                          <text> @v.grade, </text>
-                         }
-                     }],
-          ['Week 6',@foreach(var v in Model.MyGrades){
-                         if(v.project_report_date_id == 2){
-                          <text> @v.grade, </text>
-                         }
-                     }],
+          ['Week 3', 6, 7, 7, 6, 6],
+          ['Week 6', 5, 6, 7, 7, 7],
           ['Week 9', 7, 8, 9, 10, 10]
         ]);
 
@@ -48,7 +34,7 @@
 
         data = google.visualization.arrayToDataTable([
         	['Onderdeel', 'Inzet/motivatie', 'Inzicht eigen functioneren', 'Samenwerken', 'Schriftelijk communiceren', 'Mondeling communiceren', 'Projectmatig werken'],
-        	['Week 3', 6, 6, 4, 7, 4, 6],
+        	['Week 3', 5, 6, 4, 7, 4, 6],
         	['Week 6', 6, 7, 7, 6, 7, 7],
         	['Week 9', 8, 9, 10, 10, 9, 10]
         ]);
@@ -67,9 +53,6 @@
         chart.draw(data, options);
 
 
-        $(window).smartresize(function () {
-            chart.draw(data, options);
-        });
     }
 
 
@@ -81,7 +64,7 @@
 </script>
 <div class="row">
     <div class="col-lg-12">
-        <h2>@Model.CurrentProjectName <small>(@Model.CurrentProjectDate)</small></h2>
+        <h2>Project Wordfeud <small>(17-06-2013 tot 20-09-2013)</small></h2>
         <hr />
     </div>
 </div>
@@ -93,30 +76,22 @@
             <tbody>
                 <tr>
                     <td>Omschrijving</td>
-                    <td>@Model.CurrentProjectSummary</td>
+                    <td>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et</td>
                 </tr>
                 <tr>
                     <td>Docenten</td>
-                    <td>            
-                        @foreach (var u in Model.ProjectOwners)
-                        {
-                              <a href="mailto:@u.email" title="Mail docent">@u.firstname @u.lastname</a><br />
-                        } 
+                    <td>
+                        <a href="mailto:#" title="Mail docent">Erik van Apeldoor</a><br />
+                        <a href="mailto:#" title="Mail docent">Mareike NogWat</a>
                     </td>
                 </tr>
                 <tr>
                     <td>Eindcijfer</td>
-                    @if ((double)Model.CurrentProjectGroupGrade > 5.5)
-                    {<td><span class="label label-success">@Model.CurrentProjectGroupGrade</span></td>}
-                    else if ((double)Model.CurrentProjectGroupGrade < 5.5)
-                    {<td><span class="label label-danger">@Model.CurrentProjectGroupGrade</span></td>}
+                    <td><span class="label label-success">6</span></td>
                 </tr>
                 <tr>
                     <td>Eindcijfer individueel</td>
-                     @if ((double)Model.CurrentProjectIndividualGrade > 5.5)
-                     {<td><span class="label label-success">@Model.CurrentProjectIndividualGrade</span></td>}
-                     else if ((double)Model.CurrentProjectIndividualGrade < 5.5)
-                     {<td><span class="label label-danger">@Model.CurrentProjectIndividualGrade</span></td>}
+                    <td><span class="label label-danger">4</span></td>
                 </tr>
             </tbody>
         </table>
@@ -128,30 +103,48 @@
                 <tr>
                     <td colspan="3"><b>Tutor</b></td>
                 </tr>
-                @foreach (var u in Model.Tutors)
-                {
-                    <tr>
-                      <td>
+                <tr>
+                    <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                      <td colspan="2">@u.firstname @u.lastname</td>
-                    </tr>
-                }
+                    <td colspan="2">A. van de Boogaard</td>
+                </tr>
                 <tr>
                     <td colspan="3"><b>Leden</b></td>
                 </tr>
                 <tr>
                     <td>
-                @foreach (var u in Model.ProjectMembers)
-                {
-                    <tr>
-                      <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                      <td>@u.firstname @u.lastname</td>
-                      <td>
-                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Beoordeling van " + @u.firstname + " " + @u.lastname, @class = "glyphicon glyphicon-eye-open" })
-                      </td>
-                    </tr>
-                }
+                    <td>Rik Coenen</td>
+                    <td>
+                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Rik Coenen", @class = "glyphicon glyphicon-eye-open" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                    <td>Ronald van Duren</td>
+                    <td>
+                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Ronald van Duren", @class = "glyphicon glyphicon-eye-open" })
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                    <td>Joost Dolman</td>
+                    <td>
+                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Joost Dolman", @class = "glyphicon glyphicon-eye-open" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                    <td>John Huijbergt</td>
+                    <td>
+                        @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van John Huijbergt", @class = "glyphicon glyphicon-eye-open" })
+
+                    </td>
+                </tr>
             </tbody>
         </table>
 
