@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using Barometer_ASP_NET.Models;
+using oAuthDemo.Models;
 
 namespace Barometer_ASP_NET.Filters
 {

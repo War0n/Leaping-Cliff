@@ -27,20 +27,37 @@
                     <li>@Html.ActionLink("Projecten", "Projecten", "User", null)</li>
                 </ul>
 
-
-                <form class="navbar-form navbar-right">
-                    @Html.ActionLink("Log Uit", "Index", "Home", null, new { @class = "btn btn-default" })
-                </form>
-
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class= "navbar-form navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default">Log off</a>
+                    }
+                @if(Request.IsAuthenticated){
                 <p class="navbar-text navbar-right">
-                    Ingelogd als <a href="#" class="navbar-link">Jens Hoevenaars</a>
+                    Ingelogd als @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "navbar-link", title = "Manage" })
                 </p>
+                }else
+                {
+                    <p class="navbar-text navbar-right">
+                    Niet ingelogd. @Html.ActionLink("Log in","Login","Account",null,null)
+                    </p>
+                }
             </div>
             <!--/.nav-collapse -->
         </div>
 
         <!-- Main component for a primary marketing message or call to action -->
-        @RenderBody()
+        
+        @if(Request.IsAuthenticated){@RenderBody();}
+        else
+        {
+           <div style="visibility:hidden;width:0;height:0;">
+               @RenderBody()
+           </div>
+            <h1>U bent nog niet ingelogd. Klik @Html.ActionLink("Hier","Login","Account",null,null) om in  te loggen.</h1>    
+            
+        }
+
 
     </div>
 
