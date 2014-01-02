@@ -12,11 +12,20 @@
 		 <!--Js -->
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="../../js/bootstrap.min.js"></script>
-		
+		<script src="../../js/jquery.smartresize.js"></script>
+
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		    <script type="text/javascript">
 		      google.load("visualization", "1", {packages:["corechart"]});
 		      google.setOnLoadCallback(drawChart);
+
+		      var chart;
+		      var options = {
+		          title: 'Cijfers laatste 5 projecten',
+		          min : 1,
+		          max : 10
+		        };
+
 		      function drawChart() {
 		        var data = google.visualization.arrayToDataTable([
 		          ['Projecten', 'Eindcijfer', 'Mijn cijfer'],
@@ -25,16 +34,16 @@
 		          ['Proj Wordfeud',  8, 6],
 		          ['Proj Barometer',  7, 10]
 		        ]);
-		
-		        var options = {
-		          title: 'Cijfers laatste 5 projecten',
-		          min : 1,
-		          max : 10
-		        };
-		
-		        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+	
+		        chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 		        chart.draw(data, options);
+
+		        $(window).smartresize(function () {
+				   chart.draw(data, options);
+			  	});
 		      }
+
+		      
 		    </script>
 	
 	</head>
