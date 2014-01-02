@@ -217,6 +217,10 @@
     <Compile Include="Wrappers\UserProjectWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Barometer_ASP_NET-20131115111233.mdf" />
+    <Content Include="App_Data\aspnet-Barometer_ASP_NET-20131115111233_log.ldf">
+      <DependentUpon>aspnet-Barometer_ASP_NET-20131115111233.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\default.css" />
     <Content Include="Content\images\pf.jpg" />
@@ -372,9 +376,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\_ViewStart.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
