@@ -1,6 +1,7 @@
 ﻿using BarometerDataAccesLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -25,9 +26,16 @@ namespace Barometer_ASP_NET.Database
                     join pm in context.ProjectMembers on u.ProjectGroups.First() equals pm.ProjectGroup
                     where pm.ProjectGroup.Project.id == projectID
                     select u;
-                return students;
-            }
+                if (students.ToList().Count > 0)
+                {
+                    return students;
+                }
             else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
+            }
+            else 
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -65,7 +73,14 @@ namespace Barometer_ASP_NET.Database
                     from pm in context.ProjectMembers
                     join pg in context.ProjectGroups on pm.ProjectGroup equals pg
                     select pm;
-                return projectMembers;
+                if (projectMembers.ToList().Count > 0)
+                {
+                    return projectMembers;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
