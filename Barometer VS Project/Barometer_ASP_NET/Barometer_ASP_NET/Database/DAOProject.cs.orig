@@ -376,6 +376,8 @@ namespace Barometer_ASP_NET.Database
                 throw new ArgumentOutOfRangeException();
             }
         }
+<<<<<<< HEAD
+        
         public IQueryable<Project> GetProjectsByOwner(int ownerId)
         {
             DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
