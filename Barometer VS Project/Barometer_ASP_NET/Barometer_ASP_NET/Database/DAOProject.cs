@@ -92,8 +92,14 @@ namespace Barometer_ASP_NET.Database
                 {
                     nameDictionary.Add(f.firstname, f.lastname);
                 }
-
-                return nameDictionary;
+                if (nameDictionary.Count > 0)
+                {
+                    return nameDictionary;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -129,7 +135,14 @@ namespace Barometer_ASP_NET.Database
                     nameDictionary.Add(f.firstname, f.lastname);
                 }
 
-                return nameDictionary;
+                if (nameDictionary.Count > 0)
+                {
+                    return nameDictionary;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -153,7 +166,14 @@ namespace Barometer_ASP_NET.Database
                      where p.id == projectId
                      select p.name).SingleOrDefault();
 
-                return (string)projectName;
+                if (projectName != null)
+                {
+                    return (string)projectName;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -186,7 +206,14 @@ namespace Barometer_ASP_NET.Database
                 {
                     startAndEndDate.Add(p.start_date.ToString(), p.end_date.ToString());
                 }
-                return startAndEndDate;
+                if (startAndEndDate.Count > 0)
+                {
+                    return startAndEndDate;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -210,7 +237,14 @@ namespace Barometer_ASP_NET.Database
                      where p.id == projectId
                      select p.description).SingleOrDefault();
 
-                return (string)projectSummary;
+                if (projectSummary != null)
+                {
+                    return (string)projectSummary;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -223,7 +257,7 @@ namespace Barometer_ASP_NET.Database
         /// </summary>
         /// <param name="groupId">The project you want to query</param>
         /// <returns>Returns a dictionary with the names of the teachers </returns>
-        public Dictionary<string, string> projectTeachers(int projectId)
+        public Dictionary<string, string> getProjectTeachers(int projectId)
         {
             if (projectId >= 0)
             {
@@ -245,8 +279,14 @@ namespace Barometer_ASP_NET.Database
                 {
                     teachers.Add(t.firstname, t.lastname);
                 }
-
-                return teachers;
+                if (teachers.Count > 0)
+                {
+                    return teachers;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -272,7 +312,14 @@ namespace Barometer_ASP_NET.Database
                     where pm.project_group_id == groupId
                     select u;
 
-                return users;
+                if (users.ToList().Count > 0)
+                {
+                    return users;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -297,8 +344,14 @@ namespace Barometer_ASP_NET.Database
                     join po in context.ProjectOwners on u.id equals po.user_id
                     where po.project_id == projectId
                     select u;
-
-                return projectOwners;
+                if (projectOwners.ToList().Count > 0)
+                {
+                    return projectOwners;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -323,8 +376,14 @@ namespace Barometer_ASP_NET.Database
                     join pg in context.ProjectGroups on u.id equals pg.tutor_user_id
                     where pg.id == groupId
                     select u;
-
-                return tutor;
+                if (tutor.ToList().Count > 0)
+                {
+                    return tutor;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -350,8 +409,14 @@ namespace Barometer_ASP_NET.Database
                     join u in context.Users on pm.student_user_id equals u.id
                     where u.student_number == studentNumber && p.status_name.Equals("Active")
                     select p;
-
-                return activeProject;
+                if (activeProject.ToList().Count > 0)
+                {
+                    return activeProject;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
