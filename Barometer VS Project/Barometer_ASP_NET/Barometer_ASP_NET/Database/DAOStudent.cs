@@ -18,16 +18,23 @@ namespace Barometer_ASP_NET.Database
         /// <returns></returns>
         public IQueryable<Report> getStudentGrades(int studentNumber, int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            if (studentNumber > 0 && projectId > 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-              var report =
-                from r in context.Reports
-                join prd in context.ProjectReportDates on r.project_report_date_id equals prd.id
-                join u in context.Users on r.reporter_id equals u.id
-                where u.student_number == studentNumber && prd.project_id_int == projectId
-                select r; 
+                var report =
+                  from r in context.Reports
+                  join prd in context.ProjectReportDates on r.project_report_date_id equals prd.id
+                  join u in context.Users on r.reporter_id equals u.id
+                  where u.student_number == studentNumber && prd.project_id_int == projectId
+                  select r;
 
-            return report;
+                return report;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
 
@@ -38,15 +45,22 @@ namespace Barometer_ASP_NET.Database
         /// <returns></returns>
         public IQueryable<ProjectGroup> getStudentGroup(int studentNumber)
         {
-            DatabaseFactory factory = DatabaseFactory.getInstance();
-            DatabaseClassesDataContext context = factory.getDataContext();
-            var projectGroup =
-                from pg in context.ProjectGroups
-                join pm in context.ProjectMembers on pg equals pm.ProjectGroup
-                join u in context.Users on pm.student_user_id equals u.id
-                where u.student_number == studentNumber
-                select pg;
-            return projectGroup;
+            if (studentNumber > 0)
+            {
+                DatabaseFactory factory = DatabaseFactory.getInstance();
+                DatabaseClassesDataContext context = factory.getDataContext();
+                var projectGroup =
+                    from pg in context.ProjectGroups
+                    join pm in context.ProjectMembers on pg equals pm.ProjectGroup
+                    join u in context.Users on pm.student_user_id equals u.id
+                    where u.student_number == studentNumber
+                    select pg;
+                return projectGroup;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -56,29 +70,37 @@ namespace Barometer_ASP_NET.Database
         /// <returns></returns>
        public Dictionary<int, int> getReportResults(int studentNumber, int projectID)
         {
-            
-          DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            Dictionary<int, int> grades = new Dictionary<int, int>();
+            if (studentNumber > 0 && projectID >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+                Dictionary<int, int> grades = new Dictionary<int, int>();
 
-           var progress =
-                from u in context.Users
-                join pm in context.ProjectMembers on u.id equals pm.student_user_id
-                join pg in context.ProjectGroups on pm.project_group_id equals pg.id
-                join p in context.Projects on pg.project_id equals p.id
-                join r in context.Reports on u.id equals r.subject_id
-                where u.student_number == studentNumber
-                && p.id == projectID
-                && p.status_name.Equals("Done")
-                select new
+                var progress =
+                     from u in context.Users
+                     join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                     join pg in context.ProjectGroups on pm.project_group_id equals pg.id
+                     join p in context.Projects on pg.project_id equals p.id
+                     join r in context.Reports on u.id equals r.subject_id
+                     where u.student_number == studentNumber
+                     && p.id == projectID
+                     && p.status_name.Equals("Done")
+                     select new
+                     {
+                         r.project_report_date_id,
+                         r.grade
+                     };
+
+                foreach (var s in progress)
                 {
-                   r.project_report_date_id, r.grade
-                };
+                    grades.Add((int)s.project_report_date_id, (int)s.grade);
+                }
+                return grades;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
 
-           foreach(var s in progress)
-           {
-               grades.Add((int)s.project_report_date_id, (int)s.grade);
-           }
-            return grades;
        }
 
        /// <summary>
@@ -88,16 +110,23 @@ namespace Barometer_ASP_NET.Database
        /// <returns>Returns the final grade as an integer</returns>
        public int getEndGradeIndividual(int studentNumber, int projectId)
        {
-           DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+           if (studentNumber > 0 && projectId >= 0)
+           {
+               DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-           var endGrade =
-               (from u in context.Users
-               join pm in context.ProjectMembers on u.id equals pm.student_user_id
-               join pg in context.ProjectGroups on pm.project_group_id equals pg.id
-               where u.student_number == studentNumber && pg.project_id == projectId          
-               select pm.end_grade).SingleOrDefault();
+               var endGrade =
+                   (from u in context.Users
+                    join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                    join pg in context.ProjectGroups on pm.project_group_id equals pg.id
+                    where u.student_number == studentNumber && pg.project_id == projectId
+                    select pm.end_grade).SingleOrDefault();
 
-          return (int)endGrade; 
+               return (int)endGrade;
+           }
+           else
+           {
+               throw new ArgumentOutOfRangeException();
+           }
            
        }
 
@@ -108,38 +137,53 @@ namespace Barometer_ASP_NET.Database
        /// <returns>Returns the final group grade as an integer</returns>
        public int getEndGradeGroup(int studentNumber, int groupId)
        {
-           DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+           if (studentNumber > 0 && groupId >= 0)
+           {
+               DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-           var endGroupGrade =
-               (from u in context.Users
-               join pm in context.ProjectMembers on u.id equals pm.student_user_id
-               join pg in context.ProjectGroups on pm.project_group_id equals pg.project_id
-               join p in context.Projects on pg.project_id equals p.id
-               where u.student_number == studentNumber && pg.id == groupId
-               select pg.group_end_grade).SingleOrDefault();
+               var endGroupGrade =
+                   (from u in context.Users
+                    join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                    join pg in context.ProjectGroups on pm.project_group_id equals pg.project_id
+                    join p in context.Projects on pg.project_id equals p.id
+                    where u.student_number == studentNumber && pg.id == groupId
+                    select pg.group_end_grade).SingleOrDefault();
 
-           return (int)endGroupGrade;
+               return (int)endGroupGrade;
+           }
+           else
+           {
+               throw new ArgumentOutOfRangeException();
+           }
        }
 
        public Dictionary<string, string> getName(int studentNumber)
        {
-         DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-         Dictionary<string, string> fullName = new Dictionary<string, string>();
+           if (studentNumber > 0)
+           {
+               DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+               Dictionary<string, string> fullName = new Dictionary<string, string>();
 
-         var name =
-             from u in context.Users
-             where u.student_number == studentNumber
-             select new
-             {
-                 u.firstname, u.lastname
-             };
+               var name =
+                   from u in context.Users
+                   where u.student_number == studentNumber
+                   select new
+                   {
+                       u.firstname,
+                       u.lastname
+                   };
 
-         foreach (var v in name)
-         {
-             fullName.Add(v.firstname, v.lastname);
-         }
+               foreach (var v in name)
+               {
+                   fullName.Add(v.firstname, v.lastname);
+               }
 
-         return fullName;
+               return fullName;
+           }
+           else
+           {
+               throw new ArgumentOutOfRangeException();
+           }
        }
     }
 }
