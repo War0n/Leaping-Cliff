@@ -459,13 +459,12 @@ namespace Barometer_ASP_NET.Tests.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-            }
+        }
 
             Assert.AreEqual("", exception);
             Assert.IsTrue(i > 0);
         }
-
+            String exception = "";
         [TestMethod]
         public void test_83_getUsersInGroup_valid_nonexistent_input()
         {
@@ -511,17 +510,27 @@ namespace Barometer_ASP_NET.Tests.Controllers
             {
                 test_collection = d.GetProjectOwners(1);
                 foreach (User u in test_collection)
-                {
-                    i++;
-                }
+            {
+                exception = e.ToString();
+            }
+            Assert.IsTrue(exception.Contains("DataException"));
+        }
+
+        [TestMethod]
+        public void test_21_gettutors_negative_input()
+        {
+            String s = "";
+            try
+            {
+                Dictionary<string, string> b = d.getTutors(-1);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                s = e.ToString();
             }
 
             Assert.AreEqual("", exception);
-            Assert.IsTrue(i > 0);
+
         }
 
         [TestMethod]
@@ -544,17 +553,33 @@ namespace Barometer_ASP_NET.Tests.Controllers
         [TestMethod]
         public void test_101_getTutor_negative_input()
         {
-            String s = "";
+            String exception = "";
+            Dictionary<string, string> b = new Dictionary<string, string>();
             try
             {
                 IQueryable<User> test_collection = d.GetTutor(-1);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 s = e.ToString();
+                exception = e.ToString();
             }
+            Assert.AreEqual("", exception);
+            Assert.IsTrue(b.Count > 0);
 
-            Assert.IsTrue(s.Contains("ArgumentOutOfRangeException"));
+            exception = "";
+            
+            try
+            {
+                b = d.getTutors(99999);
+            }
+            catch (Exception e)
+            {
+                exception = e.ToString();
+            }
+            Assert.AreEqual("", exception);
+            Assert.IsTrue(b.Count == 0);
+
 
         }
 
@@ -562,24 +587,35 @@ namespace Barometer_ASP_NET.Tests.Controllers
         public void test_102_getTutor_valid_input()
         {
             IQueryable<User> test_collection;
-            int i = 0;
             String exception = "";
 
             try
             {
                 test_collection = d.GetTutor(1);
                 foreach (User u in test_collection)
-                {
-                    i++;
-                }
+            catch (Exception e)
+            {
+                exception = e.ToString();
+            }
+
+            Assert.IsTrue(exception.Contains("ArgumentOutOfRangeException"));
+        }
+
+        [TestMethod]
+        public void test_32_getNamesOfGroupMembers_valid_input()
+        {
+            String exception = "";
+            Dictionary<string, string> b = new Dictionary<string, string>();
+            try
+            {
+                b = d.getNamesOfGroupMembers(1);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                exception = e.ToString();
             }
-
             Assert.AreEqual("", exception);
-            Assert.IsTrue(i > 0);
+            Assert.IsTrue(b.Count > 0);
         }
 
         [TestMethod]
@@ -627,17 +663,28 @@ namespace Barometer_ASP_NET.Tests.Controllers
             {
                 test_collection = d.GetCurrentActiveProject(3000000);
                 foreach (Project u in test_collection)
-                {
-                    i++;
-                }
+            {
+                exception = e.ToString();
+            }
+            Assert.AreEqual("", exception);
+            Assert.IsTrue(b.Count == 0);
+        }
+
+        [TestMethod]
+        public void test_41_getProjectName_invalid_input()
+        {
+            String exception = "";
+            try
+            {
+               String pName = d.getProjectName(-1);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                exception = e.ToString();
             }
 
             Assert.AreEqual("", exception);
-            Assert.IsTrue(i > 0);
+            Assert.IsTrue(exception.Contains("ArgumentOutOfRangeException"));
         }
 
         [TestMethod]
