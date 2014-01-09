@@ -74,7 +74,7 @@ namespace oAuthDemo.OAuth
                         }
                     }
                 }
-                return new AuthenticationResult(false);
+                //return new AuthenticationResult(false);
             }
             catch (WebException ex)
             {

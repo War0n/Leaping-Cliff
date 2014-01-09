@@ -143,11 +143,6 @@
                 @foreach (var u in Model.ProjectMembers)
                 {
                     <tr>
-                      <td>
-                @foreach (var u in Model.ProjectMembers)
-                      <td>@u.firstname @u.lastname</td>
-                    <tr>
-                      <td>
                       <td>@u.firstname @u.lastname</td>
                       <td>
                         @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Beoordeling van " + @u.firstname + " " + @u.lastname, @class = "glyphicon glyphicon-eye-open" })
