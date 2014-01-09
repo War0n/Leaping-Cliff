@@ -57,7 +57,11 @@ namespace Barometer_ASP_NET.Database
                 select pg;
             return projectGroups;
         }
+<<<<<<< HEAD
          
+=======
+
+>>>>>>> expanded test framework and added extra error handling
         /// <summary>
         /// Get all students belonging to the projectgroup
         /// </summary>
@@ -66,8 +70,7 @@ namespace Barometer_ASP_NET.Database
         public IQueryable<ProjectMember> getProjectGroupMembers(int projectGroupId)
         {
             if (projectGroupId >= 0)
-        {
-
+            {
                 DatabaseFactory factory = DatabaseFactory.getInstance();
                 DatabaseClassesDataContext context = factory.getDataContext();
                 var projectMembers =
@@ -229,11 +232,177 @@ namespace Barometer_ASP_NET.Database
                      select p.description).SingleOrDefault();
 
                 return (string)projectSummary;
+<<<<<<< HEAD
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+=======
+>>>>>>> expanded test framework and added extra error handling
             }
             else
             {
                 throw new ArgumentOutOfRangeException();
             }
+        }
+
+        /// <summary>
+        /// Get the names of the teachers who own a particular project
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>Returns a dictionary with the names of the teachers </returns>
+        public Dictionary<string, string> projectTeachers(int projectId)
+        {
+            if (projectId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+                Dictionary<string, string> teachers = new Dictionary<string, string>();
+
+                var teacher =
+                    from p in context.Projects
+                    join po in context.ProjectOwners on p.id equals po.project_id
+                    join u in context.Users on po.user_id equals u.id
+                    where p.id == projectId
+                    select new
+                    {
+                        u.firstname,
+                        u.lastname
+                    };
+
+                foreach (var t in teacher)
+                {
+                    teachers.Add(t.firstname, t.lastname);
+                }
+
+                return teachers;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        /// <summary>
+        /// Get all the users of a project who belong to a particular group
+        /// </summary>
+        /// <param name="groupId">The project and group you want to query</param>
+        /// <returns>Returns user objects </returns>
+        /// 
+        public IQueryable<User> getUsersInGroup(int groupId)
+        {
+            if (groupId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+                var users =
+                    from u in context.Users
+                    join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                    where pm.project_group_id == groupId
+                    select u;
+
+                return users;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        /// <summary>
+        /// Get all the the project owners of a project
+        /// </summary>
+        /// <param name="groupId">The project you want to query</param>
+        /// <returns>Returns the owners of a project</returns>
+
+        public IQueryable<User> GetProjectOwners(int projectId)
+        {
+            if (projectId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+                var projectOwners =
+                    from u in context.Users
+                    join po in context.ProjectOwners on u.id equals po.user_id
+                    where po.project_id == projectId
+                    select u;
+
+                return projectOwners;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+        }
+
+        /// <summary>
+        /// Get the tutors of a group
+        /// </summary>
+        /// <param name="groupId">The group you want to query</param>
+        /// <returns>Returns tutors of a group </returns>
+        public IQueryable<User> GetTutor(int groupId)
+        {
+            if (groupId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+                var tutor =
+                    from u in context.Users
+                    join pg in context.ProjectGroups on u.id equals pg.tutor_user_id
+                    where pg.id == groupId
+                    select u;
+
+                return tutor;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        /// <summary>
+        /// Gets the ID of an active project 
+        /// </summary>
+        /// <param name="groupId">The project of a student</param>
+        /// <returns>Returns an ID from an active project </returns>
+        public IQueryable<Project> GetCurrentActiveProject(int studentNumber)
+        {
+            if (studentNumber > 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+                var activeProject =
+                    from p in context.Projects
+                    join pg in context.ProjectGroups on p.id equals pg.project_id
+                    join pm in context.ProjectMembers on pg.id equals pm.project_group_id
+                    join u in context.Users on pm.student_user_id equals u.id
+                    where u.student_number == studentNumber && p.status_name.Equals("Active")
+                    select p;
+
+                return activeProject;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+
+<<<<<<< HEAD
+        public IQueryable<Project> GetProjectsByOwner(int ownerId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            var projects =
+                from p in context.Projects
+                join po in context.ProjectOwners on p.id equals po.project_id
+                join usr in context.Users on po.user_id equals usr.id
+                where usr.student_number == ownerId
+                select p;
+            return projects;
+=======
+        public int GetProjectGroupId()
+        {
+            throw new NotImplementedException();
+>>>>>>> expanded test framework and added extra error handling
         }
 
         /// <summary>
@@ -371,11 +540,13 @@ namespace Barometer_ASP_NET.Database
 
                 return activeProject;
             }
-            else
+             else
             {
                 throw new ArgumentOutOfRangeException();
             }
         }
+<<<<<<< HEAD
+        
         public IQueryable<Project> GetProjectsByOwner(int ownerId)
         {
             DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
