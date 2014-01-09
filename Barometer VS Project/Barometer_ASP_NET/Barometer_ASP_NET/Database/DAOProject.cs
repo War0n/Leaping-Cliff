@@ -27,10 +27,27 @@ namespace Barometer_ASP_NET.Database
                     select u;
                 return students;
             }
-            else 
+            else
             {
                 throw new ArgumentOutOfRangeException();
             }
+        }
+
+        /// <summary>
+        /// Get all students belonging to the projectgroup
+        /// </summary>
+        /// <param name="projectGroupId">The projectgroup you want to query</param>
+        /// <returns>All Group members belonging to a group in a project</returns>
+        public IQueryable<ProjectGroup> getProjectGroupsByProject(int projectId)
+        {
+            DatabaseFactory factory = DatabaseFactory.getInstance();
+            DatabaseClassesDataContext context = factory.getDataContext();
+            var projectGroups =
+                from pg in context.ProjectGroups
+                join p in context.Projects on pg.project_id equals p.id
+                where p.id == projectId
+                select pg;
+            return projectGroups;
         }
 
         /// <summary>
@@ -342,6 +359,18 @@ namespace Barometer_ASP_NET.Database
             {
                 throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public IQueryable<Project> GetProjectsByOwner(int ownerId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            var projects =
+                from p in context.Projects
+                join po in context.ProjectOwners on p.id equals po.project_id
+                join usr in context.Users on po.user_id equals usr.id
+                where usr.student_number == ownerId
+                select p;
+            return projects;
         }
     }
 }
