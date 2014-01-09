@@ -1,7 +1,11 @@
 @model Barometer_ASP_NET.Wrappers.UserProjectWrapper
 @{
+<<<<<<< HEAD
+    ViewBag.Title = "Projectdetails";
     ViewBag.Title = "Project";
-
+=======
+    ViewBag.Title = "Project";
+>>>>>>> cd735dd1c54abe0cc2a75e33f38c0c504861f253
 
 }
 
@@ -68,8 +72,13 @@
         chart.draw(data, options);
 
 
+<<<<<<< HEAD
         $(window).smartresize(function () {
             chart.draw(data, options);
+=======
+        $(window).smartresize(function () {
+            chart.draw(data, options);
+>>>>>>> cd735dd1c54abe0cc2a75e33f38c0c504861f253
         });
     }
 
@@ -99,24 +108,42 @@
                 <tr>
                     <td>Docenten</td>
                     <td>            
+<<<<<<< HEAD
                         @foreach (var u in Model.ProjectOwners)
                         {
                               <a href="mailto:@u.email" title="Mail docent">@u.firstname @u.lastname</a><br />
+=======
+                        @foreach (var u in Model.ProjectOwners)
+                        {
+                              <a href="mailto:@u.email" title="Mail docent">@u.firstname @u.lastname</a><br />
+>>>>>>> cd735dd1c54abe0cc2a75e33f38c0c504861f253
                         } 
                     </td>
                 </tr>
                 <tr>
                     <td>Eindcijfer</td>
+<<<<<<< HEAD
                     @if ((double)Model.CurrentProjectGroupGrade > 5.5)
                     {<td><span class="label label-success">@Model.CurrentProjectGroupGrade</span></td>}
                     else if ((double)Model.CurrentProjectGroupGrade < 5.5)
+=======
+                    @if ((double)Model.CurrentProjectGroupGrade > 5.5)
+                    {<td><span class="label label-success">@Model.CurrentProjectGroupGrade</span></td>}
+                    else if ((double)Model.CurrentProjectGroupGrade < 5.5)
+>>>>>>> cd735dd1c54abe0cc2a75e33f38c0c504861f253
                     {<td><span class="label label-danger">@Model.CurrentProjectGroupGrade</span></td>}
                 </tr>
                 <tr>
                     <td>Eindcijfer individueel</td>
+<<<<<<< HEAD
                      @if ((double)Model.CurrentProjectIndividualGrade > 5.5)
                      {<td><span class="label label-success">@Model.CurrentProjectIndividualGrade</span></td>}
                      else if ((double)Model.CurrentProjectIndividualGrade < 5.5)
+=======
+                     @if ((double)Model.CurrentProjectIndividualGrade > 5.5)
+                     {<td><span class="label label-success">@Model.CurrentProjectIndividualGrade</span></td>}
+                     else if ((double)Model.CurrentProjectIndividualGrade < 5.5)
+>>>>>>> cd735dd1c54abe0cc2a75e33f38c0c504861f253
                      {<td><span class="label label-danger">@Model.CurrentProjectIndividualGrade</span></td>}
                 </tr>
             </tbody>
@@ -129,30 +156,47 @@
                 <tr>
                     <td colspan="3"><b>Tutor</b></td>
                 </tr>
+<<<<<<< HEAD
                 @foreach (var u in Model.Tutors)
                 {
+=======
+                @foreach (var u in Model.Tutors)
+                {
+>>>>>>> cd735dd1c54abe0cc2a75e33f38c0c504861f253
                     <tr>
                       <td>
                         <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
                       <td colspan="2">@u.firstname @u.lastname</td>
+<<<<<<< HEAD
                     </tr>
+=======
+                    </tr>
+>>>>>>> cd735dd1c54abe0cc2a75e33f38c0c504861f253
                 }
                 <tr>
                     <td colspan="3"><b>Leden</b></td>
                 </tr>
+<<<<<<< HEAD
+                <tr>
+                    <td>
                 @foreach (var u in Model.ProjectMembers)
                 {
-                    <tr>
-                      <td>
+=======
                 @foreach (var u in Model.ProjectMembers)
-                      <td>@u.firstname @u.lastname</td>
+                {
+>>>>>>> cd735dd1c54abe0cc2a75e33f38c0c504861f253
                     <tr>
                       <td>
+                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
                       <td>@u.firstname @u.lastname</td>
                       <td>
                         @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Beoordeling van " + @u.firstname + " " + @u.lastname, @class = "glyphicon glyphicon-eye-open" })
                       </td>
+<<<<<<< HEAD
                     </tr>
+=======
+                    </tr>
+>>>>>>> cd735dd1c54abe0cc2a75e33f38c0c504861f253
                 }
             </tbody>
         </table>
