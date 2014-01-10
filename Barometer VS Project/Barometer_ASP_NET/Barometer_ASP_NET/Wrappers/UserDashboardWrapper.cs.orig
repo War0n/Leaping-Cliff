@@ -19,7 +19,10 @@ namespace Barometer_ASP_NET.Wrappers
 
         private DAOProject project;
         private DAOStudent student;
+<<<<<<< Updated upstream
+=======
 
+>>>>>>> Stashed changes
 
         public UserDashboardWrapper(int studentNumber)
         {
@@ -51,26 +54,30 @@ namespace Barometer_ASP_NET.Wrappers
             AllProjects = project.GetAllProjects(studentNumber);
 
         }
+<<<<<<< Updated upstream
 
         private void FillAllIndividualGrades()
         {
             Grades = new Dictionary<string, int[]>();
 
+=======
+
+        private void FillAllIndividualGrades()
+        {
+            Grades = new Dictionary<string, int[]>();
+
+>>>>>>> Stashed changes
             foreach (Project p in AllProjects)
             {
-                if (student.getReportResults(p.id).Count() > 0)
-                {
-                    int pid;
-                    pid = p.id;
-                    string pnaam;
-                    pnaam = p.name;
-                    int pcijfer;
-                    pcijfer = (int)student.getReportResults(pid).First().group_end_grade;
-                    int icijfer;
-                    icijfer = student.getEndGradeIndividual(studentNumber, pid);
-                    Grades.Add(pnaam, new int[2] { pcijfer, icijfer });
-                }
-                
+                int pid;
+                pid = p.id;
+                string pnaam;
+                pnaam = p.name;
+                int pcijfer;
+                pcijfer = student.getReportResults(studentNumber, pid).Values.First<int>(); 
+                int icijfer;
+                icijfer = student.getEndGradeIndividual(studentNumber, pid);
+                Grades.Add(pnaam, new int[2] { pcijfer, icijfer });
             }
 
         }

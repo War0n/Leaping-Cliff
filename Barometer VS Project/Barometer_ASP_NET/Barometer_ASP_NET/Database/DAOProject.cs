@@ -337,7 +337,7 @@ namespace Barometer_ASP_NET.Database
         /// <summary>
         /// Gets the ID of an active project 
         /// </summary>
-        /// <param name="groupId">The project of a student</param>
+        /// <param name="studentNumber">The project of a student</param>
         /// <returns>Returns an ID from an active project </returns>
         public IQueryable<Project> GetCurrentActiveProject(int studentNumber)
         {
@@ -355,12 +355,12 @@ namespace Barometer_ASP_NET.Database
 
                 return activeProject;
             }
-            else
+             else
             {
                 throw new ArgumentOutOfRangeException();
             }
         }
-
+        
         public IQueryable<Project> GetProjectsByOwner(int ownerId)
         {
             DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
@@ -371,6 +371,26 @@ namespace Barometer_ASP_NET.Database
                 where usr.student_number == ownerId
                 select p;
             return projects;
+        }
+        /// <summary>
+        /// Gets all projects where a student participates
+        /// </summary>
+        /// <param name="studentNumber">The project of a student</param>
+        /// <returns>Returns all projects where a student took part of. </returns>
+        public IQueryable<Project> GetAllProjects(int studentNumber)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var AllProjects =
+                from p in context.Projects
+                join pg in context.ProjectGroups on p.id equals pg.project_id
+                join pm in context.ProjectMembers on pg.id equals pm.project_group_id
+                join u in context.Users on pm.student_user_id equals u.id
+                where u.student_number == studentNumber
+                select p;
+
+            return AllProjects;
+
         }
     }
 }

@@ -135,7 +135,7 @@
       <Name>BarometerDataAccesLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Barometer_ASP_NET\Barometer_ASP_NET.csproj">
-      <Project>{958AD0A0-F218-4248-AF76-C5F3B04DFAFA}</Project>
+      <Project>{958ad0a0-f218-4248-af76-c5f3b04dfafa}</Project>
       <Name>Barometer_ASP_NET</Name>
     </ProjectReference>
   </ItemGroup>
