@@ -57,7 +57,11 @@ namespace Barometer_ASP_NET.Database
                 select pg;
             return projectGroups;
         }
+<<<<<<< HEAD
+         
+=======
 
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
         /// <summary>
         /// Get all students belonging to the projectgroup
         /// </summary>
@@ -66,7 +70,12 @@ namespace Barometer_ASP_NET.Database
         public IQueryable<ProjectMember> getProjectGroupMembers(int projectGroupId)
         {
             if (projectGroupId >= 0)
+<<<<<<< HEAD
+        {
+
+=======
             {
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
                 DatabaseFactory factory = DatabaseFactory.getInstance();
                 DatabaseClassesDataContext context = factory.getDataContext();
                 var projectMembers =
@@ -229,12 +238,15 @@ namespace Barometer_ASP_NET.Database
 
                 return (string)projectSummary;
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
             }
             else
             {
                 throw new ArgumentOutOfRangeException();
 =======
 >>>>>>> expanded test framework and added extra error handling
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             }
             else
             {
@@ -359,7 +371,11 @@ namespace Barometer_ASP_NET.Database
         /// <summary>
         /// Gets the ID of an active project 
         /// </summary>
+<<<<<<< HEAD
+        /// <param name="studentNumber">The project of a student</param>
+=======
         /// <param name="groupId">The project of a student</param>
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
         /// <returns>Returns an ID from an active project </returns>
         public IQueryable<Project> GetCurrentActiveProject(int studentNumber)
         {
@@ -382,6 +398,13 @@ namespace Barometer_ASP_NET.Database
                 throw new ArgumentOutOfRangeException();
             }
         }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        
+>>>>>>> expanded test framework and added extra error handling
+=======
 
 <<<<<<< HEAD
         public IQueryable<Project> GetProjectsByOwner(int ownerId)
@@ -543,6 +566,7 @@ namespace Barometer_ASP_NET.Database
         }
 <<<<<<< HEAD
         
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
         public IQueryable<Project> GetProjectsByOwner(int ownerId)
         {
             DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();

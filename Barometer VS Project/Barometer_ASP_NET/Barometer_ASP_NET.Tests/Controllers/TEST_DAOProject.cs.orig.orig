@@ -102,6 +102,10 @@ namespace Barometer_ASP_NET.Tests.Controllers
             catch (Exception e)
             {
                exception = e.ToString();
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             }
             Assert.AreEqual("", exception);
             Assert.IsTrue(i > 0);
@@ -163,6 +167,9 @@ namespace Barometer_ASP_NET.Tests.Controllers
             String exception = "";
             Dictionary<string, string> b = new Dictionary<string, string>();
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
 
             try
             {
@@ -460,12 +467,28 @@ namespace Barometer_ASP_NET.Tests.Controllers
             }
             catch (Exception e)
             {
+<<<<<<< HEAD
+                Console.WriteLine(e.Message);
+=======
+>>>>>>> expanded test framework and added extra error handling
+            }
+            Assert.AreEqual("", exception);
+            Assert.IsTrue(i > 0);
+        }
+
+<<<<<<< HEAD
+            Assert.AreEqual("", exception);
+            Assert.IsTrue(i > 0);
+        }
+
+=======
         }
 
             Assert.AreEqual("", exception);
             Assert.IsTrue(i > 0);
         }
             String exception = "";
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
         [TestMethod]
         public void test_83_getUsersInGroup_valid_nonexistent_input()
         {
@@ -511,6 +534,23 @@ namespace Barometer_ASP_NET.Tests.Controllers
             {
                 test_collection = d.GetProjectOwners(1);
                 foreach (User u in test_collection)
+<<<<<<< HEAD
+                {
+                    i++;
+                }
+=======
+        [TestMethod]
+        public void test_13_getProjectGroupMembers_valid_nonexistent_input()
+        {
+            String exception = "";
+            IQueryable<ProjectMember> test_collection;
+            try
+            {
+                test_collection = d.getProjectGroupMembers(3000000);
+            }
+            catch (Exception e)
+=======
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             {
                 exception = e.ToString();
             }
@@ -524,14 +564,24 @@ namespace Barometer_ASP_NET.Tests.Controllers
             try
             {
                 Dictionary<string, string> b = d.getTutors(-1);
+<<<<<<< HEAD
+>>>>>>> expanded test framework and added extra error handling
+=======
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             }
             catch (Exception e)
             {
                 s = e.ToString();
             }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+            Assert.AreEqual("", exception);
+            Assert.IsTrue(i > 0);
+=======
             Assert.AreEqual("", exception);
 
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
         }
 
         [TestMethod]
@@ -553,23 +603,54 @@ namespace Barometer_ASP_NET.Tests.Controllers
 
         [TestMethod]
         public void test_101_getTutor_negative_input()
+<<<<<<< HEAD
+=======
+            Assert.IsTrue(s.Contains("ArgumentOutOfRangeException"));
+
+        }
+
+        [TestMethod]
+        public void test_22_getTutors_valid_input()
+>>>>>>> expanded test framework and added extra error handling
+=======
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
         {
             String exception = "";
             Dictionary<string, string> b = new Dictionary<string, string>();
             try
             {
+<<<<<<< HEAD
+<<<<<<< HEAD
+                IQueryable<User> test_collection = d.GetTutor(-1);
+            }
+            catch (Exception e)
+            {
+                s = e.ToString();
+=======
+                b = d.getTutors(1);
+            }
+            catch(Exception e)
+            {
+=======
                 IQueryable<User> test_collection = d.GetTutor(-1);
             }
             catch(Exception e)
             {
                 s = e.ToString();
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
                 exception = e.ToString();
             }
             Assert.AreEqual("", exception);
             Assert.IsTrue(b.Count > 0);
+<<<<<<< HEAD
+
+            exception = "";
+            
+=======
 =======
 >>>>>>> Testclass voor DAOProject is compleet.
 
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             try
             {
                 b = d.getTutors(99999);
@@ -577,6 +658,26 @@ namespace Barometer_ASP_NET.Tests.Controllers
             catch (Exception e)
             {
                 exception = e.ToString();
+<<<<<<< HEAD
+>>>>>>> expanded test framework and added extra error handling
+            }
+            Assert.AreEqual("", exception);
+            Assert.IsTrue(b.Count == 0);
+
+<<<<<<< HEAD
+            Assert.IsTrue(s.Contains("ArgumentOutOfRangeException"));
+=======
+>>>>>>> expanded test framework and added extra error handling
+
+        }
+
+        [TestMethod]
+<<<<<<< HEAD
+        public void test_102_getTutor_valid_input()
+        {
+            IQueryable<User> test_collection;
+            int i = 0;
+=======
             }
             Assert.IsTrue(exception.Contains("DataException"));
         }
@@ -585,12 +686,26 @@ namespace Barometer_ASP_NET.Tests.Controllers
         public void test_102_getTutor_valid_input()
         {
             IQueryable<User> test_collection;
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             String exception = "";
 
             try
             {
                 test_collection = d.GetTutor(1);
                 foreach (User u in test_collection)
+<<<<<<< HEAD
+                {
+                    i++;
+                }
+=======
+        public void test_31_getNamesOfGroupMembers_invalid_input()
+        {
+            String exception = "";
+            try
+            {
+                Dictionary<string, string> b = d.getNamesOfGroupMembers(-1);
+>>>>>>> expanded test framework and added extra error handling
+=======
             catch (Exception e)
             {
                 exception = e.ToString();
@@ -607,17 +722,28 @@ namespace Barometer_ASP_NET.Tests.Controllers
             try
             {
                 b = d.getNamesOfGroupMembers(1);
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             }
             catch (Exception e)
             {
                 exception = e.ToString();
             }
+<<<<<<< HEAD
+
+<<<<<<< HEAD
+            Assert.AreEqual("", exception);
+            Assert.IsTrue(i > 0);
+        }
+
+        [TestMethod]
+=======
             Assert.AreEqual("", exception);
             Assert.IsTrue(b.Count > 0);
         }
 
         [TestMethod]
 <<<<<<< HEAD
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
         public void test_103_getTutor_valid_nonexistent_input()
         {
             IQueryable<User> test_collection;
@@ -638,12 +764,15 @@ namespace Barometer_ASP_NET.Tests.Controllers
         public void test_111_getCurrentActiveProject_negative_input()
         {
             String s = "";
+<<<<<<< HEAD
+=======
 =======
         public void test_33_getNamesOfGroupMembers_valid_nonexistent_input()
         {
             String exception = "";
             Dictionary<string, string> b = new Dictionary<string, string>();
 >>>>>>> Testclass voor DAOProject is compleet.
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             try
             {
                 IQueryable<Project> test_collection = d.GetCurrentActiveProject(-1);
@@ -668,6 +797,12 @@ namespace Barometer_ASP_NET.Tests.Controllers
             {
                 test_collection = d.GetCurrentActiveProject(3000000);
                 foreach (Project u in test_collection)
+<<<<<<< HEAD
+                {
+                    i++;
+                }
+=======
+=======
             {
                 exception = e.ToString();
             }
@@ -751,17 +886,27 @@ namespace Barometer_ASP_NET.Tests.Controllers
                 exception = e.ToString();
             }
 
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             Assert.IsTrue(exception.Contains("ArgumentOutOfRangeException"));
         }
 
         [TestMethod]
+<<<<<<< HEAD
+        public void test_32_getNamesOfGroupMembers_valid_input()
+=======
         public void test_52_getStartAndEndDate_valid_input()
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
         {
             String exception = "";
             Dictionary<string, string> b = new Dictionary<string, string>();
             try
             {
+<<<<<<< HEAD
+                b = d.getNamesOfGroupMembers(1);
+>>>>>>> expanded test framework and added extra error handling
+=======
                 b = d.getStartAndEndDate(1);
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             }
             catch (Exception e)
             {
@@ -769,6 +914,10 @@ namespace Barometer_ASP_NET.Tests.Controllers
             }
             Assert.AreEqual("", exception);
             Assert.IsTrue(b.Count > 0);
+<<<<<<< HEAD
+
+<<<<<<< HEAD
+=======
         }
 
         [TestMethod]
@@ -925,11 +1074,21 @@ namespace Barometer_ASP_NET.Tests.Controllers
                 Console.WriteLine(e.Message);
             }
 
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             Assert.AreEqual("", exception);
             Assert.IsTrue(i > 0);
         }
 
         [TestMethod]
+<<<<<<< HEAD
+        public void test_113_getCurrentActiveProject_valid_nonexistent_input()
+        {
+            IQueryable<Project> test_collection;
+            String exception = "";
+            try
+            {
+                test_collection = d.GetCurrentActiveProject(9);
+=======
         public void test_83_getUsersInGroup_valid_nonexistent_input()
         {
             IQueryable<User> test_collection;
@@ -937,6 +1096,7 @@ namespace Barometer_ASP_NET.Tests.Controllers
             try
             {
                 test_collection = d.getUsersInGroup(99924);
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             }
             catch (Exception e)
             {
@@ -944,6 +1104,14 @@ namespace Barometer_ASP_NET.Tests.Controllers
             }
 
             Assert.IsTrue(exception.Contains("DataException"));
+<<<<<<< HEAD
+=======
+            exception = "";
+
+            try
+            {
+                b = d.getNamesOfGroupMembers(99999);
+=======
         }
 
         [TestMethod]
@@ -995,11 +1163,25 @@ namespace Barometer_ASP_NET.Tests.Controllers
             try
             {
                 test_collection = d.GetProjectOwners(99924);
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             }
             catch (Exception e)
             {
                 exception = e.ToString();
             }
+<<<<<<< HEAD
+            Assert.AreEqual("", exception);
+            Assert.IsTrue(b.Count == 0);
+        }
+
+        [TestMethod]
+        public void test_41_getProjectName_invalid_input()
+        {
+            String exception = "";
+            try
+            {
+               String pName = d.getProjectName(-1);
+=======
 
             Assert.IsTrue(exception.Contains("DataException"));
         }
@@ -1053,12 +1235,23 @@ namespace Barometer_ASP_NET.Tests.Controllers
             try
             {
                 test_collection = d.GetTutor(99924);
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
             }
             catch (Exception e)
             {
                 exception = e.ToString();
             }
 
+<<<<<<< HEAD
+            Assert.IsTrue(exception.Contains("ArgumentOutOfRangeException"));
+        }
+
+        [TestMethod]
+        public void test_42_getProjectName_valid_input()
+        {
+
+>>>>>>> expanded test framework and added extra error handling
+=======
             Assert.IsTrue(exception.Contains("DataException"));
         }
 
@@ -1119,6 +1312,7 @@ namespace Barometer_ASP_NET.Tests.Controllers
 
 >>>>>>> Testclass voor DAOProject is compleet.
             Assert.IsTrue(exception.Contains("DataException"));
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
         }
     }
 }

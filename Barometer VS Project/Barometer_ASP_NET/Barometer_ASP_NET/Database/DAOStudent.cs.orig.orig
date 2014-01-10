@@ -4,7 +4,10 @@ using System.Linq;
 using System.Web;
 using BarometerDataAccesLayer;
 using System.Data.SqlClient;
-using System.Data;
+<<<<<<< HEAD
+using System.Data.Linq;
+=======
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
 using System.Data;
 
 namespace Barometer_ASP_NET.Database
@@ -207,11 +210,6 @@ namespace Barometer_ASP_NET.Database
                if (fullName.Count > 0)
                {
                    return fullName;
-               }
-               else
-               {
-                   throw new DataException("No data found for valid argument");
-               }
                }
                else
                {
