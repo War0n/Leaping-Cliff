@@ -5,6 +5,7 @@ using System.Web;
 using BarometerDataAccesLayer;
 using System.Data.SqlClient;
 using System.Data.Linq;
+using System.Data;
 
 namespace Barometer_ASP_NET.Database
 {
@@ -29,8 +30,14 @@ namespace Barometer_ASP_NET.Database
                   join u in context.Users on r.reporter_id equals u.id
                   where u.student_number == studentNumber && prd.project_id_int == projectId
                   select r;
-
-                return report;
+                if (report.ToList().Count > 0)
+                {
+                    return report;
+                }
+                else
+                {
+                    throw new DataException("No data found for valid argument");
+                }
             }
             else
             {
@@ -58,7 +65,14 @@ namespace Barometer_ASP_NET.Database
                     join u in context.Users on pm.student_user_id equals u.id
                     where u.student_number == studentNumber
                     select pg;
-                return projectGroup;
+                if (projectGroup.ToList().Count > 0)
+                {
+                    return projectGroup;
+                }
+                else
+                {
+                    throw new DataException("No data found for valid argument");
+                }
             }
             else
             {
@@ -88,6 +102,14 @@ namespace Barometer_ASP_NET.Database
                 return results;
 
 
+                if (grades.Count > 0)
+                {
+                    return grades;
+                }
+                else
+                {
+                    throw new DataException("No data found for valid argument");
+                }
             }
             else
             {
@@ -113,11 +135,17 @@ namespace Barometer_ASP_NET.Database
                      join pg in context.ProjectGroups on pm.project_group_id equals pg.id
                      where u.student_number == studentNumber && pg.project_id == projectId
                      select pm.end_grade).SingleOrDefault();
-
-                return (int)endGrade;
-            }
-            else
-            {
+               if (endGrade != null)
+               {
+                   return (int)endGrade;
+               }
+               else
+               {
+                   throw new DataException("No data found for valid argument");
+               }
+           }
+           else
+           {
                 throw new ArgumentOutOfRangeException();
             }
 
@@ -141,11 +169,17 @@ namespace Barometer_ASP_NET.Database
                      join p in context.Projects on pg.project_id equals p.id
                      where u.student_number == studentNumber && pg.id == groupId
                      select pg.group_end_grade).SingleOrDefault();
-
-                return (int)endGroupGrade;
-            }
-            else
-            {
+               if (endGroupGrade != null)
+               {
+                   return (int)endGroupGrade;
+               }
+               else
+               {
+                   throw new DataException("No data found for valid argument");
+               }
+           }
+           else
+           {
                 throw new ArgumentOutOfRangeException();
             }
         }
@@ -170,8 +204,14 @@ namespace Barometer_ASP_NET.Database
                 {
                     fullName.Add(v.firstname, v.lastname);
                 }
-
-                return fullName;
+               if (fullName.Count > 0)
+               {
+                   return fullName;
+               }
+               else
+               {
+                   throw new DataException("No data found for valid argument");
+               }
             }
             else
             {
