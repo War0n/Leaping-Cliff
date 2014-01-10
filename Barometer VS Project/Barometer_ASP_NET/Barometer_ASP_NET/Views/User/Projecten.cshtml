@@ -1,3 +1,4 @@
+@model Barometer_ASP_NET.Wrappers.UserDashboardWrapper
 
 @{
     ViewBag.Title = "Projecten";
@@ -17,29 +18,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Wordfeud</td>
-                    <td>Blok 3</td>
-                    <td><span class="label label-success">6</span></td>
-                    <td><span class="label label-danger">4</span></td>
-                    <td>@Html.ActionLink(" ", "Project", "User", null, new { @class = "glyphicon glyphicon-tasks" })</td>
-                </tr>
-                <tr>
-                    <td>Reisbureau</td>
-                    <td>Blok 4</td>
-                    <td><span class="label label-success">7</span></td>
-                    <td><span class="label label-danger">5</span></td>
-                    <td>@Html.ActionLink(" ", "Project", "User", null, new { @class = "glyphicon glyphicon-tasks" })</td>
-                </tr>
-                <tr>
-                    <td>Barometer</td>
-                    <td>Blok 5-6</td>
-                    <td><span class="label label-success">6.5</span></td>
-                    <td><span class="label label-success">8</span></td>
-                    <td>@Html.ActionLink(" ", "Project", "User", null, new { @class = "glyphicon glyphicon-tasks" })</td>
-                </tr>
+                @foreach (BarometerDataAccesLayer.Project projects in Model.AllProjects)
+                {
+                    <tr>
+                        <td>@projects.name</td>
+                        <td></td>
+                        @switch (projects.status_name)
+                        {
+                            case "Active":
+                                <td><span class="label label-success">Actief</span></td>
+                                break;
+                            case "Closed":
+                            <td><span class="label label-success">Afgelopen</span></td>
+                                break;
+                            case "Pending":
+                            <td><span class="label label-success">Aangemaakt</span></td>
+                                break;
+                            default:
+                            <td><span class="label label-success">Onbekend</span></td>
+                                break;
+                        }
 
-            </tbody>
-        </table>
+                       
+                    </tr>
+                }
+
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
