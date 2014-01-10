@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Net;
+using Barometer_ASP_NET.Database;
 
 
 namespace oAuthDemo.OAuth
@@ -70,6 +71,14 @@ namespace oAuthDemo.OAuth
                             Dictionary<string, string> extraData = new Dictionary<string, string>();
                             extraData.Add("Id", user[0].Id ?? "Onbekend");
                             extraData.Add("Login", user[0].Login ?? "Onbekend");
+
+							//add user to db if he doesnt exists already 
+							//TODO data acces layer !!!!
+							if (!DatabaseFactory.getInstance().getDAOStudent().doesStudentExist(user[0].Id))
+							{
+								DatabaseFactory.getInstance().getDAOStudent().putStudentInDatabase(user[0].Id);
+							}
+
                             return new DotNetOpenAuth.AspNet.AuthenticationResult(true, ProviderName, extraData["Id"], extraData["Login"], extraData);
                         }
                     }
