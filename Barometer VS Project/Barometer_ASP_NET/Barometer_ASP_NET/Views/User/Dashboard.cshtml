@@ -10,11 +10,12 @@
     google.setOnLoadCallback(drawChart);
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Projecten', 'Eindcijfer', 'Mijn cijfer'],
-          ['Proj Reisbureau', 7, 9],
-          ['Proj Databases', 10, 8],
-          ['Proj Wordfeud', 8, 6],
-          ['Proj Barometer', 7, 10]
+                   ['Projecten', 'Eindcijfer', 'Mijn cijfer']
+
+            @foreach (KeyValuePair<string, int[]> result in Model.Grades)
+            {
+                <text>,['@result.Key',@result.Value[0],@result.Value[1]]</text>
+            }
         ]);
 
         var options = {
@@ -52,8 +53,11 @@
                     <tr>
                         <td>Docenten</td>
                         <td>
-                            <a href="mailto:#" title="Mail docent">Erik van Apeldoor</a><br />
-                            <a href="mailto:#" title="Mail docent">Mareike NogWat</a>
+                            @foreach (BarometerDataAccesLayer.User owner in Model.CurrentProjectOwners)
+                            {
+
+                                <a href="mailto:@owner.email" title="Mail docent">@owner.firstname @owner.lastname</a><br />
+                            }
                         </td>
                     </tr>
                     <tr>
@@ -64,15 +68,17 @@
             </table>
 
 
-            <h4><i>Beoordelingsmomenten</i>
-                <!-- 
-		      		<span class="label label-danger"><span class="glyphicon glyphicon-bell"></span> tijd voor beoordeling</span>
-		      		 -->
+            <h4>
+                <i>Beoordelingsmomenten</i>
+                <!--
+                    <span class="label label-danger"><span class="glyphicon glyphicon-bell"></span> tijd voor beoordeling</span>
+                     -->
             </h4>
             <table class="table-condensed table-bordered table-striped" style="width: 100%;">
                 <thead>
                     <tr>
-                        <th colspan="7" style="text-align: center;">@DateTime.Today.ToString("MMMM") @DateTime.Today.Year
+                        <th colspan="7" style="text-align: center;">
+                            @DateTime.Today.ToString("MMMM") @DateTime.Today.Year
                         </th>
                     </tr>
                     <tr>
@@ -135,16 +141,16 @@
             </table>
 
             <!--<table class="table table-bordered table-centered">
-		      			<tr>
-		      				<td>Huidige project week</td>
-		      				<td>Volgende beoordelings ronde</td>
-		      			</tr>
-		      			<tr>
-		      				<td><h1>4</h1></td>
-		      				<td><h1>6</h1></td>
-		      			</tr>
-		      		</table>
-		      		<a class="btn btn-danger form-control" href="barometer.html" style="margin-top: 10px;">Barometer invullen</a>-->
+                        <tr>
+                            <td>Huidige project week</td>
+                            <td>Volgende beoordelings ronde</td>
+                        </tr>
+                        <tr>
+                            <td><h1>4</h1></td>
+                            <td><h1>6</h1></td>
+                        </tr>
+                    </table>
+                    <a class="btn btn-danger form-control" href="barometer.html" style="margin-top: 10px;">Barometer invullen</a>-->
 
 
             <h4><i>Groepsleden</i></h4>
@@ -155,7 +161,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="~/Content/images/pf.jpg" alt="..." class="img-circle"></td>
+                            <img src="~/Content/images/pf.jpg" alt="..." class="img-circle">
+                        </td>
                         <td colspan="2">A. van de Boogaard</td>
                     </tr>
                     <tr>
@@ -166,48 +173,49 @@
                     {
                         <tr>
                             <td>
-                                <img src="~/Content/images/pf.jpg" alt="..." class="img-circle"></td>
+                                <img src="~/Content/images/pf.jpg" alt="..." class="img-circle">
+                            </td>
                             <td>@pm.User.firstname @pm.User.lastname</td>
                             <td>
-                                @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab"+@counter, @Title = "Bekijk beoordeling van "+@pm.User.firstname+" "+@pm.User.lastname, @class = "glyphicon glyphicon-eye-open" })
+                                @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab" + @counter, @Title = "Bekijk beoordeling van " + @pm.User.firstname + " " + @pm.User.lastname, @class = "glyphicon glyphicon-eye-open" })
                             </td>
                         </tr>
-                        {counter++;}
+                        { counter++; }
                     }
                     @*                    <tr>
-                        <td>
-                            <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                        <td>Rik Coenen</td>
-                        <td>
-                            @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Rik Coenen", @class = "glyphicon glyphicon-eye-open" })
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                        <td>Ronald van Duren</td>
-                        <td>
-                            @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Ronald van Duren", @class = "glyphicon glyphicon-eye-open" })
-                        </td>
+                            <td>
+                                <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                            <td>Rik Coenen</td>
+                            <td>
+                                @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Rik Coenen", @class = "glyphicon glyphicon-eye-open" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                            <td>Ronald van Duren</td>
+                            <td>
+                                @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Ronald van Duren", @class = "glyphicon glyphicon-eye-open" })
+                            </td>
 
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                        <td>Joost Dolman</td>
-                        <td>
-                            @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Joost Dolman", @class = "glyphicon glyphicon-eye-open" })
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                        <td>John Huijbergt</td>
-                        <td>
-                            @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van John Huijbergt", @class = "glyphicon glyphicon-eye-open" })
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                            <td>Joost Dolman</td>
+                            <td>
+                                @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van Joost Dolman", @class = "glyphicon glyphicon-eye-open" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                            <td>John Huijbergt</td>
+                            <td>
+                                @Html.ActionLink(" ", null, null, new { @data_toggle = "modal", @data_target = "#modal-baro", @Href = "#tab1", @Title = "Bekijk beoordeling van John Huijbergt", @class = "glyphicon glyphicon-eye-open" })
 
-                        </td>
-                    </tr>*@
+                            </td>
+                        </tr>*@
                 </tbody>
             </table>
         </div>

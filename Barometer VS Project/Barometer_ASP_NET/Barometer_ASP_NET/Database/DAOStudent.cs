@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using BarometerDataAccesLayer;
 using System.Data.SqlClient;
+using System.Data.Linq;
 
 namespace Barometer_ASP_NET.Database
 {
@@ -16,8 +17,9 @@ namespace Barometer_ASP_NET.Database
         /// <param name="studentNumber">The student you want to query</param>
         /// <param name="projectId">The project of which you like to see the grades</param>
         /// <returns></returns>
-        public IQueryable<Report> getStudentGrades(int studentNumber, int projectId)
+        public ISingleResult<GetProjectNameAndIndividualGradeResult> getStudentGrades(int studentNumber)
         {
+<<<<<<< Updated upstream
             if (studentNumber > 0 && projectId > 0)
             {
                 DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
@@ -35,6 +37,14 @@ namespace Barometer_ASP_NET.Database
             {
                 throw new ArgumentOutOfRangeException();
             }
+=======
+            DatabaseFactory factory = DatabaseFactory.getInstance();
+            DatabaseClassesDataContext context = factory.getDataContext();
+            ISingleResult<GetProjectNameAndIndividualGradeResult> grades =
+                context.GetProjectNameAndIndividualGrade(studentNumber);
+            return grades;
+
+>>>>>>> Stashed changes
         }
 
 
@@ -70,6 +80,7 @@ namespace Barometer_ASP_NET.Database
         /// <returns></returns>
        public Dictionary<int, int> getReportResults(int studentNumber, int projectID)
         {
+<<<<<<< Updated upstream
             if (studentNumber > 0 && projectID >= 0)
             {
                 DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
@@ -83,7 +94,7 @@ namespace Barometer_ASP_NET.Database
                      join r in context.Reports on u.id equals r.subject_id
                      where u.student_number == studentNumber
                      && p.id == projectID
-                     && p.status_name.Equals("Done")
+                && p.status_name.Equals("Closed")
                      select new
                      {
                          r.project_report_date_id,
@@ -91,6 +102,22 @@ namespace Barometer_ASP_NET.Database
                      };
 
                 foreach (var s in progress)
+=======
+            
+          DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            Dictionary<int, int> grades = new Dictionary<int, int>();
+
+           var progress =
+                from u in context.Users
+                join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                join pg in context.ProjectGroups on pm.project_group_id equals pg.id
+                join p in context.Projects on pg.project_id equals p.id
+                join r in context.Reports on u.id equals r.subject_id
+                where u.student_number == studentNumber
+                && p.id == projectID
+                && p.status_name.Equals("Closed")
+                select new
+>>>>>>> Stashed changes
                 {
                     grades.Add((int)s.project_report_date_id, (int)s.grade);
                 }

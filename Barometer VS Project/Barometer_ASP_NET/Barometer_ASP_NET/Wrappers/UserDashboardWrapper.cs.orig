@@ -16,17 +16,11 @@ namespace Barometer_ASP_NET.Wrappers
         public IQueryable<User> CurrentProjectOwners { get; set; }
         public IQueryable<Project> AllProjects { get; set; }
         public Dictionary<string, int[]> Grades { get; set; }
+
+        private DAOProject project;
+        private DAOStudent student;
 <<<<<<< Updated upstream
-        public IQueryable<User> CurrentProjectOwners { get; set; }
-        public IQueryable<Project> AllProjects { get; set; }
-        public Dictionary<string, int[]> Grades { get; set; }
-
-        private DAOProject project;
-        private DAOStudent student;
 =======
-
-        private DAOProject project;
-        private DAOStudent student;
 
 >>>>>>> Stashed changes
 
@@ -60,27 +54,19 @@ namespace Barometer_ASP_NET.Wrappers
             AllProjects = project.GetAllProjects(studentNumber);
 
         }
+<<<<<<< Updated upstream
 
         private void FillAllIndividualGrades()
         {
             Grades = new Dictionary<string, int[]>();
-<<<<<<< Updated upstream
 
-            foreach (Project p in AllProjects)
-            {
-                int pid;
-                pid = p.id;
-                string pnaam;
-                pnaam = p.name;
-                int pcijfer;
-                pcijfer = student.getReportResults(studentNumber, pid).Values.First<int>(); 
-                int icijfer;
-                icijfer = student.getEndGradeIndividual(studentNumber, pid);
-                Grades.Add(pnaam, new int[2] { pcijfer, icijfer });
-            }
 =======
->>>>>>> Stashed changes
 
+        private void FillAllIndividualGrades()
+        {
+            Grades = new Dictionary<string, int[]>();
+
+>>>>>>> Stashed changes
             foreach (Project p in AllProjects)
             {
                 int pid;
