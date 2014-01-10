@@ -16,19 +16,10 @@ namespace Barometer_ASP_NET.Wrappers
         public IQueryable<User> CurrentProjectOwners { get; set; }
         public IQueryable<Project> AllProjects { get; set; }
         public Dictionary<string, int[]> Grades { get; set; }
-<<<<<<< Updated upstream
-        public IQueryable<User> CurrentProjectOwners { get; set; }
-        public IQueryable<Project> AllProjects { get; set; }
-        public Dictionary<string, int[]> Grades { get; set; }
-
-        private DAOProject project;
-        private DAOStudent student;
-=======
 
         private DAOProject project;
         private DAOStudent student;
 
->>>>>>> Stashed changes
 
         public UserDashboardWrapper(int studentNumber)
         {
@@ -64,34 +55,22 @@ namespace Barometer_ASP_NET.Wrappers
         private void FillAllIndividualGrades()
         {
             Grades = new Dictionary<string, int[]>();
-<<<<<<< Updated upstream
 
             foreach (Project p in AllProjects)
             {
-                int pid;
-                pid = p.id;
-                string pnaam;
-                pnaam = p.name;
-                int pcijfer;
-                pcijfer = student.getReportResults(studentNumber, pid).Values.First<int>(); 
-                int icijfer;
-                icijfer = student.getEndGradeIndividual(studentNumber, pid);
-                Grades.Add(pnaam, new int[2] { pcijfer, icijfer });
-            }
-=======
->>>>>>> Stashed changes
-
-            foreach (Project p in AllProjects)
-            {
-                int pid;
-                pid = p.id;
-                string pnaam;
-                pnaam = p.name;
-                int pcijfer;
-                pcijfer = student.getReportResults(studentNumber, pid).Values.First<int>(); 
-                int icijfer;
-                icijfer = student.getEndGradeIndividual(studentNumber, pid);
-                Grades.Add(pnaam, new int[2] { pcijfer, icijfer });
+                if (student.getReportResults(p.id).Count() > 0)
+                {
+                    int pid;
+                    pid = p.id;
+                    string pnaam;
+                    pnaam = p.name;
+                    int pcijfer;
+                    pcijfer = (int)student.getReportResults(pid).First().group_end_grade;
+                    int icijfer;
+                    icijfer = student.getEndGradeIndividual(studentNumber, pid);
+                    Grades.Add(pnaam, new int[2] { pcijfer, icijfer });
+                }
+                
             }
 
         }

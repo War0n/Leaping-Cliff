@@ -8,21 +8,27 @@
 <script type="text/javascript">
     google.load("visualization", "1", { packages: ["corechart"] });
     google.setOnLoadCallback(drawChart);
+    var options = {
+        title: 'Cijfers laatste 5 projecten',
+        min: 1,
+        max: 10
+    };
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
                    ['Projecten', 'Eindcijfer', 'Mijn cijfer']
-
-            @foreach (KeyValuePair<string, int[]> result in Model.Grades)
+            @if (Model.Grades.Count > 0) { 
+                foreach (KeyValuePair<string, int[]> result in Model.Grades)
+                {
+                    <text>,['@result.Key',@result.Value[0],@result.Value[1]]</text>
+                }
+            }
+            else
             {
-                <text>,['@result.Key',@result.Value[0],@result.Value[1]]</text>
+                <text>,['Geen beoordelingen beschikbaar',1,1]</text>
             }
         ]);
 
-        var options = {
-            title: 'Cijfers laatste 5 projecten',
-            min: 1,
-            max: 10
-        };
+
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
@@ -44,11 +50,11 @@
                 <tbody>
                     <tr>
                         <td>Naam</td>
-                        <td>Project Barometer</td>
+                        <td>@Model.CurrentProject.First().name</td>
                     </tr>
                     <tr>
                         <td>Omschrijving</td>
-                        <td>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et</td>
+                        <td>@Model.CurrentProject.First().description</td>
                     </tr>
                     <tr>
                         <td>Docenten</td>
@@ -61,8 +67,9 @@
                         </td>
                     </tr>
                     <tr>
+                        @{int weeks = 0;}
                         <td>Duur</td>
-                        <td>10 weken</td>
+                        <td>@{weeks = (((DateTime)Model.CurrentProject.First().end_date).Subtract((DateTime)Model.CurrentProject.First().start_date).Days) / 7;}@weeks</td>
                     </tr>
                 </tbody>
             </table>

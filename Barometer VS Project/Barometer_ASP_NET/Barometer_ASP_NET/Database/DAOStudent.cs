@@ -17,9 +17,8 @@ namespace Barometer_ASP_NET.Database
         /// <param name="studentNumber">The student you want to query</param>
         /// <param name="projectId">The project of which you like to see the grades</param>
         /// <returns></returns>
-        public ISingleResult<GetProjectNameAndIndividualGradeResult> getStudentGrades(int studentNumber)
+        public IQueryable<Report> getStudentGrades(int studentNumber, int projectId)
         {
-<<<<<<< Updated upstream
             if (studentNumber > 0 && projectId > 0)
             {
                 DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
@@ -37,15 +36,9 @@ namespace Barometer_ASP_NET.Database
             {
                 throw new ArgumentOutOfRangeException();
             }
-=======
-            DatabaseFactory factory = DatabaseFactory.getInstance();
-            DatabaseClassesDataContext context = factory.getDataContext();
-            ISingleResult<GetProjectNameAndIndividualGradeResult> grades =
-                context.GetProjectNameAndIndividualGrade(studentNumber);
-            return grades;
-
->>>>>>> Stashed changes
         }
+
+
 
 
         /// <summary>
@@ -78,139 +71,112 @@ namespace Barometer_ASP_NET.Database
         /// </summary>
         /// <param name="studentNumber">The student and the project you want to querry</param>
         /// <returns></returns>
-       public Dictionary<int, int> getReportResults(int studentNumber, int projectID)
+        public IQueryable<ProjectGroup> getReportResults(int projectID)
         {
-<<<<<<< Updated upstream
-            if (studentNumber > 0 && projectID >= 0)
+            if (projectID >= 0)
             {
                 DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-                Dictionary<int, int> grades = new Dictionary<int, int>();
 
-                var progress =
-                     from u in context.Users
-                     join pm in context.ProjectMembers on u.id equals pm.student_user_id
-                     join pg in context.ProjectGroups on pm.project_group_id equals pg.id
-                     join p in context.Projects on pg.project_id equals p.id
-                     join r in context.Reports on u.id equals r.subject_id
-                     where u.student_number == studentNumber
-                     && p.id == projectID
-                && p.status_name.Equals("Closed")
-                     select new
-                     {
-                         r.project_report_date_id,
-                         r.grade
-                     };
+                var results =
+                    from pg in context.ProjectGroups
+                    join pm in context.ProjectMembers on pg.id equals pm.project_group_id
+                    join u in context.Users on pm.student_user_id equals u.id
+                    join p in context.Projects on pg.project_id equals p.id
+                    where p.id == projectID
+                    && p.status_name == "Closed"
+                    select pg;
+                return results;
 
-                foreach (var s in progress)
-=======
-            
-          DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            Dictionary<int, int> grades = new Dictionary<int, int>();
 
-           var progress =
-                from u in context.Users
-                join pm in context.ProjectMembers on u.id equals pm.student_user_id
-                join pg in context.ProjectGroups on pm.project_group_id equals pg.id
-                join p in context.Projects on pg.project_id equals p.id
-                join r in context.Reports on u.id equals r.subject_id
-                where u.student_number == studentNumber
-                && p.id == projectID
-                && p.status_name.Equals("Closed")
-                select new
->>>>>>> Stashed changes
-                {
-                    grades.Add((int)s.project_report_date_id, (int)s.grade);
-                }
-                return grades;
             }
             else
             {
                 throw new ArgumentOutOfRangeException();
             }
 
-       }
+        }
 
-       /// <summary>
-       /// Get the endgrade of a project of an indivdual student
-       /// </summary>
-       /// <param name="studentNumber">The student you want the grade from</param>
-       /// <returns>Returns the final grade as an integer</returns>
-       public int getEndGradeIndividual(int studentNumber, int projectId)
-       {
-           if (studentNumber > 0 && projectId >= 0)
-           {
-               DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+        /// <summary>
+        /// Get the endgrade of a project of an indivdual student
+        /// </summary>
+        /// <param name="studentNumber">The student you want the grade from</param>
+        /// <returns>Returns the final grade as an integer</returns>
+        public int getEndGradeIndividual(int studentNumber, int projectId)
+        {
+            if (studentNumber > 0 && projectId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-               var endGrade =
-                   (from u in context.Users
-                    join pm in context.ProjectMembers on u.id equals pm.student_user_id
-                    join pg in context.ProjectGroups on pm.project_group_id equals pg.id
-                    where u.student_number == studentNumber && pg.project_id == projectId
-                    select pm.end_grade).SingleOrDefault();
+                var endGrade =
+                    (from u in context.Users
+                     join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                     join pg in context.ProjectGroups on pm.project_group_id equals pg.id
+                     where u.student_number == studentNumber && pg.project_id == projectId
+                     select pm.end_grade).SingleOrDefault();
 
-               return (int)endGrade;
-           }
-           else
-           {
-               throw new ArgumentOutOfRangeException();
-           }
-           
-       }
+                return (int)endGrade;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
 
-       /// <summary>
-       /// Get the end grade of a group
-       /// </summary>
-       /// <param name="studentNumber", "GroupId">The student you want the grade from, the group he belonged to during the project</param>
-       /// <returns>Returns the final group grade as an integer</returns>
-       public int getEndGradeGroup(int studentNumber, int groupId)
-       {
-           if (studentNumber > 0 && groupId >= 0)
-           {
-               DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+        }
 
-               var endGroupGrade =
-                   (from u in context.Users
-                    join pm in context.ProjectMembers on u.id equals pm.student_user_id
-                    join pg in context.ProjectGroups on pm.project_group_id equals pg.project_id
-                    join p in context.Projects on pg.project_id equals p.id
-                    where u.student_number == studentNumber && pg.id == groupId
-                    select pg.group_end_grade).SingleOrDefault();
+        /// <summary>
+        /// Get the end grade of a group
+        /// </summary>
+        /// <param name="studentNumber", "GroupId">The student you want the grade from, the group he belonged to during the project</param>
+        /// <returns>Returns the final group grade as an integer</returns>
+        public int getEndGradeGroup(int studentNumber, int groupId)
+        {
+            if (studentNumber > 0 && groupId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-               return (int)endGroupGrade;
-           }
-           else
-           {
-               throw new ArgumentOutOfRangeException();
-           }
-       }
+                var endGroupGrade =
+                    (from u in context.Users
+                     join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                     join pg in context.ProjectGroups on pm.project_group_id equals pg.project_id
+                     join p in context.Projects on pg.project_id equals p.id
+                     where u.student_number == studentNumber && pg.id == groupId
+                     select pg.group_end_grade).SingleOrDefault();
 
-       public Dictionary<string, string> getName(int studentNumber)
-       {
-           if (studentNumber > 0)
-           {
-               DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-               Dictionary<string, string> fullName = new Dictionary<string, string>();
+                return (int)endGroupGrade;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
 
-               var name =
-                   from u in context.Users
-                   where u.student_number == studentNumber
-                   select new
-                   {
-                       u.firstname,
-                       u.lastname
-                   };
+        public Dictionary<string, string> getName(int studentNumber)
+        {
+            if (studentNumber > 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+                Dictionary<string, string> fullName = new Dictionary<string, string>();
 
-               foreach (var v in name)
-               {
-                   fullName.Add(v.firstname, v.lastname);
-               }
+                var name =
+                    from u in context.Users
+                    where u.student_number == studentNumber
+                    select new
+                    {
+                        u.firstname,
+                        u.lastname
+                    };
 
-               return fullName;
-           }
-           else
-           {
-               throw new ArgumentOutOfRangeException();
-           }
-       }
+                foreach (var v in name)
+                {
+                    fullName.Add(v.firstname, v.lastname);
+                }
+
+                return fullName;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 }

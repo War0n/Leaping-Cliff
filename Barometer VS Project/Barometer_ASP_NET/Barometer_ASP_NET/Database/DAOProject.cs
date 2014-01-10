@@ -390,31 +390,7 @@ namespace Barometer_ASP_NET.Database
                 select p;
 
             return AllProjects;
-           
+
         }
-<<<<<<< Updated upstream
-=======
-        /// <summary>
-        /// Gets all projects where a student participates
-        /// </summary>
-        /// <param name="studentNumber">The project of a student</param>
-        /// <returns>Returns all projects where a student took part of. </returns>
-        public IQueryable<Project> GetAllProjects(int studentNumber)
-        {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
-            var AllProjects =
-                from p in context.Projects
-                join pg in context.ProjectGroups on p.id equals pg.project_id
-                join pm in context.ProjectMembers on pg.id equals pm.project_group_id
-                join u in context.Users on pm.student_user_id equals u.id
-                where u.student_number == studentNumber
-                select p;
-
-            return AllProjects;
-           
-        }
->>>>>>> Stashed changes
-
     }
 }
