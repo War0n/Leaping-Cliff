@@ -9,12 +9,12 @@ namespace Barometer_ASP_NET.Controllers
 {
     public class AdminController : Controller
     {
+        AdminDashboardWrapper wrapper = new AdminDashboardWrapper(3242344);
         //
         // GET: /Admin/
 
         public ActionResult Dashboard()
         {
-            AdminDashboardWrapper wrapper = new AdminDashboardWrapper(3242344);
             return View(wrapper);
         }
 
@@ -35,7 +35,7 @@ namespace Barometer_ASP_NET.Controllers
 
 		public ActionResult List()
 		{
-			return View();
+			return View(wrapper);
 		}
 
 		public ActionResult ProjectGroups()
@@ -68,6 +68,20 @@ namespace Barometer_ASP_NET.Controllers
                 select u.id;
             int studentId = student.First();
             return RedirectToAction("Student",new {studentId = studentId});
+        }
+
+        public ActionResult DeleteProject(int projectId)
+        {
+            BarometerDataAccesLayer.DatabaseClassesDataContext context = Database.DatabaseFactory.getInstance().getDataContext();
+            var resultProjects=
+                from p in context.Projects
+                where p.id == projectId
+                select p;
+
+            context.Projects.DeleteOnSubmit(resultProjects.First());
+            context.SubmitChanges();
+
+            return RedirectToAction("List");
         }
     }
 }
