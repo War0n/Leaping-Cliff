@@ -14,7 +14,7 @@
                     <td>Blok</td>
                     <td>Eindcijfer groep</td>
                     <td>Eindcijfer individueel</td>
-                    <td>Bekijk</td>
+                    <td>Bekijk</td> 
                 </tr>
             </thead>
             <tbody>
@@ -38,10 +38,7 @@
                             <td><span class="label label-success">Onbekend</span></td>
                                 break;
                         }
-                        <td>@{int weeks = 0;} @if (projects.status_name == "Active") { weeks = (int)((DateTime.Now).Subtract((DateTime)projects.start_date).TotalDays) / 7; }@weeks</td>
-                        <td>@Html.ActionLink(" ", "ProjectGroups", "User", new { projectId = projects.id }, new { @class = "glyphicon glyphicon-align-justify" })</td>
-                        <td>@Html.ActionLink(" ", "Detail", "User", new { projectId = projects.id }, new { @class = "glyphicon glyphicon-edit" })</td>
-                        <td>@Html.ActionLink(" ", "DeleteProject", "User", new { projectId = projects.id }, new { @class = "glyphicon glyphicon-remove" })</td>
+
                        
                     </tr>
                 }

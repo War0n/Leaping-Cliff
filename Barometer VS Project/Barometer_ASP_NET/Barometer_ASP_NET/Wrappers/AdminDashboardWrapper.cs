@@ -22,7 +22,7 @@ namespace Barometer_ASP_NET.Wrappers
         private void FillUsersInGroups()
         {
             List<ProjectGroup> projectGroups = new List<ProjectGroup>();
-            UsersInGroups = new Dictionary<string, IEnumerable<User>>();
+            UsersInGroups = new Dictionary<string, IEnumerable<User>>(); 
             foreach (Project project in OwnProjects)
             {
                 projectGroups.AddRange(projectDAO.getProjectGroupsByProject(project.id));
