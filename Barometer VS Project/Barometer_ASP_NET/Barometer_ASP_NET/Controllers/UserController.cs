@@ -36,7 +36,8 @@ namespace Barometer_ASP_NET.Controllers
 
 		public ActionResult Projecten()
 		{
-			return View();
+            UserDashboardWrapper wrapper = new UserDashboardWrapper(2000000);
+            return View(wrapper);
 		}
     }
 }
