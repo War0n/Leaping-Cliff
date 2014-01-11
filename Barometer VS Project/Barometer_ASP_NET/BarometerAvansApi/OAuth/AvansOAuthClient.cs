@@ -70,14 +70,48 @@ namespace oAuthDemo.OAuth
 
                             Dictionary<string, string> extraData = new Dictionary<string, string>();
                             extraData.Add("Id", user[0].Id ?? "Onbekend");
-                            extraData.Add("Login", user[0].Login ?? "Onbekend");
+                            extraData.Add("Login", user[0].Inlognaam ?? "Onbekend");
 
-							//add user to db if he doesnt exists already 
-							//TODO data acces layer !!!!
-							if (!DatabaseFactory.getInstance().getDAOStudent().doesStudentExist(user[0].Id))
+
+							//START API TEST
+							profileEndpoint = new MessageReceivingEndpoint("https://publicapi.avans.nl/oauth/api/user/?format=json", HttpDeliveryMethods.GetRequest);
+							accessToken = response.AccessToken;
+							consumerKey = ConfigurationManager.AppSettings["AvansOAuthConsumerKey"];
+							consumerSecret = ConfigurationManager.AppSettings["AvansOAuthConsumerSecret"];
+							tokenManager = new InMemoryOAuthTokenManager(consumerKey, consumerSecret);
+							tokenManager.ExpireRequestTokenAndStoreNewAccessToken(String.Empty, String.Empty, accessToken, (response as ITokenSecretContainingMessage).TokenSecret);
+							webConsumer = new WebConsumer(AvansServiceDescription, tokenManager);
+
+							request = webConsumer.PrepareAuthorizedRequest(profileEndpoint, accessToken);
+
+							try
 							{
-								DatabaseFactory.getInstance().getDAOStudent().putStudentInDatabase(user[0].Id);
+								using (WebResponse profileResponsetest = request.GetResponse())
+								{
+									using (Stream profileResponseStreamtest = profileResponse.GetResponseStream())
+									{
+										using (StreamReader readertest = new StreamReader(profileResponseStream))
+										{
+											jsonText = reader.ReadToEnd();
+
+										}
+									}
+								}
+								return new AuthenticationResult(false);
 							}
+							catch (WebException ex)
+							{
+								using (Stream s = ex.Response.GetResponseStream())
+								{
+									using (StreamReader sr = new StreamReader(s))
+									{
+										string body = sr.ReadToEnd();
+										return new DotNetOpenAuth.AspNet.AuthenticationResult(new Exception(body, ex));
+									}
+								}
+							}
+
+							//END TEST
 
                             return new DotNetOpenAuth.AspNet.AuthenticationResult(true, ProviderName, extraData["Id"], extraData["Login"], extraData);
                         }
@@ -97,5 +131,16 @@ namespace oAuthDemo.OAuth
                 }
             }
         }
+
+		public void GetUserInfo()
+		{
+			//add user to db if he doesnt exists already 
+			//TODO data acces layer !!!!
+			if (!DatabaseFactory.getInstance().getDAOStudent().doesStudentExist(user[0].Id[0]))
+			{
+				DatabaseFactory.getInstance().getDAOStudent().putStudentInDatabase(user[0].Id[0]);
+				DatabaseFactory.getInstance().getDAOProject();
+			}
+		}
     }
 }

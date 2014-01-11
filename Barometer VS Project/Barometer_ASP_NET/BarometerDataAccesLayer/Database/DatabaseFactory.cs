@@ -50,7 +50,7 @@ namespace Barometer_ASP_NET.Database
 			return DAOPROJECT;
 		}
 
-        internal DAOStudent getDAOStudent()
+        public DAOStudent getDAOStudent()
         {
             return DAOSTUDENT;
         }
