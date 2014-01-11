@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barometer_ASP_NET", "Barometer_ASP_NET\Barometer_ASP_NET.csproj", "{958AD0A0-F218-4248-AF76-C5F3B04DFAFA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barometer_ASP_NET.Tests", "Barometer_ASP_NET.Tests\Barometer_ASP_NET.Tests.csproj", "{22A557C1-9FD9-4EB0-B3A8-FB8EE08A8D01}"

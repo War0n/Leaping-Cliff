@@ -75,35 +75,35 @@
         <classShapeMoniker Id="f0237765-2c3f-4219-bbe9-6ea101d0509b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 10.5785953776042); (1.75 : 12.5777498372396); (3.5 : 12.5777498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.75 : 10.5785953776042); (1.75 : 12.5777498372396); (3.5 : 12.5777498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/BaroTemplate/BaroTemplate_BaroAspect" />
       <nodes>
         <classShapeMoniker Id="14e8a7c8-1fcf-4c64-b988-fb017163a986" />
         <classShapeMoniker Id="f0237765-2c3f-4219-bbe9-6ea101d0509b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 9.54890055338542); (3.5 : 9.54890055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 9.54890055338542); (3.5 : 9.54890055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/BaroTemplate/BaroTemplate_Project" />
       <nodes>
         <classShapeMoniker Id="14e8a7c8-1fcf-4c64-b988-fb017163a986" />
         <classShapeMoniker Id="4f5a7043-a413-4a4d-afd3-a94cdcd99be2" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.46769230769231 : 7.75); (5.875 : 7.34269230769231); (5.875 : 2.13544840494792); (6.25 : 2.13544840494792)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.46769230769231 : 7.75); (5.875 : 7.34269230769231); (5.875 : 2.13544840494792); (6.25 : 2.13544840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/Project/Project_ProjectGroup" />
       <nodes>
         <classShapeMoniker Id="4f5a7043-a413-4a4d-afd3-a94cdcd99be2" />
         <classShapeMoniker Id="3d4e8ed9-ad61-4cbe-9337-700b04430ac8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 2.1249995); (10 : 2.1249995); (10 : 3)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 2.1249995); (10 : 2.1249995); (10 : 3)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/ProjectGroup/ProjectGroup_ProjectMember" />
       <nodes>
         <classShapeMoniker Id="3d4e8ed9-ad61-4cbe-9337-700b04430ac8" />
         <classShapeMoniker Id="5dc187aa-7f9e-4655-af7e-caebcdc703ed" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 7.84538361538462); (5.84732443490112 : 7.49805918048349 : JumpStart); (5.99642556509888 : 7.34895805028574 : JumpEnd); (6.0625 : 7.28288361538462); (6.0625 : 5.19314697265625); (6.25 : 5.19314697265625)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 7.84538361538462); (5.84732443490112 : 7.4980591804835 : JumpStart); (5.99642556509888 : 7.34895805028574 : JumpEnd); (6.0625 : 7.28288361538462); (6.0625 : 5.19314697265625); (6.25 : 5.19314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/Project/Project_ProjectOwner" />
       <nodes>
         <classShapeMoniker Id="4f5a7043-a413-4a4d-afd3-a94cdcd99be2" />
@@ -117,63 +117,63 @@
         <classShapeMoniker Id="4810457a-e8db-4645-a51c-da5555399a94" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 12.5777498372396); (7.25 : 12.5777498372396); (7.25 : 9.28049967447916)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 12.5777498372396); (7.25 : 12.5777498372396); (7.25 : 9.28049967447916)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/BaroAspect/BaroAspect_Report" />
       <nodes>
         <classShapeMoniker Id="f0237765-2c3f-4219-bbe9-6ea101d0509b" />
         <classShapeMoniker Id="704f945b-762b-447e-8c27-be7be6413168" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 2.65128098993389); (5.81607443490112 : 2.96735542483502 : JumpStart); (5.93392556509888 : 3.08520655503277 : JumpEnd); (5.9375 : 3.08878098993389); (5.9375 : 8.20274983723958); (6.25 : 8.20274983723958)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.65128098993389); (5.81607443490112 : 2.96735542483501 : JumpStart); (5.93392556509888 : 3.08520655503277 : JumpEnd); (5.9375 : 3.08878098993389); (5.9375 : 8.20274983723958); (6.25 : 8.20274983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/ProjectReportDate/ProjectReportDate_Report" />
       <nodes>
         <classShapeMoniker Id="4810457a-e8db-4645-a51c-da5555399a94" />
         <classShapeMoniker Id="704f945b-762b-447e-8c27-be7be6413168" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 8.00084554036458); (3.5 : 8.00084554036458)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 8.00084554036458); (3.5 : 8.00084554036458)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/Status/Status_Project" />
       <nodes>
         <classShapeMoniker Id="ec211a24-1d8a-4cc7-a61c-a304ed8e2d3e" />
         <classShapeMoniker Id="4f5a7043-a413-4a4d-afd3-a94cdcd99be2" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 4.15576823076923); (5.81607443490112 : 3.83969379586811 : JumpStart); (5.99642556509888 : 3.65934266567035 : JumpEnd); (6.03125 : 3.62451823076923); (6.03125 : 2.60942460742187); (6.25 : 2.60942460742187)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 4.15576823076923); (6.03125 : 3.62451823076923); (6.03125 : 2.60942460742187); (6.25 : 2.60942460742187)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/User/User_ProjectGroup" />
       <nodes>
         <classShapeMoniker Id="57938e7a-9333-47d5-a93a-f8fa375bbf25" />
         <classShapeMoniker Id="3d4e8ed9-ad61-4cbe-9337-700b04430ac8" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 4.32788661538462); (5.79166666666667 : 4.32788661538461 : JumpStart); (6.02083333333333 : 4.32788661538462 : JumpEnd); (9 : 4.32788661538462)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 4.32788661538462); (9 : 4.32788661538462)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/User/User_ProjectMember" />
       <nodes>
         <classShapeMoniker Id="57938e7a-9333-47d5-a93a-f8fa375bbf25" />
         <classShapeMoniker Id="5dc187aa-7f9e-4655-af7e-caebcdc703ed" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 4.78407348632813); (5.79166666666667 : 4.78407348632812 : JumpStart); (6.02083333333333 : 4.78407348632813 : JumpEnd); (6.25 : 4.78407348632813)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 4.78407348632813); (5.79166666666667 : 4.78407348632813 : JumpStart); (5.95833333333333 : 4.78407348632813 : JumpEnd); (6.25 : 4.78407348632813)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/User/User_ProjectOwner" />
       <nodes>
         <classShapeMoniker Id="57938e7a-9333-47d5-a93a-f8fa375bbf25" />
         <classShapeMoniker Id="2ac0b6d9-d0db-44e9-ba64-4b2c06f28ab7" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.46769230769231 : 6.28049967447917); (5.81607443490112 : 6.62888180168798 : JumpStart); (5.99642556509888 : 6.80923293188574 : JumpEnd); (6.00357443490112 : 6.81638180168798 : JumpStart); (6.12142556509888 : 6.93423293188574 : JumpEnd); (6.15625 : 6.96905736678686); (6.15625 : 7.63262291861979); (6.25 : 7.63262291861979)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.46769230769231 : 6.28049967447917); (5.81607443490112 : 6.62888180168798 : JumpStart); (5.96517556509888 : 6.77798293188574 : JumpEnd); (6.15625 : 6.96905736678686); (6.15625 : 7.63262291861979); (6.25 : 7.63262291861979)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/User/User_Report" />
       <nodes>
         <classShapeMoniker Id="57938e7a-9333-47d5-a93a-f8fa375bbf25" />
         <classShapeMoniker Id="704f945b-762b-447e-8c27-be7be6413168" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 6.21588328986378); (5.90625 : 6.62213328986378); (5.90625 : 7.63262291861979); (6.25 : 7.63262291861979)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 6.21588328986378); (5.90625 : 6.62213328986378); (5.90625 : 7.63262291861979); (6.25 : 7.63262291861979)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/User/User_Report1" />
       <nodes>
         <classShapeMoniker Id="57938e7a-9333-47d5-a93a-f8fa375bbf25" />
         <classShapeMoniker Id="704f945b-762b-447e-8c27-be7be6413168" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 5.12584554036458); (3.04166666666667 : 5.12584554036458 : JumpStart); (3.20833333333333 : 5.12584554036458 : JumpEnd); (3.5 : 5.12584554036458)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 5.12584554036458); (3.5 : 5.12584554036458)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseClassesDataContext/Rol/Rol_User" />
       <nodes>
         <classShapeMoniker Id="bfc08209-7ae1-4f6a-bb9f-100e9cd80216" />
