@@ -206,6 +206,7 @@
   <ItemGroup>
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="OAuth\AvansOAuthClient.cs" />
     <Compile Include="OAuth\OAuthUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
