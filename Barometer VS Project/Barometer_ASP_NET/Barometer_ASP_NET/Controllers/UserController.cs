@@ -1,4 +1,4 @@
-﻿using Barometer_ASP_NET.Database;
+﻿using BarometerDataAccesLayer.Database;
 using Barometer_ASP_NET.FileFactory;
 using Barometer_ASP_NET.Wrappers;
 using System;
@@ -20,7 +20,7 @@ namespace Barometer_ASP_NET.Controllers
 
         public ActionResult Dashboard()
         {
-            UserDashboardWrapper wrapper = new UserDashboardWrapper(2000000);
+            UserDashboardWrapper wrapper = new UserDashboardWrapper(CurrentUser.getInstance().Studentnummer);
             return View(wrapper);
         }
 
@@ -32,13 +32,13 @@ namespace Barometer_ASP_NET.Controllers
 
 		public ActionResult Project()
 		{
-            UserProjectWrapper wrapper = new UserProjectWrapper(3000000); //IMPORTANT, uses a test value
+            UserProjectWrapper wrapper = new UserProjectWrapper(CurrentUser.getInstance().Studentnummer); //IMPORTANT, uses a test value
             return View(wrapper);
 		}
 
 		public ActionResult Projecten()
 		{
-            UserDashboardWrapper wrapper = new UserDashboardWrapper(2000000);
+            UserDashboardWrapper wrapper = new UserDashboardWrapper(CurrentUser.getInstance().Studentnummer);
 			return View(wrapper);
 		}
     }

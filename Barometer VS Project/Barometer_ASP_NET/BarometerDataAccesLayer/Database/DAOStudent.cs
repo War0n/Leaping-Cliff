@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Data.Linq;
 using System.Data;
 
-namespace Barometer_ASP_NET.Database
+namespace BarometerDataAccesLayer.Database
 {
     public class DAOStudent
     {
@@ -44,9 +44,6 @@ namespace Barometer_ASP_NET.Database
                 throw new ArgumentOutOfRangeException();
             }
         }
-
-
-
 
         /// <summary>
         /// Get the projectgroup(s) the student belongs to
@@ -224,6 +221,29 @@ namespace Barometer_ASP_NET.Database
                 where u.student_number == studentNumber
                 select u;
             return student.FirstOrDefault();
+        }
+
+        public void putStudentInDatabase(int studentNumber, string email)
+        {
+            DatabaseFactory factory = DatabaseFactory.getInstance();
+            DatabaseClassesDataContext context = factory.getDataContext();
+            User newUser = new User();
+            newUser.student_number = studentNumber;
+            newUser.email = email + "@avans.nl";
+            newUser.rol_name = "user";
+
+            var usertest = from u in context.Users
+                           where u.student_number == studentNumber
+                           select u;
+			
+			CurrentUser.getInstance().Studentnummer = studentNumber;
+
+            if (usertest.Count() == 0)
+            {
+                context.Users.InsertOnSubmit(newUser);
+                context.SubmitChanges();
+            }
+
         }
     }
 }
