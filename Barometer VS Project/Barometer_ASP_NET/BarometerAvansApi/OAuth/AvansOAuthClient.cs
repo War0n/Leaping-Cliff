@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Net;
+using System.Web;
 
 
 namespace oAuthDemo.OAuth
@@ -45,7 +46,7 @@ namespace oAuthDemo.OAuth
 
         protected override AuthenticationResult VerifyAuthenticationCore(AuthorizedTokenResponse response)
         {
-            var profileEndpoint = new MessageReceivingEndpoint("https://publicapi.avans.nl/oauth/api/user/?format=json", HttpDeliveryMethods.GetRequest);
+            var profileEndpoint = new MessageReceivingEndpoint("https://publicapi.avans.nl/oauth/studentnummer/?format=json", HttpDeliveryMethods.GetRequest);
             string accessToken = response.AccessToken;
             consumerKey = ConfigurationManager.AppSettings["AvansOAuthConsumerKey"];
             consumerSecret = ConfigurationManager.AppSettings["AvansOAuthConsumerSecret"];
@@ -68,8 +69,9 @@ namespace oAuthDemo.OAuth
                             var user = JsonConvert.DeserializeObject<List<OAuthUser>>(jsonText);
 
                             Dictionary<string, string> extraData = new Dictionary<string, string>();
-                            extraData.Add("Id", user[0].Id ?? "Onbekend");
-                            extraData.Add("Login", user[0].Login ?? "Onbekend");
+                            extraData.Add("Id", user[0].Studentnummer ?? "Onbekend");
+                            extraData.Add("Login", user[0].Inlognaam ?? "Onbekend");
+
                             return new DotNetOpenAuth.AspNet.AuthenticationResult(true, ProviderName, extraData["Id"], extraData["Login"], extraData);
                         }
                     }
@@ -88,5 +90,6 @@ namespace oAuthDemo.OAuth
                 }
             }
         }
-    }
+
+	}
 }

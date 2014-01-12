@@ -1,4 +1,4 @@
-﻿using Barometer_ASP_NET.Database;
+﻿using BarometerDataAccesLayer.Database;
 using BarometerDataAccesLayer;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -25,7 +25,7 @@ namespace Barometer_ASP_NET.FileFactory
             Sheet sheet = wbPart.Workbook.Descendants<Sheet>().First();
             if (sheet != null)
             {
-                Database.DAOStudent studentdao = Database.DatabaseFactory.getInstance().getDAOStudent();
+                DAOStudent studentdao = DatabaseFactory.getInstance().getDAOStudent();
                 Worksheet ws = ((WorksheetPart)(wbPart.GetPartById(sheet.Id))).Worksheet;
                 int rowNumber = 2;
                 foreach (int studentnumber in (int[])students)
@@ -128,7 +128,7 @@ namespace Barometer_ASP_NET.FileFactory
 
         private void FillDatabase(Dictionary<int, object[]> rowData)
         {
-            BarometerDataAccesLayer.DatabaseClassesDataContext context = Database.DatabaseFactory.getInstance().getDataContext();
+            BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             foreach (KeyValuePair<int, object[]> cell in rowData)
             {
                 bool userExists = false;
@@ -202,7 +202,7 @@ namespace Barometer_ASP_NET.FileFactory
 
         internal void AddGroupsToProject(System.IO.Stream stream, Project insertProject)
         {
-            BarometerDataAccesLayer.DatabaseClassesDataContext context = Database.DatabaseFactory.getInstance().getDataContext();
+            BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             using (SpreadsheetDocument spreadsheetDocument =
                 SpreadsheetDocument.Open(stream, false))
             {

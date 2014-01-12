@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-namespace Barometer_ASP_NET.Database
+namespace BarometerDataAccesLayer.Database
 {
     public class DAOProject
     {

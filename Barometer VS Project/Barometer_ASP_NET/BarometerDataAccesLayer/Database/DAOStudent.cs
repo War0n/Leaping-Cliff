@@ -6,7 +6,7 @@ using BarometerDataAccesLayer;
 using System.Data.SqlClient;
 using System.Data.Linq;
 
-namespace Barometer_ASP_NET.Database
+namespace BarometerDataAccesLayer.Database
 {
     public class DAOStudent
     {
@@ -37,6 +37,40 @@ namespace Barometer_ASP_NET.Database
                 throw new ArgumentOutOfRangeException();
             }
         }
+
+		/// <summary>
+		/// Method to check if student already exists in DB
+		/// </summary>
+		/// <param name="studentNumber"></param>
+		/// <returns></returns>
+		public bool doesStudentExist(int studentNumber)
+		{
+			DatabaseFactory factory = DatabaseFactory.getInstance();
+			DatabaseClassesDataContext context = factory.getDataContext();
+			var student = from u in context.Users where u.student_number == studentNumber select u;
+
+			if (student == null)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+			
+		}
+
+
+		//WIP
+		public void putStudentInDatabase(int studentNumber)
+		{
+			DatabaseFactory factory = DatabaseFactory.getInstance();
+			DatabaseClassesDataContext context = factory.getDataContext();
+			User student = new User();
+			student.student_number = studentNumber;
+			context.SubmitChanges();
+
+		}
 
 
 

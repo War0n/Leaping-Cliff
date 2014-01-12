@@ -1,5 +1,6 @@
 ﻿using Barometer_ASP_NET.FileFactory;
 using Barometer_ASP_NET.Wrappers;
+using BarometerDataAccesLayer.Database;
 using System;
 using System.Collections.Generic;
 using System.Data.Linq;
@@ -37,7 +38,7 @@ namespace Barometer_ASP_NET.Controllers
         {
             if (collection.Count != 0)
             {
-                BarometerDataAccesLayer.DatabaseClassesDataContext context = Database.DatabaseFactory.getInstance().getDataContext();
+                BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
                 BarometerDataAccesLayer.Project insertProject = new BarometerDataAccesLayer.Project();
                 insertProject.name = collection.GetValue("FormProject.name").AttemptedValue;
                 insertProject.description = collection.GetValue("FormProject.description").AttemptedValue;
@@ -100,7 +101,7 @@ namespace Barometer_ASP_NET.Controllers
 
         public ActionResult Student(int studentId)
         {
-            BarometerDataAccesLayer.DatabaseClassesDataContext context = Database.DatabaseFactory.getInstance().getDataContext();
+            BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             var student =
                 from u in context.Users
                 where u.id == studentId
@@ -111,7 +112,7 @@ namespace Barometer_ASP_NET.Controllers
         public ActionResult StudentForm(FormCollection collection)
         {
             int studentNumber = int.Parse(collection.GetValue("student").AttemptedValue);
-            BarometerDataAccesLayer.DatabaseClassesDataContext context = Database.DatabaseFactory.getInstance().getDataContext();
+            BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             var student =
                 from u in context.Users
                 where u.student_number == studentNumber
@@ -122,7 +123,7 @@ namespace Barometer_ASP_NET.Controllers
 
         public ActionResult DeleteProject(int projectId)
         {
-            BarometerDataAccesLayer.DatabaseClassesDataContext context = Database.DatabaseFactory.getInstance().getDataContext();
+            BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             var resultProjects=
                 from p in context.Projects
                 where p.id == projectId

@@ -51,5 +51,12 @@ _ReSharper*/
  
 # NCrunch
 *ncrunch*
+<<<<<<< HEAD
+=======
 
+.mdf
+.ldf
+Barometer VS Project/Barometer_ASP_NET/Barometer_ASP_NET/App_Data/aspnet-Barometer_ASP_NET-20131115111233.mdf
+Barometer VS Project/Barometer_ASP_NET/Barometer_ASP_NET/App_Data/aspnet-Barometer_ASP_NET-20131115111233_log.ldf
 Barometer VS Project/Barometer_ASP_NET/Barometer_ASP_NET/Content/ExcelExports/
+>>>>>>> JoostBranch

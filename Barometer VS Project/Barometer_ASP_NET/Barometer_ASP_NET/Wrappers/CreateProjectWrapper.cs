@@ -1,4 +1,4 @@
-﻿using Barometer_ASP_NET.Database;
+﻿using BarometerDataAccesLayer.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ namespace Barometer_ASP_NET.Wrappers
 {
 	public class CreateProjectWrapper
 	{
-        DAOProject project = Database.DatabaseFactory.getInstance().getDAOProject();
+        DAOProject project = DatabaseFactory.getInstance().getDAOProject();
         public IQueryable<BarometerDataAccesLayer.BaroTemplate> Templates { get; set; }
         public BarometerDataAccesLayer.Project FormProject { get; set; }
 
