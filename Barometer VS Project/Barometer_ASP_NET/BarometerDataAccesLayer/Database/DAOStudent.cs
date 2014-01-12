@@ -222,5 +222,26 @@ namespace BarometerDataAccesLayer.Database
                 select u;
             return student.FirstOrDefault();
         }
+
+        public void putStudentInDatabase(int studentNumber, string email)
+        {
+            DatabaseFactory factory = DatabaseFactory.getInstance();
+            DatabaseClassesDataContext context = factory.getDataContext();
+            User newUser = new User();
+            newUser.student_number = studentNumber;
+            newUser.email = email + "@avans.nl";
+            newUser.rol_name = "user";
+
+            var usertest = from u in context.Users
+                           where u.student_number == studentNumber
+                           select u;
+
+            if (usertest.Count() == 0)
+            {
+                context.Users.InsertOnSubmit(newUser);
+                context.SubmitChanges();
+            }
+
+        }
     }
 }
