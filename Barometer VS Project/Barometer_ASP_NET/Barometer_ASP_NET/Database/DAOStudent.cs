@@ -99,12 +99,9 @@ namespace Barometer_ASP_NET.Database
                     where p.id == projectID
                     && p.status_name == "Closed"
                     select pg;
-                return results;
-
-
-                if (grades.Count > 0)
+                if (results.ToList().Count > 0)
                 {
-                    return grades;
+                    return results;
                 }
                 else
                 {
