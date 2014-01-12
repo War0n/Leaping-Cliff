@@ -140,29 +140,7 @@ namespace Barometer_ASP_NET.Tests.TEST_Database
             String exception = "";
             try
             {
-                Dictionary<int, int> b = d.getReportResults(-1, -1);
-            }
-            catch (Exception e)
-            {
-                exception = e.ToString();
-            }
-            Assert.IsTrue(exception.Contains("ArgumentOutOfRange"));
-
-            exception = "";
-            try
-            {
-                Dictionary<int, int> b = d.getReportResults(3000000, -1);
-            }
-            catch (Exception e)
-            {
-                exception = e.ToString();
-            }
-            Assert.IsTrue(exception.Contains("ArgumentOutOfRange"));
-
-            exception = "";
-            try
-            {
-                Dictionary<int, int> b = d.getReportResults(-1, 1);
+                IQueryable<ProjectGroup> b = d.getReportResults(-1);
             }
             catch (Exception e)
             {
@@ -174,11 +152,11 @@ namespace Barometer_ASP_NET.Tests.TEST_Database
         [TestMethod]
         public void test_22_getGetReportResults_valid_input()
         {
-            Dictionary<int, int> b = null;
+            IQueryable<ProjectGroup> b = null;
             String exception = "";
             try
             {
-                b = d.getReportResults(3000000, 1);
+                b = d.getReportResults(3);
             }
             catch (Exception e)
             {
@@ -192,11 +170,11 @@ namespace Barometer_ASP_NET.Tests.TEST_Database
         [TestMethod]
         public void test_23_getReportResults_valid_nonexistent_input()
         {
-            Dictionary<int, int> b = null;
+            IQueryable<ProjectGroup> b = null;
             String exception = "";
             try
             {
-                b = d.getReportResults(3000000, 999999);
+                b = d.getReportResults(999999);
             }
             catch (Exception e)
             {
