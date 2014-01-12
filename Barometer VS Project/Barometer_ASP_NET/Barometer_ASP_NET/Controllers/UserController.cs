@@ -24,7 +24,8 @@ namespace Barometer_ASP_NET.Controllers
 
 		public ActionResult Barometer()
 		{
-			return View();
+            UserProjectWrapper wrapper = new UserProjectWrapper(3000000); //IMPORTANT, uses a test value
+			return View(wrapper);
 		}
 
 		public ActionResult Project()
