@@ -37,7 +37,7 @@ namespace oAuthDemo.OAuth
             this(consumerKey, consumerSecret, new AuthenticationOnlyCookieOAuthTokenManager())
         {
         }
-
+         
         public AvansOAuthClient(string consumerKey, string consumerSecret, IOAuthTokenManager tokenManager)
             : base("avans", AvansServiceDescription, new SimpleConsumerTokenManager(consumerKey, consumerSecret, tokenManager))
         {

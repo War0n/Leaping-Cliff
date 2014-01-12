@@ -49,7 +49,7 @@ namespace Barometer_ASP_NET.Database
                 select pg;
             return projectGroups;
         }
-
+         
         /// <summary>
         /// Get all students belonging to the projectgroup
         /// </summary>
