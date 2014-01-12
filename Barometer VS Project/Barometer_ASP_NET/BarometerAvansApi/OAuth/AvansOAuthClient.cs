@@ -70,7 +70,7 @@ namespace oAuthDemo.OAuth
                             var user = JsonConvert.DeserializeObject<List<OAuthUser>>(jsonText);
 
                             Dictionary<string, string> extraData = new Dictionary<string, string>();
-                            extraData.Add("Id", user[0].Id ?? "Onbekend");
+                            extraData.Add("Id", user[0].Studentnummer ?? "Onbekend");
                             extraData.Add("Login", user[0].Inlognaam ?? "Onbekend");
 
                             return new DotNetOpenAuth.AspNet.AuthenticationResult(true, ProviderName, extraData["Id"], extraData["Login"], extraData);
