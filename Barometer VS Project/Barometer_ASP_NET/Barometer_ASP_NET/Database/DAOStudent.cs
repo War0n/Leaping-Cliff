@@ -178,5 +178,15 @@ namespace Barometer_ASP_NET.Database
                 throw new ArgumentOutOfRangeException();
             }
         }
+
+        public User getStudentInfo(int studentNumber)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            var student =
+                from u in context.Users
+                where u.student_number == studentNumber
+                select u;
+            return student.FirstOrDefault();
+        }
     }
 }
