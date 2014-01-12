@@ -10,6 +10,8 @@ namespace Barometer_ASP_NET.Wrappers
     public class UserProjectWrapper
     {
         private int studentNumber;
+        public int StudentNumber { get; set; }
+        public int CurrentProjectId { get; set; }
         public string  CurrentProjectSummary { get; set; }
         public string  CurrentProjectName { get; set; }
         public string  CurrentProjectDate { get; set; }
@@ -25,6 +27,7 @@ namespace Barometer_ASP_NET.Wrappers
         public UserProjectWrapper(int studentNumber)
         {
             this.studentNumber = studentNumber;
+            StudentNumber = studentNumber;
             student = DatabaseFactory.getInstance().getDAOStudent();
             project = DatabaseFactory.getInstance().getDAOProject();
             FillProjectMembers(student.getStudentGroup(studentNumber).First());
@@ -56,6 +59,7 @@ namespace Barometer_ASP_NET.Wrappers
          
         private void FillProjectDetails(Project p, ProjectGroup pg)
         {
+            CurrentProjectId = p.id;
             CurrentProjectSummary = p.description;
             CurrentProjectName = p.name;
             CurrentProjectDate = (Convert.ToDateTime(p.start_date).Date.ToString() + " tot " + Convert.ToDateTime(p.end_date).Date.ToString());

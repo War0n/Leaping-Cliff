@@ -1,0 +1,56 @@
+﻿@using Barometer_ASP_NET.Wrappers;
+@using BarometerDataAccesLayer;
+
+@model BaroWidgetWrapper
+
+@{
+    Layout =  "";
+}
+    <div class="barometer-control">
+        <ul class="nav nav-tabs" id="headAspectTab">
+            @{ var flag = true; }
+            @foreach (BaroAspect item in Model.HeadAspects)
+            {
+                <li class="@(flag ? "active" : "")">
+                    <a href="#tab-@item.id" data-toggle="tab">
+                        @item.name
+                    </a>
+                </li>
+                flag = false;
+            }
+        </ul>
+        <div class="tab-content">
+            @{ flag = true;}
+            @foreach (BaroAspect item in Model.HeadAspects)
+            {
+                <div class="tab-pane @(flag ? "active" : "")" id="tab-@item.id">
+                    <table class="table">
+                        @foreach (BaroAspect parent in item.BaroAspects)
+                        {
+                            <tr>
+                                <td colspan="2">
+                                    <h4>@parent.name</h4>
+                                </td>
+                            </tr>
+
+                            foreach(BaroAspect child in parent.BaroAspects) 
+                            {
+                                var givenGrade = child.Reports.Where(r => r.baro_aspect_id == child.id
+                                    && r.reporter_id == Model.Reporter.id
+                                    && r.subject_id == Model.Subject.id
+                                    && r.project_report_date_id == ViewBag.report_date_id).FirstOrDefault();
+                                
+                                <tr>
+                                    <td>@child.name</td>
+                                    <td>@((givenGrade != null) ? givenGrade.grade.ToString() : "x")</td>
+                                </tr>
+                            }                            
+                        }
+                    </table>
+                </div>
+                flag = false;
+            }
+
+        </div>
+    </div>
+
