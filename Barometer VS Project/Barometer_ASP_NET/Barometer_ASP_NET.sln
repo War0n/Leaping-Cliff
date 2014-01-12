@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barometer_ASP_NET", "Barometer_ASP_NET\Barometer_ASP_NET.csproj", "{958AD0A0-F218-4248-AF76-C5F3B04DFAFA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barometer_ASP_NET.Tests", "Barometer_ASP_NET.Tests\Barometer_ASP_NET.Tests.csproj", "{22A557C1-9FD9-4EB0-B3A8-FB8EE08A8D01}"
@@ -10,6 +8,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarometerDataAccesLayer", "BarometerDataAccesLayer\BarometerDataAccesLayer.csproj", "{16B61BE8-C5E1-44E6-95A9-BD25320D3232}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarometerAvansApi", "BarometerAvansApi\BarometerAvansApi.csproj", "{6B10513F-3123-4C4C-B98F-573508070327}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2BBF5598-D320-4E94-AA90-B59442EEF5F3}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

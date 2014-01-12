@@ -18,7 +18,8 @@ namespace Barometer_ASP_NET.Wrappers
         public Dictionary<string, int[]> Grades { get; set; }
 
         private DAOProject project;
-        private DAOStudent student;
+        private DAOStudent student; 
+
 
 
         public UserDashboardWrapper(int studentNumber)
