@@ -8,8 +8,8 @@
         <hr />
     </div>
     <div class="row">
-        <div class="col-lg-5">
-            @using (Html.BeginForm("Create", "Project", FormMethod.Post, new { @class = "form-vertical", @role = "form" }))
+        <div class="col-lg-8">
+            @using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { @class = "form-vertical",@runat="Server", @enctype = "multipart/form-data" }))
             {
                 <div class="form-group">
                     <label class="control-label">Naam</label>
@@ -48,47 +48,66 @@
                 <div class="form-group">
                     <label class="control-label">Beoordelings momenten</label>
                     <div class="row">
-                        <div class="col-xs-5">
+                        <div class="col-xs-4">
                             <label class="control-label">Momentnaam</label>
                             <input type="date" class="form-control" name="reportDateName[]" />
                         </div>
-                        <div class="col-xs-5">
-                            <label class="control-label">Momentdatum</label>
-                            <input type="date" class="form-control" name="reportDate[]" />
+                        <div class="col-xs-4">
+                            <label class="control-label">Startdatum</label>
+                            <input type="date" class="form-control" name="reportStartDate[]" />
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label class="control-label">Einddatum</label>
+                            <input type="date" class="form-control" name="reportEndDate[]" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-5">
+                        <div class="col-xs-4">
                             <label class="control-label">Momentnaam</label>
                             <input type="date" class="form-control" name="reportDateName[]" />
                         </div>
-                        <div class="col-xs-5">
-                            <label class="control-label">Momentdatum</label>
-                            <input type="date" class="form-control" name="reportDate[]" />
+                        <div class="col-xs-4">
+                            <label class="control-label">Startdatum</label>
+                            <input type="date" class="form-control" name="reportStartDate[]" />
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label class="control-label">Einddatum</label>
+                            <input type="date" class="form-control" name="reportEndDate[]" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-5">
+                        <div class="col-xs-4">
                             <label class="control-label">Momentnaam</label>
                             <input type="date" class="form-control" name="reportDateName[]" />
                         </div>
-                        <div class="col-xs-5">
-                            <label class="control-label">Momentdatum</label>
-                            <input type="date" class="form-control" name="reportDate[]" />
+                        <div class="col-xs-4">
+                            <label class="control-label">Startdatum</label>
+                            <input type="date" class="form-control" name="reportStartDate[]" />
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label class="control-label">Einddatum</label>
+                            <input type="date" class="form-control" name="reportEndDate[]" />
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-5">
+                        <div class="col-xs-4">
                             <label class="control-label">Momentnaam</label>
                             <input type="date" class="form-control" name="reportDateName[]" />
                         </div>
-                        <div class="col-xs-5">
-                            <label class="control-label">Momentdatum</label>
-                            <input type="date" class="form-control" name="reportDate[]" />
+                        <div class="col-xs-4">
+                            <label class="control-label">Startdatum</label>
+                            <input type="date" class="form-control" name="reportStartDate[]" />
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label class="control-label">Einddatum</label>
+                            <input type="date" class="form-control" name="reportEndDate[]" />
                         </div>
                     </div>
                 </div>
-
                 <hr />
                 <div class="form-group">
                     <input type="submit" value="Opslaan" class="btn btn-primary" />
@@ -99,3 +118,6 @@
         </div>
     </div>
 </div>
+
+
+
