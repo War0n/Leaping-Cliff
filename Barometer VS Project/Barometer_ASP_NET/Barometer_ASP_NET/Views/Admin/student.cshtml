@@ -1,9 +1,10 @@
+@model BarometerDataAccesLayer.User
 @{
     ViewBag.Title = "Student";
 }
 <div class="row">
     <div class="col-lg-12">
-        <h2>Rik Coenen <small>#2071047</small></h2>
+        <h2>@Model.firstname @Model.lastname <small>#@Model.student_number</small></h2>
         <hr />
     </div>
 </div>
@@ -14,18 +15,21 @@
         <h4><i>Gegevens</i></h4>
         <form>
             <div class="form-group">
-                <label>Naam</label>
-                @Html.TextBox("naam"," ",new { @class = "form-control",@placeholder = "Naam" })
+                <label>Voornaam</label>
+                @Html.TextBox("voornaam", @Model.firstname, new { @class = "form-control", @placeholder = "Naam" })
+            </div>
+            <div class="form-group">
+                <label>Achternaam</label>
+                @Html.TextBox("achternaam", @Model.lastname, new { @class = "form-control", @placeholder = "Naam" })
             </div>
             <div class="form-group">
                 <label>Studentennummer</label>
-                @Html.TextBox("studentennummer"," ",new { @class = "form-control",@placeholder = "Studentennummer" })
+                @Html.TextBox("studentennummer", @Model.student_number, new { @class = "form-control", @placeholder = "Studentennummer" })
             </div>
             <div class="form-group">
                 <label>Huidige project groep</label>
                 <select class="form-control">
-                    <option>MIN06SOb</option>
-
+                    <option>Niks te selecteren</option>
                 </select>
             </div>
 

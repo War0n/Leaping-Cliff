@@ -12,28 +12,13 @@
             <div class="row">
                 <div class="col-lg-6">
                     <h1>Avans barometer</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu iaculis leo, quis lobortis orci. Nulla malesuada pulvinar lorem. Morbi ullamcorper est metus, sit amet venenatis libero adipiscing id. Ut suscipit mattis lobortis. Vestibulum bibendum lorem id sodales fermentum.</p>
+                    <p>Dit beoordelingsmiddel geeft de ingelogde student, tutor of docent de mogelijkheid zijn projecten en beoordelingen te beheren. Om te beginnen klik op de passende inlogmethode hiernaast.</p>
                 </div>
-@*                <div class="col-lg-5 col-lg-offset-1 well">
-                    <form class="form-horizontal login-form" method="get" role="form">
-                        <div class="form-group">
-                            <label for="inputEmail3" class="control-label">Naam</label>
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Avans gebruikersnaam">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="control-label">Wachtwoord</label>
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Wachtwoord">
-                        </div>*@
-                        <!-- test -->
                         <hr />
 
                         <div class="form-group">
-@*                            @Html.ActionLink("Log in", "Dashboard", "User", null, new { @class = "btn btn-default btn-lgn" })
-                            @Html.ActionLink("Avans login", "Account", "Login", null, new { @class = "btn btn-danger btn-lgn" })*@
                             @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-                            <a href="#">Wachtwoord vergeten</a>
                         </div>
-@*                    </form>*@
                 </div>
             </div>
 

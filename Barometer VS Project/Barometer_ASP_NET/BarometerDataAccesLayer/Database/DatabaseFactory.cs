@@ -14,6 +14,7 @@ namespace Barometer_ASP_NET.Database
 		private static DatabaseFactory instance = null;
         private DAOStudent DAOSTUDENT = new DAOStudent();
         private static DatabaseClassesDataContext DataContext { get; set; }
+        private DAOTemplate DAOTEMPLATE = new DAOTemplate();
 
 		/// <summary>
 		/// Singleton pattern to get the DatabaseFactory Object
@@ -53,6 +54,11 @@ namespace Barometer_ASP_NET.Database
         public DAOStudent getDAOStudent()
         {
             return DAOSTUDENT;
+        }
+
+        internal DAOTemplate getDAOTemplate()
+        {
+            return DAOTEMPLATE;
         }
     }
 }

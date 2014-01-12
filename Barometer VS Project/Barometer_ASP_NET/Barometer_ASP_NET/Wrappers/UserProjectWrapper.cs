@@ -18,6 +18,7 @@ namespace Barometer_ASP_NET.Wrappers
         public IQueryable<User> ProjectMembers { get; set; }
         public IQueryable<User> ProjectOwners { get; set; }
         public IQueryable<User> Tutors { get; set; }
+        public IQueryable<Report> MyGrades { get; set; }
         private DAOProject project;
         private DAOStudent student;
 
@@ -30,6 +31,7 @@ namespace Barometer_ASP_NET.Wrappers
             FillTutors(student.getStudentGroup(studentNumber).First());
             FillProjectOwners(project.GetCurrentActiveProject(studentNumber).First());
             FillProjectDetails(project.GetCurrentActiveProject(studentNumber).First(), student.getStudentGroup(studentNumber).First());
+            FillMyGrades(project.GetCurrentActiveProject(studentNumber).First());
         }
 
         private void FillProjectMembers(ProjectGroup projectGroup)
@@ -47,6 +49,11 @@ namespace Barometer_ASP_NET.Wrappers
             Tutors = project.GetTutor(projectGroup.id);
         }
 
+        private void FillMyGrades(Project p)
+        {
+            MyGrades = student.getStudentGrades(studentNumber, p.id);
+        }
+         
         private void FillProjectDetails(Project p, ProjectGroup pg)
         {
             CurrentProjectSummary = p.description;

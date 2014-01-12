@@ -2,18 +2,31 @@
 @{
     ViewBag.Title = "Project";
 
+
 }
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
+
     google.load("visualization", "1", { packages: ["corechart"] });
     google.setOnLoadCallback(drawChart);
     function drawChart() {
+        var d = []
         var data = google.visualization.arrayToDataTable([
+          
+            
           ['Onderdeel', 'BDS', 'System use cases', 'Prototypes', 'Requirement Analyse', 'Functioneel Ontwerp'],
-          ['Week 3', 6, 7, 7, 6, 6],
-          ['Week 6', 5, 6, 7, 7, 7],
+          ['Week 3',@foreach(var v in Model.MyGrades){
+                         if(v.project_report_date_id == 1){
+                          <text> @v.grade, </text>
+                         }
+                     }],
+          ['Week 6',@foreach(var v in Model.MyGrades){
+                         if(v.project_report_date_id == 2){
+                          <text> @v.grade, </text>
+                         }
+                     }],
           ['Week 9', 7, 8, 9, 10, 10]
         ]);
 
@@ -36,7 +49,7 @@
 
         data = google.visualization.arrayToDataTable([
         	['Onderdeel', 'Inzet/motivatie', 'Inzicht eigen functioneren', 'Samenwerken', 'Schriftelijk communiceren', 'Mondeling communiceren', 'Projectmatig werken'],
-        	['Week 3', 5, 6, 4, 7, 4, 6],
+        	['Week 3', 6, 6, 4, 7, 4, 6],
         	['Week 6', 6, 7, 7, 6, 7, 7],
         	['Week 9', 8, 9, 10, 10, 9, 10]
         ]);
