@@ -13,7 +13,7 @@ namespace Barometer_ASP_NET.Controllers
 {
     public class AdminController : Controller
     {
-        AdminDashboardWrapper wrapper = new AdminDashboardWrapper(3242344);
+        AdminDashboardWrapper wrapper = new AdminDashboardWrapper(CurrentUser.getInstance().Studentnummer);
         //
         // GET: /Admin/
 
@@ -40,19 +40,23 @@ namespace Barometer_ASP_NET.Controllers
             {
                 BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
                 BarometerDataAccesLayer.Project insertProject = new BarometerDataAccesLayer.Project();
+                BarometerDataAccesLayer.ProjectOwner me = new BarometerDataAccesLayer.ProjectOwner();
+                var ownerInfo = 
+                    from u in context.Users
+                    where u.student_number == CurrentUser.getInstance().Studentnummer
+                    select u;
+                me.User =  ownerInfo.First();
                 insertProject.name = collection.GetValue("FormProject.name").AttemptedValue;
                 insertProject.description = collection.GetValue("FormProject.description").AttemptedValue;
-
                 insertProject.start_date = DateTime.ParseExact(collection.GetValue("FormProject.start_date").AttemptedValue, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 insertProject.end_date = DateTime.ParseExact(collection.GetValue("FormProject.end_date").AttemptedValue, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
+                insertProject.ProjectOwners.Add(me);
+                insertProject.status_name = "Pending";
                 if (Request.Files.Count != 0)
                 {
                     HttpPostedFileBase fileBase = Request.Files[0];
-                    StudentExcel studentExcel = new StudentExcel();
+                    StudentExcel studentExcel = new StudentExcel(insertProject);
                     studentExcel.Import(fileBase.InputStream);
-                    context.Projects.InsertOnSubmit(insertProject);
-                    studentExcel.AddGroupsToProject(fileBase.InputStream, insertProject);
 
 
                     insertProject.baro_template_id = int.Parse(collection.GetValue("FormProject.baro_template_id").AttemptedValue);

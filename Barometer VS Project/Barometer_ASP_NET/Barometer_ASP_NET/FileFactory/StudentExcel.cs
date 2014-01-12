@@ -11,8 +11,10 @@ namespace Barometer_ASP_NET.FileFactory
 {
     public class StudentExcel : IExcelDataTransfer
     {
-        public StudentExcel()
+        private Project assignableProject;
+        public StudentExcel(Project toAssign = null)
         {
+            assignableProject = toAssign;
             setTemplatePath("StudentTemplate");
             string newFileName = path + "Students" + DateTime.Now.ToShortDateString() + ".xlsx";
             CopyFile(TemplatePath, newFileName);
@@ -120,13 +122,13 @@ namespace Barometer_ASP_NET.FileFactory
                         rowID++;
                     }
 
-                    FillDatabase(rowData);
+                    FillDatabase(rowData, assignableProject);
                 }
 
             }
         }
 
-        private void FillDatabase(Dictionary<int, object[]> rowData)
+        private void FillDatabase(Dictionary<int, object[]> rowData, Project insertProject)
         {
             BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             foreach (KeyValuePair<int, object[]> cell in rowData)
@@ -180,6 +182,10 @@ namespace Barometer_ASP_NET.FileFactory
                                 groupExists = true;
                                 newGroup = currentGroup.First();
                             }
+                            if (insertProject != null)
+                            {
+                                newGroup.Project = insertProject;
+                            }
 
                             ProjectMember member = new ProjectMember();
                             member.student_user_id = insertUser.id;
@@ -197,6 +203,7 @@ namespace Barometer_ASP_NET.FileFactory
                     }
                 }
             }
+            int i = 0;
             context.SubmitChanges();
         }
 

@@ -24,7 +24,7 @@ namespace Barometer_ASP_NET.Controllers
         //Detail Function
         public string ShowNameOfStudent()
         {
-            Dictionary<string, string> d = student.getName(3000000);//IMPORTANT, uses a test value, it needs the studentnumber when LDAP is finished.
+            Dictionary<string, string> d = student.getName(CurrentUser.getInstance().Studentnummer);//IMPORTANT, uses a test value, it needs the studentnumber when LDAP is finished.
             string s ="";
             foreach (KeyValuePair<string, string> pair in d)
             {
