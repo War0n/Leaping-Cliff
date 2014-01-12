@@ -93,7 +93,7 @@ namespace Barometer_ASP_NET.Tests.Controllers
             int i = 0;
             try
             {
-                test_collection = d.getProjectGroupMembers(3000000);
+                test_collection = d.getProjectGroupMembers(1);
                 foreach (ProjectMember u in test_collection)
                 {
                     i++;

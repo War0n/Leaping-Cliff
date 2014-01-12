@@ -156,7 +156,7 @@ namespace Barometer_ASP_NET.Tests.TEST_Database
             String exception = "";
             try
             {
-                b = d.getReportResults(3);
+                b = d.getReportResults(4);
             }
             catch (Exception e)
             {
@@ -317,7 +317,7 @@ namespace Barometer_ASP_NET.Tests.TEST_Database
             String exception = "";
             try
             {
-                i = d.getEndGradeGroup(1, 1);
+                i = d.getEndGradeGroup(3000000, 1);
             }
             catch (Exception e)
             {

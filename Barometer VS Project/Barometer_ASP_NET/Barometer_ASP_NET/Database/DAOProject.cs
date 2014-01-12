@@ -72,6 +72,7 @@ namespace Barometer_ASP_NET.Database
                 var projectMembers =
                     from pm in context.ProjectMembers
                     join pg in context.ProjectGroups on pm.ProjectGroup equals pg
+                    where pg.id == projectGroupId
                     select pm;
                 if (projectMembers.ToList().Count > 0)
                 {
