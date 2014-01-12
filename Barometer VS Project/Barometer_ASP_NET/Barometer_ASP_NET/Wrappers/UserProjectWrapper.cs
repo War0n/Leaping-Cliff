@@ -53,7 +53,7 @@ namespace Barometer_ASP_NET.Wrappers
         {
             MyGrades = student.getStudentGrades(studentNumber, p.id);
         }
-
+         
         private void FillProjectDetails(Project p, ProjectGroup pg)
         {
             CurrentProjectSummary = p.description;

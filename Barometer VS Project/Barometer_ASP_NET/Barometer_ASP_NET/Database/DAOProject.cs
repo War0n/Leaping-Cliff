@@ -16,14 +16,21 @@ namespace Barometer_ASP_NET.Database
         /// <returns></returns>
         public IQueryable<User> getStudents(int projectID)
         {
-            DatabaseFactory factory = DatabaseFactory.getInstance();
-            DatabaseClassesDataContext context = factory.getDataContext();
-            var students =
-                from u in context.Users
-                join pm in context.ProjectMembers on u.ProjectGroups.First() equals pm.ProjectGroup
-                where pm.ProjectGroup.Project.id == projectID
-                select u;
-            return students;
+            if (projectID >= 0)
+            {
+                DatabaseFactory factory = DatabaseFactory.getInstance();
+                DatabaseClassesDataContext context = factory.getDataContext();
+                var students =
+                    from u in context.Users
+                    join pm in context.ProjectMembers on u.ProjectGroups.First() equals pm.ProjectGroup
+                    where pm.ProjectGroup.Project.id == projectID
+                    select u;
+                return students;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -31,38 +38,69 @@ namespace Barometer_ASP_NET.Database
         /// </summary>
         /// <param name="projectGroupId">The projectgroup you want to query</param>
         /// <returns>All Group members belonging to a group in a project</returns>
-        public IQueryable<ProjectMember> getProjectGroupMembers(int projectGroupId)
+        public IQueryable<ProjectGroup> getProjectGroupsByProject(int projectId)
         {
             DatabaseFactory factory = DatabaseFactory.getInstance();
             DatabaseClassesDataContext context = factory.getDataContext();
-            var projectMembers =
-                from pm in context.ProjectMembers
-                join pg in context.ProjectGroups on pm.ProjectGroup equals pg
-                select pm;
-            return projectMembers;
+            var projectGroups =
+                from pg in context.ProjectGroups
+                join p in context.Projects on pg.project_id equals p.id
+                where p.id == projectId
+                select pg;
+            return projectGroups;
+        }
+         
+        /// <summary>
+        /// Get all students belonging to the projectgroup
+        /// </summary>
+        /// <param name="projectGroupId">The projectgroup you want to query</param>
+        /// <returns>All Group members belonging to a group in a project</returns>
+        public IQueryable<ProjectMember> getProjectGroupMembers(int projectGroupId)
+        {
+            if (projectGroupId >= 0)
+            {
+                DatabaseFactory factory = DatabaseFactory.getInstance();
+                DatabaseClassesDataContext context = factory.getDataContext();
+                var projectMembers =
+                    from pm in context.ProjectMembers
+                    join pg in context.ProjectGroups on pm.ProjectGroup equals pg
+                    select pm;
+                return projectMembers;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
         /// <summary>
         /// Get all tutors belonging to the projectgroup
         /// </summary>
         public Dictionary<string, string> getTutors(int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            Dictionary<string, string> nameDictionary = new Dictionary<string, string>();
-             var fullName =
-                from pg in context.ProjectGroups
-                join u in context.Users on pg.tutor_user_id equals u.id
-                where projectId == pg.project_id
-                select new
+            if (projectId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+                Dictionary<string, string> nameDictionary = new Dictionary<string, string>();
+                var fullName =
+                   from pg in context.ProjectGroups
+                   join u in context.Users on pg.tutor_user_id equals u.id
+                   where projectId == pg.project_id
+                   select new
+                   {
+                       u.firstname,
+                       u.lastname
+                   };
+                foreach (var f in fullName)
                 {
-                    u.firstname,
-                    u.lastname
-                };
-             foreach (var f in fullName)
-             {
-                 nameDictionary.Add(f.firstname, f.lastname);
-             }
+                    nameDictionary.Add(f.firstname, f.lastname);
+                }
 
-            return nameDictionary;
+                return nameDictionary;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
 
@@ -73,24 +111,32 @@ namespace Barometer_ASP_NET.Database
         /// <returns>All the names of the students in a dictionary </returns>
         public Dictionary<string, string> getNamesOfGroupMembers(int groupId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            Dictionary<string, string> nameDictionary = new Dictionary<string, string>();
-
-            var users =
-                from pm in context.ProjectMembers
-                join u in context.Users on pm.student_user_id equals u.id
-                where pm.project_group_id == groupId
-                select new
-                {
-                    u.firstname, u.lastname
-                };
-
-            foreach (var f in users)
+            if (groupId >= 0)
             {
-                nameDictionary.Add(f.firstname, f.lastname);
-            }
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+                Dictionary<string, string> nameDictionary = new Dictionary<string, string>();
 
-            return nameDictionary;
+                var users =
+                    from pm in context.ProjectMembers
+                    join u in context.Users on pm.student_user_id equals u.id
+                    where pm.project_group_id == groupId
+                    select new
+                    {
+                        u.firstname,
+                        u.lastname
+                    };
+
+                foreach (var f in users)
+                {
+                    nameDictionary.Add(f.firstname, f.lastname);
+                }
+
+                return nameDictionary;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -100,14 +146,21 @@ namespace Barometer_ASP_NET.Database
         /// <returns>The name of the project </returns>
         public string getProjectName(int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            if (projectId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-            var projectName =
-                (from p in context.Projects
-                 where p.id == projectId
-                 select p.name).SingleOrDefault();
+                var projectName =
+                    (from p in context.Projects
+                     where p.id == projectId
+                     select p.name).SingleOrDefault();
 
-            return (string)projectName;
+                return (string)projectName;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -117,22 +170,30 @@ namespace Barometer_ASP_NET.Database
         /// <returns>The start and end date of a project in string format </returns>
         public Dictionary<string, string> getStartAndEndDate(int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            Dictionary<string, string> startAndEndDate = new Dictionary<string,string>();
-
-            var projectDate =
-                from p in context.Projects
-                where p.id == projectId
-                select new
-                {
-                    p.start_date, p.end_date
-                };
-
-            foreach(var p in projectDate)
+            if (projectId >= 0)
             {
-                startAndEndDate.Add(p.start_date.ToString(), p.end_date.ToString());
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+                Dictionary<string, string> startAndEndDate = new Dictionary<string, string>();
+
+                var projectDate =
+                    from p in context.Projects
+                    where p.id == projectId
+                    select new
+                    {
+                        p.start_date,
+                        p.end_date
+                    };
+
+                foreach (var p in projectDate)
+                {
+                    startAndEndDate.Add(p.start_date.ToString(), p.end_date.ToString());
+                }
+                return startAndEndDate;
             }
-            return startAndEndDate;
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -142,14 +203,21 @@ namespace Barometer_ASP_NET.Database
         /// <returns>The summary of a project</returns>
         public string getProjectSummary(int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            if (projectId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-            var projectSummary =
-                (from p in context.Projects
-                 where p.id == projectId
-                 select p.description).SingleOrDefault();
+                var projectSummary =
+                    (from p in context.Projects
+                     where p.id == projectId
+                     select p.description).SingleOrDefault();
 
-            return (string)projectSummary;
+                return (string)projectSummary;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -159,25 +227,33 @@ namespace Barometer_ASP_NET.Database
         /// <returns>Returns a dictionary with the names of the teachers </returns>
         public Dictionary<string, string> projectTeachers(int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            Dictionary<string, string> teachers = new Dictionary<string, string>();
-
-            var teacher =
-                from p in context.Projects
-                join po in context.ProjectOwners on p.id equals po.project_id
-                join u in context.Users on po.user_id equals u.id
-                where p.id == projectId
-                select new
-                {
-                    u.firstname, u.lastname
-                };
-
-            foreach (var t in teacher)
+            if (projectId >= 0)
             {
-                teachers.Add(t.firstname, t.lastname);
-            }
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+                Dictionary<string, string> teachers = new Dictionary<string, string>();
 
-            return teachers;
+                var teacher =
+                    from p in context.Projects
+                    join po in context.ProjectOwners on p.id equals po.project_id
+                    join u in context.Users on po.user_id equals u.id
+                    where p.id == projectId
+                    select new
+                    {
+                        u.firstname,
+                        u.lastname
+                    };
+
+                foreach (var t in teacher)
+                {
+                    teachers.Add(t.firstname, t.lastname);
+                }
+
+                return teachers;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -188,15 +264,22 @@ namespace Barometer_ASP_NET.Database
         /// 
         public IQueryable<User> getUsersInGroup(int groupId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            if (groupId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-            var users =
-                from u in context.Users
-                join pm in context.ProjectMembers on u.id equals pm.student_user_id
-                where pm.project_group_id == groupId
-                select u;
+                var users =
+                    from u in context.Users
+                    join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                    where pm.project_group_id == groupId
+                    select u;
 
-            return users;
+                return users;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
@@ -207,15 +290,22 @@ namespace Barometer_ASP_NET.Database
 
         public IQueryable<User> GetProjectOwners(int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            if (projectId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-            var projectOwners =
-                from u in context.Users
-                join po in context.ProjectOwners on u.id equals po.user_id
-                where po.project_id == projectId
-                select u;
+                var projectOwners =
+                    from u in context.Users
+                    join po in context.ProjectOwners on u.id equals po.user_id
+                    where po.project_id == projectId
+                    select u;
 
-            return projectOwners;
+                return projectOwners;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
 
         }
 
@@ -226,35 +316,81 @@ namespace Barometer_ASP_NET.Database
         /// <returns>Returns tutors of a group </returns>
         public IQueryable<User> GetTutor(int groupId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            if (groupId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-            var tutor =
-                from u in context.Users 
-                join pg in context.ProjectGroups on u.id equals pg.tutor_user_id
-                where pg.id == groupId
-                select u;
+                var tutor =
+                    from u in context.Users
+                    join pg in context.ProjectGroups on u.id equals pg.tutor_user_id
+                    where pg.id == groupId
+                    select u;
 
-            return tutor;
+                return tutor;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
 
         /// <summary>
         /// Gets the ID of an active project 
         /// </summary>
-        /// <param name="groupId">The project of a student</param>
+        /// <param name="studentNumber">The project of a student</param>
         /// <returns>Returns an ID from an active project </returns>
         public IQueryable<Project> GetCurrentActiveProject(int studentNumber)
         {
+            if (studentNumber > 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+                var activeProject =
+                    from p in context.Projects
+                    join pg in context.ProjectGroups on p.id equals pg.project_id
+                    join pm in context.ProjectMembers on pg.id equals pm.project_group_id
+                    join u in context.Users on pm.student_user_id equals u.id
+                    where u.student_number == studentNumber && p.status_name.Equals("Active")
+                    select p;
+
+                return activeProject;
+            }
+             else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+        
+        public IQueryable<Project> GetProjectsByOwner(int ownerId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            var projects =
+                from p in context.Projects
+                join po in context.ProjectOwners on p.id equals po.project_id
+                join usr in context.Users on po.user_id equals usr.id
+                where usr.student_number == ownerId
+                select p;
+            return projects;
+        }
+        /// <summary>
+        /// Gets all projects where a student participates
+        /// </summary>
+        /// <param name="studentNumber">The project of a student</param>
+        /// <returns>Returns all projects where a student took part of. </returns>
+        public IQueryable<Project> GetAllProjects(int studentNumber)
+        {
             DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
-            var activeProject =
+            var AllProjects =
                 from p in context.Projects
                 join pg in context.ProjectGroups on p.id equals pg.project_id
                 join pm in context.ProjectMembers on pg.id equals pm.project_group_id
                 join u in context.Users on pm.student_user_id equals u.id
-                where u.student_number == studentNumber && p.status_name.Equals("Active")
+                where u.student_number == studentNumber
                 select p;
 
-            return activeProject;
+            return AllProjects;
+
         }
     }
 }

@@ -2,7 +2,7 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=mssql.aii.avans.nl;Initial Catalog=LeapingCliff;Persist Security Info=True;User ID=42IN05SOb" SettingsObjectName="BarometerDataAccesLayer.Properties.Settings" SettingsPropertyName="LeapingCliffConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.BaroAspect" Member="BaroAspects">
     <Type Name="BaroAspect">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="parent_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="baro_template_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="is_head_aspect" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
@@ -15,9 +15,26 @@
       <Association Name="BaroTemplate_BaroAspect" Member="BaroTemplate" ThisKey="baro_template_id" OtherKey="id" Type="BaroTemplate" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="student_number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="firstname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="lastname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="profile_image" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="rol_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="User_ProjectGroup" Member="ProjectGroups" ThisKey="id" OtherKey="tutor_user_id" Type="ProjectGroup" />
+      <Association Name="User_ProjectMember" Member="ProjectMembers" ThisKey="id" OtherKey="student_user_id" Type="ProjectMember" />
+      <Association Name="User_ProjectOwner" Member="ProjectOwners" ThisKey="id" OtherKey="user_id" Type="ProjectOwner" />
+      <Association Name="User_Report" Member="Reports" ThisKey="id" OtherKey="reporter_id" Type="Report" />
+      <Association Name="User_Report1" Member="Reports1" ThisKey="id" OtherKey="subject_id" Type="Report" />
+      <Association Name="Rol_User" Member="Rol" ThisKey="rol_name" OtherKey="name" Type="Rol" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.BaroTemplate" Member="BaroTemplates">
     <Type Name="BaroTemplate">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="template_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="rating_type" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="anonymous" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
@@ -27,7 +44,7 @@
   </Table>
   <Table Name="dbo.Project" Member="Projects">
     <Type Name="Project">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="description" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="blok" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -38,13 +55,14 @@
       <Association Name="Project_ProjectGroup" Member="ProjectGroups" ThisKey="id" OtherKey="project_id" Type="ProjectGroup" />
       <Association Name="Project_ProjectOwner" Member="ProjectOwners" ThisKey="id" OtherKey="project_id" Type="ProjectOwner" />
       <Association Name="Project_ProjectReportDate" Member="ProjectReportDates" ThisKey="id" OtherKey="project_id_int" Type="ProjectReportDate" />
+      <Association Name="Project_ProjectReportDate1" Member="ProjectReportDates1" ThisKey="id" OtherKey="project_id_int" Type="ProjectReportDate" />
       <Association Name="BaroTemplate_Project" Member="BaroTemplate" ThisKey="baro_template_id" OtherKey="id" Type="BaroTemplate" IsForeignKey="true" />
       <Association Name="Status_Project" Member="Status" ThisKey="status_name" OtherKey="name" Type="Status" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProjectGroup" Member="ProjectGroups">
     <Type Name="ProjectGroup">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="group_code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="group_end_grade" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="tutor_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -56,7 +74,7 @@
   </Table>
   <Table Name="dbo.ProjectMember" Member="ProjectMembers">
     <Type Name="ProjectMember">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="project_group_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="student_user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="end_grade" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -66,7 +84,7 @@
   </Table>
   <Table Name="dbo.ProjectOwner" Member="ProjectOwners">
     <Type Name="ProjectOwner">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="project_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Project_ProjectOwner" Member="Project" ThisKey="project_id" OtherKey="id" Type="Project" IsForeignKey="true" />
@@ -75,7 +93,7 @@
   </Table>
   <Table Name="dbo.ProjectReportDate" Member="ProjectReportDates">
     <Type Name="ProjectReportDate">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="project_id_int" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="is_endreport" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="week_label" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
@@ -83,11 +101,12 @@
       <Column Name="end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="ProjectReportDate_Report" Member="Reports" ThisKey="id" OtherKey="project_report_date_id" Type="Report" />
       <Association Name="Project_ProjectReportDate" Member="Project" ThisKey="project_id_int" OtherKey="id" Type="Project" IsForeignKey="true" />
+      <Association Name="Project_ProjectReportDate1" Member="Project1" ThisKey="project_id_int" OtherKey="id" Type="Project" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Report" Member="Reports">
     <Type Name="Report">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="reporter_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="subject_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="project_report_date_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -112,27 +131,21 @@
       <Association Name="Status_Project" Member="Projects" ThisKey="name" OtherKey="status_name" Type="Project" />
     </Type>
   </Table>
-  <Table Name="dbo.[User]" Member="Users">
-    <Type Name="User">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="student_number" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="firstname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="lastname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="profile_image" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="rol_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="User_ProjectGroup" Member="ProjectGroups" ThisKey="id" OtherKey="tutor_user_id" Type="ProjectGroup" />
-      <Association Name="User_ProjectMember" Member="ProjectMembers" ThisKey="id" OtherKey="student_user_id" Type="ProjectMember" />
-      <Association Name="User_ProjectOwner" Member="ProjectOwners" ThisKey="id" OtherKey="user_id" Type="ProjectOwner" />
-      <Association Name="User_Report" Member="Reports" ThisKey="id" OtherKey="reporter_id" Type="Report" />
-      <Association Name="User_Report1" Member="Reports1" ThisKey="id" OtherKey="subject_id" Type="Report" />
-      <Association Name="Rol_User" Member="Rol" ThisKey="rol_name" OtherKey="name" Type="Rol" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Function Name="dbo.add_student_to_group" Method="add_student_to_group" IsComposable="true">
+  <Function Name="dbo.add_student_to_group" Method="add_student_to_group">
     <Parameter Name="StudentNumber" Parameter="studentNumber" Type="System.Int32" DbType="Int" />
     <Parameter Name="GroupID" Parameter="groupID" Type="System.Int32" DbType="Int" />
-    <Return Type="object" />
+  </Function>
+  <Function Name="dbo.GetProjectNameAndIndividualGrade" Method="GetProjectNameAndIndividualGrade">
+    <Parameter Name="studentnumber" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetProjectNameAndIndividualGradeResult">
+      <Column Name="Foutmelding" Type="System.String" DbType="VarChar(22) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetProjectNameAndGrade" Method="GetProjectNameAndGrade">
+    <Parameter Name="studentnumber" Type="System.Int32" DbType="Int" />
+    <ElementType Name="GetProjectNameAndGradeResult">
+      <Column Name="Foutmelding" Type="System.String" DbType="VarChar(22) NOT NULL" CanBeNull="false" />
+    </ElementType>
   </Function>
   <Function Name="dbo.get_student_procedure" Method="get_student_procedure">
     <Parameter Name="StudentNr" Parameter="studentNr" Type="System.Int32" DbType="Int" />
@@ -141,25 +154,21 @@
       <Column Name="Eindcijfer" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.Check_Group_Exists" Method="Check_Group_Exists" IsComposable="true">
+    <Parameter Name="groupID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetProject" Method="GetProject" IsComposable="true">
+    <Parameter Name="groupID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.Check_Student_Is_In_Group" Method="Check_Student_Is_In_Group" IsComposable="true">
     <Parameter Name="studentID" Type="System.Int32" DbType="Int" />
     <Parameter Name="ProjectID" Parameter="projectID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.GetProjectID" Method="GetProjectID" IsComposable="true">
-    <Parameter Name="groupID" Type="System.Int32" DbType="Int" />
-    <ElementType Name="GetProjectIDResult">
-      <Column Name="project_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.Get_Student" Method="Get_Student" IsComposable="true">
     <Parameter Name="studentnumber" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.GetProject" Method="GetProject" IsComposable="true">
-    <Parameter Name="groupID" Type="System.Int32" DbType="Int" />
-    <ElementType Name="GetProjectResult">
-      <Column Name="project_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
   </Function>
 </Database>

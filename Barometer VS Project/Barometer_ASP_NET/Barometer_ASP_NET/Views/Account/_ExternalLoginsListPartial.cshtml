@@ -13,7 +13,7 @@ else
     {
     @Html.AntiForgeryToken()
     <fieldset id="socialLoginList">
-        <legend>Click any service to login to</legend>
+        <legend>Login via:</legend>
         <p>
         @foreach (AuthenticationClientData p in Model)
         {
