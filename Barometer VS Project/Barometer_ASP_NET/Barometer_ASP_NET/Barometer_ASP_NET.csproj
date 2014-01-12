@@ -387,6 +387,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\_ViewStart.cshtml" />
+    <Compile Include="Wrappers\CreateProjectWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\ExcelExports\" />

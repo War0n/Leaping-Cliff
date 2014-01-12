@@ -25,8 +25,19 @@ namespace Barometer_ASP_NET.Controllers
 
 		public ActionResult Create()
 		{
-			return View();
+            CreateProjectWrapper wrapper = new CreateProjectWrapper();
+			return View(wrapper);
 		}
+
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            if (collection.Count != 0)
+            {
+
+            }
+            return RedirectToAction("List");
+        }
 
 		public ActionResult Detail()
 		{

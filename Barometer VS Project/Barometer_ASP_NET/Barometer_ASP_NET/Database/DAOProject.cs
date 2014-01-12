@@ -392,5 +392,14 @@ namespace Barometer_ASP_NET.Database
             return AllProjects;
 
         }
+
+        public IQueryable<BaroTemplate> GetAllTemplates()
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            var templates =
+                from bt in context.BaroTemplates
+                select bt;
+            return templates;
+        }
     }
 }
