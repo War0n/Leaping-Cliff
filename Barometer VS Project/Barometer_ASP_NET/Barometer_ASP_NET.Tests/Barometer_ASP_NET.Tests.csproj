@@ -40,6 +40,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetOpenAuth.AspNet">
       <HintPath>..\packages\DotNetOpenAuth.AspNet.4.3.4.13329\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
     </Reference>
@@ -128,6 +132,10 @@
     <Compile Include="TEST_Database\TEST_DAOStudent.cs" />
     <Compile Include="TEST_Database\TEST_DatabaseFactory.cs" />
     <Compile Include="TEST_Database\TEST_DAOTemplate.cs" />
+    <Compile Include="TEST_FileFactory\TEST_FileHandlerFactory.cs" />
+    <Compile Include="TEST_FileFactory\TEST_GradeExcel.cs" />
+    <Compile Include="TEST_FileFactory\TEST_StudentExcel.cs" />
+    <Compile Include="TEST_FileFactory\TEST_TemplateExcel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
