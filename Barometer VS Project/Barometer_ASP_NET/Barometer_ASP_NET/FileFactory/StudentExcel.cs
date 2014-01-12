@@ -1,4 +1,6 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+﻿using Barometer_ASP_NET.Database;
+using BarometerDataAccesLayer;
+using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
@@ -47,6 +49,15 @@ namespace Barometer_ASP_NET.FileFactory
                         InsertCellInWorksheet(ws, emailAdress);
                         UpdateValue("Blad1", emailAdress, student.email, 0, true);
 
+                        string groupsString = "";
+                        foreach (BarometerDataAccesLayer.ProjectGroup group in studentdao.getStudentGroup((int)student.student_number))
+                        {
+                            groupsString += group.group_code + ",";
+                        }
+                        string groupAdress = "E" + rowNumber;
+                        InsertCellInWorksheet(ws, groupAdress);
+                        UpdateValue("Blad1", groupAdress, groupsString, 0, true);
+
                     }
                     else
                     {
@@ -92,7 +103,7 @@ namespace Barometer_ASP_NET.FileFactory
                     {
                         bool emptyRow = true;
                         string value;
-                        object[] values = new object[4];
+                        object[] values = new object[5];
                         int cellID = 0;
                         foreach (Cell c in row.Elements<Cell>())
                         {
@@ -119,11 +130,58 @@ namespace Barometer_ASP_NET.FileFactory
             {
                 if (cell.Key != 0)
                 {
-                    BarometerDataAccesLayer.User insertUser = new BarometerDataAccesLayer.User();
+                    BarometerDataAccesLayer.User insertUser = null;
+                    var existingUser =
+                        from u in context.Users
+                        where u.student_number == int.Parse(cell.Value[0].ToString())
+                        select u;
+
+                    if (existingUser.Count() == 0)
+                    {
+                        //If doesnt exist, create empty one 
+                        insertUser = new BarometerDataAccesLayer.User();
+                    }
+                    else
+                    {
+                        //If exists, get user
+                        insertUser = existingUser.First();
+                    }
+
                     insertUser.student_number = int.Parse(cell.Value[0].ToString());
                     insertUser.firstname = cell.Value[1].ToString();
                     insertUser.lastname = cell.Value[2].ToString();
                     insertUser.email = cell.Value[3].ToString();
+
+                    if (cell.Value[4].ToString() != "")
+                    {
+                        string[] groups = cell.Value[4].ToString().Split(',');
+                        foreach (string groupcode in groups)
+                        {
+                            var currentGroup =
+                                from pg in context.ProjectGroups
+                                where pg.group_code == groupcode
+                                select pg;
+
+                            ProjectGroup newGroup = null;
+                            if (currentGroup.Count() == 0)
+                            {
+                                //Groep bestaat nog niet, aanmaken
+                                newGroup = new ProjectGroup();
+                                newGroup.group_code = groupcode;
+                            }
+                            else
+                            {
+                                newGroup = currentGroup.First();
+                            }
+
+                            ProjectMember member = new ProjectMember();
+                            member.student_user_id = insertUser.id;
+                            member.ProjectGroup = newGroup;
+                            context.ProjectGroups.InsertOnSubmit(newGroup);
+                            context.ProjectMembers.InsertOnSubmit(member);
+                        }
+                    }
+
                     context.Users.InsertOnSubmit(insertUser);
                 }
             }
