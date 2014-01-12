@@ -31,9 +31,6 @@ namespace Barometer_ASP_NET.Controllers
 
 		public ActionResult Project()
 		{
-            FileStream fs = new FileStream(System.Web.HttpContext.Current.Server.MapPath("~/Content/ExcelExports/std.xlsx"), FileMode.Open);
-            StudentExcel std = new StudentExcel();
-            std.Import(fs);
             UserProjectWrapper wrapper = new UserProjectWrapper(3000000); //IMPORTANT, uses a test value
             return View(wrapper);
 		}
