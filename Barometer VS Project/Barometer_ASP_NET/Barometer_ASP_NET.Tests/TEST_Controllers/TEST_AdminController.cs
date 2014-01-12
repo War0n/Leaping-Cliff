@@ -14,8 +14,8 @@ namespace Barometer_ASP_NET.Tests.TEST_Controllers
         [TestMethod]
         public void test_01_student_correct_testdata()
         {
-            var result = a.Student(3000000) as ViewResult;
-            var resultdata = (User) result.ViewData.Model;
+            var result = a.Student(1) as ViewResult;
+            var resultdata = (User)result.ViewData.Model;
 
             Assert.AreEqual("John", resultdata.firstname);
         }

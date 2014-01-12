@@ -1,6 +1,7 @@
 ﻿using Barometer_ASP_NET.Wrappers;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -55,7 +56,14 @@ namespace Barometer_ASP_NET.Controllers
                 from u in context.Users
                 where u.id == studentId
                 select u;
-            return View(student.First());
+            if (student.ToList().Count > 0)
+            {
+                return View(student.First());
+            }
+            else
+            {
+                throw new DataException("No data found");
+            }
         }
 
         public ActionResult StudentForm(FormCollection collection)
