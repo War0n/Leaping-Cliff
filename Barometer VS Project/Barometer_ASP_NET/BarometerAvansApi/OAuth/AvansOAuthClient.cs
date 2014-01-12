@@ -4,6 +4,7 @@ using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OAuth;
 using DotNetOpenAuth.OAuth.ChannelElements;
 using DotNetOpenAuth.OAuth.Messages;
+using BarometerDataAccesLayer.Database;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace oAuthDemo.OAuth
             this(consumerKey, consumerSecret, new AuthenticationOnlyCookieOAuthTokenManager())
         {
         }
-         
+
         public AvansOAuthClient(string consumerKey, string consumerSecret, IOAuthTokenManager tokenManager)
             : base("avans", AvansServiceDescription, new SimpleConsumerTokenManager(consumerKey, consumerSecret, tokenManager))
         {
@@ -72,11 +73,13 @@ namespace oAuthDemo.OAuth
                             extraData.Add("Id", user[0].Studentnummer ?? "Onbekend");
                             extraData.Add("Login", user[0].Inlognaam ?? "Onbekend");
 
+                            DatabaseFactory.getInstance().getDAOStudent().putStudentInDatabase(Convert.ToInt32(user[0].Studentnummer), user[0].Inlognaam);
+
                             return new DotNetOpenAuth.AspNet.AuthenticationResult(true, ProviderName, extraData["Id"], extraData["Login"], extraData);
                         }
                     }
                 }
-                //return new AuthenticationResult(false);
+                return new AuthenticationResult(false);
             }
             catch (WebException ex)
             {
@@ -91,5 +94,5 @@ namespace oAuthDemo.OAuth
             }
         }
 
-	}
+    }
 }
