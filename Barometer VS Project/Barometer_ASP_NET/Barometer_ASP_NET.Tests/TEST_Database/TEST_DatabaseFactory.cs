@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Security;
 using System.Web;
-using Barometer_ASP_NET.Database;
+using BarometerDataAccesLayer.Database;
 
 namespace Barometer_ASP_NET.Tests.TEST_Database
 {

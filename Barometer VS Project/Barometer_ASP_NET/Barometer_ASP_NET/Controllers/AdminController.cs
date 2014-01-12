@@ -3,6 +3,7 @@ using Barometer_ASP_NET.Wrappers;
 using BarometerDataAccesLayer.Database;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Linq;
 using System.Globalization;
 using System.Linq;

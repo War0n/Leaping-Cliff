@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Barometer_ASP_NET.Database;
+using BarometerDataAccesLayer.Database;
 
 namespace Barometer_ASP_NET.Tests.TEST_Database
 {

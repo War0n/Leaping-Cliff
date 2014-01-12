@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using BarometerDataAccesLayer;
-using Barometer_ASP_NET.Database;
+using BarometerDataAccesLayer.Database;
 using System.Collections.Generic;
 
 namespace Barometer_ASP_NET.Tests.TEST_Database

@@ -203,7 +203,6 @@ namespace Barometer_ASP_NET.FileFactory
                     }
                 }
             }
-            int i = 0;
             context.SubmitChanges();
         }
 
