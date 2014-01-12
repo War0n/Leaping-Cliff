@@ -7,7 +7,7 @@ namespace oAuthDemo.OAuth
 {
     public class OAuthUser
     {
-        public string Id { get; set; }
+        public string Studentnummer { get; set; }
         public string Inlognaam { get; set; }
 		public int TelefoonExtern { get; set; }
 		public int Toestel { get; set; }
