@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using BarometerDataAccesLayer;
 using System.Data.SqlClient;
-using System.Data;
+using System.Data.Linq;
 using System.Data;
 
 namespace Barometer_ASP_NET.Database
@@ -107,6 +107,14 @@ namespace Barometer_ASP_NET.Database
                 {
                     throw new DataException("No data found for valid argument");
                 }
+                if (grades.Count > 0)
+                {
+                    return grades;
+                }
+                else
+                {
+                    throw new DataException("No data found for valid argument");
+                }
             }
             else
             {
@@ -204,6 +212,16 @@ namespace Barometer_ASP_NET.Database
                if (fullName.Count > 0)
                {
                    return fullName;
+               }
+               else
+               {
+                   throw new DataException("No data found for valid argument");
+               }
+               }
+               else
+               {
+                   throw new DataException("No data found for valid argument");
+               }
                }
                else
                {
