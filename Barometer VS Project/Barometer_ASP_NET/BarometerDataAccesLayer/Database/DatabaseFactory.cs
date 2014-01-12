@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security;
 using System.Web;
 
-namespace Barometer_ASP_NET.Database
+namespace BarometerDataAccesLayer.Database
 {
 	public class DatabaseFactory
 	{
@@ -56,7 +56,7 @@ namespace Barometer_ASP_NET.Database
             return DAOSTUDENT;
         }
 
-        internal DAOTemplate getDAOTemplate()
+        public DAOTemplate getDAOTemplate()
         {
             return DAOTEMPLATE;
         }

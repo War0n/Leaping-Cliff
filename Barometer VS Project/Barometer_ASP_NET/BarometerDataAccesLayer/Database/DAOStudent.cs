@@ -6,7 +6,7 @@ using BarometerDataAccesLayer;
 using System.Data.SqlClient;
 using System.Data.Linq;
 
-namespace Barometer_ASP_NET.Database
+namespace BarometerDataAccesLayer.Database
 {
     public class DAOStudent
     {
