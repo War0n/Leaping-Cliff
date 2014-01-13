@@ -39,22 +39,24 @@
     }
 </script>
 <div class="row">
-
+    
     <div class="col-lg-4">
+        
         <h2>Huidig project</h2>
         <hr />
 
         <div class="well well-lg">
+            @if(Model.HasProject){
             <h4><i>Info</i></h4>
             <table class="table table-bordered">
                 <tbody>
                     <tr>
                         <td>Naam</td>
-                        <td>@Model.CurrentProject.First().name</td>
+                        <td>@Model.CurrentProject.name</td>
                     </tr>
                     <tr>
                         <td>Omschrijving</td>
-                        <td>@Model.CurrentProject.First().description</td>
+                        <td>@Model.CurrentProject.description</td>
                     </tr>
                     <tr>
                         <td>Docenten</td>
@@ -69,7 +71,7 @@
                     <tr>
                         @{int weeks = 0;}
                         <td>Duur</td>
-                        <td>@{weeks = (((DateTime)Model.CurrentProject.First().end_date).Subtract((DateTime)Model.CurrentProject.First().start_date).Days) / 7;}@weeks</td>
+                        <td>@{weeks = (((DateTime)Model.CurrentProject.end_date).Subtract((DateTime)Model.CurrentProject.start_date).Days) / 7;}@weeks</td>
                     </tr>
                 </tbody>
             </table>
@@ -225,10 +227,12 @@
                         </tr>*@
                 </tbody>
             </table>
+            }else
+            {
+                <p>Je zit momenteel niet in een project.</p>
+            }
         </div>
-
     </div>
-
 
     <div class="col-lg-7 col-lg-offset-1">
         <h2>Persoonlijke voortgang</h2>

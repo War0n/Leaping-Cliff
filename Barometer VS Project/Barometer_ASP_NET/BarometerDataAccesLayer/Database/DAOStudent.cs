@@ -96,14 +96,14 @@ namespace BarometerDataAccesLayer.Database
                     where p.id == projectID
                     && p.status_name == "Closed"
                     select pg;
-                if (results.ToList().Count > 0)
-                {
+                //if (results.ToList().Count > 0)
+                //{
                     return results;
-                }
-                else
-                {
-                    throw new DataException("No data found for valid argument");
-                }
+                //}
+                //else
+                //{
+                //    throw new DataException("No data found for valid argument");
+                //}
             }
             else
             {
