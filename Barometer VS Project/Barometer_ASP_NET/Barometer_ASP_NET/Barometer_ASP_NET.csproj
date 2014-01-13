@@ -204,7 +204,6 @@
     <Compile Include="Controllers\ModeratorController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Database\DAOBaro.cs" />
     <Compile Include="FileFactory\FileHandlerFactory.cs" />
     <Compile Include="FileFactory\GradeExcel.cs" />
     <Compile Include="FileFactory\IExcelDataTransfer.cs" />
@@ -215,7 +214,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaroGradeViewModel.cs" />
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectGroup.cs" />
@@ -397,6 +395,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\ExcelExports\" />
+    <Folder Include="Database\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
