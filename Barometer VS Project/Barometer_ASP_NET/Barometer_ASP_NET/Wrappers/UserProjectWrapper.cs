@@ -12,6 +12,7 @@ namespace Barometer_ASP_NET.Wrappers
     {
         private int studentNumber;
         private int projectId;
+        public int StudentNumber { get; set; }
         public int CurrentProjectId { get; set; }
         public string  CurrentProjectSummary { get; set; }
         public string  CurrentProjectName { get; set; }
@@ -22,6 +23,8 @@ namespace Barometer_ASP_NET.Wrappers
         public IQueryable<User> ProjectOwners { get; set; }
         public IQueryable<User> Tutors { get; set; }
         public IQueryable<Report> MyGrades { get; set; }
+        public IQueryable<BaroAspect> SubAspects { get; set; }
+        public IQueryable<BaroAspect> SubSubAspects { get; set; }
         public Dictionary<ProjectReportDate, Dictionary<Report, int>> SecondDictionary { get; set; }
         public Dictionary<Report, int> ThirdDictionary { get; set; }
         public Dictionary<BaroAspect, Dictionary<ProjectReportDate, Dictionary<Report, int>>> Grades { get; set; }
@@ -41,6 +44,8 @@ namespace Barometer_ASP_NET.Wrappers
             FillProjectDetails(project.GetProject(this.studentNumber, projectId).FirstOrDefault(), student.getStudentGroup(studentNumber).First());
             FillMyGrades(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
             FillGrades(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
+            FillSubAspects(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
+            FillSubSubAspects(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
         }
 
         private void FillProjectMembers(ProjectGroup projectGroup)
@@ -61,6 +66,16 @@ namespace Barometer_ASP_NET.Wrappers
         private void FillMyGrades(Project p)
         {
             MyGrades = student.getStudentGrades(studentNumber, p.id);
+        }
+
+        private void FillSubAspects(Project p)
+        {
+            SubAspects = project.GetSubAspects(p.id);
+        }
+
+        private void FillSubSubAspects(Project p)
+        {
+            SubSubAspects = project.GetSubSubAspects(p.id);
         }
          
         private void FillProjectDetails(Project p, ProjectGroup pg)
@@ -110,7 +125,7 @@ namespace Barometer_ASP_NET.Wrappers
         {
             ThirdDictionary = new Dictionary<Report, int>();
 
-            foreach (var v in project.GetSubAspects(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id, this.studentNumber))
+            foreach (var v in project.GetReports(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id, this.studentNumber))
             {
                 ThirdDictionary.Add(v, (int)v.grade);
             }

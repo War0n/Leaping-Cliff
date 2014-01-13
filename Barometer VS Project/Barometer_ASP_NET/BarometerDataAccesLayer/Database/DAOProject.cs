@@ -525,7 +525,7 @@ namespace BarometerDataAccesLayer.Database
             return dates;
         }
 
-        public IQueryable<Report> GetSubAspects(int projectId, int studentNumber)
+        public IQueryable<Report> GetReports(int projectId, int studentNumber)
         {
             DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
@@ -539,6 +539,34 @@ namespace BarometerDataAccesLayer.Database
                 select r;
 
             return report;
+        }
+
+        public IQueryable<BaroAspect> GetSubAspects(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var subAspects =
+                from ba in context.BaroAspects
+                join bt in context.BaroTemplates on ba.baro_template_id equals bt.id
+                join p in context.Projects on bt.id equals p.baro_template_id
+                where p.id == projectId && ba.is_head_aspect == 0 && ba.can_be_filled == 0
+                select ba;
+
+            return subAspects;
+        }
+
+        public IQueryable<BaroAspect> GetSubSubAspects(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var subAspects =
+                from ba in context.BaroAspects
+                join bt in context.BaroTemplates on ba.baro_template_id equals bt.id
+                join p in context.Projects on bt.id equals p.baro_template_id
+                where p.id == projectId && ba.is_head_aspect == 0 && ba.can_be_filled == 1
+                select ba;
+
+            return subAspects;
         }
     }
 }
