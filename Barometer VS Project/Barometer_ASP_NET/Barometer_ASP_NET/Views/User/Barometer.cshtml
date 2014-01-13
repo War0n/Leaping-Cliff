@@ -36,9 +36,10 @@
 
                 <li class="pull-right">
                     <select class="form-control">
-                        <option>Week 3</option>
-                        <option>Week 6</option>
-                        <option>Week 9</option>
+                        @foreach (var v in Model.SecondDictionary)
+                        {
+                             <option>@v.Key.week_label</option>
+                        }
                     </select>
                 </li>
             </ul>
