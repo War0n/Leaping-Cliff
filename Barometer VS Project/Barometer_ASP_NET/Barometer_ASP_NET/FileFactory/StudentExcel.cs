@@ -12,7 +12,7 @@ namespace Barometer_ASP_NET.FileFactory
     public class StudentExcel : IExcelDataTransfer
     {
         private Project assignableProject;
-        public StudentExcel(Project toAssign = null)
+        public StudentExcel(Project toAssign = null):base()
         {
             assignableProject = toAssign;
             setTemplatePath("StudentTemplate");

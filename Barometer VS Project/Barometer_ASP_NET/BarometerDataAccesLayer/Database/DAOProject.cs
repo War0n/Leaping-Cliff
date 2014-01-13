@@ -74,14 +74,14 @@ namespace BarometerDataAccesLayer.Database
                     join pg in context.ProjectGroups on pm.ProjectGroup equals pg
                     where pg.id == projectGroupId
                     select pm;
-                if (projectMembers.ToList().Count > 0)
-                {
+                //if (projectMembers.ToList().Count > 0)
+                //{
                     return projectMembers;
-                }
-                else
-                {
-                    throw new DataException("No data found, for valid parameter");
-                }
+                //}
+                //else
+                //{
+                //    throw new DataException("No data found, for valid parameter");
+                //}
             }
             else
             {
