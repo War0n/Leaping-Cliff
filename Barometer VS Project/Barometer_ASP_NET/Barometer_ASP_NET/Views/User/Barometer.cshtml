@@ -1,3 +1,5 @@
+@model Barometer_ASP_NET.Wrappers.UserProjectWrapper
+
 @{
     ViewBag.Title = "Barometer";
 }
@@ -16,30 +18,13 @@
 <div class="row barometer">
     <div class="col-lg-3">
         <ul class="nav nav-pills nav-stacked baro-students" style="">
-            <li>
+            @foreach (var u in Model.ProjectMembers)
+            {
+             <li>
                 <img src="../../images/pf.jpg" class="img-circle pull-left">
-                <p>Rik Coenen <span class="glyphicon glyphicon-ok"></span></p>
+                <p>@u.firstname @u.lastname <span class="glyphicon glyphicon-ok"></span></p>
             </li>
-            <li class="active">
-                <img src="../../images/pf.jpg" class="img-circle pull-left">
-                <p>Dennis Dolleman </p>
-            </li>
-            <li>
-                <img src="../../images/pf.jpg" class="img-circle pull-left">
-                <p>Alhric Lacile</p>
-            </li>
-            <li>
-                <img src="../../images/pf.jpg" class="img-circle pull-left">
-                <p>Ronald Makelaar <span class="glyphicon glyphicon-ok"></span></p>
-            </li>
-            <li>
-                <img src="../../images/pf.jpg" class="img-circle pull-left">
-                <p>Nick Hulodake <span class="glyphicon glyphicon-ok"></span></p>
-            </li>
-            <li>
-                <img src="../../images/pf.jpg" class="img-circle pull-left">
-                <p>John Pakema <span class="glyphicon glyphicon-ok"></span></p>
-            </li>
+            }
         </ul>
 
     </div>

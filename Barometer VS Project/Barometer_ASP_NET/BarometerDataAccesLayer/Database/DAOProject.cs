@@ -1,11 +1,12 @@
 ﻿using BarometerDataAccesLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-namespace Barometer_ASP_NET.Database
+namespace BarometerDataAccesLayer.Database
 {
     public class DAOProject
     {
@@ -25,9 +26,16 @@ namespace Barometer_ASP_NET.Database
                     join pm in context.ProjectMembers on u.ProjectGroups.First() equals pm.ProjectGroup
                     where pm.ProjectGroup.Project.id == projectID
                     select u;
-                return students;
-            }
+                if (students.ToList().Count > 0)
+                {
+                    return students;
+                }
             else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
+            }
+            else 
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -64,8 +72,16 @@ namespace Barometer_ASP_NET.Database
                 var projectMembers =
                     from pm in context.ProjectMembers
                     join pg in context.ProjectGroups on pm.ProjectGroup equals pg
+                    where pg.id == projectGroupId
                     select pm;
-                return projectMembers;
+                //if (projectMembers.ToList().Count > 0)
+                //{
+                    return projectMembers;
+                //}
+                //else
+                //{
+                //    throw new DataException("No data found, for valid parameter");
+                //}
             }
             else
             {
@@ -94,8 +110,14 @@ namespace Barometer_ASP_NET.Database
                 {
                     nameDictionary.Add(f.firstname, f.lastname);
                 }
-
-                return nameDictionary;
+                if (nameDictionary.Count > 0)
+                {
+                    return nameDictionary;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -131,7 +153,14 @@ namespace Barometer_ASP_NET.Database
                     nameDictionary.Add(f.firstname, f.lastname);
                 }
 
-                return nameDictionary;
+                if (nameDictionary.Count > 0)
+                {
+                    return nameDictionary;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -155,7 +184,14 @@ namespace Barometer_ASP_NET.Database
                      where p.id == projectId
                      select p.name).SingleOrDefault();
 
-                return (string)projectName;
+                if (projectName != null)
+                {
+                    return (string)projectName;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -188,7 +224,14 @@ namespace Barometer_ASP_NET.Database
                 {
                     startAndEndDate.Add(p.start_date.ToString(), p.end_date.ToString());
                 }
-                return startAndEndDate;
+                if (startAndEndDate.Count > 0)
+                {
+                    return startAndEndDate;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -212,7 +255,14 @@ namespace Barometer_ASP_NET.Database
                      where p.id == projectId
                      select p.description).SingleOrDefault();
 
-                return (string)projectSummary;
+                if (projectSummary != null)
+                {
+                    return (string)projectSummary;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -225,7 +275,7 @@ namespace Barometer_ASP_NET.Database
         /// </summary>
         /// <param name="groupId">The project you want to query</param>
         /// <returns>Returns a dictionary with the names of the teachers </returns>
-        public Dictionary<string, string> projectTeachers(int projectId)
+        public Dictionary<string, string> getProjectTeachers(int projectId)
         {
             if (projectId >= 0)
             {
@@ -247,8 +297,14 @@ namespace Barometer_ASP_NET.Database
                 {
                     teachers.Add(t.firstname, t.lastname);
                 }
-
-                return teachers;
+                if (teachers.Count > 0)
+                {
+                    return teachers;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -274,7 +330,14 @@ namespace Barometer_ASP_NET.Database
                     where pm.project_group_id == groupId
                     select u;
 
-                return users;
+                if (users.ToList().Count > 0)
+                {
+                    return users;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -299,8 +362,14 @@ namespace Barometer_ASP_NET.Database
                     join po in context.ProjectOwners on u.id equals po.user_id
                     where po.project_id == projectId
                     select u;
-
-                return projectOwners;
+                if (projectOwners.ToList().Count > 0)
+                {
+                    return projectOwners;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -325,8 +394,14 @@ namespace Barometer_ASP_NET.Database
                     join pg in context.ProjectGroups on u.id equals pg.tutor_user_id
                     where pg.id == groupId
                     select u;
-
-                return tutor;
+                if (tutor.ToList().Count > 0)
+                {
+                    return tutor;
+                }
+                else
+                {
+                    throw new DataException("No data found, for valid parameter");
+                }
             }
             else
             {
@@ -352,8 +427,14 @@ namespace Barometer_ASP_NET.Database
                     join u in context.Users on pm.student_user_id equals u.id
                     where u.student_number == studentNumber && p.status_name.Equals("Active")
                     select p;
-
-                return activeProject;
+                //if (activeProject.ToList().Count > 0)
+                //{
+                    return activeProject;
+                //}
+                //else
+                //{
+                //    throw new DataException("No data found, for valid parameter");
+                //}
             }
              else
             {
@@ -391,6 +472,58 @@ namespace Barometer_ASP_NET.Database
 
             return AllProjects;
 
+        }
+
+        public IQueryable<BaroTemplate> GetAllTemplates()
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            var templates =
+                from bt in context.BaroTemplates
+                select bt;
+            return templates;
+        }
+
+        public IQueryable<BaroAspect> GetBaroAspect(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var baroAspect =
+                from ba in context.BaroAspects
+                join t in context.BaroTemplates on ba.baro_template_id equals t.id
+                join p in context.Projects on t.id equals p.baro_template_id
+                where ba.is_head_aspect == 1 && p.id == projectId
+                select ba;
+
+            return baroAspect;
+        }
+
+        public IQueryable<ProjectReportDate> GetProjectReportDate(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var dates =
+                from pd in context.ProjectReportDates
+                join p in context.Projects on pd.project_id_int equals p.id
+                where p.id == projectId
+                select pd;
+
+            return dates;
+        }
+
+        public IQueryable<Report> GetSubAspects(int projectId, int studentNumber)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var report =
+                from r in context.Reports
+                join u in context.Users on r.reporter_id equals u.id
+                join pgm in context.ProjectMembers on u.id equals pgm.student_user_id
+                join pg in context.ProjectGroups on pgm.project_group_id equals pg.id
+                join p in context.Projects on pg.project_id equals p.id
+                where p.id == projectId && u.student_number == studentNumber
+                select r;
+
+            return report;
         }
     }
 }

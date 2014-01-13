@@ -1,4 +1,4 @@
-﻿using Barometer_ASP_NET.Database;
+﻿using BarometerDataAccesLayer.Database;
 using BarometerDataAccesLayer;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -12,14 +12,14 @@ namespace Barometer_ASP_NET.FileFactory
 {
 	public class TemplateExcel: IExcelDataTransfer
 	{
-        public TemplateExcel()
+        public TemplateExcel():base()
         {
             setTemplatePath("TemplateTemplate");
         }
 
         public override void Export(object identifier)
         {
-            DAOTemplate templatedao = Database.DatabaseFactory.getInstance().getDAOTemplate();
+            DAOTemplate templatedao = DatabaseFactory.getInstance().getDAOTemplate();
             IQueryable<BaroTemplate> templates = templatedao.getTemplate((int)identifier);
             BaroTemplate template = null;
 

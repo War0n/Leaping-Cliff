@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Barometer_ASP_NET.FileFactory
 {
-	public static class FileHandlerFactory<Product>
+    public static class FileHandlerFactory<IExcelDataTransfer>
 	{
 		private static Dictionary<string, Type> map;
 
@@ -15,23 +15,23 @@ namespace Barometer_ASP_NET.FileFactory
 		/// </summary>
 		/// <param name="productName"></param>
 		/// <returns></returns>
-		public static Product create(string productName)
+		public static IExcelDataTransfer create(string productName)
 		{
 			if (map == null)
 			{
 				map = new Dictionary<string, Type>();
-				Type[] types = Assembly.GetAssembly(typeof(Product)).GetTypes();
+                Type[] types = Assembly.GetAssembly(typeof(IExcelDataTransfer)).GetTypes();
 
 				foreach (Type type in types)
 				{
-					if (!typeof(Product).IsAssignableFrom(type) || type == typeof(Product))
+                    if (!typeof(IExcelDataTransfer).IsAssignableFrom(type) || type == typeof(IExcelDataTransfer))
 					{
 						continue;
 					}
 					map.Add(type.Name, type);
 				}
 			}
-			return (Product)Activator.CreateInstance(map[productName]);
+            return (IExcelDataTransfer)Activator.CreateInstance(map[productName]);
 		}
 	}
 }

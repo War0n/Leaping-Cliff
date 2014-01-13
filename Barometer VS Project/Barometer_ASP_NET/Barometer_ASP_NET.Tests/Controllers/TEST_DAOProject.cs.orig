@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BarometerDataAccesLayer.Database;
+using Barometer_ASP_NET.Database;
 using System.Linq;
 using BarometerDataAccesLayer;
 using System.Collections.Generic;
@@ -162,6 +162,7 @@ namespace Barometer_ASP_NET.Tests.Controllers
         {
             String exception = "";
             Dictionary<string, string> b = new Dictionary<string, string>();
+<<<<<<< HEAD
 
             try
             {
@@ -566,12 +567,8 @@ namespace Barometer_ASP_NET.Tests.Controllers
             }
             Assert.AreEqual("", exception);
             Assert.IsTrue(b.Count > 0);
-
-        [TestMethod]
-        public void test_23_getTutors_valid_nonexistent_input()
-        {
-            String exception = "";
-            Dictionary<string, string> b = new Dictionary<string, string>();
+=======
+>>>>>>> Testclass voor DAOProject is compleet.
 
             try
             {
@@ -620,6 +617,7 @@ namespace Barometer_ASP_NET.Tests.Controllers
         }
 
         [TestMethod]
+<<<<<<< HEAD
         public void test_103_getTutor_valid_nonexistent_input()
         {
             IQueryable<User> test_collection;
@@ -635,10 +633,17 @@ namespace Barometer_ASP_NET.Tests.Controllers
 
             Assert.IsTrue(exception.Contains("DataException"));
         }
+
         [TestMethod]
         public void test_111_getCurrentActiveProject_negative_input()
         {
             String s = "";
+=======
+        public void test_33_getNamesOfGroupMembers_valid_nonexistent_input()
+        {
+            String exception = "";
+            Dictionary<string, string> b = new Dictionary<string, string>();
+>>>>>>> Testclass voor DAOProject is compleet.
             try
             {
                 IQueryable<Project> test_collection = d.GetCurrentActiveProject(-1);
@@ -689,20 +694,27 @@ namespace Barometer_ASP_NET.Tests.Controllers
         [TestMethod]
         public void test_113_getCurrentActiveProject_valid_nonexistent_input()
         {
+<<<<<<< HEAD
             IQueryable<Project> test_collection;
             String exception = "";
             try
             {
                 test_collection = d.GetCurrentActiveProject(9);
+=======
+            String exception = "";
+            String pName = "";
+            try
+            {
+                pName = d.getProjectName(1);
+>>>>>>> Testclass voor DAOProject is compleet.
             }
             catch (Exception e)
             {
                 exception = e.ToString();
             }
-            catch (Exception e)
-            {
-                exception = e.ToString();
-            }
+<<<<<<< HEAD
+
+=======
 
             Assert.AreEqual("", exception);
             Assert.AreNotEqual("", pName);
@@ -889,7 +901,7 @@ namespace Barometer_ASP_NET.Tests.Controllers
                 s = e.ToString();
             }
 
-            Assert.IsTrue(exception.Contains("DataException"));
+            Assert.IsTrue(s.Contains("ArgumentOutOfRangeException"));
 
         }
 
@@ -1105,6 +1117,7 @@ namespace Barometer_ASP_NET.Tests.Controllers
                 exception = e.ToString();
             }
 
+>>>>>>> Testclass voor DAOProject is compleet.
             Assert.IsTrue(exception.Contains("DataException"));
         }
     }
