@@ -1,0 +1,30 @@
+﻿@using BarometerDataAccesLayer;
+@model Barometer_ASP_NET.Wrappers.BaroTreeViewWrapper
+@{
+    Layout = "";
+}
+<ul>
+        @foreach (BaroAspect head in Model.HeadAspect)
+        {
+            <li>
+                <span><i class="glyphicon glyphicon-chevron-right"></i> @head.name</span>
+                <ul>
+                @foreach (BaroAspect parent in head.BaroAspects)
+                {
+                    <li>
+                        <span><i class="glyphicon glyphicon-leaf"></i> @parent.name</span>
+                        <ul>
+                        @foreach (BaroAspect child in parent.BaroAspects)
+                        {
+                            <li>
+	                            <span><i class="glyphicon glyphicon-leaf"></i> @child.name</span>
+                            </li>
+                        }
+                        </ul>
+                    </li>
+
+                }
+                </ul>
+            </li>
+        }
+ </ul>

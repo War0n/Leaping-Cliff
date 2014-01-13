@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using BarometerDataAccesLayer;
 using BarometerDataAccesLayer.Database;
 using System.Diagnostics;
+using Barometer_ASP_NET.Filters;
 
 namespace Barometer_ASP_NET.Controllers
 {
@@ -16,6 +17,71 @@ namespace Barometer_ASP_NET.Controllers
         /// Database
         /// </summary>
         private DatabaseClassesDataContext _db = DatabaseFactory.getInstance().getDataContext();
+
+
+        /// <summary>
+        /// Maak template aan
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public ActionResult CreateTemplate(string name = "")
+        {
+            if(!(name.Length > 0)) {
+                return Json(new { status = "error"}, JsonRequestBehavior.AllowGet);
+            }
+
+
+            BaroTemplate newTemplate = new BaroTemplate();
+            newTemplate.template_name = name;
+            newTemplate.rating_type = 0;
+            newTemplate.anonymous = 0;
+
+            _db.BaroTemplates.InsertOnSubmit(newTemplate);
+            _db.SubmitChanges();
+
+            //string selectHtml = headAspectsToSelect(template.HeadAspect);
+
+            return Json(new {status = "success", baro_template_id = newTemplate.id}, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /// <summary>
+        /// Voeg een aspect toe en retourneer een nieuwe tree
+        /// </summary>
+        /// <param name="aspect"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddAspect(BaroAspect aspect)
+        {
+            aspect.parent_id = (aspect.parent_id == 0) ? null : aspect.parent_id;
+            _db.BaroAspects.InsertOnSubmit(aspect);
+            _db.SubmitChanges();
+
+            BaroTreeViewWrapper template = _db.BaroTemplates.Where(r => r.id == aspect.baro_template_id)
+                                            .Select(r => new BaroTreeViewWrapper
+                                            {
+                                                Template = r,
+                                                HeadAspect = r.BaroAspects.Where(d => d.is_head_aspect == 1).ToList()
+                                            }).FirstOrDefault();
+
+            return PartialView("_BaroTreePartial", template);
+        }
+
+
+
+        public ActionResult SelectParents(int template_id = 0)
+        {
+            BaroTreeViewWrapper viewModel = (from t in _db.BaroTemplates
+                                             where (t.id == template_id)
+                                             select t).Select(r => new BaroTreeViewWrapper
+                                             {
+                                                 Template = r,
+                                                 HeadAspect = r.BaroAspects.Where(d => d.is_head_aspect == 1).ToList()
+
+                                             }).FirstOrDefault();
+            return PartialView("_BaroSelectParents", viewModel);
+        }
+
 
         /// <summary>
         /// Toon een report card. Wordt alleen aangeroepen vanaf de Holder.
