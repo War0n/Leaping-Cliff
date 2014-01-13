@@ -483,6 +483,21 @@ namespace BarometerDataAccesLayer.Database
             return templates;
         }
 
+        public IQueryable<Project> GetProject(int studentNumber, int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var project =
+                from p in context.Projects
+                join pg in context.ProjectGroups on p.id equals pg.project_id
+                join pm in context.ProjectMembers on p.id equals pm.project_group_id
+                join u in context.Users on pm.student_user_id equals u.id
+                where u.student_number == studentNumber && p.id == projectId
+                select p;
+
+            return project;
+        }
+
         public IQueryable<BaroAspect> GetBaroAspect(int projectId)
         {
             DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();

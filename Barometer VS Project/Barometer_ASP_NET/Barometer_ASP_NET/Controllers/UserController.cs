@@ -32,7 +32,8 @@ namespace Barometer_ASP_NET.Controllers
 
         public ActionResult Project(int studentNummer = CurrentUser.getInstance().Studentnummer)
 		{
-            UserProjectWrapper wrapper = new UserProjectWrapper(studentNummer); //IMPORTANT, uses a test value
+            UserProjectWrapper wrapper = new UserProjectWrapper(3000000); 
+            //UserProjectWrapper wrapper = new UserProjectWrapper(CurrentUser.getInstance().Studentnummer); 
             return View(wrapper);
 		}
 

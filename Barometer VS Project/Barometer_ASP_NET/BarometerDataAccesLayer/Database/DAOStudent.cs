@@ -62,14 +62,14 @@ namespace BarometerDataAccesLayer.Database
                     join u in context.Users on pm.student_user_id equals u.id
                     where u.student_number == studentNumber
                     select pg;
-                if (projectGroup.ToList().Count > 0)
-                {
+                //if (projectGroup.ToList().Count > 0)
+                //{
                     return projectGroup;
-                }
-                else
-                {
-                    throw new DataException("No data found for valid argument");
-                }
+                //}
+                //else
+                //{
+                //    throw new DataException("No data found for valid argument");
+                //}
             }
             else
             {

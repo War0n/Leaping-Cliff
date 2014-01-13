@@ -11,7 +11,7 @@ namespace Barometer_ASP_NET.Wrappers
     public class UserProjectWrapper
     {
         private int studentNumber;
-        public int StudentNumber { get; set; }
+        private int projectId;
         public int CurrentProjectId { get; set; }
         public string  CurrentProjectSummary { get; set; }
         public string  CurrentProjectName { get; set; }
@@ -30,16 +30,17 @@ namespace Barometer_ASP_NET.Wrappers
 
         public UserProjectWrapper(int studentNumber)
         {
+            this.projectId = 1; //IMPORTANT, set this value to pId
             this.studentNumber = studentNumber;
             StudentNumber = studentNumber;
             student = DatabaseFactory.getInstance().getDAOStudent();
             project = DatabaseFactory.getInstance().getDAOProject();
             FillProjectMembers(student.getStudentGroup(studentNumber).First());
             FillTutors(student.getStudentGroup(studentNumber).First());
-            FillProjectOwners(project.GetCurrentActiveProject(studentNumber).First());
-            FillProjectDetails(project.GetCurrentActiveProject(studentNumber).First(), student.getStudentGroup(studentNumber).First());
-            FillMyGrades(project.GetCurrentActiveProject(studentNumber).First());
-            FillGrades(project.GetCurrentActiveProject(this.studentNumber).FirstOrDefault());
+            FillProjectOwners(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
+            FillProjectDetails(project.GetProject(this.studentNumber, projectId).FirstOrDefault(), student.getStudentGroup(studentNumber).First());
+            FillMyGrades(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
+            FillGrades(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
         }
 
         private void FillProjectMembers(ProjectGroup projectGroup)
@@ -79,7 +80,7 @@ namespace Barometer_ASP_NET.Wrappers
 
             Grades = new Dictionary<BaroAspect, Dictionary<ProjectReportDate, Dictionary<Report, int>>>();
 
-            foreach (var v in project.GetBaroAspect(project.GetCurrentActiveProject(this.studentNumber).FirstOrDefault().id))
+            foreach (var v in project.GetBaroAspect(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id))
             {
                 Grades.Add(v, FillSecondDictionary());
             }
@@ -89,7 +90,7 @@ namespace Barometer_ASP_NET.Wrappers
         {
             SecondDictionary = new Dictionary<ProjectReportDate, Dictionary<Report, int>>();
 
-            foreach (var v in project.GetProjectReportDate(project.GetCurrentActiveProject(this.studentNumber).FirstOrDefault().id))
+            foreach (var v in project.GetProjectReportDate(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id))
             {
                 SecondDictionary.Add(v, FillThirdDictionary());
             }
@@ -109,7 +110,7 @@ namespace Barometer_ASP_NET.Wrappers
         {
             ThirdDictionary = new Dictionary<Report, int>();
 
-            foreach (var v in project.GetSubAspects(project.GetCurrentActiveProject(this.studentNumber).FirstOrDefault().id, this.studentNumber))
+            foreach (var v in project.GetSubAspects(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id, this.studentNumber))
             {
                 ThirdDictionary.Add(v, (int)v.grade);
             }
