@@ -9,6 +9,7 @@ using System.Web.Routing;
 using System.IO;
 using System.Configuration;
 using BarometerDataAccesLayer.Database;
+using System.Security.Principal;
 
 namespace Barometer_ASP_NET.Tests.TEST_Controllers
 {
@@ -18,10 +19,48 @@ namespace Barometer_ASP_NET.Tests.TEST_Controllers
         AdminController a = new AdminController();
         private FileStream _stream;
 
-        [TestInitialize]
+        private HttpContextBase GetMockedHttpContext()
+        {
+            var context = new Mock<HttpContextBase>();
+            var request = new Mock<HttpRequestBase>();
+            var response = new Mock<HttpResponseBase>();
+            var session = new Mock<HttpSessionStateBase>();
+            var server = new Mock<HttpServerUtilityBase>();
+            var user = new Mock<IPrincipal>();
+            var identity = new Mock<IIdentity>();
+            var urlHelper = new Mock<UrlHelper>();
+            var file = new Mock<HttpPostedFileBase>();
+
+            file.Setup(x => x.InputStream).Returns(_stream);
+            file.Setup(x => x.ContentLength).Returns((int)_stream.Length);
+            file.Setup(x => x.FileName).Returns(_stream.Name);
+
+            var files = new Mock<HttpFileCollectionBase>();
+            files.Setup(r => r.Count).Returns(1);
+            files.Setup(r => r.Get(0).InputStream).Returns(file.Object.InputStream);
+
+            var requestContext = new Mock<RequestContext>();
+            requestContext.Setup(x => x.HttpContext).Returns(context.Object);
+            context.Setup(ctx => ctx.Request).Returns(request.Object);
+            context.Setup(ctx => ctx.Response).Returns(response.Object);
+            context.Setup(ctx => ctx.Session).Returns(session.Object);
+            context.Setup(ctx => ctx.Server).Returns(server.Object);
+            context.Setup(ctx => ctx.User).Returns(user.Object);
+            user.Setup(ctx => ctx.Identity).Returns(identity.Object);
+            identity.Setup(id => id.IsAuthenticated).Returns(true);
+            identity.Setup(id => id.Name).Returns("test");
+            request.Setup(req => req.Url).Returns(new Uri("http://www.google.com"));
+            request.Setup(req => req.RequestContext).Returns(requestContext.Object);
+            requestContext.Setup(x => x.RouteData).Returns(new RouteData());
+            request.Setup(r => r.Files).Returns(files.Object);
+
+            return context.Object;
+        }
+
+        //[TestInitialize]
         public void SetUp()
         {
-            _stream = new FileStream("../../../Barometer_ASP_NET/Content/ExcelTemplates/GradeTemplate.xlsx",
+            _stream = new FileStream("../../../Barometer_ASP_NET/Content/TestTemplate/TestTemplate.xlsx",
                          FileMode.Open);
 
         }
@@ -50,35 +89,8 @@ namespace Barometer_ASP_NET.Tests.TEST_Controllers
         {
             var controller = new AdminController();
 
-            var server = new Mock<HttpServerUtilityBase>();
-            var response = new Mock<HttpResponseBase>();
-
-            var request = new Mock<HttpRequestBase>();
-            request.Setup(r => r.UserHostAddress).Returns("localhost");
-
-            var session = new Mock<HttpSessionStateBase>();
-            session.Setup(s => s.SessionID).Returns(Guid.NewGuid().ToString());
-
-            var file = new Mock<HttpPostedFileBase>();
-            file.Setup(x => x.InputStream).Returns(_stream);
-            file.Setup(x => x.ContentLength).Returns((int)_stream.Length);
-            file.Setup(x => x.FileName).Returns(_stream.Name);
-
-            var files = new Mock<HttpFileCollectionBase>();
-            files.Setup(r => r.Count).Returns(1);
-            files.Setup(r => r.Get(0).InputStream).Returns(file.Object.InputStream);
-            request.Setup(r => r.Files).Returns(files.Object);
-            //request.Setup(r => r.Files[0]).Returns(file.Object);
-
-            var context = new Mock<HttpContextBase>();
-            context.Setup(c => c.Request).Returns(request.Object);
-            context.SetupGet(c => c.Request).Returns(request.Object);
-            context.SetupGet(c => c.Response).Returns(response.Object);
-            context.SetupGet(c => c.Server).Returns(server.Object);
-            context.SetupGet(c => c.Session).Returns(session.Object);
-
-
-            controller.ControllerContext = new ControllerContext(context.Object,
+            HttpContextFactory.SetCurrentContext(GetMockedHttpContext());
+            controller.ControllerContext = new ControllerContext(HttpContextFactory.Current,
                                               new RouteData(), controller);
 
             CurrentUser currentUser = CurrentUser.getInstance();
