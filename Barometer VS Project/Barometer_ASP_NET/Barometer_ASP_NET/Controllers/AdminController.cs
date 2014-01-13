@@ -99,9 +99,21 @@ namespace Barometer_ASP_NET.Controllers
 			return View();
 		}
 
-		public ActionResult ProjectGroupsView()
+		public ActionResult ProjectGroupsView(int groupId)
 		{
-			return View();
+            BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            var student =
+                from pm in context.ProjectMembers
+                where pm.project_group_id == groupId
+                select pm;
+            if (student.ToList().Count > 0)
+            {
+                return View(student.ToList());
+            }
+            else
+            {
+                throw new DataException("No data found");
+            }
 		}
 
         public ActionResult Student(int studentId)
