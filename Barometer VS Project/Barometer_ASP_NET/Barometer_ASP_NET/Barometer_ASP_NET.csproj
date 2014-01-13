@@ -212,6 +212,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ProjectMember.cs" />
+    <Compile Include="Models\BaroGradeViewModel.cs" />
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectGroup.cs" />
@@ -310,6 +311,7 @@
     <Content Include="Content\ExcelTemplates\GradeTemplate.xlsx" />
     <Content Include="Content\ExcelTemplates\StudentTemplate.xlsx" />
     <Content Include="Content\ExcelTemplates\TemplateTemplate.xlsx" />
+    <Content Include="Content\TestTemplate\TestTemplate.xlsx" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
