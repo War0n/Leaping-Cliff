@@ -427,14 +427,14 @@ namespace BarometerDataAccesLayer.Database
                     join u in context.Users on pm.student_user_id equals u.id
                     where u.student_number == studentNumber && p.status_name.Equals("Active")
                     select p;
-                if (activeProject.ToList().Count > 0)
-                {
+                //if (activeProject.ToList().Count > 0)
+                //{
                     return activeProject;
-                }
-                else
-                {
-                    throw new DataException("No data found, for valid parameter");
-                }
+                //}
+                //else
+                //{
+                //    throw new DataException("No data found, for valid parameter");
+                //}
             }
              else
             {
