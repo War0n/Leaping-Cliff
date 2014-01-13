@@ -418,7 +418,16 @@ namespace Barometer_ASP_NET.Database
                 where ba.is_head_aspect == 1 && p.id == projectId
                 select ba;
 
+<<<<<<< HEAD:Barometer VS Project/Barometer_ASP_NET/BarometerDataAccesLayer/Database/DAOProject.cs.orig
+=======
+
+        public int GetProjectGroupId()
+        {
+            throw new NotImplementedException();
+>>>>>>> expanded test framework and added extra error handling
+=======
             return baroAspect;
+>>>>>>> Finished nested dictionary, added queries to fill the dictionaries.:Barometer VS Project/Barometer_ASP_NET/Barometer_ASP_NET/Database/DAOProject.cs
         }
 
         public IQueryable<ProjectReportDate> GetProjectReportDate(int projectId)
@@ -447,12 +456,7 @@ namespace Barometer_ASP_NET.Database
                 where p.id == projectId && u.student_number == studentNumber
                 select r;
 
-=======
-
-        public int GetProjectGroupId()
-        {
-            throw new NotImplementedException();
->>>>>>> expanded test framework and added extra error handling
+            return report;
         }
 
 
