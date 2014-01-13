@@ -330,14 +330,14 @@ namespace BarometerDataAccesLayer.Database
                     where pm.project_group_id == groupId
                     select u;
 
-                if (users.ToList().Count > 0)
-                {
+                //if (users.ToList().Count > 0)
+                //{
                     return users;
-                }
-                else
-                {
-                    throw new DataException("No data found, for valid parameter");
-                }
+                //}
+                //else
+                //{
+                //    throw new DataException("No data found, for valid parameter");
+                //}
             }
             else
             {
@@ -362,14 +362,14 @@ namespace BarometerDataAccesLayer.Database
                     join po in context.ProjectOwners on u.id equals po.user_id
                     where po.project_id == projectId
                     select u;
-                if (projectOwners.ToList().Count > 0)
-                {
+                //if (projectOwners.ToList().Count > 0)
+                //{
                     return projectOwners;
-                }
-                else
-                {
-                    throw new DataException("No data found, for valid parameter");
-                }
+                //}
+                //else
+                //{
+                //    throw new DataException("No data found, for valid parameter");
+                //}
             }
             else
             {

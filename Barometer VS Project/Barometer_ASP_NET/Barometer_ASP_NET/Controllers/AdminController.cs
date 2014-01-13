@@ -23,16 +23,16 @@ namespace Barometer_ASP_NET.Controllers
             return View(wrapper);
         }
 
-		public ActionResult Barotemplate()
-		{
-			return View();
-		}
+        public ActionResult Barotemplate()
+        {
+            return View();
+        }
 
-		public ActionResult Create()
-		{
+        public ActionResult Create()
+        {
             CreateProjectWrapper wrapper = new CreateProjectWrapper();
-			return View(wrapper);
-		}
+            return View(wrapper);
+        }
 
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -42,11 +42,11 @@ namespace Barometer_ASP_NET.Controllers
                 BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
                 BarometerDataAccesLayer.Project insertProject = new BarometerDataAccesLayer.Project();
                 BarometerDataAccesLayer.ProjectOwner me = new BarometerDataAccesLayer.ProjectOwner();
-                var ownerInfo = 
+                var ownerInfo =
                     from u in context.Users
                     where u.student_number == CurrentUser.getInstance().Studentnummer
                     select u;
-                me.User =  ownerInfo.First();
+                me.User = ownerInfo.First();
                 insertProject.name = collection.GetValue("FormProject.name").AttemptedValue;
                 insertProject.description = collection.GetValue("FormProject.description").AttemptedValue;
                 insertProject.start_date = DateTime.ParseExact(collection.GetValue("FormProject.start_date").AttemptedValue, "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -84,37 +84,27 @@ namespace Barometer_ASP_NET.Controllers
             return RedirectToAction("List");
         }
 
-		public ActionResult Detail()
-		{
-			return View();
-		}
+        public ActionResult Detail()
+        {
+            return View();
+        }
 
-		public ActionResult List()
-		{
-			return View(wrapper);
-		}
+        public ActionResult List()
+        {
+            return View(wrapper);
+        }
 
-		public ActionResult ProjectGroups()
-		{
-			return View();
-		}
+        public ActionResult ListProjectGroup(int projectId)
+        {
+            AdminProjectGroupListWrapper wrapper = new AdminProjectGroupListWrapper(projectId);
+            return View(wrapper);
+        }
 
-		public ActionResult ProjectGroupsView(int groupId)
-		{
-            BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            var student =
-                from pm in context.ProjectMembers
-                where pm.project_group_id == groupId
-                select pm;
-            if (student.ToList().Count > 0)
-            {
-                return View(student.ToList());
-            }
-            else
-            {
-                throw new DataException("No data found");
-            }
-		}
+        public ActionResult ProjectGroups(int groupId)
+        {
+            AdminProjectGroupViewWrapper wrapper = new AdminProjectGroupViewWrapper(groupId);
+            return View(wrapper);
+        }
 
         public ActionResult Student(int studentId)
         {
@@ -142,13 +132,13 @@ namespace Barometer_ASP_NET.Controllers
                 where u.student_number == studentNumber
                 select u.id;
             int studentId = student.First();
-            return RedirectToAction("Student",new {studentId = studentId});
+            return RedirectToAction("Student", new { studentId = studentId });
         }
 
         public ActionResult DeleteProject(int projectId)
         {
             BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            var resultProjects=
+            var resultProjects =
                 from p in context.Projects
                 where p.id == projectId
                 select p;
@@ -157,6 +147,27 @@ namespace Barometer_ASP_NET.Controllers
             context.SubmitChanges();
 
             return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public ActionResult AddStudent(FormCollection collection)
+        {
+            int studentIdToAdd = int.Parse(collection.GetValue("student").AttemptedValue);
+            int projectId = int.Parse(collection.GetValue("projectID").AttemptedValue);
+            int groupId = int.Parse(collection.GetValue("groupID").AttemptedValue);
+            DAOStudent studentdao = DatabaseFactory.getInstance().getDAOStudent();
+            DAOProject projectdao = DatabaseFactory.getInstance().getDAOProject();
+            BarometerDataAccesLayer.User studentUser = studentdao.getStudentInfo(studentIdToAdd);
+            BarometerDataAccesLayer.Project project = projectdao.GetAllProjects(studentIdToAdd).Where(r => r.id == projectId).FirstOrDefault();
+            BarometerDataAccesLayer.ProjectGroup group = projectdao.getProjectGroupsByProject(projectId).Where(pg => pg.id == groupId).FirstOrDefault();
+            if (group.ProjectMembers.Where(pm => pm.User == studentUser) == null)
+            {
+                BarometerDataAccesLayer.ProjectMember member = new BarometerDataAccesLayer.ProjectMember();
+                member.User = studentUser;
+                member.ProjectGroup = group;
+            }
+
+            return RedirectToAction("ProjectGroups",projectId);
         }
     }
 }

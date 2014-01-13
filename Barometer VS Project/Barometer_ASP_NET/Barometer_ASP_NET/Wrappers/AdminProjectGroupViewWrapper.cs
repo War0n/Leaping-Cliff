@@ -16,7 +16,7 @@ namespace Barometer_ASP_NET.Wrappers
         public int projectGroup { get; set; }
         public IQueryable<ProjectMember> ProjectGroupMembers { get; set; }
         public IQueryable<User> CurrentProjectOwners { get; set; }
-        public IQueryable<User> GroupMemberUserList { get; set; }
+        public List<User> GroupMemberUserList { get; set; }
         public IQueryable<User> TutorList { get; set; }
         public IQueryable<User> CurrentTutor { get; set; }
         public IQueryable<ProjectGroup> ProjectGroups { get; set; }
@@ -26,9 +26,12 @@ namespace Barometer_ASP_NET.Wrappers
         {
             ProjectGroupMembers = projectDAO.getProjectGroupMembers(groupid);
             CurrentProjectOwners = projectDAO.GetProjectOwners(groupid);
-            int projectID = ProjectGroupMembers.First().project_group_id;
             CurrentTutor = projectDAO.GetTutor(groupid);
-            ProjectGroups = projectDAO.getProjectGroupsByProject(projectID);
+            GroupMemberUserList = new List<User>();
+            foreach (ProjectMember member in ProjectGroupMembers)
+            {
+                GroupMemberUserList.Add(member.User);
+            }
         }
     }
 }

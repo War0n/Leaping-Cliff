@@ -1,0 +1,39 @@
+@model Barometer_ASP_NET.Wrappers.AdminProjectGroupListWrapper
+@{ 
+    ViewBag.Title = "Lijst";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Projecten</h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Titel</td>
+                    <td>ProjectNaam</td>
+                    <td>Tutor</td>
+                    <td>Eindcijfer</td>
+                    <td>Details</td>
+                    <td>Verwijder</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (BarometerDataAccesLayer.ProjectGroup group in Model.ProjectGroups)
+                {
+                    <tr>
+                        <td>@group.group_code</td>
+                        <td>@group.Project.name</td>
+                        <td>@group.User.firstname @group.User.lastname</td>
+                        <td>@group.group_end_grade</td>
+                        <td>@Html.ActionLink(" ", "ProjectGroups", "Admin",new {groupId = group.id}, new { @class = "glyphicon glyphicon-edit" })</td>
+                        <td>@Html.ActionLink(" ", "DeleteProject", "Admin",new {groupId = group.id}, new { @class = "glyphicon glyphicon-remove"})</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
