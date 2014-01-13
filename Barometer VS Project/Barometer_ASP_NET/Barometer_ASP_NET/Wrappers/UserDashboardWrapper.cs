@@ -27,10 +27,17 @@ namespace Barometer_ASP_NET.Wrappers
             this.studentNumber = studentNumber;
             student = DatabaseFactory.getInstance().getDAOStudent();
             project = DatabaseFactory.getInstance().getDAOProject();
-            FillProjectMembers(student.getStudentGroup(studentNumber).First());
-            FillCurrentProjectOwners(student.getStudentGroup(studentNumber).First());
-            FillAllProjects();
+
+
             FillCurrentProject();
+            if (HasProject)
+            {
+                FillProjectMembers(student.getStudentGroup(studentNumber).First());
+                FillCurrentProjectOwners(student.getStudentGroup(studentNumber).First());
+            }
+            
+            FillAllProjects();
+            
             FillAllIndividualGrades();
         }
 

@@ -208,10 +208,10 @@
     <Compile Include="FileFactory\StudentExcel.cs" />
     <Compile Include="FileFactory\TemplateExcel.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="Filters\RazorViewToString.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProjectMember.cs" />
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectGroup.cs" />
@@ -221,6 +221,7 @@
     <Compile Include="Wrappers\AdminDashboardWrapper.cs" />
     <Compile Include="Wrappers\AdminProjectDetailWrapper.cs" />
     <Compile Include="Wrappers\AdminProjectGroupViewWrapper.cs" />
+    <Compile Include="Wrappers\BaroTreeViewWrapper.cs" />
     <Compile Include="Wrappers\AdminProjectGroupListWrapper.cs" />
     <Compile Include="Wrappers\ModeratorDashboardWrapper.cs" />
     <Compile Include="Wrappers\BaroWidgetWrapper.cs" />
@@ -350,6 +351,8 @@
     <Content Include="Views\Admin\_ViewStart.cshtml" />
     <Content Include="Views\Baro\_BaroWidget.cshtml" />
     <Content Include="Views\Baro\_BaroWidgetHolder.cshtml" />
+    <Content Include="Views\Baro\_BaroTreePartial.cshtml" />
+    <Content Include="Views\Baro\_BaroSelectParents.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\LoggedOut.cshtml" />

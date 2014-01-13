@@ -1,6 +1,7 @@
 ﻿using Barometer_ASP_NET.FileFactory;
 using Barometer_ASP_NET.Wrappers;
 using BarometerDataAccesLayer.Database;
+using BarometerDataAccesLayer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,13 +19,24 @@ namespace Barometer_ASP_NET.Controllers
         //
         // GET: /Admin/
 
+        public ActionResult Index()
+        {
+
+            return RedirectToAction("Dashboard");
+        }
+
         public ActionResult Dashboard()
         {
             return View(wrapper);
         }
 
+
+        DatabaseClassesDataContext db = DatabaseFactory.getInstance().getDataContext();
+
         public ActionResult Barotemplate()
         {
+            int debug_id = (Request["template_id"] == null) ? 0 :  Convert.ToInt32(Request["template_id"]);
+            ViewBag.debug_id = debug_id;
             return View();
         }
 
