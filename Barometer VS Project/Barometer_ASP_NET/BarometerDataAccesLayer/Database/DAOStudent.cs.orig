@@ -4,7 +4,11 @@ using System.Linq;
 using System.Web;
 using BarometerDataAccesLayer;
 using System.Data.SqlClient;
+<<<<<<< HEAD
 using System.Data.Linq;
+=======
+using System.Data;
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
 
 namespace Barometer_ASP_NET.Database
 {
@@ -17,9 +21,8 @@ namespace Barometer_ASP_NET.Database
         /// <param name="studentNumber">The student you want to query</param>
         /// <param name="projectId">The project of which you like to see the grades</param>
         /// <returns></returns>
-        public ISingleResult<GetProjectNameAndIndividualGradeResult> getStudentGrades(int studentNumber)
+        public IQueryable<Report> getStudentGrades(int studentNumber, int projectId)
         {
-<<<<<<< Updated upstream
             if (studentNumber > 0 && projectId > 0)
             {
                 DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
@@ -30,22 +33,22 @@ namespace Barometer_ASP_NET.Database
                   join u in context.Users on r.reporter_id equals u.id
                   where u.student_number == studentNumber && prd.project_id_int == projectId
                   select r;
-
-                return report;
+                if (report.ToList().Count > 0)
+                {
+                    return report;
+                }
+                else
+                {
+                    throw new DataException("No data found for valid argument");
+                }
             }
             else
             {
                 throw new ArgumentOutOfRangeException();
             }
-=======
-            DatabaseFactory factory = DatabaseFactory.getInstance();
-            DatabaseClassesDataContext context = factory.getDataContext();
-            ISingleResult<GetProjectNameAndIndividualGradeResult> grades =
-                context.GetProjectNameAndIndividualGrade(studentNumber);
-            return grades;
-
->>>>>>> Stashed changes
         }
+
+
 
 
         /// <summary>
@@ -65,7 +68,14 @@ namespace Barometer_ASP_NET.Database
                     join u in context.Users on pm.student_user_id equals u.id
                     where u.student_number == studentNumber
                     select pg;
-                return projectGroup;
+                if (projectGroup.ToList().Count > 0)
+                {
+                    return projectGroup;
+                }
+                else
+                {
+                    throw new DataException("No data found for valid argument");
+                }
             }
             else
             {
@@ -78,56 +88,138 @@ namespace Barometer_ASP_NET.Database
         /// </summary>
         /// <param name="studentNumber">The student and the project you want to querry</param>
         /// <returns></returns>
-       public Dictionary<int, int> getReportResults(int studentNumber, int projectID)
+        public IQueryable<ProjectGroup> getReportResults(int projectID)
         {
-<<<<<<< Updated upstream
-            if (studentNumber > 0 && projectID >= 0)
+            if (projectID >= 0)
             {
                 DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-                Dictionary<int, int> grades = new Dictionary<int, int>();
 
-                var progress =
-                     from u in context.Users
-                     join pm in context.ProjectMembers on u.id equals pm.student_user_id
-                     join pg in context.ProjectGroups on pm.project_group_id equals pg.id
-                     join p in context.Projects on pg.project_id equals p.id
-                     join r in context.Reports on u.id equals r.subject_id
-                     where u.student_number == studentNumber
-                     && p.id == projectID
-                && p.status_name.Equals("Closed")
-                     select new
-                     {
-                         r.project_report_date_id,
-                         r.grade
-                     };
+                var results =
+                    from pg in context.ProjectGroups
+                    join pm in context.ProjectMembers on pg.id equals pm.project_group_id
+                    join u in context.Users on pm.student_user_id equals u.id
+                    join p in context.Projects on pg.project_id equals p.id
+                    where p.id == projectID
+                    && p.status_name == "Closed"
+                    select pg;
+                return results;
 
-                foreach (var s in progress)
-=======
-            
-          DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            Dictionary<int, int> grades = new Dictionary<int, int>();
 
-           var progress =
-                from u in context.Users
-                join pm in context.ProjectMembers on u.id equals pm.student_user_id
-                join pg in context.ProjectGroups on pm.project_group_id equals pg.id
-                join p in context.Projects on pg.project_id equals p.id
-                join r in context.Reports on u.id equals r.subject_id
-                where u.student_number == studentNumber
-                && p.id == projectID
-                && p.status_name.Equals("Closed")
-                select new
->>>>>>> Stashed changes
-                {
-                    grades.Add((int)s.project_report_date_id, (int)s.grade);
-                }
-                return grades;
             }
             else
             {
                 throw new ArgumentOutOfRangeException();
             }
 
+        }
+
+        /// <summary>
+        /// Get the endgrade of a project of an indivdual student
+        /// </summary>
+        /// <param name="studentNumber">The student you want the grade from</param>
+        /// <returns>Returns the final grade as an integer</returns>
+        public int getEndGradeIndividual(int studentNumber, int projectId)
+        {
+            if (studentNumber > 0 && projectId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+                var endGrade =
+                    (from u in context.Users
+                     join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                     join pg in context.ProjectGroups on pm.project_group_id equals pg.id
+                     where u.student_number == studentNumber && pg.project_id == projectId
+                     select pm.end_grade).SingleOrDefault();
+
+                return (int)endGrade;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+        }
+
+        /// <summary>
+        /// Get the end grade of a group
+        /// </summary>
+        /// <param name="studentNumber", "GroupId">The student you want the grade from, the group he belonged to during the project</param>
+        /// <returns>Returns the final group grade as an integer</returns>
+        public int getEndGradeGroup(int studentNumber, int groupId)
+        {
+            if (studentNumber > 0 && groupId >= 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+                var endGroupGrade =
+                    (from u in context.Users
+                     join pm in context.ProjectMembers on u.id equals pm.student_user_id
+                     join pg in context.ProjectGroups on pm.project_group_id equals pg.project_id
+                     join p in context.Projects on pg.project_id equals p.id
+                     where u.student_number == studentNumber && pg.id == groupId
+                     select pg.group_end_grade).SingleOrDefault();
+
+                return (int)endGroupGrade;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public Dictionary<string, string> getName(int studentNumber)
+        {
+            if (studentNumber > 0)
+            {
+                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+                Dictionary<string, string> fullName = new Dictionary<string, string>();
+
+                var name =
+                    from u in context.Users
+                    where u.student_number == studentNumber
+                    select new
+                    {
+                        u.firstname,
+                        u.lastname
+                    };
+
+                foreach (var v in name)
+                {
+                    fullName.Add(v.firstname, v.lastname);
+                }
+<<<<<<< HEAD
+
+                return fullName;
+=======
+                if (grades.Count > 0)
+                {
+                    return grades;
+                }
+                else
+                {
+                    throw new DataException("No data found for valid argument");
+                }
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+<<<<<<< HEAD
+        }
+=======
+
+<<<<<<< HEAD
+        public User getStudentInfo(int studentNumber)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            var student =
+                from u in context.Users
+                where u.student_number == studentNumber
+                select u;
+            return student.FirstOrDefault();
+        }
+=======
        }
 
        /// <summary>
@@ -147,8 +239,14 @@ namespace Barometer_ASP_NET.Database
                     join pg in context.ProjectGroups on pm.project_group_id equals pg.id
                     where u.student_number == studentNumber && pg.project_id == projectId
                     select pm.end_grade).SingleOrDefault();
-
-               return (int)endGrade;
+               if (endGrade != null)
+               {
+                   return (int)endGrade;
+               }
+               else
+               {
+                   throw new DataException("No data found for valid argument");
+               }
            }
            else
            {
@@ -175,8 +273,14 @@ namespace Barometer_ASP_NET.Database
                     join p in context.Projects on pg.project_id equals p.id
                     where u.student_number == studentNumber && pg.id == groupId
                     select pg.group_end_grade).SingleOrDefault();
-
-               return (int)endGroupGrade;
+               if (endGroupGrade != null)
+               {
+                   return (int)endGroupGrade;
+               }
+               else
+               {
+                   throw new DataException("No data found for valid argument");
+               }
            }
            else
            {
@@ -204,13 +308,20 @@ namespace Barometer_ASP_NET.Database
                {
                    fullName.Add(v.firstname, v.lastname);
                }
-
-               return fullName;
+               if (fullName.Count > 0)
+               {
+                   return fullName;
+               }
+               else
+               {
+                   throw new DataException("No data found for valid argument");
+               }
            }
            else
            {
                throw new ArgumentOutOfRangeException();
            }
        }
+>>>>>>> added DatabaseFactory tests and DAOStudent tests
     }
 }

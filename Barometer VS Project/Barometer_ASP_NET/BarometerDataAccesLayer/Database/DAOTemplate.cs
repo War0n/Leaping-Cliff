@@ -1,10 +1,11 @@
 ﻿using BarometerDataAccesLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
-namespace Barometer_ASP_NET.Database
+namespace BarometerDataAccesLayer.Database
 {
     public class DAOTemplate 
     {
@@ -25,7 +26,14 @@ namespace Barometer_ASP_NET.Database
                     join ba in context.BaroAspects on bt.id equals ba.baro_template_id
                     where bt.id == templateNumber
                     select bt;
-                return template;
+                if (template.ToList().Count > 0)
+                {
+                    return template;
+                }
+                else
+                {
+                    throw new DataException("No data found for valid argument");
+                }
             }
             else
             {

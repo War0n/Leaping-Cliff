@@ -1,4 +1,4 @@
-﻿using Barometer_ASP_NET.Database;
+﻿using BarometerDataAccesLayer.Database;
 using BarometerDataAccesLayer;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -11,8 +11,10 @@ namespace Barometer_ASP_NET.FileFactory
 {
     public class StudentExcel : IExcelDataTransfer
     {
-        public StudentExcel()
+        private Project assignableProject;
+        public StudentExcel(Project toAssign = null)
         {
+            assignableProject = toAssign;
             setTemplatePath("StudentTemplate");
             string newFileName = path + "Students" + DateTime.Now.ToShortDateString() + ".xlsx";
             CopyFile(TemplatePath, newFileName);
@@ -25,7 +27,7 @@ namespace Barometer_ASP_NET.FileFactory
             Sheet sheet = wbPart.Workbook.Descendants<Sheet>().First();
             if (sheet != null)
             {
-                Database.DAOStudent studentdao = Database.DatabaseFactory.getInstance().getDAOStudent();
+                DAOStudent studentdao = DatabaseFactory.getInstance().getDAOStudent();
                 Worksheet ws = ((WorksheetPart)(wbPart.GetPartById(sheet.Id))).Worksheet;
                 int rowNumber = 2;
                 foreach (int studentnumber in (int[])students)
@@ -107,27 +109,31 @@ namespace Barometer_ASP_NET.FileFactory
                         int cellID = 0;
                         foreach (Cell c in row.Elements<Cell>())
                         {
-                            value = GetCellValue(c);
-                            emptyRow = emptyRow && string.IsNullOrWhiteSpace(value);
-                            values[cellID] = value;
+                            if (cellID < 5)
+                            {
+                                value = GetCellValue(c);
+                                emptyRow = emptyRow && string.IsNullOrWhiteSpace(value);
+                                values[cellID] = value;
+                            }
                             cellID++;
                         }
                         cellID = 0;
                         rowData.Add(rowID, values);
                         rowID++;
                     }
-                     
-                    FillDatabase(rowData);
+
+                    FillDatabase(rowData, assignableProject);
                 }
 
             }
         }
 
-        private void FillDatabase(Dictionary<int, object[]> rowData)
+        private void FillDatabase(Dictionary<int, object[]> rowData, Project insertProject)
         {
-            BarometerDataAccesLayer.DatabaseClassesDataContext context = Database.DatabaseFactory.getInstance().getDataContext();
-            foreach(KeyValuePair<int,object[]> cell in rowData)
+            BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            foreach (KeyValuePair<int, object[]> cell in rowData)
             {
+                bool userExists = false;
                 if (cell.Key != 0)
                 {
                     BarometerDataAccesLayer.User insertUser = null;
@@ -144,6 +150,7 @@ namespace Barometer_ASP_NET.FileFactory
                     else
                     {
                         //If exists, get user
+                        userExists = true;
                         insertUser = existingUser.First();
                     }
 
@@ -157,6 +164,7 @@ namespace Barometer_ASP_NET.FileFactory
                         string[] groups = cell.Value[4].ToString().Split(',');
                         foreach (string groupcode in groups)
                         {
+                            bool groupExists = false;
                             var currentGroup =
                                 from pg in context.ProjectGroups
                                 where pg.group_code == groupcode
@@ -171,21 +179,88 @@ namespace Barometer_ASP_NET.FileFactory
                             }
                             else
                             {
+                                groupExists = true;
                                 newGroup = currentGroup.First();
+                            }
+                            if (insertProject != null)
+                            {
+                                newGroup.Project = insertProject;
                             }
 
                             ProjectMember member = new ProjectMember();
                             member.student_user_id = insertUser.id;
                             member.ProjectGroup = newGroup;
-                            context.ProjectGroups.InsertOnSubmit(newGroup);
+                            if (!groupExists)
+                            {
+                                context.ProjectGroups.InsertOnSubmit(newGroup);
+                            }
                             context.ProjectMembers.InsertOnSubmit(member);
                         }
                     }
-
-                    context.Users.InsertOnSubmit(insertUser);
+                    if (!userExists)
+                    {
+                        context.Users.InsertOnSubmit(insertUser);
+                    }
                 }
             }
             context.SubmitChanges();
+        }
+
+        internal void AddGroupsToProject(System.IO.Stream stream, Project insertProject)
+        {
+            BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+            using (SpreadsheetDocument spreadsheetDocument =
+                SpreadsheetDocument.Open(stream, false))
+            {
+                WorkbookPart workBookPart = spreadsheetDocument.WorkbookPart;
+
+                foreach (Sheet s in workBookPart.Workbook.Descendants<Sheet>())
+                {
+                    WorksheetPart wsPart = workBookPart.GetPartById(s.Id) as WorksheetPart;
+                    System.Diagnostics.Debug.WriteLine("Worksheet {1}:{2} - id({0}) {3}", s.Id, s.SheetId, s.Name,
+                        wsPart == null ? "NOT FOUND!" : "found.");
+
+                    if (wsPart == null)
+                    {
+                        continue;
+                    }
+
+                    Row[] rows = wsPart.Worksheet.Descendants<Row>().ToArray();
+
+                    List<string> groupsToAdd = new List<string>();
+
+                    //assumes the first row contains column names 
+                    foreach (Row row in wsPart.Worksheet.Descendants<Row>())
+                    {
+                        bool emptyRow = true;
+                        string[] values = row.ElementAt(4).ToString().Split(',');
+                        emptyRow = emptyRow && (values.Count() > 0);
+
+                        foreach (string value in values)
+                        {
+                            if (!groupsToAdd.Contains(value))
+                            {
+                                groupsToAdd.Add(value);
+                            }
+                        }
+                    }
+
+                    foreach (string projectgroup in groupsToAdd)
+                    {
+                        var groupResult =
+                            from pg in context.ProjectGroups
+                            where pg.group_code == projectgroup
+                            select pg;
+
+                        BarometerDataAccesLayer.ProjectGroup group = groupResult.First();
+
+                        group.Project = insertProject;
+                    }
+
+
+                }
+
+            }
         }
     }
 }

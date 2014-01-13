@@ -283,7 +283,7 @@ namespace Barometer_ASP_NET.Controllers
 					}
 					else
 					{
-						ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
+						ModelState.AddModelError("UserName", "User name already groupExists. Please enter a different user name.");
 					}
 				}
 			}
@@ -375,10 +375,10 @@ namespace Barometer_ASP_NET.Controllers
 			switch (createStatus)
 			{
 				case MembershipCreateStatus.DuplicateUserName:
-					return "User name already exists. Please enter a different user name.";
+					return "User name already groupExists. Please enter a different user name.";
 
 				case MembershipCreateStatus.DuplicateEmail:
-					return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
+					return "A user name for that e-mail address already groupExists. Please enter a different e-mail address.";
 
 				case MembershipCreateStatus.InvalidPassword:
 					return "The password provided is invalid. Please enter a valid password value.";

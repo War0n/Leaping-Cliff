@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BarometerDataAccesLayer;
-using Barometer_ASP_NET.Database;
+using BarometerDataAccesLayer.Database;
 using System.Data.Linq;
 
 namespace Barometer_ASP_NET.Wrappers
@@ -12,7 +12,7 @@ namespace Barometer_ASP_NET.Wrappers
     {
         private int studentNumber;
         public IQueryable<ProjectMember> ProjectMembers { get; set; }
-        public IQueryable<Project> CurrentProject { get; set; }
+        public Project CurrentProject { get; set; }
         public IQueryable<User> CurrentProjectOwners { get; set; }
         public IQueryable<Project> AllProjects { get; set; }
         public Dictionary<string, int[]> Grades { get; set; }
@@ -45,7 +45,8 @@ namespace Barometer_ASP_NET.Wrappers
         }
         private void FillCurrentProject()
         {
-            CurrentProject = project.GetCurrentActiveProject(studentNumber);
+            CurrentProject = project.GetCurrentActiveProject(studentNumber).FirstOrDefault();
+            HasProject = !(CurrentProject == null);
         }
         private void FillAllProjects()
         {
@@ -77,5 +78,7 @@ namespace Barometer_ASP_NET.Wrappers
         }
 
 
+
+        public bool HasProject { get; set; }
     }
 }

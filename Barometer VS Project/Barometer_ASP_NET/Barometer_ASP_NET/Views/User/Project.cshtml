@@ -27,7 +27,11 @@
                           <text> @v.grade, </text>
                          }
                      }],
-          ['Week 9', 7, 8, 9, 10, 10]
+          ['Week 9',@foreach(var v in Model.MyGrades){
+                         if(v.project_report_date_id == 3){
+                          <text> @v.grade, </text>
+                         }
+                     }],
         ]);
 
         var options = {

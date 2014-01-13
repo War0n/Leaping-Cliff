@@ -96,6 +96,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.3.0.0\lib\net45\Microsoft.Web.WebPages.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -202,10 +205,6 @@
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Database\DAOBaro.cs" />
-    <Compile Include="Database\DAOStudent.cs" />
-    <Compile Include="Database\DAOProject.cs" />
-    <Compile Include="Database\DAOTemplate.cs" />
-    <Compile Include="Database\DatabaseFactory.cs" />
     <Compile Include="FileFactory\FileHandlerFactory.cs" />
     <Compile Include="FileFactory\GradeExcel.cs" />
     <Compile Include="FileFactory\IExcelDataTransfer.cs" />
@@ -394,6 +393,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\User\_ViewStart.cshtml" />
+    <Compile Include="Wrappers\CreateProjectWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\ExcelExports\" />
