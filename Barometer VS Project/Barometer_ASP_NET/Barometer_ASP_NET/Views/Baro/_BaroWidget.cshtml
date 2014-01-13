@@ -42,7 +42,11 @@
                                 
                                 <tr>
                                     <td>@child.name</td>
-                                    <td>@((givenGrade != null) ? givenGrade.grade.ToString() : "x")</td>
+                                    <td>
+                                        <a href="#" title="@((givenGrade != null) ? givenGrade.comment : "Hier komt extra commentaar dat kan worden meegegeven bij een beoordeling")">
+                                            @((givenGrade != null) ? givenGrade.grade.ToString() : "x")
+                                        </a>
+                                    </td>
                                 </tr>
                             }                            
                         }

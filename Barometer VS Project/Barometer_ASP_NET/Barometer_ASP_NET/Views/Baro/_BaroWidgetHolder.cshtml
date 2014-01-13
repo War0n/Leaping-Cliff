@@ -22,25 +22,24 @@
             };
 
             $.ajax(options).done(function(data){
-                $('#modal-report-container').html(data);
+                $('#modal-report-holder').html(data);
             });
         });
     });
 </script>
 <div class="modal-header">
-    <h4>Beoordelingen van @Model.Reporter.firstname voor jou in @Model.Project.name</h4>
+    <h4>Beoordelingen van <b>@Model.Reporter.firstname</b> voor jou in <b>@Model.Project.name</b></h4>
     <select class="form-control" id="ctrl-select-moment">
-        <option value="0">Selecteer een beoordelings moment</option>
+        <option value="0">Selecteer een beoordelingsmoment</option>
         @foreach(BarometerDataAccesLayer.ProjectReportDate item in Model.ReportDates) 
         {
         <option value="@item.id">@item.week_label</option>
         }
     </select>
 </div>
-<div class="modal-body" id="modal-report-container">
+<div class="modal-body" id="modal-report-holder">
     
 </div>
-
 <div class="modal-footer">
     <input type="button" value="Sluit" class="btn btn-default" data-dismiss="modal" />
 </div>

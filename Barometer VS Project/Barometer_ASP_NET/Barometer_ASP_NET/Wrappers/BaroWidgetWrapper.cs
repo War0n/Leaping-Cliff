@@ -15,7 +15,5 @@ namespace Barometer_ASP_NET.Wrappers
         public Project Project { get; set; }
         public List<ProjectReportDate> ReportDates { get; set; }
         public List<BaroAspect> HeadAspects { get; set; }
-        public List<BaroAspect> ParentAspects { get; set; }
-        public List<BaroAspect> SubAspects { get; set; }
     }
 }
