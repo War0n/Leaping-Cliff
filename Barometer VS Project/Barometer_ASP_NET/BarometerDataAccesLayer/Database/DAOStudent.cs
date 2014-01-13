@@ -66,10 +66,7 @@ namespace BarometerDataAccesLayer.Database
                 {
                     return projectGroup;
                 }
-                else
-                {
-                    throw new DataException("No data found for valid argument");
-                }
+                return null;
             }
             else
             {

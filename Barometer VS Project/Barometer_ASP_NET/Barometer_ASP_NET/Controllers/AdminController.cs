@@ -18,6 +18,12 @@ namespace Barometer_ASP_NET.Controllers
         //
         // GET: /Admin/
 
+        public ActionResult Index()
+        {
+
+            return RedirectToAction("Dashboard");
+        }
+
         public ActionResult Dashboard()
         {
             return View(wrapper);
