@@ -1,7 +1,6 @@
 ﻿using BarometerDataAccesLayer;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -26,14 +25,7 @@ namespace Barometer_ASP_NET.Database
                     join pm in context.ProjectMembers on u.ProjectGroups.First() equals pm.ProjectGroup
                     where pm.ProjectGroup.Project.id == projectID
                     select u;
-                if (students.ToList().Count > 0)
-                {
-                    return students;
-                }
-                else
-                {
-                    throw new DataException("No data found, for valid parameter");
-                }
+                return students;
             }
             else
             {
@@ -66,22 +58,14 @@ namespace Barometer_ASP_NET.Database
         public IQueryable<ProjectMember> getProjectGroupMembers(int projectGroupId)
         {
             if (projectGroupId >= 0)
-        {
-
+            {
                 DatabaseFactory factory = DatabaseFactory.getInstance();
                 DatabaseClassesDataContext context = factory.getDataContext();
                 var projectMembers =
                     from pm in context.ProjectMembers
                     join pg in context.ProjectGroups on pm.ProjectGroup equals pg
                     select pm;
-                if (projectMembers.ToList().Count > 0)
-                {
-                    return projectMembers;
-                }
-                else
-                {
-                    throw new DataException("No data found, for valid parameter");
-                }
+                return projectMembers;
             }
             else
             {
@@ -371,11 +355,12 @@ namespace Barometer_ASP_NET.Database
 
                 return activeProject;
             }
-            else
+             else
             {
                 throw new ArgumentOutOfRangeException();
             }
         }
+        
         public IQueryable<Project> GetProjectsByOwner(int ownerId)
         {
             DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
@@ -418,16 +403,7 @@ namespace Barometer_ASP_NET.Database
                 where ba.is_head_aspect == 1 && p.id == projectId
                 select ba;
 
-<<<<<<< HEAD:Barometer VS Project/Barometer_ASP_NET/BarometerDataAccesLayer/Database/DAOProject.cs.orig
-=======
-
-        public int GetProjectGroupId()
-        {
-            throw new NotImplementedException();
->>>>>>> expanded test framework and added extra error handling
-=======
             return baroAspect;
->>>>>>> Finished nested dictionary, added queries to fill the dictionaries.:Barometer VS Project/Barometer_ASP_NET/Barometer_ASP_NET/Database/DAOProject.cs
         }
 
         public IQueryable<ProjectReportDate> GetProjectReportDate(int projectId)
