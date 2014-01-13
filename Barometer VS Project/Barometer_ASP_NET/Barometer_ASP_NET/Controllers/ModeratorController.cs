@@ -16,9 +16,14 @@ namespace Barometer_ASP_NET.Controllers
             return View();
         }
 
-		public ActionResult Student()
+        public ActionResult Student(int studentId)
 		{
-			return View();
+            BarometerDataAccesLayer.DatabaseClassesDataContext context = Database.DatabaseFactory.getInstance().getDataContext();
+            var student =
+                from u in context.Users
+                where u.id == studentId
+                select u;
+            return View(student.First());
 		}
 
     }
