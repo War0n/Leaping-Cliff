@@ -222,6 +222,7 @@
     <Compile Include="Wrappers\AdminProjectDetailWrapper.cs" />
     <Compile Include="Wrappers\ModeratorDashboardWrapper.cs" />
     <Compile Include="Wrappers\AdminProjectGroupViewWrapper.cs" />
+    <Compile Include="Wrappers\AdminProjectGroupViewWrapper.cs" />
     <Compile Include="Wrappers\BaroWidgetWrapper.cs" />
     <Compile Include="Wrappers\UserDashboardWrapper.cs" />
     <Compile Include="Wrappers\UserProjectWrapper.cs" />
