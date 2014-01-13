@@ -1,11 +1,11 @@
-﻿using Barometer_ASP_NET.Database;
-using Barometer_ASP_NET.Wrappers;
+﻿using Barometer_ASP_NET.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BarometerDataAccesLayer;
+using BarometerDataAccesLayer.Database;
 using System.Diagnostics;
 
 namespace Barometer_ASP_NET.Controllers
