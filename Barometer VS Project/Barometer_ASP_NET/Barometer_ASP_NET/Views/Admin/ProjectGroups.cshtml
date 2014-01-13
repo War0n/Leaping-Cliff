@@ -34,11 +34,16 @@
         <hr />
         @using (Html.BeginForm("ListStudents", "Group", FormMethod.Post, new { @class = "form-vertical", @role = "form" }))
         {
+            List<SelectListItem> ownerItems = new List<SelectListItem>();
+            foreach (BarometerDataAccesLayer.User owner in Model.CurrentProjectOwners)
+            {
+                ownerItems.Add(new SelectListItem {Text = owner.lastname + " " +owner.lastname, Value = owner.id.ToString() });
+            }
+            
             <div class="form-group">
                 <label class="control-label">Tutor</label>
                 <select class="form-control">
-                    <option>Angeliqeu</option>
-                    <option>Angeliqeu</option>
+                    @Html.DropDownList("owner", ownerItems)
                 </select>
             </div>
             <div class="form-group">
