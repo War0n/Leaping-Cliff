@@ -196,7 +196,14 @@ namespace BarometerDataAccesLayer.Database
 
                 foreach (var v in name)
                 {
-                    fullName.Add(v.firstname, v.lastname);
+                    if (v.firstname != null && v.lastname != null)
+                    {
+                        fullName.Add(v.firstname, v.lastname);
+                    }
+                    else
+                    {
+                        fullName.Add("Naam", "Onbekend");
+                    }
                 }
                if (fullName.Count > 0)
                {
