@@ -24,9 +24,11 @@ namespace Barometer_ASP_NET.Wrappers
 
         public AdminProjectGroupViewWrapper(int groupid)
         {
+            projectGroup = groupid;
             ProjectGroupMembers = projectDAO.getProjectGroupMembers(groupid);
             CurrentProjectOwners = projectDAO.GetProjectOwners(groupid);
             CurrentTutor = projectDAO.GetTutor(groupid);
+            ProjectGroups = projectDAO.getProjectGroupsByProject(ProjectGroupMembers.First().ProjectGroup.project_id);
             GroupMemberUserList = new List<User>();
             foreach (ProjectMember member in ProjectGroupMembers)
             {

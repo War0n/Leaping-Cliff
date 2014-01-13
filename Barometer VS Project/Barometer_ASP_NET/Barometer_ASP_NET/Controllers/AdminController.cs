@@ -158,16 +158,18 @@ namespace Barometer_ASP_NET.Controllers
             DAOStudent studentdao = DatabaseFactory.getInstance().getDAOStudent();
             DAOProject projectdao = DatabaseFactory.getInstance().getDAOProject();
             BarometerDataAccesLayer.User studentUser = studentdao.getStudentInfo(studentIdToAdd);
-            BarometerDataAccesLayer.Project project = projectdao.GetAllProjects(studentIdToAdd).Where(r => r.id == projectId).FirstOrDefault();
-            BarometerDataAccesLayer.ProjectGroup group = projectdao.getProjectGroupsByProject(projectId).Where(pg => pg.id == groupId).FirstOrDefault();
-            if (group.ProjectMembers.Where(pm => pm.User == studentUser) == null)
+            IEnumerable<BarometerDataAccesLayer.ProjectMember> member = studentUser.ProjectMembers.Where(pm => pm.project_group_id == groupId);
+            if (member.Count() == 0)
             {
-                BarometerDataAccesLayer.ProjectMember member = new BarometerDataAccesLayer.ProjectMember();
-                member.User = studentUser;
-                member.ProjectGroup = group;
+                BarometerDataAccesLayer.ProjectMember pMember = new BarometerDataAccesLayer.ProjectMember();
+                pMember.User = studentUser;
+                pMember.project_group_id = groupId;
+                BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+                context.ProjectMembers.InsertOnSubmit(pMember);
+                context.SubmitChanges();
             }
 
-            return RedirectToAction("ProjectGroups",projectId);
+            return RedirectToAction("ProjectGroups", new { groupId = groupId });
         }
     }
 }
