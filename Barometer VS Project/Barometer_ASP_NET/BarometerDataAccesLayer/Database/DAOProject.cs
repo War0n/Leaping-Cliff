@@ -427,14 +427,14 @@ namespace BarometerDataAccesLayer.Database
                     join u in context.Users on pm.student_user_id equals u.id
                     where u.student_number == studentNumber && p.status_name.Equals("Active")
                     select p;
-                if (activeProject.ToList().Count > 0)
-                {
+                //if (activeProject.ToList().Count > 0)
+                //{
                     return activeProject;
-                }
-                else
-                {
-                    throw new DataException("No data found, for valid parameter");
-                }
+                //}
+                //else
+                //{
+                //    throw new DataException("No data found, for valid parameter");
+                //}
             }
              else
             {
@@ -481,6 +481,49 @@ namespace BarometerDataAccesLayer.Database
                 from bt in context.BaroTemplates
                 select bt;
             return templates;
+        }
+
+        public IQueryable<BaroAspect> GetBaroAspect(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var baroAspect =
+                from ba in context.BaroAspects
+                join t in context.BaroTemplates on ba.baro_template_id equals t.id
+                join p in context.Projects on t.id equals p.baro_template_id
+                where ba.is_head_aspect == 1 && p.id == projectId
+                select ba;
+
+            return baroAspect;
+        }
+
+        public IQueryable<ProjectReportDate> GetProjectReportDate(int projectId)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var dates =
+                from pd in context.ProjectReportDates
+                join p in context.Projects on pd.project_id_int equals p.id
+                where p.id == projectId
+                select pd;
+
+            return dates;
+        }
+
+        public IQueryable<Report> GetSubAspects(int projectId, int studentNumber)
+        {
+            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+
+            var report =
+                from r in context.Reports
+                join u in context.Users on r.reporter_id equals u.id
+                join pgm in context.ProjectMembers on u.id equals pgm.student_user_id
+                join pg in context.ProjectGroups on pgm.project_group_id equals pg.id
+                join p in context.Projects on pg.project_id equals p.id
+                where p.id == projectId && u.student_number == studentNumber
+                select r;
+
+            return report;
         }
     }
 }
