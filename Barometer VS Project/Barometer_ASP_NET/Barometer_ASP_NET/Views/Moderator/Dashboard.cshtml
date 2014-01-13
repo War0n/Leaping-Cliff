@@ -2,156 +2,73 @@
     ViewBag.Title = "Dashboard";
 }
 
-<!-- http://www.youtube.com/watch?v=rct6LIyErUE -->
+@model Barometer_ASP_NET.Wrappers.ModeratorDashboardWrapper
+
 <div class="row">
     <div class="col-lg-6">
         <h2>Mijn groepen</h2>
         <p>Klik op een student om het historisch overzicht en voortgangen te bekijken</p>
         <hr />
-        <select class="form-control">
+        <<select class="form-control">
             <option>Selecteer project</option>
-            <option>Project Barometer</option>
-            <option>Project Wordfeud</option>
+            @foreach (BarometerDataAccesLayer.Project project in Model.OwnProjects)
+            {
+                <option value="@project.id">@project.name</option>
+            }
         </select>
+
         <br />
         <br />
+
         <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        @Html.ActionLink("42IN06SOa", null, null, new { @data_toggle = "collapse", @data_parent = "#accordion", @Href = "#group1" })
-
-                    </h4>
-                </div>
-                <div id="group1" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <table class="table table-bordered table-members table-centered">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>Rik Coenen</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>Ronald Duren</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>Joost Dolman</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>John Huijbergt</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            @{int counter = 0;}
+            @foreach (KeyValuePair<string, IEnumerable<BarometerDataAccesLayer.User>> group in Model.UsersInGroups)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            @Html.ActionLink(group.Key, null, null, new { @data_toggle = "collapse", @data_parent = "#accordion", @Href = "#group_" + counter })
+                        </h4>
+                    </div>
+                    <div id="group_@counter" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table table-bordered table-members table-centered">
+                                <tbody>
+                                    @foreach (BarometerDataAccesLayer.User user in group.Value)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img src="../../images/pf.jpg" alt="..." class="img-circle">
+                                            </td>
+                                            <td>@user.firstname @user.lastname</td>
+                                            <td>@Html.ActionLink(" ", "Student", "Admin", new { user.id }, new { @class = "glyphicon glyphicon-eye-open", @Title = "Bekijk historich overzicht" })</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        @Html.ActionLink("42IN06SOb", null, null, new { @data_toggle = "collapse", @data_parent = "#accordion", @Href = "#group2" })
+                                    counter++;
+            }
 
-                    </h4>
-                </div>
-                <div id="group2" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <table class="table table-bordered table-members table-centered">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>Rik Coenen</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>Ronald Duren</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>Joost Dolman</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>John Huijbergt</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        @Html.ActionLink("42IN06SOc", null, null, new { @data_toggle = "collapse", @data_parent = "#accordion", @Href = "#group3" })
-                    </h4>
-                </div>
-                <div id="group3" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <table class="table table-bordered table-members table-centered">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>Rik Coenen</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>Ronald Duren</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>Joost Dolman</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img src="Content/images/pf.jpg" alt="..." class="img-circle"></td>
-                                    <td>John Huijbergt</td>
-                                    <td>@Html.ActionLink(" ", "Student", "Moderator", null, new { @class = "glyphicon glyphicon-eye-open", @title = "Bekijk historisch overzicht" })</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
 
         </div>
+
+
+
     </div>
     <div class="col-lg-6">
         <h2>Zoek een student</h2>
-        <p>Typ de naam van een student in om het overzicht te bekijken</p>
+        <p>Typ het studentnummer van een student in om het overzicht te bekijken</p>
         <hr />
-        <form class="form-vertical">
+        @using (Html.BeginForm("StudentForm", "Moderator", FormMethod.Post))
+        {
             <div class="form-group">
                 <label class="control-label">Zoek student</label>
                 <input type="text" class="form-control" name="student" />
-
             </div>
-        </form>
+        }
 
 
     </div>

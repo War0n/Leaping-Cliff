@@ -12,7 +12,7 @@ namespace Barometer_ASP_NET.FileFactory
 {
     public class GradeExcel : IExcelDataTransfer
     {
-        public GradeExcel()
+        public GradeExcel():base()
         {
             setTemplatePath("GradeTemplate");
         }
