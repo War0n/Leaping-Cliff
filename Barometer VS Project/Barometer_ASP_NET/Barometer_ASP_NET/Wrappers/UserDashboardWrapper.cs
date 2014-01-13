@@ -37,7 +37,6 @@ namespace Barometer_ASP_NET.Wrappers
         private void FillProjectMembers(ProjectGroup projectGroup)
         {
             ProjectMembers = project.getProjectGroupMembers(projectGroup.id);
-
         }
         private void FillCurrentProjectOwners(ProjectGroup projectGroup)
         {
