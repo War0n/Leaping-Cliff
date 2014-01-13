@@ -211,6 +211,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProjectMember.cs" />
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectGroup.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Wrappers\AdminDashboardWrapper.cs" />
     <Compile Include="Wrappers\AdminProjectDetailWrapper.cs" />
     <Compile Include="Wrappers\ModeratorDashboardWrapper.cs" />
+    <Compile Include="Wrappers\AdminProjectGroupViewWrapper.cs" />
     <Compile Include="Wrappers\BaroWidgetWrapper.cs" />
     <Compile Include="Wrappers\UserDashboardWrapper.cs" />
     <Compile Include="Wrappers\UserProjectWrapper.cs" />

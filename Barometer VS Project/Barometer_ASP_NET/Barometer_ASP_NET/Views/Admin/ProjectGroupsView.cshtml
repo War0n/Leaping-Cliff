@@ -1,3 +1,5 @@
+@model Barometer_ASP_NET.Wrappers.AdminProjectGroupViewWrapper
+
 @{
     ViewBag.Title = "Projectgroep";
 }
@@ -48,8 +50,10 @@
                         </tr>
                     </thead>
                     <tbody>
+@foreach(BarometerDataAccesLayer.User user in Model.GroupMemberUserList)
+{
                         <tr>
-                            <td>Jens Hoevenaars</td>
+                            <td>@user.firstname + @user.lastname</td>
                             <td>
                                 <select>
                                     <option>42INSO06a
@@ -62,49 +66,7 @@
                             </td>
                             <td>@Html.ActionLink(" ", "RemoveStudent", "Group", new { @class = "glyphicon glyphicon-remove", @Href = "#" })</td>
                         </tr>
-                        <tr>
-                            <td>Rik Coenen</td>
-                            <td>
-                                <select>
-                                    <option>42INSO06a
-                                    </option>
-                                    <option>42INSO06b  
-                                    </option>
-                                    <option>42INSO06c
-                                    </option>
-                                </select>
-                            </td>
-                            <td>@Html.ActionLink(" ", "RemoveStudent", "Group", new { @class = "glyphicon glyphicon-remove", @Href = "#" })</td>
-                        </tr>
-                        <tr>
-                            <td>John Geldboom</td>
-                            <td>
-                                <select>
-                                    <option>42INSO06a
-                                    </option>
-                                    <option>42INSO06b  
-                                    </option>
-                                    <option>42INSO06c
-                                    </option>
-                                </select>
-                            </td>
-                            <td>@Html.ActionLink(" ", "RemoveStudent", "Group", new { @class = "glyphicon glyphicon-remove", @Href = "#" })</td>
-                        </tr>
-                        <tr>
-                            <td>Dennis Dolmand</td>
-                            <td>
-                                <select>
-                                    <option>42INSO06a
-                                    </option>
-                                    <option>42INSO06b  
-                                    </option>
-                                    <option>42INSO06c
-                                    </option>
-                                </select>
-                            </td>
-                            <td>@Html.ActionLink(" ", "RemoveStudent", "Group", new { @class = "glyphicon glyphicon-remove", @Href = "#" })</td>
-                        </tr>
-
+}
 
                     </tbody>
 
