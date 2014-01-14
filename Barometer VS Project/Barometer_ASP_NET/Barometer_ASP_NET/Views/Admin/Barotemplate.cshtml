@@ -18,27 +18,18 @@
         
         var saveAspect = function (e) {
             var data = $('#form-add-aspect').serialize();
-            console.log(data);
-
             var options = {
                 data: $('#form-add-aspect').serialize(),
                 url: '/Baro/AddAspect',
                 type: 'POST',
-                dataType: 'HTML'
+                dataType: 'JSON'
             };
 
             $.ajax(options).done(function (response) {
-                $('#baro-template-tree').html(response);
-
-                $.get("/Baro/SelectParents", {template_id : baro_template_id}, function(data, t, jx){
-                    $('#form-parents-select').empty().append(data);
-                }, "HTML");
+                $('#baro-template-tree').html(response.html_tree);
+                $('#form-parents-select').empty().append(response.html_select);
             });
-
-            
         };
-
-
 
 
         $('#btn-save-aspect').click(saveAspect);
@@ -61,7 +52,7 @@
          </div>
     </div>
 </div>
-<div class="row" id="baro-template-editor">
+<div class="row hide" id="baro-template-editor">
     <div class="col-lg-8">
         <h3>Overzicht</h3>
         <hr />

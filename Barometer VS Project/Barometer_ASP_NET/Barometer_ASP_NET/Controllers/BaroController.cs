@@ -16,7 +16,7 @@ namespace Barometer_ASP_NET.Controllers
         /// <summary>
         /// Database
         /// </summary>
-        private DatabaseClassesDataContext _db = DatabaseFactory.getInstance().getDataContext();
+        private DatabaseClassesDataContext _db = new DatabaseClassesDataContext();
 
 
         /// <summary>
@@ -57,29 +57,37 @@ namespace Barometer_ASP_NET.Controllers
             _db.BaroAspects.InsertOnSubmit(aspect);
             _db.SubmitChanges();
 
-            BaroTreeViewWrapper template = _db.BaroTemplates.Where(r => r.id == aspect.baro_template_id)
+            // haal de tree op
+            BaroTreeViewWrapper viewModel = _db.BaroTemplates.Where(r => r.id == aspect.baro_template_id)
                                             .Select(r => new BaroTreeViewWrapper
                                             {
                                                 Template = r,
-                                                HeadAspect = r.BaroAspects.Where(d => d.is_head_aspect == 1).ToList()
+                                                HeadAspect = r.BaroAspects.Where(d => d.is_head_aspect == 1 && d.parent_id == null || d.parent_id == 0).ToList()
                                             }).FirstOrDefault();
 
-            return PartialView("_BaroTreePartial", template);
+
+            string treeHtml = RazorViewToString.RenderRazorViewToString(this, "_BaroTreePartial", viewModel);
+            string selectHtml = RazorViewToString.RenderRazorViewToString(this, "_BaroSelectParents", viewModel);
+
+            return Json(new { status = "success", html_tree = treeHtml, html_select = selectHtml}, JsonRequestBehavior.AllowGet);
         }
 
-
-
-        public ActionResult SelectParents(int template_id = 0)
+        /// <summary>
+        /// TEST METHOD om te kijken hoe een baro mmeter er uit ziet
+        /// </summary>
+        /// <param name="template_id"></param>
+        /// <returns></returns>
+        public ActionResult GetTree(int template_id = 0)
         {
-            BaroTreeViewWrapper viewModel = (from t in _db.BaroTemplates
-                                             where (t.id == template_id)
-                                             select t).Select(r => new BaroTreeViewWrapper
-                                             {
-                                                 Template = r,
-                                                 HeadAspect = r.BaroAspects.Where(d => d.is_head_aspect == 1).ToList()
+            BaroTreeViewWrapper viewModel = _db.BaroTemplates.Where(r => r.id == template_id)
+                                           .Select(r => new BaroTreeViewWrapper
+                                           {
+                                               Template = r,
+                                               HeadAspect = r.BaroAspects.Where(d => d.is_head_aspect == 1 && d.parent_id == null || d.parent_id == 0).ToList()
+                                           }).FirstOrDefault();
+            
 
-                                             }).FirstOrDefault();
-            return PartialView("_BaroSelectParents", viewModel);
+            return PartialView("_BaroTreePartial", viewModel);
         }
 
 
@@ -140,6 +148,13 @@ namespace Barometer_ASP_NET.Controllers
             viewModel.Reporter = _db.Users.Where(r => r.id == reporter_id || r.student_number == reporter_id).FirstOrDefault();
 
             return PartialView("_BaroWidgetHolder", viewModel);
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            _db.Dispose();
+            base.Dispose(disposing);
         }
 
     }
