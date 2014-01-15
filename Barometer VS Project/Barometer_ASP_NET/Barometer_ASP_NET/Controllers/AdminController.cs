@@ -30,12 +30,11 @@ namespace Barometer_ASP_NET.Controllers
             return View(wrapper);
         }
 
-
         DatabaseClassesDataContext db = DatabaseFactory.getInstance().getDataContext();
 
         public ActionResult Barotemplate()
         {
-            int debug_id = (Request["template_id"] == null) ? 0 :  Convert.ToInt32(Request["template_id"]);
+            int debug_id = (Request["template_id"] == null) ? 0 : Convert.ToInt32(Request["template_id"]);
             ViewBag.debug_id = debug_id;
             return View();
         }
