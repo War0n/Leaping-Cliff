@@ -10,7 +10,7 @@ namespace Barometer_ASP_NET.Wrappers
 {
     public class UserDashboardWrapper
     {
-        private int studentNumber;
+        public int StudentNumber {get;set;}
         public IQueryable<ProjectMember> ProjectMembers { get; set; }
         public Project CurrentProject { get; set; }
         public IQueryable<User> CurrentProjectOwners { get; set; }
@@ -24,7 +24,7 @@ namespace Barometer_ASP_NET.Wrappers
 
         public UserDashboardWrapper(int studentNumber)
         {
-            this.studentNumber = studentNumber;
+            this.StudentNumber = studentNumber;
             student = DatabaseFactory.getInstance().getDAOStudent();
             project = DatabaseFactory.getInstance().getDAOProject();
 
@@ -51,12 +51,12 @@ namespace Barometer_ASP_NET.Wrappers
         }
         private void FillCurrentProject()
         {
-            CurrentProject = project.GetCurrentActiveProject(studentNumber).FirstOrDefault();
+            CurrentProject = project.GetCurrentActiveProject(StudentNumber).FirstOrDefault();
             HasProject = !(CurrentProject == null);
         }
         private void FillAllProjects()
         {
-            AllProjects = project.GetAllProjects(studentNumber);
+            AllProjects = project.GetAllProjects(StudentNumber);
 
         }
 
@@ -75,7 +75,7 @@ namespace Barometer_ASP_NET.Wrappers
                     int pcijfer;
                     pcijfer = (int)student.getReportResults(pid).First().group_end_grade;
                     int icijfer;
-                    icijfer = student.getEndGradeIndividual(studentNumber, pid);
+                    icijfer = student.getEndGradeIndividual(StudentNumber, pid);
                     Grades.Add(pnaam, new int[2] { pcijfer, icijfer });
                 }
                 

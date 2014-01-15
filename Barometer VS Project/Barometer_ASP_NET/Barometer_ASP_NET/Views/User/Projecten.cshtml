@@ -12,6 +12,7 @@
                 <tr>
                     <td>Titel</td>
                     <td>Blok</td>
+                    <td>Status</td>
                     <td>Eindcijfer groep</td>
                     <td>Eindcijfer individueel</td>
                     <td>Bekijk</td> 
@@ -22,7 +23,7 @@
                 {
                     <tr>
                         <td>@projects.name</td>
-                        <td></td>
+                        <td>@projects.blok</td>
                         @switch (projects.status_name)
                         {
                             case "Active":

@@ -8,6 +8,7 @@ namespace BarometerDataAccesLayer.Database
 	public class CurrentUser
 	{
 		public int Studentnummer { get; set; }
+        public string Role { get; set; }
 		public static CurrentUser instance;
 
 		public static CurrentUser getInstance(){

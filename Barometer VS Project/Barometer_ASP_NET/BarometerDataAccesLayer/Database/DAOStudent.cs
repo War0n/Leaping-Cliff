@@ -231,23 +231,35 @@ namespace BarometerDataAccesLayer.Database
         {
             DatabaseFactory factory = DatabaseFactory.getInstance();
             DatabaseClassesDataContext context = factory.getDataContext();
-            User newUser = new User();
-            newUser.student_number = studentNumber;
-            newUser.email = email + "@avans.nl";
-            newUser.rol_name = "user";
+            User newUser;
+            bool userExists = false;
+
 
             var usertest = from u in context.Users
                            where u.student_number == studentNumber
                            select u;
-			
-			CurrentUser.getInstance().Studentnummer = studentNumber;
 
             if (usertest.Count() == 0)
             {
-                context.Users.InsertOnSubmit(newUser);
-                context.SubmitChanges();
+                newUser = new User();        
+                newUser.student_number = studentNumber;    
+                newUser.email = email + "@avans.nl";
+                newUser.rol_name = "user";
+            }
+            else
+            {
+                userExists = true;
+                newUser = usertest.First();
             }
 
+            CurrentUser.getInstance().Studentnummer = studentNumber;
+            CurrentUser.getInstance().Role = newUser.rol_name;
+
+            if (!userExists)
+            {
+                context.Users.InsertOnSubmit(newUser);
+            }
+            context.SubmitChanges();
         }
     }
 }
