@@ -39,7 +39,6 @@ namespace Barometer_ASP_NET.Controllers
             _db.BaroTemplates.InsertOnSubmit(newTemplate);
             _db.SubmitChanges();
 
-            //string selectHtml = headAspectsToSelect(template.HeadAspect);
 
             return Json(new {status = "success", baro_template_id = newTemplate.id}, JsonRequestBehavior.AllowGet);
         }
@@ -54,10 +53,15 @@ namespace Barometer_ASP_NET.Controllers
         public ActionResult AddAspect(BaroAspect aspect)
         {
             aspect.parent_id = (aspect.parent_id == 0) ? null : aspect.parent_id;
+            if (aspect.parent_id == null) // Als node geen parent heeft is het een head aspect
+            {
+                aspect.is_head_aspect = 1;
+            }
+
             _db.BaroAspects.InsertOnSubmit(aspect);
             _db.SubmitChanges();
 
-            // haal de tree op
+            // Haal de tree op
             BaroTreeViewWrapper viewModel = _db.BaroTemplates.Where(r => r.id == aspect.baro_template_id)
                                             .Select(r => new BaroTreeViewWrapper
                                             {
@@ -67,6 +71,7 @@ namespace Barometer_ASP_NET.Controllers
 
 
             string treeHtml = RazorViewToString.RenderRazorViewToString(this, "_BaroTreePartial", viewModel);
+            ViewBag.parent_id = aspect.parent_id;
             string selectHtml = RazorViewToString.RenderRazorViewToString(this, "_BaroSelectParents", viewModel);
 
             return Json(new { status = "success", html_tree = treeHtml, html_select = selectHtml}, JsonRequestBehavior.AllowGet);
@@ -123,7 +128,7 @@ namespace Barometer_ASP_NET.Controllers
         /// <summary>
         /// Haal de holder op voor het bekijken van de beoordelingen.
         /// Deze weergeeft de SELECT met daarin de report dates. 
-        /// Bij het selecteren van de report date wordt er een request gemaakt naar de Widget()
+        /// Bij het selecteren van de report date wordt er een request gemaakt naar de Widget() die dan de reports laat zien
         /// </summary>
         /// <param name="reporter_id"></param>
         /// <param name="subject_id"></param>

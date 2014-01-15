@@ -7,17 +7,17 @@
         @foreach (BaroAspect head in Model.HeadAspect)
         {
             <li>
-                <span><i class="glyphicon glyphicon-chevron-right"></i> @head.name</span>
+                <span><i class="glyphicon glyphicon-chevron-right"></i> @head.name</span><span class="glyphicon glyphicon-remove"><a class="tree-note-delete" data-nodeid="@head.id"></a></span>
                 <ul>
                 @foreach (BaroAspect parent in head.BaroAspects)
                 {
                     <li>
-                        <span><i class="glyphicon glyphicon-leaf"></i> @parent.name</span>
+                        <span><i class="glyphicon glyphicon-chevron-right"></i> @parent.name</span><span class="glyphicon glyphicon-remove"><a class="tree-note-delete" data-nodeid="@parent.id"></a></span>
                         <ul>
                         @foreach (BaroAspect child in parent.BaroAspects)
                         {
                             <li>
-	                            <span><i class="glyphicon glyphicon-leaf"></i> @child.name</span>
+	                            <span><i class="glyphicon glyphicon-leaf"></i> @child.name</span><span class="glyphicon glyphicon-remove"><a class="tree-note-delete" data-nodeid="@child.id"></a></span>
                             </li>
                         }
                         </ul>
