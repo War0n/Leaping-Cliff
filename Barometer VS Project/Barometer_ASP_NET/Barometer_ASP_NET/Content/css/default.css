@@ -15,10 +15,24 @@ body {
 }
 
 
+.loginbox {
+    background: #ecf0f1;
+    padding: 30px;
+}
+
+    .loginbox form {
+        margin-left: 0px;
+    }
+
+        .loginbox form .btn-lgn {
+            width: 100%;
+        }
+
 .login-form {
 	font-size: 12px;
 	padding: 20px;
 }
+
 
 	.login-form .btn-lgn {
 		margin-right: 20px;
@@ -72,20 +86,34 @@ form {
 	overflow-y: auto;
 }
 
-.barometer-control{
-	background-color: #fff;
-	height: 500px;
+#barometer-control{
+	background-color:#f5f5f5;
+    margin-top: 40px;
+    min-height: 100px;
+    width: 100%;
+    border-left: 0;
+    border-top: 0;
 }
 
-	.barometer .tab-pane {
-	}
+    #barometer-control .nav-tabs {
+        border-bottom: 0;
+    }
+
+
+#barometer .btn {
+    margin-top: 30px;
+
+}
+
+
+
 
 .baro-students {
 	margin-top: 40px;
 }
 
 .baro-students li {
-	background-color: #e7e7e7;
+	background-color: #ecf0f1;
 	height: 70px;
 	padding: 10px;
 	cursor: pointer;
@@ -95,16 +123,32 @@ form {
 	border-top-left-radius: 4px;
 }
 	.baro-students li.active {
-		background-color: #fff;
+		background-color: #f5f5f5;
 	}
+
+    .baro-students li.done-report {
+        background-color: #2ecc71;
+        cursor: default;
+    }
+
+    .baro-students li span {
+        float:right;
+        margin-top: 14px;
+    }
 
 	.baro-students li p {
 		margin: 14px;
 		float: right;
 	}
+
+
 	
-.baro-students img {
-	width: 50px;
+    .baro-students img {
+	    width: 50px;
+    }
+
+.alert-success {
+    background-color: #2ecc71;
 }
 
 .select-week {
@@ -190,4 +234,18 @@ form {
     background:#eee;
     border:1px solid #94a0b4;
     color:#000
+}
+
+#loading-overlay {
+    width: 100%;
+    background: url('/Content/images/load.GIF') repeat;
+    position: relative;
+}
+
+#loading-overlay img.loading_circle {
+    position: absolute;
+    top: 50%;
+    left: 45%; 
+    width: 40px;
+    height: 40px;
 }

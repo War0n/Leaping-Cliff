@@ -33,7 +33,7 @@ namespace Barometer_ASP_NET.Wrappers
 
         public UserProjectWrapper(int studentNumber)
         {
-            this.projectId = 1; //IMPORTANT, set this value to pId
+            this.projectId = project.GetCurrentActiveProject(studentNumber).First().id;
             this.studentNumber = studentNumber;
             StudentNumber = studentNumber;
             student = DatabaseFactory.getInstance().getDAOStudent();
@@ -46,6 +46,12 @@ namespace Barometer_ASP_NET.Wrappers
             FillGrades(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
             FillSubAspects(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
             FillSubSubAspects(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
+        }
+
+
+        public UserProjectWrapper()
+        {
+
         }
 
         private void FillProjectMembers(ProjectGroup projectGroup)

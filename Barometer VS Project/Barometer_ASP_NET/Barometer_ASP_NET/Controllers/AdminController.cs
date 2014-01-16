@@ -10,9 +10,11 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Barometer_ASP_NET.Filters;
 
 namespace Barometer_ASP_NET.Controllers
 {
+    [AuthFilter("admin")]
     public class AdminController : Controller
     {
         AdminDashboardWrapper wrapper = new AdminDashboardWrapper(CurrentUser.getInstance().Studentnummer);

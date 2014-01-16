@@ -8,8 +8,12 @@ using System.Text;
 
 namespace BarometerDataAccesLayer.Database
 {
-    public class DAOProject
-    {
+    public class DAOProject {
+    
+
+        private DatabaseClassesDataContext context = new DatabaseClassesDataContext();
+
+
         /// <summary>
         /// Get all students belonging to the project
         /// </summary>
@@ -19,8 +23,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (projectID >= 0)
             {
-                DatabaseFactory factory = DatabaseFactory.getInstance();
-                DatabaseClassesDataContext context = factory.getDataContext();
                 var students =
                     from u in context.Users
                     join pm in context.ProjectMembers on u.ProjectGroups.First() equals pm.ProjectGroup
@@ -42,14 +44,25 @@ namespace BarometerDataAccesLayer.Database
         }
 
         /// <summary>
+        /// Zoek de aankomende report date op
+        /// </summary>
+        /// <returns></returns>
+        public ProjectReportDate getNextReportDate(int project_id)
+        {
+            ProjectReportDate reportDate = context.ProjectReportDates
+                .Where(r => r.project_id_int == project_id && (r.start_date >= DateTime.Now || (DateTime.Now >= r.start_date && DateTime.Now <= r.end_date)))
+                .OrderBy(r => r.start_date)
+                .FirstOrDefault();
+            return reportDate;
+        }
+
+        /// <summary>
         /// Get all students belonging to the projectgroup
         /// </summary>
         /// <param name="projectGroupId">The projectgroup you want to query</param>
         /// <returns>All Group members belonging to a group in a project</returns>
         public IQueryable<ProjectGroup> getProjectGroupsByProject(int projectId)
         {
-            DatabaseFactory factory = DatabaseFactory.getInstance();
-            DatabaseClassesDataContext context = factory.getDataContext();
             var projectGroups =
                 from pg in context.ProjectGroups
                 join p in context.Projects on pg.project_id equals p.id
@@ -67,8 +80,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (projectGroupId >= 0)
             {
-                DatabaseFactory factory = DatabaseFactory.getInstance();
-                DatabaseClassesDataContext context = factory.getDataContext();
                 var projectMembers =
                     from pm in context.ProjectMembers
                     join pg in context.ProjectGroups on pm.ProjectGroup equals pg
@@ -95,7 +106,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (projectId >= 0)
             {
-                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
                 Dictionary<string, string> nameDictionary = new Dictionary<string, string>();
                 var fullName =
                    from pg in context.ProjectGroups
@@ -135,7 +145,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (groupId >= 0)
             {
-                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
                 Dictionary<string, string> nameDictionary = new Dictionary<string, string>();
 
                 var users =
@@ -177,8 +186,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (projectId >= 0)
             {
-                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
                 var projectName =
                     (from p in context.Projects
                      where p.id == projectId
@@ -208,7 +215,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (projectId >= 0)
             {
-                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
                 Dictionary<string, string> startAndEndDate = new Dictionary<string, string>();
 
                 var projectDate =
@@ -248,8 +254,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (projectId >= 0)
             {
-                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
                 var projectSummary =
                     (from p in context.Projects
                      where p.id == projectId
@@ -279,7 +283,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (projectId >= 0)
             {
-                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
                 Dictionary<string, string> teachers = new Dictionary<string, string>();
 
                 var teacher =
@@ -322,8 +325,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (groupId >= 0)
             {
-                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
                 var users =
                     from u in context.Users
                     join pm in context.ProjectMembers on u.id equals pm.student_user_id
@@ -355,8 +356,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (projectId >= 0)
             {
-                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
                 var projectOwners =
                     from u in context.Users
                     join po in context.ProjectOwners on u.id equals po.user_id
@@ -387,8 +386,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (groupId >= 0)
             {
-                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
                 var tutor =
                     from u in context.Users
                     join pg in context.ProjectGroups on u.id equals pg.tutor_user_id
@@ -418,8 +415,6 @@ namespace BarometerDataAccesLayer.Database
         {
             if (studentNumber > 0)
             {
-                DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
                 var activeProject =
                     from p in context.Projects
                     join pg in context.ProjectGroups on p.id equals pg.project_id
@@ -444,7 +439,6 @@ namespace BarometerDataAccesLayer.Database
         
         public IQueryable<Project> GetProjectsByOwner(int ownerId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             var projects =
                 from p in context.Projects
                 join po in context.ProjectOwners on p.id equals po.project_id
@@ -460,8 +454,6 @@ namespace BarometerDataAccesLayer.Database
         /// <returns>Returns all projects where a student took part of. </returns>
         public IQueryable<Project> GetAllProjects(int studentNumber)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
             var AllProjects =
                 from p in context.Projects
                 join pg in context.ProjectGroups on p.id equals pg.project_id
@@ -476,7 +468,6 @@ namespace BarometerDataAccesLayer.Database
 
         public IQueryable<BaroTemplate> GetAllTemplates()
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             var templates =
                 from bt in context.BaroTemplates
                 select bt;
@@ -485,7 +476,6 @@ namespace BarometerDataAccesLayer.Database
 
         public IQueryable<Project> GetProject(int studentNumber, int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
             var project =
                 from p in context.Projects
@@ -500,8 +490,6 @@ namespace BarometerDataAccesLayer.Database
 
         public IQueryable<BaroAspect> GetBaroAspect(int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
             var baroAspect =
                 from ba in context.BaroAspects
                 join t in context.BaroTemplates on ba.baro_template_id equals t.id
@@ -514,7 +502,6 @@ namespace BarometerDataAccesLayer.Database
 
         public IQueryable<ProjectReportDate> GetProjectReportDate(int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
             var dates =
                 from pd in context.ProjectReportDates
@@ -527,7 +514,6 @@ namespace BarometerDataAccesLayer.Database
 
         public IQueryable<Report> GetReports(int projectId, int studentNumber)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
 
             var report =
                 from r in context.Reports
@@ -543,8 +529,6 @@ namespace BarometerDataAccesLayer.Database
 
         public IQueryable<BaroAspect> GetSubAspects(int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
             var subAspects =
                 from ba in context.BaroAspects
                 join bt in context.BaroTemplates on ba.baro_template_id equals bt.id
@@ -557,8 +541,6 @@ namespace BarometerDataAccesLayer.Database
 
         public IQueryable<BaroAspect> GetSubSubAspects(int projectId)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
             var subAspects =
                 from ba in context.BaroAspects
                 join bt in context.BaroTemplates on ba.baro_template_id equals bt.id
@@ -571,8 +553,6 @@ namespace BarometerDataAccesLayer.Database
 
         public void AddGroup(ProjectGroup group)
         {
-            DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-
 
         }
     }
