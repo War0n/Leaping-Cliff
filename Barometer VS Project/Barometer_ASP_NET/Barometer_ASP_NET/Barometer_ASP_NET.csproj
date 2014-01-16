@@ -236,6 +236,13 @@
     <Content Include="App_Data\aspnet-Barometer_ASP_NET-20131115111233_log.ldf">
       <DependentUpon>aspnet-Barometer_ASP_NET-20131115111233.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\images\alhric.jpg" />
+    <Content Include="Content\images\dennis.jpg" />
+    <Content Include="Content\images\john.jpg" />
+    <Content Include="Content\images\joost.jpg" />
+    <Content Include="Content\images\merijn.jpg" />
+    <Content Include="Content\images\rik.jpg" />
+    <Content Include="Content\images\rox.jpg" />
     <Content Include="Content\js\bootbox.min.js" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\default.css" />

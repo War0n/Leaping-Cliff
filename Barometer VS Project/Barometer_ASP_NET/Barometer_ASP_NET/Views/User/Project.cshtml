@@ -103,7 +103,7 @@
                 {
                     <tr>
                       <td>
-                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                        <img src="@((u.profile_image != null && u.profile_image != "") ? u.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle"></td>
                       <td colspan="2">@u.firstname @u.lastname</td>
                     </tr>
                 }
@@ -114,7 +114,7 @@
                 {
                     <tr>
                       <td>
-                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                        <img src="@(u.profile_image != null ? u.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle"></td>
                       <td>@u.firstname @u.lastname</td>
                       <td>
                             <a title="Beoordeling van @u.firstname @u.lastname" class="displayBaroWidget" 

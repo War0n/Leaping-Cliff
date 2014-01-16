@@ -30,6 +30,7 @@ namespace Barometer_ASP_NET.Controllers
             UserDashboardWrapper wrapper = new UserDashboardWrapper(curUser.Studentnummer);
 
             ViewBag.Filled = (Request["b"] == "done") ? true : false;
+
             return View(wrapper);
         }
 
