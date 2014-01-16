@@ -60,9 +60,11 @@ namespace Barometer_ASP_NET.Controllers
 			return View(viewModel);
 		}
 
-        public ActionResult Project()
+        public ActionResult Project(int project_id = 0)
 		{
-            UserProjectWrapper wrapper = new UserProjectWrapper(curUser.Studentnummer); 
+            if (project_id == 0)
+                return RedirectToAction("Projecten");
+            UserProjectWrapper wrapper = new UserProjectWrapper(curUser.Studentnummer, project_id); 
             return View(wrapper);
 		}
 

@@ -16,6 +16,7 @@ namespace BarometerDataAccesLayer.Database
 			if (instance == null)
 			{
 				instance = new CurrentUser();
+
                 // Set default role
                 instance.Role = "guest";
                 instance.Studentnummer = 0;

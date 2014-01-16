@@ -65,7 +65,7 @@ namespace Barometer_ASP_NET.Controllers
                     }
                     else
                     {
-                        reports.Add(aspect_id, 0);
+                        reports.Add(aspect_id, 1);
                     }
                     
                 }
