@@ -252,6 +252,7 @@ namespace BarometerDataAccesLayer.Database
                 newUser = usertest.First();
             }
 
+            
             CurrentUser.getInstance().Studentnummer = studentNumber;
             CurrentUser.getInstance().Role = newUser.rol_name;
 
@@ -260,6 +261,8 @@ namespace BarometerDataAccesLayer.Database
                 context.Users.InsertOnSubmit(newUser);
             }
             context.SubmitChanges();
+
+            CurrentUser.getInstance().StudentId = newUser.id;
         }
     }
 }

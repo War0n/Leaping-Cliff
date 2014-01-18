@@ -1,4 +1,5 @@
-﻿using Barometer_ASP_NET.Wrappers;
+﻿using Barometer_ASP_NET.Filters;
+using Barometer_ASP_NET.Wrappers;
 using BarometerDataAccesLayer.Database;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Barometer_ASP_NET.Controllers
 {
+    [AuthFilter("moderator")]
     public class ModeratorController : Controller
     {
         ModeratorDashboardWrapper wrapper = new ModeratorDashboardWrapper(CurrentUser.getInstance().Studentnummer); 

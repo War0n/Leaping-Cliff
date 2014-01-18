@@ -73,96 +73,47 @@
                         <tr>
                             @{int weeks = 0;}
                             <td>Duur</td>
-                            <td>@{weeks = (((DateTime)Model.CurrentProject.end_date).Subtract((DateTime)Model.CurrentProject.start_date).Days) / 7;}@weeks</td>
+                            <td>@{weeks = (((DateTime)Model.CurrentProject.end_date).Subtract((DateTime)Model.CurrentProject.start_date).Days) / 7;}@weeks weken</td>
                         </tr>
                     </tbody>
                 </table>
 
 
                 <h4>
-                    <i>Beoordelingsmomenten</i>
-                    <!--
-                    <span class="label label-danger"><span class="glyphicon glyphicon-bell"></span> tijd voor beoordeling</span>
-                     -->
+                    <i>Beoordelingen</i>
+                    @{
+                        var sDate = (DateTime)Model.NextReportDate.start_date;
+                        var eDate = (DateTime)Model.NextReportDate.end_date;   
+                    }
+                    @if (DateTime.Now >= sDate && DateTime.Now <= eDate)
+                    {
+                        <span class="label label-danger"><span class="glyphicon glyphicon-bell"></span> Het is beoordelingsweek!</span>
+                    }
                 </h4>
-                <table class="table-condensed table-bordered table-striped" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th colspan="7" style="text-align: center;">
-                                @DateTime.Today.ToString("MMMM") @DateTime.Today.Year
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>@DateTimeOffset.MaxValue.Date.AddDays(-12).ToString("ddd").ToUpper()</th>
-                            <th>@DateTimeOffset.MaxValue.Date.AddDays(-11).ToString("ddd").ToUpper()</th>
-                            <th>@DateTimeOffset.MaxValue.Date.AddDays(-10).ToString("ddd").ToUpper()</th>
-                            <th>@DateTimeOffset.MaxValue.Date.AddDays(-9).ToString("ddd").ToUpper()</th>
-                            <th>@DateTimeOffset.MaxValue.Date.AddDays(-8).ToString("ddd").ToUpper()</th>
-                            <th>@DateTimeOffset.MaxValue.Date.AddDays(-7).ToString("ddd").ToUpper()</th>
-                            <th>@DateTimeOffset.MaxValue.Date.AddDays(-6).ToString("ddd").ToUpper()</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>29</td>
-                            <td>30</td>
-                            <td>31</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
-                            <td class="currentday">9</td>
-                            <td>10</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>13</td>
-                            <td>14</td>
-                            <td>15</td>
-                            <td>16</td>
-                            <td>17</td>
-                            <td>18</td>
-                        </tr>
-                        <tr class="baroweek">
-                            <td>19</td>
-                            <td>20</td>
-                            <td>21</td>
-                            <td>22</td>
-                            <td>23</td>
-                            <td>24</td>
-                            <td>25</td>
-                        </tr>
-                        <tr>
-                            <td>26</td>
-                            <td>27</td>
-                            <td>28</td>
-                            <td>29</td>
-                            <td class="muted">1</td>
-                            <td class="muted">2</td>
-                            <td class="muted">3</td>
-                        </tr>
-                    </tbody>
+                
+                
+                <table class="table table-bordered table-centered">
+                    <tr>
+                        <td>Datum</td>
+                        <td>Volgende beoordelings ronde</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>@DateTime.Now.ToString("dd/MM/yy")</h4>
+                        </td>
+                        <td>
+                            <h4>
+                                
+                                @sDate.ToString("dd/MM/yy") <text>-</text> @eDate.ToString("dd/MM/yy")
+
+                            </h4>
+                        </td>
+                    </tr>
                 </table>
-
-                <!--<table class="table table-bordered table-centered">
-                        <tr>
-                            <td>Huidige project week</td>
-                            <td>Volgende beoordelings ronde</td>
-                        </tr>
-                        <tr>
-                            <td><h1>4</h1></td>
-                            <td><h1>6</h1></td>
-                        </tr>
-                    </table>
-                    <a class="btn btn-danger form-control" href="barometer.html" style="margin-top: 10px;">Barometer invullen</a>-->
-
+                if (DateTime.Now >= sDate && DateTime.Now <= eDate && !ViewBag.Filled)
+                {
+                    <a class="btn btn-default form-control" href="@Url.Action("Barometer", new { @report_id = @Model.NextReportDate.id })" style="margin-top: 10px;">Barometer invullen</a>
+                }
 
                 <h4><i>Groepsleden</i></h4>
                 <table class="table table-bordered table-members table-centered">
@@ -172,7 +123,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <img src="~/Content/images/pf.jpg" alt="..." class="img-circle">
+                                <img src="/Content/images/angelique.jpg" alt="..." class="img-circle">
                             </td>
                             <td colspan="2">A. van de Boogaard</td>
                         </tr>
@@ -182,9 +133,14 @@
                         @{int counter = 1;}
                         @foreach (BarometerDataAccesLayer.ProjectMember pm in Model.ProjectMembers)
                         {
+                            if (pm.User.student_number == @Model.StudentNumber)
+                            {
+                                // We willen onszelf niet laten zien.
+                                break;
+                            }
                             <tr>
                                 <td>
-                                    <img src="~/Content/images/pf.jpg" alt="..." class="img-circle">
+                                    <img src="@(pm.User.profile_image != null ? pm.User.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle">
                                 </td>
                                 <td>@pm.User.firstname @pm.User.lastname</td>
                                 <td>

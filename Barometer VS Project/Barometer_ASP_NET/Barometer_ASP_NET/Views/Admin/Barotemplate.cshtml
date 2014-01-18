@@ -4,7 +4,7 @@
 
 <script type="text/javascript">
     $(function () {
-        var baro_template_id = @((ViewBag.debug_id == 0) ? 0 : ViewBag.debug_id);
+        var baro_template_id = 0;
         var startDrawing = function (e) {
             var templateName = $('#txt-template-name').val();
             var req  = $.get("/Baro/CreateTemplate", { name: templateName }, function (data, xhr, s) {
@@ -18,31 +18,33 @@
         
         var saveAspect = function (e) {
             var data = $('#form-add-aspect').serialize();
-            console.log(data);
-
             var options = {
                 data: $('#form-add-aspect').serialize(),
                 url: '/Baro/AddAspect',
                 type: 'POST',
-                dataType: 'HTML'
+                dataType: 'JSON'
             };
-
-            $.ajax(options).done(function (response) {
-                $('#baro-template-tree').html(response);
-
-                $.get("/Baro/SelectParents", {template_id : baro_template_id}, function(data, t, jx){
-                    $('#form-parents-select').empty().append(data);
-                }, "HTML");
-            });
-
-            
+            loadTree(options);
         };
 
-
+        var loadTree = function (options) {
+            $.ajax(options).done(function (response) {
+                $('#baro-template-tree').html(response.html_tree);
+                $('#form-parents-select').empty().append(response.html_select);
+            });
+        };
 
 
         $('#btn-save-aspect').click(saveAspect);
         $('#btn-start-draw').click(startDrawing);
+
+        $("#form-parents-select").on('change', function () {
+            if ($(this).val() > 0) {
+                $('#form-head-select').val(0).prop('disabled', 'disabled');
+            } else {
+                $('#form-head-select').val(0).prop('disabled', false);
+            }
+        });
     });
 </script>
 
@@ -51,60 +53,81 @@
     <div class="col-lg-12">
         <h2>Barometer template aanmaken</h2>
         <hr />
-        <div class="row">
-            <div class="form-group col-lg-10">
-                <input type="text" id="txt-template-name" class="form-control" placeholder="Template naam" />
-            </div>
-            <div class="form-group col-lg-2">
-                <button type="button" id="btn-start-draw" class="btn btn-danger">Maak aan</button>
-            </div>
-         </div>
     </div>
 </div>
-<div class="row" id="baro-template-editor">
-    <div class="col-lg-8">
-        <h3>Overzicht</h3>
+<div class="row">
+    <div class="col-lg-3">
+        <h4>Eigenschappen</h4>
         <hr />
-        <div class="tree well" id="baro-template-tree">
-            
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <h3>Aspecten toevoegen</h3>
-        <hr />
-        <form class="form form-horizontal" id="form-add-aspect">
-            <input type="hidden" name="baro_template_id" value="@((ViewBag.debug_id == 0) ? 0 : ViewBag.debug_id)" />
+        <form class="form-horizontal">
             <div class="form-group">
-                <label class="control-label">Parent onderdeel</label>
-                <select class="form-control" id="form-parents-select" name="parent_id">
-                    <option value="0">Selecteer parent</option>
+                <label class="control-label">Template naam</label>
+                <input type="text" name="" id="txt-template-name" class="form-control" placeholder="Template naam" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Beoordelings type</label>
+                <select class="form-control" name="rating_type">
+                    <option value="0">Cijfers</option>
+                    <option value="1">O/V/G</option>
                 </select>
             </div>
             <div class="form-group">
-                <label class="control-label">Is hoofd aspect</label>
-                <select class="form-control" name="is_head_aspect">
+                <label class="control-label">Anoniem</label>
+                <select class="form-control" name="anonymous">
                     <option value="0">Nee</option>
                     <option value="1">Ja</option>
                 </select>
             </div>
             <div class="form-group">
-                <label class="control-label">Kan worden ingevuld</label>
-                <select class="form-control" name="can_be_filled">
-                    <option value="0">Nee</option>
-                    <option value="1">Ja</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Naam</label>
-                <input type="text" name="name" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label class="control-label">Omschrijving</label>
-                <textarea class="form-control" name="desription" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-                <button type="button" id="btn-save-aspect" class="btn btn-primary">Toevoegen</button>
+                <button type="button" id="btn-start-draw" class="btn btn-danger">Maak aan</button>
             </div>
         </form>
     </div>
+    <div id="baro-template-editor" style="margin:0;padding:0;" class="hide">
+        <div class="col-lg-3">
+            <h4>Aspecten</h4>
+            <hr />
+            <form class="form form-horizontal" id="form-add-aspect">
+                <input type="hidden" name="baro_template_id" value="@((ViewBag.debug_id == 0) ? 0 : ViewBag.debug_id)" />
+                <div class="form-group">
+                    <label class="control-label">Parent onderdeel</label>
+                    <select class="form-control" id="form-parents-select" name="parent_id">
+                        <option value="0">Selecteer parent</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Is hoofd aspect</label>
+                    <select class="form-control" id="form-head-select" name="is_head_aspect">
+                        <option value="0">Nee</option>
+                        <option value="1">Ja</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Kan worden ingevuld</label>
+                    <select class="form-control" id="form-filled-select" name="can_be_filled">
+                        <option value="0">Nee</option>
+                        <option value="1">Ja</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Naam</label>
+                    <input type="text" name="name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Omschrijving</label>
+                    <textarea class="form-control" name="desription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="btn-save-aspect" class="btn btn-primary">Toevoegen</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <h4>Preview</h4>
+            <hr />
+            <div class="tree well" id="baro-template-tree">
+            
+            </div>
+        </div>
+     </div>
 </div>

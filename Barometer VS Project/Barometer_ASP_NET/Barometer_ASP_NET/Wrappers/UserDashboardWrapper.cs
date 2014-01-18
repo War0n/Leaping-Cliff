@@ -11,36 +11,62 @@ namespace Barometer_ASP_NET.Wrappers
     public class UserDashboardWrapper
     {
         public int StudentNumber {get;set;}
+        
         public IQueryable<ProjectMember> ProjectMembers { get; set; }
+
         public Project CurrentProject { get; set; }
+        public ProjectReportDate NextReportDate { get; set; }
+
         public IQueryable<User> CurrentProjectOwners { get; set; }
         public IQueryable<Project> AllProjects { get; set; }
         public Dictionary<string, int[]> Grades { get; set; }
 
         private DAOProject project;
-        private DAOStudent student; 
+        private DAOStudent student;
 
+
+        private DateTime _currentDate = DateTime.MinValue;
+        public DateTime GetCurrentDate
+        {
+            get
+            {
+                return DateTime.Now;
+            }
+        }
 
 
         public UserDashboardWrapper(int studentNumber)
         {
             this.StudentNumber = studentNumber;
-            student = DatabaseFactory.getInstance().getDAOStudent();
-            project = DatabaseFactory.getInstance().getDAOProject();
+            student = new DAOStudent();
+            project = new DAOProject();
 
 
             FillCurrentProject();
             if (HasProject)
             {
+                FillNextReportDate();
                 FillProjectMembers(student.getStudentGroup(studentNumber).First());
                 FillCurrentProjectOwners(student.getStudentGroup(studentNumber).First());
             }
+
+
+            try
+            {
+                FillAllProjects();
+                FillAllIndividualGrades();
+            }
+            catch (Exception ex)
+            {
+                // doe niks met error. (dit laten staan)
+            }
             
-            FillAllProjects();
-            
-            FillAllIndividualGrades();
         }
 
+        private void FillNextReportDate()
+        {
+            NextReportDate = project.getNextReportDate(CurrentProject.id);
+        }
         private void FillProjectMembers(ProjectGroup projectGroup)
         {
             ProjectMembers = project.getProjectGroupMembers(projectGroup.id);
@@ -59,7 +85,6 @@ namespace Barometer_ASP_NET.Wrappers
             AllProjects = project.GetAllProjects(StudentNumber);
 
         }
-
         private void FillAllIndividualGrades()
         {
             Grades = new Dictionary<string, int[]>();

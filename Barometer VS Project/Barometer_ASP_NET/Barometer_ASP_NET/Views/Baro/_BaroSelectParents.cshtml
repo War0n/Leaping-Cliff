@@ -4,9 +4,11 @@
 <option value="0">Selecteer parent</option>
 @foreach (BarometerDataAccesLayer.BaroAspect item in Model.HeadAspect)
 {
-    <option value="@item.id">@item.name</option>
+    <option value="@item.id" @(ViewBag.parent_id == item.id ? "selected='selected'" : "")>@item.name</option>
     foreach (BarometerDataAccesLayer.BaroAspect child in item.BaroAspects)
     {
-        <option value="@child.id"><i>sub : @child.name</i></option>
+        <option value="@child.id" @(ViewBag.parent_id == child.id ? "selected='selected'" : "")><i>----- @child.name</i></option>
     }
 }
+
+@ViewBag.parent_id
