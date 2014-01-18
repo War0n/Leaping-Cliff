@@ -26,6 +26,7 @@ namespace Barometer_ASP_NET.Controllers
 
             return RedirectToAction("Dashboard");
         }
+    
 
         public ActionResult Dashboard()
         {
@@ -140,14 +141,19 @@ namespace Barometer_ASP_NET.Controllers
 
         public ActionResult StudentForm(FormCollection collection)
         {
+
             int studentNumber = int.Parse(collection.GetValue("student").AttemptedValue);
+            UserDashboardWrapper userwrap = new UserDashboardWrapper(studentNumber);
+
             BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             var student =
                 from u in context.Users
                 where u.student_number == studentNumber
                 select u.id;
             int studentId = student.First();
-            return RedirectToAction("Student", new { studentId = studentId });
+            return RedirectToAction("Dashboard","User",userwrap);
+
+
         }
 
         public ActionResult DeleteProject(int projectId)
