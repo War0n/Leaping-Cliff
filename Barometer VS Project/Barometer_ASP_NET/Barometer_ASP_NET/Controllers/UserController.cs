@@ -13,7 +13,6 @@ using Barometer_ASP_NET.Filters;
 
 namespace Barometer_ASP_NET.Controllers
 {
-    [AuthFilter("user")]
     public class UserController : Controller
     {
         private DatabaseClassesDataContext db = new DatabaseClassesDataContext();
@@ -21,7 +20,9 @@ namespace Barometer_ASP_NET.Controllers
         private DAOProject daoProject = new DAOProject();
         private CurrentUser curUser = CurrentUser.getInstance();
 
-
+        [AuthFilter("user")]
+        [AuthFilter("moderator")]
+        [AuthFilter("admin")]
         public ActionResult Dashboard()
         {
             //VOOR ALS JE WILT TESTEN WAT JE STUDENTNUM IS : 
@@ -34,6 +35,7 @@ namespace Barometer_ASP_NET.Controllers
             return View(wrapper);
         }
 
+        [AuthFilter("user")]
 		public ActionResult Barometer(int report_id = 0)
 		{
             BaroReportWrapper viewModel =
@@ -61,6 +63,9 @@ namespace Barometer_ASP_NET.Controllers
 			return View(viewModel);
 		}
 
+        [AuthFilter("admin")]
+        [AuthFilter("moderator")]
+        [AuthFilter("user")]
         public ActionResult Project(int project_id = 0)
 		{
             if (project_id == 0)
@@ -69,6 +74,9 @@ namespace Barometer_ASP_NET.Controllers
             return View(wrapper);
 		}
 
+        [AuthFilter("moderator")]
+        [AuthFilter("admin")]
+        [AuthFilter("user")]
 		public ActionResult Projecten()
 		{
             UserDashboardWrapper wrapper = new UserDashboardWrapper(curUser.Studentnummer);
