@@ -1,0 +1,43 @@
+﻿@using BarometerDataAccesLayer
+@using Barometer_ASP_NET.Wrappers
+
+@model BaroReportWrapper
+
+<form id="baro-create-form" method="post">
+    <input type="hidden" name="reporter_id" value="@ViewBag.reporter_id" />
+    <input type="hidden" name="subject_id" value="@ViewBag.subject_id" />
+    <input type="hidden" name="project_report_date_id" value="@Model.ReportDate.id" />
+
+    <table class="table table-condensed">
+        @foreach (BaroAspect head in Model.Aspects)
+        {
+            <tr>
+                <td colspan="2">
+                    <h3><b>@head.name</b></h3>
+                </td>
+            </tr>
+                    
+            foreach (BaroAspect parent in head.BaroAspects)
+            {
+                <tr>
+                    <td colspan="2">
+                        <h4><i>@parent.name</i></h4>
+                    </td>
+                </tr>
+                                
+                foreach (BaroAspect child in parent.BaroAspects)
+                {
+                    <tr>
+                        <td>@child.name</td>
+                        <td>
+                            <input type="text" class="col-xs-2 pull-right" name="aspect[@child.id]" value="" />
+                        </td>
+                    </tr>
+                } 
+            }
+        }
+
+    </table>
+
+    <button type="button" class="btn btn-danger btn-block" id="btn-send-form">Verstuur beoordeling</button>
+</form>
