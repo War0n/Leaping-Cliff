@@ -633,28 +633,29 @@ namespace Barometer_ASP_NET.Tests.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                exception = e.ToString();
             }
 
             Assert.AreEqual("", exception);
             Assert.IsTrue(i > 0);
         }
 
-        [TestMethod]
-        public void test_113_getCurrentActiveProject_valid_nonexistent_input()
-        {
-            IQueryable<Project> test_collection;
-            String exception = "";
-            try
-            {
-                test_collection = d.GetCurrentActiveProject(9);
-            }
-            catch (Exception e)
-            {
-                exception = e.ToString();
-            }
+        // Obsolete
+        //[TestMethod]
+        //public void test_113_getCurrentActiveProject_valid_nonexistent_input()
+        //{
+        //    IQueryable<Project> test_collection;
+        //    String exception = "";
+        //    try
+        //    {
+        //        test_collection = d.GetCurrentActiveProject(9);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        exception = e.ToString();
+        //    }
 
-            Assert.IsTrue(exception.Contains("DataException"));
-        }
+        //    Assert.IsTrue(exception.Contains("DataException"));
+        //}
     }
 }

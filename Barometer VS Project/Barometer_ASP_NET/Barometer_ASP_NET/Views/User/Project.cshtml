@@ -8,82 +8,48 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
+@{ var count = 1; }
 
-    google.load("visualization", "1", { packages: ["corechart"] });
-    google.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var d = []
-        var data = google.visualization.arrayToDataTable([
-          
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            @foreach (KeyValuePair<BarometerDataAccesLayer.BaroAspect, Dictionary<BarometerDataAccesLayer.ProjectReportDate, Dictionary<BarometerDataAccesLayer.Report, int>>> chart in Model.Grades)
+{
+       
+       <text>
             
-          ['Onderdeel', 'BDS', 'System use cases', 'Prototypes', 'Requirement Analyse', 'Functioneel Ontwerp'],
-          ['Week 3',@foreach(var v in Model.MyGrades){
-                         if(v.project_report_date_id == 1){
-                          <text> @v.grade, </text>
-                         }
-                     }],
-          ['Week 6',@foreach(var v in Model.MyGrades){
-                         if(v.project_report_date_id == 2){
-                          <text> @v.grade, </text>
-                         }
-                     }],
-          ['Week 9',@foreach(var v in Model.MyGrades){
-                         if(v.project_report_date_id == 3){
-                          <text> @v.grade, </text>
-                         }
-                     }],
-        ]);
-
-        var options = {
-            title: 'Voortgang Inhoudelijke kennis',
-            min: 1,
-            max: 10,
-            vAxis: {
-                gridlines: {
-                    count: 10
-                }
-            },
-            seriesType: "bars",
-            series: { 5: { type: "line" } }
-        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div_inhoudelijk'));
-        chart.draw(data, options);
+            var d = []
+            var data = google.visualization.arrayToDataTable([
 
 
-        data = google.visualization.arrayToDataTable([
-        	['Onderdeel', 'Inzet/motivatie', 'Inzicht eigen functioneren', 'Samenwerken', 'Schriftelijk communiceren', 'Mondeling communiceren', 'Projectmatig werken'],
-        	['Week 3', 6, 6, 4, 7, 4, 6],
-        	['Week 6', 6, 7, 7, 6, 7, 7],
-        	['Week 9', 8, 9, 10, 10, 9, 10]
-        ]);
-        options = {
-            title: 'Voortgang werken als professional',
-            min: 1,
-            max: 10,
-            vAxis: {
-                gridlines: {
-                    count: 10
-                }
-            }
-        };
+            ['Onderdeel', 'BDS', 'System use cases', 'Prototypes', 'Requirement Analyse', 'Functioneel Ontwerp'],
+            ['Week 3', 6, 6, 4, 7, 4],
+        	['Week 6', 6, 7, 7, 6, 7],
+        	['Week 9', 8, 9, 10, 10, 9]
+            ]);
 
-        chart = new google.visualization.ColumnChart(document.getElementById('chart_div_prof'));
-        chart.draw(data, options);
+            var options = {
+                title: 'Voortgang Inhoudelijke kennis',
+                min: 1,
+                max: 10,
+                vAxis: {
+                    gridlines: {
+                        count: 10
+                    }
+                },
+                seriesType: "bars",
+                series: { 5: { type: "line" } }
+            };
 
-
-        $(window).smartresize(function () {
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div_</text>@count<text>'));
             chart.draw(data, options);
-        });
-    }
 
-
-
-
-
-
-    chart_div_prof
+            </text>
+    count++;
+}
+        }
 </script>
+   
 <div class="row">
     <div class="col-lg-12">
         <h2>@Model.CurrentProjectName <small>(@Model.CurrentProjectDate)</small></h2>
@@ -137,7 +103,7 @@
                 {
                     <tr>
                       <td>
-                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                        <img src="@((u.profile_image != null && u.profile_image != "") ? u.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle"></td>
                       <td colspan="2">@u.firstname @u.lastname</td>
                     </tr>
                 }
@@ -148,7 +114,7 @@
                 {
                     <tr>
                       <td>
-                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                        <img src="@(u.profile_image != null ? u.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle"></td>
                       <td>@u.firstname @u.lastname</td>
                       <td>
                             <a title="Beoordeling van @u.firstname @u.lastname" class="displayBaroWidget" 
@@ -169,10 +135,13 @@
 
     <div class="col-lg-8">
         <h4><i>Voortgang</i></h4>
-        <div id="chart_div_inhoudelijk" style="position: relative; width: 100%;"></div>
-        <div id="chart_div_prof" style="position: relative; width: 100%"></div>
-    </div>
+        <div id ="charts">
 
+        <div id="chart_div_1" style="position: relative; width: 100%;"></div>
+        <div id="chart_div_2" style="position: relative; width: 100%"></div>
+
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="modal-baro-widget" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="model-baroLabel">

@@ -1,6 +1,7 @@
 ﻿using Barometer_ASP_NET.FileFactory;
 using Barometer_ASP_NET.Wrappers;
 using BarometerDataAccesLayer.Database;
+using BarometerDataAccesLayer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,30 +10,42 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Barometer_ASP_NET.Filters;
 
 namespace Barometer_ASP_NET.Controllers
 {
+    [AuthFilter("admin")]
     public class AdminController : Controller
     {
         AdminDashboardWrapper wrapper = new AdminDashboardWrapper(CurrentUser.getInstance().Studentnummer);
         //
         // GET: /Admin/
 
+        public ActionResult Index()
+        {
+
+            return RedirectToAction("Dashboard");
+        }
+
         public ActionResult Dashboard()
         {
             return View(wrapper);
         }
 
-		public ActionResult Barotemplate()
-		{
-			return View();
-		}
+        DatabaseClassesDataContext db = DatabaseFactory.getInstance().getDataContext();
 
-		public ActionResult Create()
-		{
+        public ActionResult Barotemplate()
+        {
+            int debug_id = (Request["template_id"] == null) ? 0 : Convert.ToInt32(Request["template_id"]);
+            ViewBag.debug_id = debug_id;
+            return View();
+        }
+
+        public ActionResult Create()
+        {
             CreateProjectWrapper wrapper = new CreateProjectWrapper();
-			return View(wrapper);
-		}
+            return View(wrapper);
+        }
 
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -42,11 +55,11 @@ namespace Barometer_ASP_NET.Controllers
                 BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
                 BarometerDataAccesLayer.Project insertProject = new BarometerDataAccesLayer.Project();
                 BarometerDataAccesLayer.ProjectOwner me = new BarometerDataAccesLayer.ProjectOwner();
-                var ownerInfo = 
+                var ownerInfo =
                     from u in context.Users
                     where u.student_number == CurrentUser.getInstance().Studentnummer
                     select u;
-                me.User =  ownerInfo.First();
+                me.User = ownerInfo.First();
                 insertProject.name = collection.GetValue("FormProject.name").AttemptedValue;
                 insertProject.description = collection.GetValue("FormProject.description").AttemptedValue;
                 insertProject.start_date = DateTime.ParseExact(collection.GetValue("FormProject.start_date").AttemptedValue, "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -84,26 +97,30 @@ namespace Barometer_ASP_NET.Controllers
             return RedirectToAction("List");
         }
 
-		public ActionResult Detail()
-		{
-			return View();
-		}
+        public ActionResult Detail()
+        {
+            return View();
+        }
 
-		public ActionResult List()
-		{
-			return View(wrapper);
-		}
+        public ActionResult List()
+        {
+            return View(wrapper);
+        }
 
-		public ActionResult ProjectGroups()
-		{
-			return View();
-		}
+        public ActionResult ListProjectGroup(int projectId)
+        {
+            AdminProjectGroupListWrapper wrapper = new AdminProjectGroupListWrapper(projectId);
+            return View(wrapper);
+        }
 
-		public ActionResult ProjectGroupsView()
-		{
-			return View();
-		}
+        public ActionResult ProjectGroups(int groupId)
+        {
+            AdminProjectGroupViewWrapper wrapper = new AdminProjectGroupViewWrapper(groupId);
+            return View(wrapper);
+        }
 
+        [AuthFilter("admin")]
+        [AuthFilter("moderator")]
         public ActionResult Student(int studentId)
         {
             BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
@@ -130,13 +147,13 @@ namespace Barometer_ASP_NET.Controllers
                 where u.student_number == studentNumber
                 select u.id;
             int studentId = student.First();
-            return RedirectToAction("Student",new {studentId = studentId});
+            return RedirectToAction("Student", new { studentId = studentId });
         }
 
         public ActionResult DeleteProject(int projectId)
         {
             BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
-            var resultProjects=
+            var resultProjects =
                 from p in context.Projects
                 where p.id == projectId
                 select p;
@@ -145,6 +162,29 @@ namespace Barometer_ASP_NET.Controllers
             context.SubmitChanges();
 
             return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public ActionResult AddStudent(FormCollection collection)
+        {
+            int studentIdToAdd = int.Parse(collection.GetValue("student").AttemptedValue);
+            int projectId = int.Parse(collection.GetValue("projectID").AttemptedValue);
+            int groupId = int.Parse(collection.GetValue("groupID").AttemptedValue);
+            DAOStudent studentdao = DatabaseFactory.getInstance().getDAOStudent();
+            DAOProject projectdao = DatabaseFactory.getInstance().getDAOProject();
+            BarometerDataAccesLayer.User studentUser = studentdao.getStudentInfo(studentIdToAdd);
+            IEnumerable<BarometerDataAccesLayer.ProjectMember> member = studentUser.ProjectMembers.Where(pm => pm.project_group_id == groupId);
+            if (member.Count() == 0)
+            {
+                BarometerDataAccesLayer.ProjectMember pMember = new BarometerDataAccesLayer.ProjectMember();
+                pMember.User = studentUser;
+                pMember.project_group_id = groupId;
+                BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
+                context.ProjectMembers.InsertOnSubmit(pMember);
+                context.SubmitChanges();
+            }
+
+            return RedirectToAction("ProjectGroups", new { groupId = groupId });
         }
     }
 }

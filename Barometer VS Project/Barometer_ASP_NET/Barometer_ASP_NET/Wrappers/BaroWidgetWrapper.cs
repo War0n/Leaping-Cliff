@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BarometerDataAccesLayer;
-using Barometer_ASP_NET.Database;
 
 namespace Barometer_ASP_NET.Wrappers
 {

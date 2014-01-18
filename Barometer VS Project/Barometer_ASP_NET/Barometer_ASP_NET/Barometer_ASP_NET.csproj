@@ -96,9 +96,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.3.0.0\lib\net45\Microsoft.Web.WebPages.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -204,18 +201,19 @@
     <Compile Include="Controllers\ModeratorController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Database\DAOBaro.cs" />
     <Compile Include="FileFactory\FileHandlerFactory.cs" />
     <Compile Include="FileFactory\GradeExcel.cs" />
     <Compile Include="FileFactory\IExcelDataTransfer.cs" />
     <Compile Include="FileFactory\Portfolio.cs" />
     <Compile Include="FileFactory\StudentExcel.cs" />
     <Compile Include="FileFactory\TemplateExcel.cs" />
+    <Compile Include="Filters\AuthFilter.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="Filters\RazorViewToString.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BaroGradeViewModel.cs" />
+    <Compile Include="Models\AddAspectsViewModel.cs" />
     <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectGroup.cs" />
@@ -224,6 +222,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wrappers\AdminDashboardWrapper.cs" />
     <Compile Include="Wrappers\AdminProjectDetailWrapper.cs" />
+    <Compile Include="Wrappers\AdminProjectGroupViewWrapper.cs" />
+    <Compile Include="Wrappers\BaroReportWrapper.cs" />
+    <Compile Include="Wrappers\BaroTreeViewWrapper.cs" />
+    <Compile Include="Wrappers\AdminProjectGroupListWrapper.cs" />
+    <Compile Include="Wrappers\ModeratorDashboardWrapper.cs" />
     <Compile Include="Wrappers\BaroWidgetWrapper.cs" />
     <Compile Include="Wrappers\UserDashboardWrapper.cs" />
     <Compile Include="Wrappers\UserProjectWrapper.cs" />
@@ -233,8 +236,17 @@
     <Content Include="App_Data\aspnet-Barometer_ASP_NET-20131115111233_log.ldf">
       <DependentUpon>aspnet-Barometer_ASP_NET-20131115111233.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\images\alhric.jpg" />
+    <Content Include="Content\images\dennis.jpg" />
+    <Content Include="Content\images\john.jpg" />
+    <Content Include="Content\images\joost.jpg" />
+    <Content Include="Content\images\merijn.jpg" />
+    <Content Include="Content\images\rik.jpg" />
+    <Content Include="Content\images\rox.jpg" />
+    <Content Include="Content\js\bootbox.min.js" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\default.css" />
+    <Content Include="Content\images\load.GIF" />
     <Content Include="Content\images\pf.jpg" />
     <Content Include="Content\js\baro.widget.js" />
     <Content Include="Content\js\bootstrap-min.js" />
@@ -311,6 +323,7 @@
     <Content Include="Content\ExcelTemplates\GradeTemplate.xlsx" />
     <Content Include="Content\ExcelTemplates\StudentTemplate.xlsx" />
     <Content Include="Content\ExcelTemplates\TemplateTemplate.xlsx" />
+    <Content Include="Content\TestTemplate\TestTemplate.xlsx" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
@@ -340,16 +353,19 @@
     <Content Include="Views\Account\_ViewStart.cshtml" />
     <None Include="Views\Admin\Barolist.cshtml" />
     <None Include="Views\Admin\Barotemplate.cshtml" />
+    <Content Include="Views\Admin\ListProjectGroup.cshtml" />
     <None Include="Views\Admin\Create.cshtml" />
     <None Include="Views\Admin\Dashboard.cshtml" />
     <None Include="Views\Admin\Detail.cshtml" />
     <None Include="Views\Admin\List.cshtml" />
-    <None Include="Views\Admin\ProjectGroupsView.cshtml" />
     <None Include="Views\Admin\ProjectGroups.cshtml" />
     <None Include="Views\Admin\Student.cshtml" />
     <Content Include="Views\Admin\_ViewStart.cshtml" />
     <Content Include="Views\Baro\_BaroWidget.cshtml" />
     <Content Include="Views\Baro\_BaroWidgetHolder.cshtml" />
+    <Content Include="Views\Baro\_BaroTreePartial.cshtml" />
+    <Content Include="Views\Baro\_BaroSelectParents.cshtml" />
+    <Content Include="Views\Baro\_BaroFormPartial.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\LoggedOut.cshtml" />
@@ -372,19 +388,6 @@
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Images\accent.png" />
-    <Content Include="Images\bullet.png" />
-    <Content Include="Images\heroAccent.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
@@ -397,6 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\ExcelExports\" />
+    <Folder Include="Database\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

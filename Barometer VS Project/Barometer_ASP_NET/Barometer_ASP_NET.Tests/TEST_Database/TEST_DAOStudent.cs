@@ -167,22 +167,23 @@ namespace Barometer_ASP_NET.Tests.TEST_Database
 
         }
 
-        [TestMethod]
-        public void test_23_getReportResults_valid_nonexistent_input()
-        {
-            IQueryable<ProjectGroup> b = null;
-            String exception = "";
-            try
-            {
-                b = d.getReportResults(999999);
-            }
-            catch (Exception e)
-            {
-                exception = e.ToString();
-            }
-            Assert.IsTrue(exception.Contains("DataException"));
+        // Obsolete
+        //[TestMethod]
+        //public void test_23_getReportResults_valid_nonexistent_input()
+        //{
+        //    IQueryable<ProjectGroup> b = null;
+        //    String exception = "";
+        //    try
+        //    {
+        //        b = d.getReportResults(999999);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        exception = e.ToString();
+        //    }
+        //    Assert.IsTrue(exception.Contains("DataException"));
 
-        }
+        //}
 
         [TestMethod]
         public void test_31_getEndGradeIndividual_invalid_input()
@@ -256,22 +257,23 @@ namespace Barometer_ASP_NET.Tests.TEST_Database
 
         }
 
-        [TestMethod]
-        public void test_34_getEndGradeIndividual_unclosed_project()
-        {
-            int i = 0;
-            String exception = "";
-            try
-            {
-                i = d.getEndGradeIndividual(3000000, 2);
-            }
-            catch (Exception e)
-            {
-                exception = e.ToString();
-            }
-            Assert.AreEqual("", exception);
-            Assert.AreEqual(0, i);
-        }
+        //obsolete
+        //[TestMethod]
+        //public void test_34_getEndGradeIndividual_unclosed_project()
+        //{
+        //    int i = 0;
+        //    String exception = "";
+        //    try
+        //    {
+        //        i = d.getEndGradeIndividual(3000000, 2);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        exception = e.ToString();
+        //    }
+        //    Assert.AreEqual("", exception);
+        //    Assert.AreEqual(0, i);
+        //}
 
         [TestMethod]
         public void test_41_getEndGradeGroup_invalid_input()
