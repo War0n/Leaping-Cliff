@@ -31,21 +31,41 @@ namespace Barometer_ASP_NET.Wrappers
         private DAOProject project;
         private DAOStudent student;
 
-        public UserProjectWrapper(int studentNumber)
+        public int ProjectId
         {
-            this.projectId = 1; //IMPORTANT, set this value to pId
+            get
+            {
+                return projectId;
+            }
+            set
+            {
+                projectId = value;
+            }
+        }
+
+        public UserProjectWrapper(int studentNumber, int project_id)
+        {
+            this.projectId = project_id;
             this.studentNumber = studentNumber;
             StudentNumber = studentNumber;
             student = DatabaseFactory.getInstance().getDAOStudent();
             project = DatabaseFactory.getInstance().getDAOProject();
             FillProjectMembers(student.getStudentGroup(studentNumber).First());
             FillTutors(student.getStudentGroup(studentNumber).First());
+
+           
             FillProjectOwners(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
             FillProjectDetails(project.GetProject(this.studentNumber, projectId).FirstOrDefault(), student.getStudentGroup(studentNumber).First());
             FillMyGrades(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
             FillGrades(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
             FillSubAspects(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
             FillSubSubAspects(project.GetProject(this.studentNumber, projectId).FirstOrDefault());
+        }
+
+
+        public UserProjectWrapper()
+        {
+
         }
 
         private void FillProjectMembers(ProjectGroup projectGroup)

@@ -62,14 +62,11 @@ namespace BarometerDataAccesLayer.Database
                     join u in context.Users on pm.student_user_id equals u.id
                     where u.student_number == studentNumber
                     select pg;
-                //if (projectGroup.ToList().Count > 0)
-                //{
+                if (projectGroup.ToList().Count > 0)
+                {
                     return projectGroup;
-                //}
-                //else
-                //{
-                //    throw new DataException("No data found for valid argument");
-                //}
+                }
+                return null;
             }
             else
             {
@@ -255,6 +252,7 @@ namespace BarometerDataAccesLayer.Database
                 newUser = usertest.First();
             }
 
+            
             CurrentUser.getInstance().Studentnummer = studentNumber;
             CurrentUser.getInstance().Role = newUser.rol_name;
 
@@ -263,6 +261,8 @@ namespace BarometerDataAccesLayer.Database
                 context.Users.InsertOnSubmit(newUser);
             }
             context.SubmitChanges();
+
+            CurrentUser.getInstance().StudentId = newUser.id;
         }
     }
 }

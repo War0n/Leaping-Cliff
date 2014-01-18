@@ -29,7 +29,7 @@ namespace Barometer_ASP_NET
 
             //Eigen JavaScript files
 			bundles.Add(new ScriptBundle("~/Content/js").Include(
-                        "~/Content/js/bootstrap-min.js", "~/Content/js/baro.widget.js"));
+                        "~/Content/js/bootstrap-min.js", "~/Content/js/baro.widget.js", "~/Content/js/bootbox.min.js"));
 		}
 	}
 }

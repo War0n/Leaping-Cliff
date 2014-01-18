@@ -3,31 +3,22 @@
 @{
     ViewBag.Title = "Avans Barometer";
 }
-<html>
-<body>
-    <div class="container">
 
-        <!-- Main component for a primary marketing message or call to action -->
-        <div class="jumbotron">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1>Avans barometer</h1>
-                    <p>Dit beoordelingsmiddel geeft de ingelogde student, tutor of docent de mogelijkheid zijn projecten en beoordelingen te beheren. Om te beginnen klik op de passende inlogmethode hiernaast.</p>
-                </div>
-                        <hr />
+<style type="text/css">
+    body {
+        background: #222 url(/Content/images/pattern.png);
+    }
+</style>
 
-                        <div class="form-group">
-                            @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-                        </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5 col-lg-offset-3 loginbox">
+            <h1>Avans barometer</h1>
+            <p>Dit beoordelingsmiddel geeft de ingelogde student, tutor of docent de mogelijkheid zijn projecten en beoordelingen te beheren. Om te beginnen klik op de passende inlogmethode hiernaast.</p>
+            @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 
-        </div>
-
-@*    </div>*@
-    <!-- /container -->
-@*    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
-</body>
-</html>
+            <hr />
+            <p>&copy; Copyright @DateTime.Now.ToString("yyyy") Groep 42IN06SOb - <a href="http://www.avans.nl">Avans</a></p>
+        </div>   
+    </div>
+</div>
