@@ -1,0 +1,14 @@
+﻿@using BarometerDataAccesLayer;
+@model Barometer_ASP_NET.Wrappers.BaroTreeViewWrapper
+
+<option value="0">Selecteer parent</option>
+@foreach (BarometerDataAccesLayer.BaroAspect item in Model.HeadAspect)
+{
+    <option value="@item.id" @(ViewBag.parent_id == item.id ? "selected='selected'" : "")>@item.name</option>
+    foreach (BarometerDataAccesLayer.BaroAspect child in item.BaroAspects)
+    {
+        <option value="@child.id" @(ViewBag.parent_id == child.id ? "selected='selected'" : "")><i>----- @child.name</i></option>
+    }
+}
+
+@ViewBag.parent_id

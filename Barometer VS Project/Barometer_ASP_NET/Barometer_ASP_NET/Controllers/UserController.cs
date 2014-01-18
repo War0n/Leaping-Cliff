@@ -1,4 +1,5 @@
-﻿using BarometerDataAccesLayer.Database;
+﻿using BarometerDataAccesLayer;
+using BarometerDataAccesLayer.Database;
 using Barometer_ASP_NET.FileFactory;
 using Barometer_ASP_NET.Wrappers;
 using System;
@@ -8,37 +9,69 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Barometer_ASP_NET.Filters;
 
 namespace Barometer_ASP_NET.Controllers
 {
+    [AuthFilter("user")]
     public class UserController : Controller
     {
-        //
-        // GET: /User/ 
-        public DAOStudent student = new DAOStudent();
-        public DAOProject project = new DAOProject();
+        private DatabaseClassesDataContext db = new DatabaseClassesDataContext();
+        private DAOStudent daoStudent = new DAOStudent();
+        private DAOProject daoProject = new DAOProject();
+        private CurrentUser curUser = CurrentUser.getInstance();
+
 
         public ActionResult Dashboard()
         {
-            UserDashboardWrapper wrapper = new UserDashboardWrapper(CurrentUser.getInstance().Studentnummer);
+            //VOOR ALS JE WILT TESTEN WAT JE STUDENTNUM IS : 
+            // return Content(CurrentUser.getInstance().Studentnummer.ToString());
+
+            UserDashboardWrapper wrapper = new UserDashboardWrapper(curUser.Studentnummer);
+
+            ViewBag.Filled = (Request["b"] == "done") ? true : false;
+
             return View(wrapper);
         }
 
-		public ActionResult Barometer()
+		public ActionResult Barometer(int report_id = 0)
 		{
-            UserProjectWrapper wrapper = new UserProjectWrapper(3000000); //IMPORTANT, uses a test value
-			return View(wrapper);
+            BaroReportWrapper viewModel =
+                db.ProjectReportDates
+                .Where(r => r.id == report_id)
+                .Select(r => new BaroReportWrapper
+                {
+                    ReportDate = r,
+                    Project = r.Project,
+                    Aspects = r.Project.BaroTemplate.BaroAspects.Where(a => a.is_head_aspect == 1).ToList()
+                }).FirstOrDefault();
+
+            if (viewModel == null)
+                return HttpNotFound();
+
+            ProjectGroup group = daoStudent.getStudentGroup(curUser.Studentnummer).First();
+            if (group == null)
+                return RedirectToAction("Dashboard");
+
+
+            viewModel.ReporterId = curUser.StudentId;
+            viewModel.Members = daoProject.getUsersInGroup(group.id).ToList();
+            
+
+			return View(viewModel);
 		}
 
-        public ActionResult Project()
+        public ActionResult Project(int project_id = 0)
 		{
-            UserProjectWrapper wrapper = new UserProjectWrapper(CurrentUser.getInstance().Studentnummer); //IMPORTANT, uses a test value
+            if (project_id == 0)
+                return RedirectToAction("Projecten");
+            UserProjectWrapper wrapper = new UserProjectWrapper(curUser.Studentnummer, project_id); 
             return View(wrapper);
 		}
 
 		public ActionResult Projecten()
 		{
-            UserDashboardWrapper wrapper = new UserDashboardWrapper(CurrentUser.getInstance().Studentnummer);
+            UserDashboardWrapper wrapper = new UserDashboardWrapper(curUser.Studentnummer);
 			return View(wrapper);
 		}
     }

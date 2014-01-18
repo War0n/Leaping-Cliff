@@ -1,6 +1,7 @@
 ﻿using Barometer_ASP_NET.FileFactory;
 using Barometer_ASP_NET.Wrappers;
 using BarometerDataAccesLayer.Database;
+using BarometerDataAccesLayer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,22 +10,34 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Barometer_ASP_NET.Filters;
 
 namespace Barometer_ASP_NET.Controllers
 {
+    [AuthFilter("admin")]
     public class AdminController : Controller
     {
         AdminDashboardWrapper wrapper = new AdminDashboardWrapper(CurrentUser.getInstance().Studentnummer);
         //
         // GET: /Admin/
 
+        public ActionResult Index()
+        {
+
+            return RedirectToAction("Dashboard");
+        }
+
         public ActionResult Dashboard()
         {
             return View(wrapper);
         }
 
+        DatabaseClassesDataContext db = DatabaseFactory.getInstance().getDataContext();
+
         public ActionResult Barotemplate()
         {
+            int debug_id = (Request["template_id"] == null) ? 0 : Convert.ToInt32(Request["template_id"]);
+            ViewBag.debug_id = debug_id;
             return View();
         }
 
@@ -106,6 +119,8 @@ namespace Barometer_ASP_NET.Controllers
             return View(wrapper);
         }
 
+        [AuthFilter("admin")]
+        [AuthFilter("moderator")]
         public ActionResult Student(int studentId)
         {
             BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
