@@ -66,10 +66,7 @@ namespace BarometerDataAccesLayer.Database
                 {
                     return projectGroup;
                 }
-                else
-                {
-                    throw new DataException("No data found for valid argument");
-                }
+                return null;
             }
             else
             {
@@ -96,14 +93,14 @@ namespace BarometerDataAccesLayer.Database
                     where p.id == projectID
                     && p.status_name == "Closed"
                     select pg;
-                if (results.ToList().Count > 0)
-                {
+                //if (results.ToList().Count > 0)
+                //{
                     return results;
-                }
-                else
-                {
-                    throw new DataException("No data found for valid argument");
-                }
+                //}
+                //else
+                //{
+                //    throw new DataException("No data found for valid argument");
+                //}
             }
             else
             {
@@ -196,7 +193,14 @@ namespace BarometerDataAccesLayer.Database
 
                 foreach (var v in name)
                 {
-                    fullName.Add(v.firstname, v.lastname);
+                    if (v.firstname != null && v.lastname != null)
+                    {
+                        fullName.Add(v.firstname, v.lastname);
+                    }
+                    else
+                    {
+                        fullName.Add("Naam", "Onbekend");
+                    }
                 }
                if (fullName.Count > 0)
                {
@@ -227,23 +231,38 @@ namespace BarometerDataAccesLayer.Database
         {
             DatabaseFactory factory = DatabaseFactory.getInstance();
             DatabaseClassesDataContext context = factory.getDataContext();
-            User newUser = new User();
-            newUser.student_number = studentNumber;
-            newUser.email = email + "@avans.nl";
-            newUser.rol_name = "user";
+            User newUser;
+            bool userExists = false;
+
 
             var usertest = from u in context.Users
                            where u.student_number == studentNumber
                            select u;
-			
-			CurrentUser.getInstance().Studentnummer = studentNumber;
 
             if (usertest.Count() == 0)
             {
-                context.Users.InsertOnSubmit(newUser);
-                context.SubmitChanges();
+                newUser = new User();        
+                newUser.student_number = studentNumber;    
+                newUser.email = email + "@avans.nl";
+                newUser.rol_name = "user";
+            }
+            else
+            {
+                userExists = true;
+                newUser = usertest.First();
             }
 
+            
+            CurrentUser.getInstance().Studentnummer = studentNumber;
+            CurrentUser.getInstance().Role = newUser.rol_name;
+
+            if (!userExists)
+            {
+                context.Users.InsertOnSubmit(newUser);
+            }
+            context.SubmitChanges();
+
+            CurrentUser.getInstance().StudentId = newUser.id;
         }
     }
 }

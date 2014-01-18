@@ -21,7 +21,7 @@ namespace Barometer_ASP_NET.Tests.TEST_FileFactory
             String exception = "";
             try
             {
-                b = FileHandlerFactory<TemplateExcel>.create("Template");
+                b = FileHandlerFactory<TemplateExcel>.create("TemplateExcel");
             }catch(Exception e){
                 exception = e.ToString();
             }

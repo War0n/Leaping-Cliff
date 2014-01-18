@@ -10,34 +10,66 @@ namespace Barometer_ASP_NET.Wrappers
 {
     public class UserDashboardWrapper
     {
-        private int studentNumber;
+        public int StudentNumber {get;set;}
+        
         public IQueryable<ProjectMember> ProjectMembers { get; set; }
-        public IQueryable<Project> CurrentProject { get; set; }
+
+        public Project CurrentProject { get; set; }
+        public ProjectReportDate NextReportDate { get; set; }
+
         public IQueryable<User> CurrentProjectOwners { get; set; }
         public IQueryable<Project> AllProjects { get; set; }
         public Dictionary<string, int[]> Grades { get; set; }
 
         private DAOProject project;
-        private DAOStudent student; 
+        private DAOStudent student;
 
+
+        private DateTime _currentDate = DateTime.MinValue;
+        public DateTime GetCurrentDate
+        {
+            get
+            {
+                return DateTime.Now;
+            }
+        }
 
 
         public UserDashboardWrapper(int studentNumber)
         {
-            this.studentNumber = studentNumber;
-            student = DatabaseFactory.getInstance().getDAOStudent();
-            project = DatabaseFactory.getInstance().getDAOProject();
-            FillProjectMembers(student.getStudentGroup(studentNumber).First());
-            FillCurrentProjectOwners(student.getStudentGroup(studentNumber).First());
-            FillAllProjects();
+            this.StudentNumber = studentNumber;
+            student = new DAOStudent();
+            project = new DAOProject();
+
+
             FillCurrentProject();
-            FillAllIndividualGrades();
+            if (HasProject)
+            {
+                FillNextReportDate();
+                FillProjectMembers(student.getStudentGroup(studentNumber).First());
+                FillCurrentProjectOwners(student.getStudentGroup(studentNumber).First());
+            }
+
+
+            try
+            {
+                FillAllProjects();
+                FillAllIndividualGrades();
+            }
+            catch (Exception ex)
+            {
+                // doe niks met error. (dit laten staan)
+            }
+            
         }
 
+        private void FillNextReportDate()
+        {
+            NextReportDate = project.getNextReportDate(CurrentProject.id);
+        }
         private void FillProjectMembers(ProjectGroup projectGroup)
         {
             ProjectMembers = project.getProjectGroupMembers(projectGroup.id);
-
         }
         private void FillCurrentProjectOwners(ProjectGroup projectGroup)
         {
@@ -45,14 +77,14 @@ namespace Barometer_ASP_NET.Wrappers
         }
         private void FillCurrentProject()
         {
-            CurrentProject = project.GetCurrentActiveProject(studentNumber);
+            CurrentProject = project.GetCurrentActiveProject(StudentNumber).FirstOrDefault();
+            HasProject = !(CurrentProject == null);
         }
         private void FillAllProjects()
         {
-            AllProjects = project.GetAllProjects(studentNumber);
+            AllProjects = project.GetAllProjects(StudentNumber);
 
         }
-
         private void FillAllIndividualGrades()
         {
             Grades = new Dictionary<string, int[]>();
@@ -68,7 +100,7 @@ namespace Barometer_ASP_NET.Wrappers
                     int pcijfer;
                     pcijfer = (int)student.getReportResults(pid).First().group_end_grade;
                     int icijfer;
-                    icijfer = student.getEndGradeIndividual(studentNumber, pid);
+                    icijfer = student.getEndGradeIndividual(StudentNumber, pid);
                     Grades.Add(pnaam, new int[2] { pcijfer, icijfer });
                 }
                 
@@ -77,5 +109,7 @@ namespace Barometer_ASP_NET.Wrappers
         }
 
 
+
+        public bool HasProject { get; set; }
     }
 }

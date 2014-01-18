@@ -18,7 +18,12 @@ namespace Barometer_ASP_NET.FileFactory
         public abstract void Import(System.IO.Stream fileStream);
         protected WorkbookPart wbPart = null;
         protected SpreadsheetDocument document = null;
-        protected string path = HttpContext.Current.Server.MapPath("~/Content/ExcelExports/");
+        protected string path;
+
+        public IExcelDataTransfer()
+        {
+            path = HttpContext.Current.Server.MapPath("~/Content/ExcelExports/");
+        }
 
         protected void setTemplatePath(string templateName)
         {
