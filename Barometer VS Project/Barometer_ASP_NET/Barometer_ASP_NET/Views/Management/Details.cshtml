@@ -1,0 +1,66 @@
+﻿@model BarometerDataAccesLayer.User
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+<h2>Detail</h2>
+
+<fieldset>
+    <legend>Gebruiker   @Html.ActionLink(" ", "Edit", new { id = Model.id }, new {@class = "glyphicon glyphicon-pencil" }) </legend>
+    <table class="table">
+        <tr>
+    <th>
+         @Html.DisplayNameFor(model => model.student_number)
+    </th>
+    <td>
+        @Html.DisplayFor(model => model.student_number)
+    </td>
+    </tr>
+        <tr>
+    <th>
+         @Html.DisplayNameFor(model => model.firstname)
+    </th>
+    <td>
+        @Html.DisplayFor(model => model.firstname)
+    </td>
+</tr>
+        <tr>
+    <th>
+         @Html.DisplayNameFor(model => model.lastname)
+    </th>
+    <td>
+        @Html.DisplayFor(model => model.lastname)
+    </td>
+</tr>
+        <tr>
+    <th>
+         @Html.DisplayNameFor(model => model.profile_image)
+    </th>
+    <td >
+        @Html.DisplayFor(model => model.profile_image)
+    </td>
+</tr>
+        <tr>
+    <th>
+         @Html.DisplayNameFor(model => model.email)
+    </th>
+    <td>
+        @Html.DisplayFor(model => model.email)
+    </td>
+</tr>
+        <tr>
+    <th>
+         @Html.DisplayNameFor(model => model.rol_name)
+    </th>
+    <td>
+        @Html.DisplayFor(model => model.rol_name)
+    </td>
+
+        </tr>
+    </table>
+</fieldset>
+<p>
+    @Html.ActionLink("Terug naar overzicht", "List")
+</p>

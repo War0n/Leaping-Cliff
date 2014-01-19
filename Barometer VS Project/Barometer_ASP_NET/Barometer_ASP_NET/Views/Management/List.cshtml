@@ -1,0 +1,64 @@
+﻿@model IQueryable<BarometerDataAccesLayer.User>
+
+@{
+    ViewBag.Title = "Gebruikersoverzicht";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+<h2>Gebrukersoverzicht</h2>
+
+<p>
+    @Html.ActionLink("Nieuwe user aanmaken", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().student_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().profile_image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().rol_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.student_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.profile_image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rol_name)
+        </td>
+        <td>
+            @Html.ActionLink(" ", "Edit", new { id = item.id }, new {@class="glyphicon glyphicon-pencil" }) |
+            @Html.ActionLink(" ", "Details", new { id=item.id },new {@class="glyphicon glyphicon-eye-open" }) |
+            @Html.ActionLink(" ", "Delete", new { id=item.id },new {@class="glyphicon glyphicon-remove" })
+        </td>
+    </tr>
+}
+
+</table>
