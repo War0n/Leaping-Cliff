@@ -195,6 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaroController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -366,9 +367,13 @@
     <Content Include="Views\Baro\_BaroTreePartial.cshtml" />
     <Content Include="Views\Baro\_BaroSelectParents.cshtml" />
     <Content Include="Views\Baro\_BaroFormPartial.cshtml" />
+    <Content Include="Views\Error\_ViewStart.cshtml" />
+    <Content Include="Views\Error\HttpError500.cshtml" />
+    <Content Include="Views\Error\General.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\LoggedOut.cshtml" />
+    <Content Include="Views\Error\HttpError404.cshtml" />
     <None Include="Views\Moderator\Dashboard.cshtml" />
     <None Include="Views\Moderator\Student.cshtml" />
     <Content Include="Views\Moderator\_ViewStart.cshtml" />
