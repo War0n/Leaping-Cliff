@@ -86,8 +86,8 @@ namespace Barometer_ASP_NET.Controllers
                         BarometerDataAccesLayer.ProjectReportDate tmpReportDate = new BarometerDataAccesLayer.ProjectReportDate();
                         tmpReportDate.Project = insertProject;
                         tmpReportDate.week_label = reportDateName;
-                        tmpReportDate.start_date = DateTime.ParseExact(reportStartDates[counter], "dd-MM-yyyy", CultureInfo.InvariantCulture);
-                        tmpReportDate.end_date = DateTime.ParseExact(reportStartDates[counter], "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                        tmpReportDate.start_date = DateTime.Parse(reportStartDates[counter]);
+                        tmpReportDate.end_date = DateTime.Parse(reportEndDates[counter]);
                         context.ProjectReportDates.InsertOnSubmit(tmpReportDate);
                         counter++;
                     }

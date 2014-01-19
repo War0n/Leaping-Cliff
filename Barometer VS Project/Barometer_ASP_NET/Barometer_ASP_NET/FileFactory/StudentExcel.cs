@@ -134,9 +134,10 @@ namespace Barometer_ASP_NET.FileFactory
             foreach (KeyValuePair<int, object[]> cell in rowData)
             {
                 bool userExists = false;
-                int studentNumber = int.Parse(cell.Value[0].ToString());
-                if (cell.Key != 0)
-                {
+
+                if (cell.Key != 0 && cell.Value[0].ToString() != "")
+                {   
+                    int studentNumber = int.Parse(cell.Value[0].ToString());
                     BarometerDataAccesLayer.User insertUser = null;
                     var existingUser =
                         from u in context.Users
