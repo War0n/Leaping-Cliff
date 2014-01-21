@@ -133,11 +133,9 @@
                         @{int counter = 1;}
                         @foreach (BarometerDataAccesLayer.ProjectMember pm in Model.ProjectMembers)
                         {
-                            if (pm.User.student_number == @Model.StudentNumber)
+                            if (pm.User.student_number != @Model.StudentNumber)
                             {
                                 // We willen onszelf niet laten zien.
-                                break;
-                            }
                             <tr>
                                 <td>
                                     <img src="@(pm.User.profile_image != null ? pm.User.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle">
@@ -153,6 +151,7 @@
                                 </td>
                             </tr>
                             { counter++; }
+                            }
                         }
 
                     </tbody>
