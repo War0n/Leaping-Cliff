@@ -480,7 +480,7 @@ namespace BarometerDataAccesLayer.Database
             var project =
                 from p in context.Projects
                 join pg in context.ProjectGroups on p.id equals pg.project_id
-                join pm in context.ProjectMembers on p.id equals pm.project_group_id
+                join pm in context.ProjectMembers on pg.id equals pm.project_group_id
                 join u in context.Users on pm.student_user_id equals u.id
                 where u.student_number == studentNumber && p.id == projectId
                 select p;
@@ -512,7 +512,7 @@ namespace BarometerDataAccesLayer.Database
             return dates;
         }
 
-        public IQueryable<Report> GetReports(int projectId, int studentNumber)
+        public IQueryable<Report> GetReports(int projectId, int studentNumber, int reportDateId)
         {
 
             var report =
@@ -521,7 +521,7 @@ namespace BarometerDataAccesLayer.Database
                 join pgm in context.ProjectMembers on u.id equals pgm.student_user_id
                 join pg in context.ProjectGroups on pgm.project_group_id equals pg.id
                 join p in context.Projects on pg.project_id equals p.id
-                where p.id == projectId && u.student_number == studentNumber
+                where p.id == projectId && u.student_number == studentNumber && r.project_report_date_id == reportDateId
                 select r;
 
             return report;

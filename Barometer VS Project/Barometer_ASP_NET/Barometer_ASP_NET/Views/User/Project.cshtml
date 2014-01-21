@@ -8,28 +8,50 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-@{ var count = 1; }
+    @{ var count = 1;
+       var headAspectid = 0; }
+    @{var amountOf = 0;
+      foreach(var v in Model.ThirdDictionary)
+      {
+          amountOf++;
+      }}
 
         google.load("visualization", "1", { packages: ["corechart"] });
         google.setOnLoadCallback(drawChart);
         function drawChart() {
-            @foreach (KeyValuePair<BarometerDataAccesLayer.BaroAspect, Dictionary<BarometerDataAccesLayer.ProjectReportDate, Dictionary<BarometerDataAccesLayer.Report, int>>> chart in Model.Grades)
+@foreach (KeyValuePair<BarometerDataAccesLayer.BaroAspect, Dictionary<BarometerDataAccesLayer.ProjectReportDate, Dictionary<BarometerDataAccesLayer.Report, int>>> chart in Model.Grades)
 {
-       
+       headAspectid = chart.Key.id;
        <text>
-            
             var d = []
             var data = google.visualization.arrayToDataTable([
-
-
+            [
+            @foreach(KeyValuePair<BarometerDataAccesLayer.Report, int> grades in Model.ThirdDictionary)
+            {
+               
+               for(int i = 0; i <  Model.ThirdDictionary.Count - 1; i++)
+               {
+                   <text>'@grades.Key.BaroAspect.name',</text> 
+               }
+               <text>'@Model.ThirdDictionary.Last().Key.BaroAspect.name'</text>
+            }],
+            
+            @foreach(KeyValuePair<BarometerDataAccesLayer.ProjectReportDate, Dictionary<BarometerDataAccesLayer.Report, int>> dates in Model.SecondDictionary)
+            {
+              <text>['@dates.Key.week_label',</text>
+                foreach(KeyValuePair<BarometerDataAccesLayer.Report, int> grades in Model.ThirdDictionary)
+                {
+                   <text>@grades.Value,</text> 
+                }<text>],</text>  
+            }]);
+            
             ['Onderdeel', 'BDS', 'System use cases', 'Prototypes', 'Requirement Analyse', 'Functioneel Ontwerp'],
-            ['Week 3', 6, 6, 4, 7, 4],
-        	['Week 6', 6, 7, 7, 6, 7],
-        	['Week 9', 8, 9, 10, 10, 9]
-            ]);
-
+                ['Week 3', 6, 6, 4, 7, 4],
+                ['Week 6', 6, 7, 7, 6, 7],
+                ['Week 9', 8, 9, 10, 10, 9]
+        ]);
             var options = {
-                title: 'Voortgang Inhoudelijke kennis',
+                title: '@chart.Key.name',
                 min: 1,
                 max: 10,
                 vAxis: {
@@ -38,7 +60,7 @@
                     }
                 },
                 seriesType: "bars",
-                series: { 5: { type: "line" } }
+                series: { 6: { type: "line" } }
             };
 
             var chart = new google.visualization.ComboChart(document.getElementById('chart_div_</text>@count<text>'));
@@ -103,7 +125,7 @@
                 {
                     <tr>
                       <td>
-                        <img src="@((u.profile_image != null && u.profile_image != "") ? u.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle"></td>
+                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
                       <td colspan="2">@u.firstname @u.lastname</td>
                     </tr>
                 }
@@ -114,7 +136,7 @@
                 {
                     <tr>
                       <td>
-                        <img src="@(u.profile_image != null ? u.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle"></td>
+                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
                       <td>@u.firstname @u.lastname</td>
                       <td>
                             <a title="Beoordeling van @u.firstname @u.lastname" class="displayBaroWidget" 

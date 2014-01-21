@@ -36,7 +36,7 @@ namespace BarometerDataAccesLayer.Database
                 }
                 else
                 {
-                    throw new DataException("No data found for valid argument");
+                     throw new DataException("No data found for valid argument");
                 }
             }
             else
@@ -156,7 +156,7 @@ namespace BarometerDataAccesLayer.Database
                 var endGroupGrade =
                     (from u in context.Users
                      join pm in context.ProjectMembers on u.id equals pm.student_user_id
-                     join pg in context.ProjectGroups on pm.project_group_id equals pg.project_id
+                     join pg in context.ProjectGroups on pm.project_group_id equals pg.id
                      join p in context.Projects on pg.project_id equals p.id
                      where u.student_number == studentNumber && pg.id == groupId
                      select pg.group_end_grade).SingleOrDefault();

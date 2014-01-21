@@ -127,7 +127,7 @@ namespace Barometer_ASP_NET.Wrappers
 
             foreach (var v in project.GetProjectReportDate(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id))
             {
-                SecondDictionary.Add(v, FillThirdDictionary());
+                SecondDictionary.Add(v, FillThirdDictionary(v.id));
             }
 
             foreach (KeyValuePair<ProjectReportDate, Dictionary<Report, int>> s in SecondDictionary)
@@ -141,15 +141,22 @@ namespace Barometer_ASP_NET.Wrappers
             return SecondDictionary;
         }
 
-        private Dictionary<Report, int> FillThirdDictionary()
+        private Dictionary<Report, int> FillThirdDictionary(int reportDateId)
         {
             ThirdDictionary = new Dictionary<Report, int>();
+            int amountOfGroupMembers = ProjectMembers.ToList().Count;
+            int gradeToAdd = 0;
 
-            foreach (var v in project.GetReports(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id, this.studentNumber))
+            foreach (var v in project.GetReports(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id, this.studentNumber, reportDateId))
             {
+                /*foreach (var grade in project.GetReports(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id, this.studentNumber, reportDateId))
+                {
+                    gradeToAdd = (gradeToAdd + (int)grade.grade);
+                }
+                gradeToAdd = (gradeToAdd / amountOfGroupMembers);*/
                 ThirdDictionary.Add(v, (int)v.grade);
             }
-
+            gradeToAdd = 0;
             return ThirdDictionary;
         }
     }
