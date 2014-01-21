@@ -121,8 +121,7 @@ namespace Barometer_ASP_NET.Controllers
         }
 
         
-        [AuthFilter("moderator")]
-        [AuthFilter("admin")]
+        [AuthFilter("admod")]        
         public ActionResult Student(int studentId)
         {
             BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
