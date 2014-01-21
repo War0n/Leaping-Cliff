@@ -11,7 +11,7 @@ namespace Barometer_ASP_NET.Wrappers
     public class ModeratorDashboardWrapper
     {
 
-        private DAOProject projectDAO = new DAOProject();
+        private DAOProject projectDAO = DatabaseFactory.getInstance().getDAOProject();
         public IEnumerable<Project> OwnProjects { get; set; }
         public Dictionary<string, IEnumerable<User>> UsersInGroups { get; set; }
 

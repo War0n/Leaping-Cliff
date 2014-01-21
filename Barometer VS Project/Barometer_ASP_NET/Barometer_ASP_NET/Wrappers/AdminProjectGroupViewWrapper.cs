@@ -10,8 +10,8 @@ namespace Barometer_ASP_NET.Wrappers
 {
     public class AdminProjectGroupViewWrapper
     {
-        private DAOProject projectDAO = new DAOProject();
-        private DAOStudent studentDAO = new DAOStudent();
+        private DAOProject projectDAO = DatabaseFactory.getInstance().getDAOProject();
+        private DAOStudent studentDAO = DatabaseFactory.getInstance().getDAOStudent();
         public int projectID { get; set; }
         public int projectGroup { get; set; }
         public IQueryable<ProjectMember> ProjectGroupMembers { get; set; }
