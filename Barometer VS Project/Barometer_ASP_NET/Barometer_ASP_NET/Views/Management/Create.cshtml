@@ -1,0 +1,62 @@
+﻿@model BarometerDataAccesLayer.User
+
+@{
+    ViewBag.Title = "Aanmaken User";
+    Layout = "~/Views/Shared/_ManagementLayout.cshtml";
+}
+
+<h2>User aanmaken</h2>
+
+@using (Html.BeginForm("Create", "Management", FormMethod.Post, new {@class = "form-vertical" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>User</legend>
+        <div class="form-group">
+            @Html.LabelFor(model => model.student_number, new {@class =  "control-label" })
+            @Html.TextBoxFor(model => model.student_number, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.student_number)
+        </div>
+
+           
+        <div class="form-group">
+            @Html.LabelFor(model => model.firstname, new {@class =  "control-label" })
+            @Html.TextBoxFor(model => model.firstname, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.firstname)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.lastname, new {@class =  "control-label" })
+            @Html.TextBoxFor(model => model.lastname, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.lastname)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.profile_image, new {@class =  "control-label" })
+            @Html.TextBoxFor(model => model.profile_image, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.profile_image)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, new {@class =  "control-label" })
+            @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.email)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.rol_name, new {@class =  "control-label" })
+            @Html.TextBoxFor(model => model.rol_name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.rol_name)
+        </div>
+
+        <p>
+            <input type="submit" value="Aanmaken" class="btn btn-default pull-right" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Terug naar overzicht", "List")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

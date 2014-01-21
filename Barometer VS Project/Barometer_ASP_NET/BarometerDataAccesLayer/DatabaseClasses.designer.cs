@@ -661,7 +661,8 @@ namespace BarometerDataAccesLayer
 				}
 			}
 		}
-		
+
+        [DisplayName("Studentnummer")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_student_number", DbType="Int")]
 		public System.Nullable<int> student_number
 		{
@@ -681,7 +682,8 @@ namespace BarometerDataAccesLayer
 				}
 			}
 		}
-		
+
+        [DisplayName("Voornaam")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firstname", DbType="VarChar(50)")]
 		public string firstname
 		{
@@ -701,7 +703,8 @@ namespace BarometerDataAccesLayer
 				}
 			}
 		}
-		
+
+        [DisplayName("Achternaam")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lastname", DbType="VarChar(50)")]
 		public string lastname
 		{
@@ -721,7 +724,8 @@ namespace BarometerDataAccesLayer
 				}
 			}
 		}
-		
+
+        [DisplayName("Profielafbeelding")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profile_image", DbType="VarChar(255)")]
 		public string profile_image
 		{
@@ -741,7 +745,8 @@ namespace BarometerDataAccesLayer
 				}
 			}
 		}
-		
+
+        [DisplayName("Emailadres")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50)")]
 		public string email
 		{
@@ -761,7 +766,8 @@ namespace BarometerDataAccesLayer
 				}
 			}
 		}
-		
+
+        [DisplayName("Rol")]
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_name", DbType="VarChar(50)")]
 		public string rol_name
 		{

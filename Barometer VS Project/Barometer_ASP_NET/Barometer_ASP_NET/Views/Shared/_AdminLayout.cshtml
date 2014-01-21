@@ -39,6 +39,7 @@
                         </ul>
 
                     </li>
+                    <li>@Html.ActionLink("Users", "UserList", "Admin")</li>
                 </ul>
 
                 @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-form navbar-right" }))
@@ -80,6 +81,6 @@
     </div>
 
 
-    @*        @RenderSection("scripts", required: false)*@
+    @RenderSection("scripts", required: false)
 </body>
 </html>
