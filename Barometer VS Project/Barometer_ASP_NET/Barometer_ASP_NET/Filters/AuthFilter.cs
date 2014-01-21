@@ -20,14 +20,19 @@ namespace Barometer_ASP_NET.Filters
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             CurrentUser curUser = CurrentUser.getInstance();
-            if(curUser == null) {
+            if(curUser.Role == null) {
                 filterContext.Result = new RedirectResult("/Account/login");
-            } else {
-                if (!CurrentUser.getInstance().Role.ToLower().Equals(GivenRole.ToLower()))
-                {
-                    filterContext.Result = new RedirectResult("/Account/login");
+            }
+            if (!curUser.Role.ToLower().Equals(GivenRole.ToLower()) && !GivenRole.ToLower().Equals("all") && !GivenRole.ToLower().Equals("admod"))
+                {                    
+                        filterContext.Result = new RedirectResult("/Account/login");                                     
                 }
-            }                
+            if (GivenRole.ToLower().Equals("admod") && curUser.Role.ToLower().Equals("user"))
+            {
+                filterContext.Result = new RedirectResult("/Account/login");
+            }
+  
+             
         }
 
     }
