@@ -23,7 +23,7 @@ namespace Barometer_ASP_NET.Filters
             if(curUser.Role == null) {
                 filterContext.Result = new RedirectResult("/Account/login");
             }
-            else if (!curUser.Role.ToLower().Equals(GivenRole.ToLower()) && !GivenRole.ToLower().Equals("all") && !GivenRole.ToLower().Equals("admod"))
+            if (!curUser.Role.ToLower().Equals(GivenRole.ToLower()) && !GivenRole.ToLower().Equals("all") && !GivenRole.ToLower().Equals("admod"))
                 {                    
                         filterContext.Result = new RedirectResult("/Account/login");                                     
                 }
