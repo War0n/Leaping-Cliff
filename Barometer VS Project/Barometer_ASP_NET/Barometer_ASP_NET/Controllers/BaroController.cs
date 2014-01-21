@@ -51,8 +51,6 @@ namespace Barometer_ASP_NET.Controllers
         {
             Dictionary<int, int> reports = new Dictionary<int, int>();
 
-
-           
             // Parse alle cijfers naar reports (Dit kan makkelijker maar kon zo snel ff niet vinden hoe
             foreach (var key in form.AllKeys)
             {

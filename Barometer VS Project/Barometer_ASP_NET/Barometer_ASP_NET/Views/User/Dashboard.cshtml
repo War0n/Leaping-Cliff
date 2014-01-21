@@ -82,12 +82,20 @@
                 <h4>
                     <i>Beoordelingen</i>
                     @{
-                        var sDate = (DateTime)Model.NextReportDate.start_date;
-                        var eDate = (DateTime)Model.NextReportDate.end_date;   
-                    }
-                    @if (DateTime.Now >= sDate && DateTime.Now <= eDate)
-                    {
-                        <span class="label label-danger"><span class="glyphicon glyphicon-bell"></span> Het is beoordelingsweek!</span>
+                        var sDate = new DateTime();
+                        var eDate = new DateTime();
+                        
+                        
+                        if (Model.NextReportDate != null)
+                        {
+                            sDate = (DateTime)Model.NextReportDate.start_date;
+                            eDate = (DateTime)Model.NextReportDate.end_date;   
+                            
+                            if (DateTime.Now >= sDate && DateTime.Now <= eDate)
+                            {
+                                <span class="label label-danger"><span class="glyphicon glyphicon-bell"></span> Het is beoordelingsweek!</span>
+                            }
+                        }
                     }
                 </h4>
                 
@@ -103,16 +111,22 @@
                         </td>
                         <td>
                             <h4>
-                                
-                                @sDate.ToString("dd/MM/yy") <text>-</text> @eDate.ToString("dd/MM/yy")
-
+                                @if (Model.NextReportDate != null)
+                                {
+                                    @sDate.ToString("dd/MM/yy") <text>-</text> @eDate.ToString("dd/MM/yy")
+                                } else {
+                                    <p>Einde</p>   
+                                }
                             </h4>
                         </td>
                     </tr>
                 </table>
-                if (DateTime.Now >= sDate && DateTime.Now <= eDate && !ViewBag.Filled)
+                if (Model.NextReportDate != null && !ViewBag.Filled)
                 {
-                    <a class="btn btn-default form-control" href="@Url.Action("Barometer", new { @report_id = @Model.NextReportDate.id })" style="margin-top: 10px;">Barometer invullen</a>
+                    if (DateTime.Now >= sDate && DateTime.Now <= eDate)
+                    {
+                        <a class="btn btn-default form-control" href="@Url.Action("Barometer", new { @report_id = @Model.NextReportDate.id })" style="margin-top: 10px;">Barometer invullen</a>
+                    }
                 }
 
                 <h4><i>Groepsleden</i></h4>
@@ -150,7 +164,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            { counter++; }
+                                { counter++; }
                             }
                         }
 
@@ -178,6 +192,5 @@
         <div class="modal-content">
         </div>
     </div>
-
 </div>
 

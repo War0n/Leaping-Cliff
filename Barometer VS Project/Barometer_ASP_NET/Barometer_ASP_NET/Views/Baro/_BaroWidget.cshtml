@@ -44,7 +44,20 @@
                                     <td>@child.name</td>
                                     <td>
                                         <a href="#" title="@((givenGrade != null) ? givenGrade.comment : "Hier komt extra commentaar dat kan worden meegegeven bij een beoordeling")">
-                                            @((givenGrade != null) ? givenGrade.grade.ToString() : "x")
+                                            @if(givenGrade != null) {
+                                               if(givenGrade.grade >= 7) {
+                                                   <span class="badge alert-success">@givenGrade.grade</span>
+                                               } else if(givenGrade.grade < 7 && givenGrade.grade >= 5)  {
+                                                   <span class="badge alert-warning">@givenGrade.grade</span>
+                                               } else {
+                                                   <span class="badge alert-danger">@givenGrade.grade</span>
+                                               }
+                                            } else {
+                                                <text>-</text>   
+                                            }
+                                                
+                                                
+                                            
                                         </a>
                                     </td>
                                 </tr>
