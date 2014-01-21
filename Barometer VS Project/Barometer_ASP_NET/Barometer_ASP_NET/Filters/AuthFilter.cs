@@ -26,12 +26,7 @@ namespace Barometer_ASP_NET.Filters
                 {
                     filterContext.Result = new RedirectResult("/Account/login");
                 }
-           
-            if (!HttpContext.Current.Request.Url.AbsoluteUri.ToLower().Contains(GivenRole.ToLower())||!GivenRole.ToLower().Equals("all"))
-            {
-                
-                filterContext.Result = new RedirectResult("/"+GivenRole+"/Dashboard");
-            }
+                      
              
         }
 

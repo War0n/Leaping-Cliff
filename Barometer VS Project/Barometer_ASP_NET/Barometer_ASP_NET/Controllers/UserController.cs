@@ -20,9 +20,8 @@ namespace Barometer_ASP_NET.Controllers
         private DAOProject daoProject = new DAOProject();
         private CurrentUser curUser = CurrentUser.getInstance();
 
-        [AuthFilter("user")]
-        [AuthFilter("moderator")]
-        [AuthFilter("admin")]
+        
+        [AuthFilter("all")]
         public ActionResult Dashboard()
         {
             //VOOR ALS JE WILT TESTEN WAT JE STUDENTNUM IS : 
@@ -63,9 +62,8 @@ namespace Barometer_ASP_NET.Controllers
 			return View(viewModel);
 		}
 
-        [AuthFilter("admin")]
-        [AuthFilter("moderator")]
-        [AuthFilter("user")]
+       
+        [AuthFilter("all")]
         public ActionResult Project(int project_id = 0)
 		{
             if (project_id == 0)
@@ -74,9 +72,8 @@ namespace Barometer_ASP_NET.Controllers
             return View(wrapper);
 		}
 
-        [AuthFilter("moderator")]
-        [AuthFilter("admin")]
-        [AuthFilter("user")]
+       
+        [AuthFilter("all")]
 		public ActionResult Projecten()
 		{
             UserDashboardWrapper wrapper = new UserDashboardWrapper(curUser.Studentnummer);
