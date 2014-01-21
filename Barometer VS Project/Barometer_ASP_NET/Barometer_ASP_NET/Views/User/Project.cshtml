@@ -34,15 +34,15 @@
                    <text>'@grades.Key.BaroAspect.name',</text> 
                }
                <text>'@Model.ThirdDictionary.Last().Key.BaroAspect.name'</text>
-            }],
+            }]
             
             @foreach(KeyValuePair<BarometerDataAccesLayer.ProjectReportDate, Dictionary<BarometerDataAccesLayer.Report, int>> dates in Model.SecondDictionary)
             {
-              <text>['@dates.Key.week_label',</text>
+              <text>,['@dates.Key.week_label'</text>
                 foreach(KeyValuePair<BarometerDataAccesLayer.Report, int> grades in Model.ThirdDictionary)
                 {
-                   <text>@grades.Value,</text> 
-                }<text>],</text>  
+                   <text>,@grades.Value</text> 
+                }<text>]</text>  
             }]);
             
             ['Onderdeel', 'BDS', 'System use cases', 'Prototypes', 'Requirement Analyse', 'Functioneel Ontwerp'],

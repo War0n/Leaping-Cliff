@@ -58,7 +58,7 @@ namespace BarometerDataAccesLayer.Database
                 DatabaseClassesDataContext context = factory.getDataContext();
                 var projectGroup =
                     from pg in context.ProjectGroups
-                    join pm in context.ProjectMembers on pg.id equals pm.project_group_id
+                    join pm in context.ProjectMembers on pg equals pm.ProjectGroup
                     join u in context.Users on pm.student_user_id equals u.id
                     where u.student_number == studentNumber
                     select pg;

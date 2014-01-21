@@ -108,7 +108,7 @@ namespace Barometer_ASP_NET.Wrappers
                 }
                 
             }
-            int i = 0;
+
         }
 
 
