@@ -11,7 +11,7 @@ namespace Barometer_ASP_NET.Wrappers
     public class AdminProjectGroupListWrapper
     {
         public IQueryable<ProjectGroup> ProjectGroups { get; set; }
-        public DAOProject projectDAO = new DAOProject();
+        public DAOProject projectDAO = DatabaseFactory.getInstance().getDAOProject();
 
         public AdminProjectGroupListWrapper(int projectID)
         {

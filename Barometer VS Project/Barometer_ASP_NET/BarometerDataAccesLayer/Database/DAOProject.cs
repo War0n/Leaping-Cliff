@@ -70,6 +70,19 @@ namespace BarometerDataAccesLayer.Database
                 select pg;
             return projectGroups;
         }
+
+		/// <summary>
+		/// Get all students belonging to the projectgroup
+		/// </summary>
+		/// <param name="projectGroupId">The projectgroup you want to query</param>
+		/// <returns>All Group members belonging to a group in a project</returns>
+		public IEnumerable<Project> getAllProjects()
+		{
+			var projectGroups =
+				from pg in context.Projects
+				select pg;
+			return projectGroups;
+		}
          
         /// <summary>
         /// Get all students belonging to the projectgroup
@@ -82,7 +95,7 @@ namespace BarometerDataAccesLayer.Database
             {
                 var projectMembers =
                     from pm in context.ProjectMembers
-                    join pg in context.ProjectGroups on pm.ProjectGroup equals pg
+                    join pg in context.ProjectGroups on pm.project_group_id equals pg.id
                     where pg.id == projectGroupId
                     select pm;
                 //if (projectMembers.ToList().Count > 0)
@@ -555,5 +568,7 @@ namespace BarometerDataAccesLayer.Database
         {
 
         }
-    }
+
+
+	}
 }

@@ -18,6 +18,7 @@ namespace Barometer_ASP_NET.Wrappers
         public ProjectReportDate NextReportDate { get; set; }
 
         public IQueryable<User> CurrentProjectOwners { get; set; }
+        public User CurrentProjectTutor { get; set; }
         public IQueryable<Project> AllProjects { get; set; }
         public Dictionary<string, int[]> Grades { get; set; }
 
@@ -38,8 +39,8 @@ namespace Barometer_ASP_NET.Wrappers
         public UserDashboardWrapper(int studentNumber)
         {
             this.StudentNumber = studentNumber;
-            student = new DAOStudent();
-            project = new DAOProject();
+            student = DatabaseFactory.getInstance().getDAOStudent();
+			project = DatabaseFactory.getInstance().getDAOProject();
 
 
             FillCurrentProject();
@@ -48,6 +49,7 @@ namespace Barometer_ASP_NET.Wrappers
                 FillNextReportDate();
                 FillProjectMembers(student.getStudentGroup(studentNumber).First());
                 FillCurrentProjectOwners(student.getStudentGroup(studentNumber).First());
+                CurrentProjectTutor = ProjectMembers.FirstOrDefault().ProjectGroup.User;
             }
 
 
@@ -58,6 +60,7 @@ namespace Barometer_ASP_NET.Wrappers
             }
             catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message + " in " + ex.Source);
                 // doe niks met error. (dit laten staan)
             }
             
@@ -73,12 +76,12 @@ namespace Barometer_ASP_NET.Wrappers
         }
         private void FillCurrentProjectOwners(ProjectGroup projectGroup)
         {
-            CurrentProjectOwners = project.GetProjectOwners(projectGroup.id);
+            CurrentProjectOwners = project.GetProjectOwners(projectGroup.project_id);
         }
         private void FillCurrentProject()
         {
             CurrentProject = project.GetCurrentActiveProject(StudentNumber).FirstOrDefault();
-            HasProject = !(CurrentProject == null);
+            HasProject = (CurrentProject != null);
         }
         private void FillAllProjects()
         {
@@ -105,7 +108,7 @@ namespace Barometer_ASP_NET.Wrappers
                 }
                 
             }
-
+            int i = 0;
         }
 
 

@@ -26,6 +26,7 @@ namespace Barometer_ASP_NET.Controllers
 
             return RedirectToAction("Dashboard");
         }
+    
 
         public ActionResult Dashboard()
         {
@@ -62,8 +63,8 @@ namespace Barometer_ASP_NET.Controllers
                 me.User = ownerInfo.First();
                 insertProject.name = collection.GetValue("FormProject.name").AttemptedValue;
                 insertProject.description = collection.GetValue("FormProject.description").AttemptedValue;
-                insertProject.start_date = DateTime.ParseExact(collection.GetValue("FormProject.start_date").AttemptedValue, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                insertProject.end_date = DateTime.ParseExact(collection.GetValue("FormProject.end_date").AttemptedValue, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                insertProject.start_date = DateTime.ParseExact(collection.GetValue("FormProject.start_date").AttemptedValue, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                insertProject.end_date = DateTime.ParseExact(collection.GetValue("FormProject.end_date").AttemptedValue, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 insertProject.ProjectOwners.Add(me);
                 insertProject.status_name = "Pending";
                 if (Request.Files.Count != 0)
@@ -86,8 +87,8 @@ namespace Barometer_ASP_NET.Controllers
                         BarometerDataAccesLayer.ProjectReportDate tmpReportDate = new BarometerDataAccesLayer.ProjectReportDate();
                         tmpReportDate.Project = insertProject;
                         tmpReportDate.week_label = reportDateName;
-                        tmpReportDate.start_date = DateTime.ParseExact(reportStartDates[counter], "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                        tmpReportDate.end_date = DateTime.ParseExact(reportStartDates[counter], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        tmpReportDate.start_date = DateTime.Parse(reportStartDates[counter]);
+                        tmpReportDate.end_date = DateTime.Parse(reportEndDates[counter]);
                         context.ProjectReportDates.InsertOnSubmit(tmpReportDate);
                         counter++;
                     }
@@ -119,8 +120,8 @@ namespace Barometer_ASP_NET.Controllers
             return View(wrapper);
         }
 
-        [AuthFilter("admin")]
-        [AuthFilter("moderator")]
+        
+        [AuthFilter("admod")]        
         public ActionResult Student(int studentId)
         {
             BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
@@ -140,14 +141,19 @@ namespace Barometer_ASP_NET.Controllers
 
         public ActionResult StudentForm(FormCollection collection)
         {
+
             int studentNumber = int.Parse(collection.GetValue("student").AttemptedValue);
+            //UserDashboardWrapper userwrap = new UserDashboardWrapper(studentNumber);
+
             BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             var student =
                 from u in context.Users
                 where u.student_number == studentNumber
                 select u.id;
             int studentId = student.First();
-            return RedirectToAction("Student", new { studentId = studentId });
+            return RedirectToAction("Dashboard", "User", new { studentId = studentNumber});
+
+
         }
 
         public ActionResult DeleteProject(int projectId)

@@ -123,9 +123,9 @@
                         </tr>
                         <tr>
                             <td>
-                                <img src="/Content/images/angelique.jpg" alt="..." class="img-circle">
+                                <img src="@(Model.CurrentProjectTutor.profile_image != null ? Model.CurrentProjectTutor.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle">
                             </td>
-                            <td colspan="2">A. van de Boogaard</td>
+                            <td colspan="2">@Model.CurrentProjectTutor.firstname @Model.CurrentProjectTutor.lastname</td>
                         </tr>
                         <tr>
                             <td colspan="3"><b>Leden</b></td>
@@ -133,11 +133,9 @@
                         @{int counter = 1;}
                         @foreach (BarometerDataAccesLayer.ProjectMember pm in Model.ProjectMembers)
                         {
-                            if (pm.User.student_number == @Model.StudentNumber)
+                            if (pm.User.student_number != @Model.StudentNumber)
                             {
                                 // We willen onszelf niet laten zien.
-                                break;
-                            }
                             <tr>
                                 <td>
                                     <img src="@(pm.User.profile_image != null ? pm.User.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle">
@@ -153,6 +151,7 @@
                                 </td>
                             </tr>
                             { counter++; }
+                            }
                         }
 
                     </tbody>
