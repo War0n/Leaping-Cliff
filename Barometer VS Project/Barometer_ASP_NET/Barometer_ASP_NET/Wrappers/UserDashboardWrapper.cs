@@ -38,8 +38,8 @@ namespace Barometer_ASP_NET.Wrappers
         public UserDashboardWrapper(int studentNumber)
         {
             this.StudentNumber = studentNumber;
-            student = new DAOStudent();
-            project = new DAOProject();
+            student = DatabaseFactory.getInstance().getDAOStudent();
+			project = DatabaseFactory.getInstance().getDAOProject();
 
 
             FillCurrentProject();
