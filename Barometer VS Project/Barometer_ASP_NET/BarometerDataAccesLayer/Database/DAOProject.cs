@@ -95,7 +95,7 @@ namespace BarometerDataAccesLayer.Database
             {
                 var projectMembers =
                     from pm in context.ProjectMembers
-                    join pg in context.ProjectGroups on pm.ProjectGroup equals pg
+                    join pg in context.ProjectGroups on pm.project_group_id equals pg.id
                     where pg.id == projectGroupId
                     select pm;
                 //if (projectMembers.ToList().Count > 0)

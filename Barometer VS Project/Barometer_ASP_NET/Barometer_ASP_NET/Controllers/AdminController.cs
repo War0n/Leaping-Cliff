@@ -143,7 +143,7 @@ namespace Barometer_ASP_NET.Controllers
         {
 
             int studentNumber = int.Parse(collection.GetValue("student").AttemptedValue);
-            UserDashboardWrapper userwrap = new UserDashboardWrapper(studentNumber);
+            //UserDashboardWrapper userwrap = new UserDashboardWrapper(studentNumber);
 
             BarometerDataAccesLayer.DatabaseClassesDataContext context = DatabaseFactory.getInstance().getDataContext();
             var student =
@@ -151,7 +151,7 @@ namespace Barometer_ASP_NET.Controllers
                 where u.student_number == studentNumber
                 select u.id;
             int studentId = student.First();
-            return RedirectToAction("Dashboard","User",userwrap);
+            return RedirectToAction("Dashboard", "User", new { studentId = studentNumber});
 
 
         }

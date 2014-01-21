@@ -20,14 +20,21 @@ namespace Barometer_ASP_NET.Controllers
         private DAOProject daoProject = new DAOProject();
         private CurrentUser curUser = CurrentUser.getInstance();
 
-        
+
         [AuthFilter("all")]
-        public ActionResult Dashboard()
+        public ActionResult Dashboard(int studentId = 0)
         {
             //VOOR ALS JE WILT TESTEN WAT JE STUDENTNUM IS : 
             // return Content(CurrentUser.getInstance().Studentnummer.ToString());
-
-            UserDashboardWrapper wrapper = new UserDashboardWrapper(curUser.Studentnummer);
+            UserDashboardWrapper wrapper;
+            if (studentId != 0)
+            {
+                wrapper = new UserDashboardWrapper(studentId);
+            }
+            else
+            {
+                wrapper = new UserDashboardWrapper(curUser.Studentnummer);
+            }
 
             ViewBag.Filled = (Request["b"] == "done") ? true : false;
 
@@ -35,8 +42,8 @@ namespace Barometer_ASP_NET.Controllers
         }
 
         [AuthFilter("user")]
-		public ActionResult Barometer(int report_id = 0)
-		{
+        public ActionResult Barometer(int report_id = 0)
+        {
             BaroReportWrapper viewModel =
                 db.ProjectReportDates
                 .Where(r => r.id == report_id)
@@ -57,27 +64,27 @@ namespace Barometer_ASP_NET.Controllers
 
             viewModel.ReporterId = curUser.StudentId;
             viewModel.Members = daoProject.getUsersInGroup(group.id).ToList();
-            
 
-			return View(viewModel);
-		}
 
-       
+            return View(viewModel);
+        }
+
+
         [AuthFilter("all")]
         public ActionResult Project(int project_id = 0)
-		{
+        {
             if (project_id == 0)
                 return RedirectToAction("Projecten");
-            UserProjectWrapper wrapper = new UserProjectWrapper(curUser.Studentnummer, project_id); 
+            UserProjectWrapper wrapper = new UserProjectWrapper(curUser.Studentnummer, project_id);
             return View(wrapper);
-		}
+        }
 
-       
+
         [AuthFilter("all")]
-		public ActionResult Projecten()
-		{
+        public ActionResult Projecten()
+        {
             UserDashboardWrapper wrapper = new UserDashboardWrapper(curUser.Studentnummer);
-			return View(wrapper);
-		}
+            return View(wrapper);
+        }
     }
 }
