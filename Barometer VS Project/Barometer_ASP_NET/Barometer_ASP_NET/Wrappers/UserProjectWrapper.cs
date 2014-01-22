@@ -28,6 +28,7 @@ namespace Barometer_ASP_NET.Wrappers
         public Dictionary<ProjectReportDate, Dictionary<Report, int>> SecondDictionary { get; set; }
         public Dictionary<Report, int> ThirdDictionary { get; set; }
         public Dictionary<BaroAspect, Dictionary<ProjectReportDate, Dictionary<Report, int>>> Grades { get; set; }
+        public Dictionary<int, List<string>> AspectNames { get; set; }
         private DAOProject project;
         private DAOStudent student;
 
@@ -112,38 +113,40 @@ namespace Barometer_ASP_NET.Wrappers
         private void FillGrades(Project p)
         {
             project = DatabaseFactory.getInstance().getDAOProject();
+            AspectNames = new Dictionary<int, List<string>>();
 
             Grades = new Dictionary<BaroAspect, Dictionary<ProjectReportDate, Dictionary<Report, int>>>();
 
             foreach (var v in project.GetBaroAspect(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id))
             {
-                Grades.Add(v, FillSecondDictionary());
+                Grades.Add(v, FillSecondDictionary(v.id));
             }
         }
 
-        private Dictionary<ProjectReportDate, Dictionary<Report, int>> FillSecondDictionary()
+        private Dictionary<ProjectReportDate, Dictionary<Report, int>> FillSecondDictionary(int headAspectId)
         {
             SecondDictionary = new Dictionary<ProjectReportDate, Dictionary<Report, int>>();
-
+            if (!AspectNames.ContainsKey(headAspectId))
+            {
+                AspectNames.Add(headAspectId, new List<string>());
+            }
             foreach (var v in project.GetProjectReportDate(project.GetProject(this.studentNumber, projectId).FirstOrDefault().id))
             {
-                SecondDictionary.Add(v, FillThirdDictionary(v.id));
-            }
-
-            foreach (KeyValuePair<ProjectReportDate, Dictionary<Report, int>> s in SecondDictionary)
-            {
-                for (int i = 0; i < ThirdDictionary.Count; i++)
+                var thirdD = FillThirdDictionary(v.id, headAspectId);
+                if (thirdD.Where(d => d.Value == 0).Count() == 0 || thirdD.Count != 0)
                 {
-                    Debug.WriteLine(s.Key.week_label + " " + s.Value.Keys.ElementAt(i).grade);
+                    SecondDictionary.Add(v, thirdD);
                 }
             }
+            Debug.WriteLine(headAspectId);
 
             return SecondDictionary;
         }
 
-        private Dictionary<Report, int> FillThirdDictionary(int reportDateId)
+        private Dictionary<Report, int> FillThirdDictionary(int reportDateId, int headAspectId)
         {
             ThirdDictionary = new Dictionary<Report, int>();
+            Dictionary<int, List<int>> grades = new Dictionary<int, List<int>>();
             int amountOfGroupMembers = ProjectMembers.ToList().Count;
             int gradeToAdd = 0;
 
@@ -154,8 +157,18 @@ namespace Barometer_ASP_NET.Wrappers
                     gradeToAdd = (gradeToAdd + (int)grade.grade);
                 }
                 gradeToAdd = (gradeToAdd / amountOfGroupMembers);*/
+               /** if (grades.ContainsKey(v.baro_aspect_id))
+                {
+
+                }*/
                 ThirdDictionary.Add(v, (int)v.grade);
+
+                if (!AspectNames[headAspectId].Contains(v.BaroAspect.name))
+                {
+                    AspectNames[headAspectId].Add(v.BaroAspect.name);
+                }
             }
+            
             gradeToAdd = 0;
             return ThirdDictionary;
         }

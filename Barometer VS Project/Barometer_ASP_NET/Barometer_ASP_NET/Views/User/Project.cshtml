@@ -6,52 +6,20 @@
 }
 
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-    @{ var count = 1;
-       var headAspectid = 0; }
-    @{var amountOf = 0;
-      foreach(var v in Model.ThirdDictionary)
-      {
-          amountOf++;
-      }}
-
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
         google.load("visualization", "1", { packages: ["corechart"] });
         google.setOnLoadCallback(drawChart);
         function drawChart() {
-@foreach (KeyValuePair<BarometerDataAccesLayer.BaroAspect, Dictionary<BarometerDataAccesLayer.ProjectReportDate, Dictionary<BarometerDataAccesLayer.Report, int>>> chart in Model.Grades)
-{
-       headAspectid = chart.Key.id;
-       <text>
-            var d = []
             var data = google.visualization.arrayToDataTable([
-            [
-            @foreach(KeyValuePair<BarometerDataAccesLayer.Report, int> grades in Model.ThirdDictionary)
-            {
-               
-               for(int i = 0; i <  Model.ThirdDictionary.Count - 1; i++)
-               {
-                   <text>'@grades.Key.BaroAspect.name',</text> 
-               }
-               <text>'@Model.ThirdDictionary.Last().Key.BaroAspect.name'</text>
-            }],
-            
-            @foreach(KeyValuePair<BarometerDataAccesLayer.ProjectReportDate, Dictionary<BarometerDataAccesLayer.Report, int>> dates in Model.SecondDictionary)
-            {
-              <text>['@dates.Key.week_label'</text>
-                foreach(KeyValuePair<BarometerDataAccesLayer.Report, int> grades in Model.ThirdDictionary)
-                {
-                   <text>,@grades.Value</text> 
-                }<text>]</text>  
-            }]);
-            
-            ['Onderdeel', 'BDS', 'System use cases', 'Prototypes', 'Requirement Analyse', 'Functioneel Ontwerp'],
-                ['Week 3', 6, 6, 4, 7, 4],
-                ['Week 6', 6, 7, 7, 6, 7],
-                ['Week 9', 8, 9, 10, 10, 9]
-        ]);
+              ['Onderdeel', 'BDS', 'System use cases', 'Prototypes', 'Requirement Analyse', 'Functioneel Ontwerp'],
+              ['Week 3', 6, 7, 7, 6, 6],
+              ['Week 6', 5, 6, 7, 7, 7],
+              ['Week 9', 7, 8, 9, 10, 10]
+            ]);
+
             var options = {
-                title: '@chart.Key.name',
+                title: 'Voortgang Inhoudelijke kennis',
                 min: 1,
                 max: 10,
                 vAxis: {
@@ -60,18 +28,117 @@
                     }
                 },
                 seriesType: "bars",
-                series: { 6: { type: "line" } }
+                series: { 5: { type: "line" } }
+            };
+
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div_1'));
+            chart.draw(data, options);
+
+
+            data = google.visualization.arrayToDataTable([
+                ['Onderdeel', 'Inzet/motivatie', 'Inzicht eigen functioneren', 'Samenwerken', 'Schriftelijk communiceren', 'Mondeling communiceren', 'Projectmatig werken'],
+                ['Week 3', 5, 6, 4, 7, 4, 6],
+                ['Week 6', 6, 7, 7, 6, 7, 7],
+                ['Week 9', 8, 9, 10, 10, 9, 10]
+            ]);
+            options = {
+                title: 'Voortgang werken als professional',
+                min: 1,
+                max: 10,
+                vAxis: {
+                    gridlines: {
+                        count: 10
+                    }
+                }
+            };
+
+            chart = new google.visualization.ColumnChart(document.getElementById('chart_div_2'));
+            chart.draw(data, options);
+
+
+        }
+
+
+
+
+
+
+        chart_div_prof
+    </script>
+
+ @* @{ var count = 1;
+       var headAspectId = 0; }
+    @{var amountOf = 0;
+      foreach (var v in Model.ThirdDictionary)
+      {
+          amountOf++;
+      }}
+
+    google.load("visualization", "1", { packages: ["corechart"] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        @foreach (KeyValuePair<BarometerDataAccesLayer.BaroAspect, Dictionary<BarometerDataAccesLayer.ProjectReportDate, Dictionary<BarometerDataAccesLayer.Report, int>>> chart in Model.Grades)
+{
+    headAspectId = chart.Key.id; 
+       <text>
+
+            var d = []
+            var data = google.visualization.arrayToDataTable([
+            [@{
+            
+                   
+    for (int i = 0; i < Model.AspectNames[headAspectId].Count - 1; i++)
+    {
+        var grades = Model.AspectNames[headAspectId].ElementAt(i);
+      
+                     <text>'@grades',</text> 
+    }
+                <text>'@Model.AspectNames[headAspectId].Last()'</text>
+                }
+            ],
+           
+    @for (int i = 0; i < Model.SecondDictionary.Count - 1; i++)
+    {
+        var dates = Model.SecondDictionary.ElementAt(i);
+                    <text>['@dates.Key.week_label'</text>
+        foreach (KeyValuePair<BarometerDataAccesLayer.Report, int> grades in dates.Value)
+        {
+                   <text>,@grades.Value</text> 
+        }
+         <text>],</text>
+    }          
+                ['@Model.SecondDictionary.Last().Key.week_label'
+   @foreach (KeyValuePair<BarometerDataAccesLayer.Report, int> grades in Model.SecondDictionary.Last().Value)
+    {
+                    <text>,@grades.Value</text>
+    }
+                ]
+            
+            ]);
+            
+            
+            
+        var options = {
+            title: '@chart.Key.name',
+                min: 1,
+                max: 10,
+                vAxis: {
+                    gridlines: {
+                        count: 10
+                    }
+                },
+                seriesType: "bars",
+                series: { 5: { type: "line" } }
             };
 
             var chart = new google.visualization.ComboChart(document.getElementById('chart_div_</text>@count<text>'));
-            chart.draw(data, options);
+    chart.draw(data, options);
 
-            </text>
+    </text>
     count++;
 }
-        }
-</script>
-   
+    }*@
+
 <div class="row">
     <div class="col-lg-12">
         <h2>@Model.CurrentProjectName <small>(@Model.CurrentProjectDate)</small></h2>
@@ -90,11 +157,11 @@
                 </tr>
                 <tr>
                     <td>Docenten</td>
-                    <td>            
+                    <td>
                         @foreach (var u in Model.ProjectOwners)
                         {
-                              <a href="mailto:@u.email" title="Mail docent">@u.firstname @u.lastname</a><br />
-                        } 
+                            <a href="mailto:@u.email" title="Mail docent">@u.firstname @u.lastname</a><br />
+                        }
                     </td>
                 </tr>
                 <tr>
@@ -106,10 +173,10 @@
                 </tr>
                 <tr>
                     <td>Eindcijfer individueel</td>
-                     @if ((double)Model.CurrentProjectIndividualGrade > 5.5)
-                     {<td><span class="label label-success">@Model.CurrentProjectIndividualGrade</span></td>}
-                     else if ((double)Model.CurrentProjectIndividualGrade < 5.5)
-                     {<td><span class="label label-danger">@Model.CurrentProjectIndividualGrade</span></td>}
+                    @if ((double)Model.CurrentProjectIndividualGrade > 5.5)
+                    {<td><span class="label label-success">@Model.CurrentProjectIndividualGrade</span></td>}
+                    else if ((double)Model.CurrentProjectIndividualGrade < 5.5)
+                    {<td><span class="label label-danger">@Model.CurrentProjectIndividualGrade</span></td>}
                 </tr>
             </tbody>
         </table>
@@ -124,9 +191,9 @@
                 @foreach (var u in Model.Tutors)
                 {
                     <tr>
-                      <td>
-                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                      <td colspan="2">@u.firstname @u.lastname</td>
+                        <td>
+                            <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                        <td colspan="2">@u.firstname @u.lastname</td>
                     </tr>
                 }
                 <tr>
@@ -135,18 +202,18 @@
                 @foreach (var u in Model.ProjectMembers)
                 {
                     <tr>
-                      <td>
-                        <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
-                      <td>@u.firstname @u.lastname</td>
-                      <td>
+                        <td>
+                            <img src="../../images/pf.jpg" alt="..." class="img-circle"></td>
+                        <td>@u.firstname @u.lastname</td>
+                        <td>
                             <a title="Beoordeling van @u.firstname @u.lastname" class="displayBaroWidget" 
                                 data-modal-id="modal-baro-widget" 
                                 data-reporter-id="@u.id" 
                                 data-subject-id="@Model.StudentNumber" 
                                 data-project-id="@Model.CurrentProjectId">
-                              <span class="glyphicon glyphicon-eye-open"></span>
-                          </a>
-                      </td>
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -157,10 +224,10 @@
 
     <div class="col-lg-8">
         <h4><i>Voortgang</i></h4>
-        <div id ="charts">
+        <div id="charts">
 
-        <div id="chart_div_1" style="position: relative; width: 100%;"></div>
-        <div id="chart_div_2" style="position: relative; width: 100%"></div>
+            <div id="chart_div_1" style="position: relative; width: 100%;"></div>
+            <div id="chart_div_2" style="position: relative; width: 100%"></div>
 
         </div>
     </div>
@@ -169,7 +236,6 @@
 <div class="modal fade" id="modal-baro-widget" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="model-baroLabel">
     <div class="modal-dialog">
         <div class="modal-content">
-           
         </div>
     </div>
 </div>

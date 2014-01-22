@@ -530,7 +530,7 @@ namespace BarometerDataAccesLayer.Database
 
             var report =
                 from r in context.Reports
-                join u in context.Users on r.reporter_id equals u.id
+                join u in context.Users on r.subject_id equals u.id
                 join pgm in context.ProjectMembers on u.id equals pgm.student_user_id
                 join pg in context.ProjectGroups on pgm.project_group_id equals pg.id
                 join p in context.Projects on pg.project_id equals p.id
