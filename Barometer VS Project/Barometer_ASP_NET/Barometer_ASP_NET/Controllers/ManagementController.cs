@@ -1,4 +1,5 @@
-﻿using BarometerDataAccesLayer;
+﻿using Barometer_ASP_NET.Filters;
+using BarometerDataAccesLayer;
 using BarometerDataAccesLayer.Database;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Barometer_ASP_NET.Controllers
 {
+    [AuthFilter("manager")]
     public class ManagementController : Controller
     {
         //
