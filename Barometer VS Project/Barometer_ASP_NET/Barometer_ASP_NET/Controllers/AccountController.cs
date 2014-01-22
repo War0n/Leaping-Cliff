@@ -229,6 +229,7 @@ namespace Barometer_ASP_NET.Controllers
 
             if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
             {
+                //Switch tbv autoredirect
                 switch (CurrentUser.getInstance().Role)
                 {
                     case "user":
