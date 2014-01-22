@@ -75,6 +75,7 @@ namespace Barometer_ASP_NET.Wrappers
 
         private void FillProjectOwners(Project p)
         {
+            int i=0;
             ProjectOwners = project.GetProjectOwners(p.id);
         }
 

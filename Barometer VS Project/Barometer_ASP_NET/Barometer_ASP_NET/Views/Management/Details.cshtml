@@ -6,7 +6,7 @@
 }
 
 <h2>Detail</h2>
-
+<div class="col-lg-8">
 <fieldset>
     <legend>Gebruiker   @Html.ActionLink(" ", "Edit", new { id = Model.id }, new {@class = "glyphicon glyphicon-pencil" }) </legend>
     <table class="table">
@@ -35,12 +35,6 @@
     </td>
 </tr>
         <tr>
-    <th>
-         @Html.DisplayNameFor(model => model.profile_image)
-    </th>
-    <td >
-        @Html.DisplayFor(model => model.profile_image)
-    </td>
 </tr>
         <tr>
     <th>
@@ -60,7 +54,24 @@
 
         </tr>
     </table>
+
 </fieldset>
-<p>
+    <p>
     @Html.ActionLink("Terug naar overzicht", "List")
 </p>
+
+</div>
+<div class="col-lg-4">
+    <table>
+        <tr>
+    <th>
+         @Html.DisplayNameFor(model => model.profile_image)
+    </th>
+        </tr>
+        <tr>
+    <td >
+       <img src="@(Model.profile_image != null ? Model.profile_image : "/Content/images/pf.jpg")" alt="..." class="img-circle" style="width: 100px;">
+    </td>
+        </tr>
+    </table>
+</div>

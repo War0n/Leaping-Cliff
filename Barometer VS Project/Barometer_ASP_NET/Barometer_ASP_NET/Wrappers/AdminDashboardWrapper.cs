@@ -29,7 +29,10 @@ namespace Barometer_ASP_NET.Wrappers
             }
             foreach (ProjectGroup projectGroup in projectGroups)
             {
-                UsersInGroups.Add(projectGroup.group_code, projectDAO.getUsersInGroup(projectGroup.id));
+                if (!UsersInGroups.ContainsKey(projectGroup.group_code))
+                {
+                    UsersInGroups.Add(projectGroup.group_code, projectDAO.getUsersInGroup(projectGroup.id));
+                }
             }
         }
 

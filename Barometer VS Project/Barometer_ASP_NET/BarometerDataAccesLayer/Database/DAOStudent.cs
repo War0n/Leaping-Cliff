@@ -132,7 +132,7 @@ namespace BarometerDataAccesLayer.Database
                }
                else
                {
-                   throw new DataException("No data found for valid argument");
+                   return 0;
                }
            }
            else
@@ -166,7 +166,7 @@ namespace BarometerDataAccesLayer.Database
                }
                else
                {
-                   throw new DataException("No data found for valid argument");
+                   return 0;
                }
            }
            else
